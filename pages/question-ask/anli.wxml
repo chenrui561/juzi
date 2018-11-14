@@ -1,0 +1,125 @@
+<view class='page'>
+<!--术后三张图/术前三张图-->
+  <view>
+    <swiper style=' height:100VW' indicator-dots="true">
+      <swiper-item wx:if="{{anli_info.comment_img}}">
+        <image class='jiaobiao' src='/images/after.png'></image>
+        <image mode='aspectFill' src="{{anli_info.comment_img}}" class="slide-image"/>
+      </swiper-item>
+      <swiper-item wx:if="{{anli_info.comment_img2}}">
+        <image class='jiaobiao' src='/images/after.png'></image>
+        <image mode='aspectFill' src="{{anli_info.comment_img2}}" class="slide-image"/>
+      </swiper-item>
+      <swiper-item wx:if="{{anli_info.comment_img3}}">
+        <image class='jiaobiao' src='/images/after.png'></image>
+        <image mode='aspectFill' src="{{anli_info.comment_img3}}" class="slide-image"/>
+      </swiper-item>
+      
+      <swiper-item wx:if="{{anli_info.comment_img4}}">
+        <image class='jiaobiao' src='/images/bf.png'></image>
+        <image mode='aspectFill' src="{{anli_info.comment_img4}}" class="slide-image"/>
+      </swiper-item>
+      <swiper-item wx:if="{{anli_info.comment_img5}}">
+        <image class='jiaobiao' src='/images/bf.png'></image>
+        <image mode='aspectFill' src="{{anli_info.comment_img5}}" class="slide-image"/>
+      </swiper-item>
+      <swiper-item wx:if="{{anli_info.comment_img6}}">
+        <image class='jiaobiao' src='/images/bf.png'></image>
+         <image mode='aspectFill' src="{{anli_info.comment_img6}}" class="slide-image" />
+      </swiper-item>
+     
+    </swiper>
+  </view>
+<!--用户基本信息和分享的内容-->
+<view class='user_con'>
+  <view class='user_info'>
+    <view class='user_info2'>
+      <image src='{{anli_info.tx_img}}' class='user_img' mode='aspectFill'></image>
+      <text class='user_name'>{{anli_info.passwd_answer}}</text>
+      <view wx:if="{{guanzhu_off == 0}}" bindtap='guanzhu' class='guanzhu'>关注</view>
+      <view wx:if="{{guanzhu_off > 0}}" bindtap='del_guanzhu' class='guanzhu2'>已关注</view>
+    </view>
+    <view class='user_time'>{{anli_info.add_time}}</view>
+  </view>
+  <import src="../../wxParse/wxParse.wxml"/> 
+    <view class="wxParse user_connet">
+        <view  >
+           <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+        </view>
+    </view>
+
+</view>
+<!--过去的她
+<view class='guoqu_box'>
+  <view class='title'>过去的她</view>
+  <view class='guoqu'>
+    <image class='guoqu_img' src='http://img2.soyoung.com/tieba/web/diary/20181011/7/b95f07c3252ea9092718091196f96a13_301_301.jpg'></image>
+    <image class='guoqu_img' src='http://img2.soyoung.com/tieba/web/diary/20181011/7/b95f07c3252ea9092718091196f96a13_301_301.jpg'></image>
+    <image class='guoqu_img' src='http://img2.soyoung.com/tieba/web/diary/20181011/7/b95f07c3252ea9092718091196f96a13_301_301.jpg'></image>
+  </view>
+</view>-->
+<!--案例评论-->
+
+<!--案例评论结束-->
+<!--用户的医院/项目-->
+<view class='guoqu_box'>
+  <view class='title' style='padding-bottom:0px;'>改变她的是：</view>
+  <navigator url='../product/detail?productId={{anli_info.goods_id}}&tid={{anli_info.user_id}}' class='xiangmu'>
+    <image mode='aspectFill' class='xiangmu_img'   src='{{anli_info.goods_img}}'></image>
+    <view class='xiangmu_info'>
+      <view class='xiangmu_title'>{{anli_info.goods_name}}</view>
+      <view class='xiangmu_yiyuan'>{{anli_info.brand_name[0].brand_name}}</view>
+      <view class='xiangmu_price'>￥{{anli_info.juzi_price}}</view>
+    </view>
+  </navigator>
+</view>
+<!--评论-->
+<view class='guoqu_box'>
+  <view class='title' style='border-bottom:1px solid #eee;'>案例评论：</view>
+  <view class='pl_input'>
+    <image class='pl_img' src='{{HeadUrl}}'></image>
+    <input placeholder="请留下您的评论" bindconfirm="dopl" bindinput="searchValueInput" class='pl_inputs'></input>
+  </view>
+  <view class='pl_box' wx:for="{{pl}}">
+    <view class='pl_info_all'>
+      <image class='pl_img' src='{{item.tx_img}}'></image>
+      <view class='pl_info'>
+        <text style='color:#333'>{{item.passwd_answer}}</text>
+        <text style='margin-right:10px;'>{{item.add_time}}</text>
+      </view>
+    </view>
+    <view class='pl_content'>{{item.content}}</view>
+  </view>
+  <view wx:if="{{pl == null}}" class='pl_no'>
+    <text class='pl_no_text'>此案例暂时还没有评论</text>
+  </view>
+  <view>
+  
+  </view>
+</view>
+<!--底部开始-->
+<view class="footfixed">
+  <view class="fl_l font_12 hui03 df" style="height: 50px;">
+                <view wx:if="{{zan_off == 0}}" class="zan" bindtap='zan' style='border-right:1px solid #999;'>
+                  <image class="icon_kf"src="/images/xin_b.png"></image>
+                  <text class="dbtext" style="margin-top: 2px;">赞 · {{zan}} </text>
+                </view >
+                <view wx:if="{{zan_off > 0}}" class="zan" style='border-right:1px solid #999;'>
+                  <image class="icon_kf"src="/images/xin_on.png"></image>
+                  <text class="dbtext" style="margin-top: 2px;">赞 · {{zan}} </text>
+                </view >
+                <view class="zan" style='border-right:1px solid #999;'>
+                  <image class="icon_kf2"src="/images/pl.png"></image>
+                  <text class="dbtext" style="margin-top: 4px;">评论 · 0 </text>
+                </view >
+
+  </view>
+      <navigator url='../product/detail?productId={{anli_info.goods_id}}&tid={{anli_info.user_id}}' class="fl_l yiyuan_block">
+      <image class="icon_kf2"src="/images/gwc.png"></image>
+        <text class='yiyuan_text'>{{anli_info.goods_name}}</text>
+        <text class='yiyuan_price'>￥{{anli_info.juzi_price}}</text>
+      </navigator>
+   </view>
+
+<view class='bottom'></view>
+</view>

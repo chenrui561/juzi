@@ -1,0 +1,126 @@
+
+<!--pages/index/detail.wxml-->
+<view wx:if="{{shouquan == 0}}" class='shouquan'></view>
+<view class='shouquan_b' wx:if="{{shouquan == 0}}">
+    <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.jpg'></image>
+    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子医美</text>
+    <button style="bottom: 0;position: absolute;width: 100%;color: #1aad19;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+
+<!--内容开始-->
+<view class="cont">
+      <button open-type="share" class="fenxiang"><image class="fenxiang_img" src='/images/fx.png'></image></button>
+      <view wx:if="{{tid > 0}}" class="tuijian">
+      <image class="tuijian_img" src='{{t_user.tx_img}}'></image>由{{t_user.nick_name}}推荐
+      </view>
+  <!--<image class="tp_image" src="{{itemData.photo_d}}"></image>-->
+  <swiper style="height:100VW" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block >
+      <swiper-item>
+      
+        <image src="https://www.juziyimei.com/{{goods_img}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="title">{{title}}</view>
+  
+  <view class="gmxx">
+    <view class='juzi_price'>
+      <view>
+        <text class='juzijia'>桔子价：￥</text>
+        <span wx:if="{{goods_number > 0 && is_on_sale == 1}}" class="jiage">{{itemData.juzi_price}}</span>
+        <span wx:if="{{goods_number == 0 || is_on_sale == 0 }}" style="color:#999;" class="jiage">{{itemData.juzi_price}}</span>
+      </view>
+      <view bindtap="addFavorites" wx:if="{{bd_id == 0}}" class="" >
+                
+                    <image class="icon_kf" style='display:{{none_off}}' src="/images/shc.png" ></image>
+                    <image class="icon_kf" style='display:{{none_on}}' src="/images/shced.png" ></image>
+                    
+      </view>
+    </view>
+    <view class='yuanjia' style='height:30px;'>
+      <view class="font_14 c6 goods_info">原价：<text style='text-decoration: line-through;'>￥{{market_price}}</text></view>
+      <view class="font_14 c6 goods_info">武汉市</view>
+    </view>
+  </view>
+  
+</view>
+<!--<navigator wx:if="{{is_tuan == 0}}" url="../product/lilshi?id={{goods_id}}" class='lishi'>
+  <text>历史交易记录({{count_goods_user}})</text>
+  <span class="fl_r c9" hover-class="none">
+    <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+  </span>
+</navigator>-->
+<!--医院信息-->
+<navigator url="../product/lilshi?id={{goods_id}}" class='lishi'>
+  <view class='yiyuan_info'>
+    <image class='yiyuan_img' src='{{itemData.brand_logo}}'></image>
+    <view class='yiyuan_text'>
+      <text>{{itemData.goods_brand}}</text>
+      <text class='hui'>{{itemData.address}}</text>
+    </view>
+  </view>
+  <span class="fl_r c9" hover-class="none">
+    <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+  </span>
+</navigator>
+
+<!--图文详情头部-->
+<view>
+<view class="swiper-tab">
+  <view class="bre swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">详情展示</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">桔子保障</view>
+</view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+
+  <!-- 图文详情 -->
+  <swiper-item>
+    <import src="../../wxParse/wxParse.wxml"/> 
+    <view class="wxParse">
+        <view style="height:5000rpx;" >
+           <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+             <image wx:if="{{!goods_desc}}" mode='aspectFit' src="/images/lan.png" style=" width:100%;"/>
+             
+        </view>
+    </view>
+    
+  </swiper-item>
+  
+
+
+  <!-- 产品参数 -->
+  <swiper-item>
+        <view class="p_all">
+          <image mode='aspectFit' src="https://www.anranhaitao.com/mobile/themes/default/images/goods_info_tips.jpg" style=" width:100%;"/>
+          <image mode='aspectFit' src="https://www.anranhaitao.com/mobile/themes/default/images/goods_info_tips2.jpg" style=" width:100%;"/>
+          <image mode='aspectFit' src="https://www.anranhaitao.com/mobile/themes/default/images/goods_info_tips3.jpg" style=" width:100%;"/>
+    </view>
+  </swiper-item>
+  
+</swiper>
+
+</view>
+
+<view style='height:200px;' class='bottom'></view>  
+          <button open-type="contact" class="kefu df_1 l_h15 pt5" style=''>
+                    <view   data-status="2" >
+                      <image class="icon_wx"src="/images/weixin.png"></image>
+                    </view >
+            </button>       
+
+<!---底部开始-->
+<view class="footfixed tc">
+    <view class='yyj'>
+      <view class='yyj_info'>
+        <view class='yyj_title'>预约金：</view>
+        <view class='yyj_price'>￥{{itemData.shop_price}}</view>
+      </view>
+        <view class='yyj_tips'>在线支付，到院双倍抵扣</view>
+    </view>
+      <view class="fl_l w50">
+        <view class="w50 bg_m white fl_l c3" bindtap="addShopCart" data-type="addcart" >加入购物车</view>
+        <view class="bg_red white w50 fl_l" bindtap="addShopCart" data-type="buynow">立即预约</view>
+      </view>
+  
+</view>
+

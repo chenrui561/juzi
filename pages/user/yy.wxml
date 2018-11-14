@@ -1,0 +1,87 @@
+<!--pages/user/bd.wxml-->
+<view class="page-body">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+
+<!--选择项目
+
+<view  class="cont" wx:for="{{xiangmu_info}}" >
+                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
+                            <image class="hot_photo" src="http://www.pprenwu.com/images/201811/goods_img/63_G_1541048809936.jpg"></image>
+                            <view class="hot_title">{{item.goods_name}}</view>
+                            
+                            <view style="display:flex;line-height:50rpx;color:#999;margin-bottom:10rpx;">
+                              <view class="gmxx" style="font-size:28rpx;">
+                                  <view style="display:flex;line-height:50rpx;color:#999">
+                                    <view style="float: right;font-size: 12px;display: flex;align-items: center;">
+                                      <text>桔子独家签约</text> 
+                                    </view>
+                                  </view>  
+                              </view>
+                            </view>
+                            <view style="display:flex;line-height:50rpx;">
+                                  <view style="float: right;font-size: 12px;display: flex;align-items: center; color:#999;">
+                                      桔子价:
+                                    </view>
+                                  <view class="gmxx" style="color: #F14918;"> {{item.juzi_price}}</view>
+                                  <view class="gmx">¥ {{item.market_price}}</view> 
+                              </view>
+                          </navigator>
+                    </view>
+
+  <navigator  url='../xuanze/xz_xiangmu?tid={{xiangmu_id}}' class="xiangmu" >
+      <image class='jiahao' src="/images/jiahao.png"></image>
+      <span class="font_14 c3">添加项目</span>
+      
+  </navigator>-->
+<picker   bindchange="bindPickerChange" value="{{index}}" range="{{yiyuan}}" class="qbdd mt10" >
+      <span class="font_14 c3">医院</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+        <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{yiyuan[yiyuan_index]}}</text>
+        <text wx:else>请选择医院</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
+
+  <picker mode="date" value="{{dy_time}}" class="qbdd mt10"  bindchange="bindDateChange">
+    <span class="font_14 c3">到院时间</span>
+    <span class="fl_r c9 xuanze_box" hover-class="none"> 
+        <text>{{dy_time}}</text>
+          <image class='xuanze' src="/images/x_right.png"></image>
+    </span>
+  </picker>
+
+
+  <view class="page-section">
+    <view class="page-section">
+        <view class="weui-cells__title" >姓名</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_input">
+            <input name="name" class="weui-input"  placeholder="请输入客户姓名" />
+          </view>
+        </view>
+      </view>
+
+    <view class="weui-cells__title">手机号</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="phone" type='number' bindinput='input_mobile' class="weui-input" maxlength="11" placeholder="客户的手机号" />
+
+      </view>
+    </view>
+  </view>
+    <view class="weui-cells__title">预约项目备注</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="bz" bindinput='input_mobile' class="weui-input" maxlength="11" placeholder="请填写备注" />
+      </view>
+    </view>
+
+  <button style="margin-top:30px;width: 86%;color: #F14918;background-color:#fff;" formType="submit">提交</button>
+  
+ </form>
+
+ <!--<button style="margin-top:30px;width: 86%;color: #1aad19;background-color:#fff;" bindtap="chongxin">重新加载首页</button>-->
+
+
+
+</view>
+

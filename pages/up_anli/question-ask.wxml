@@ -1,0 +1,43 @@
+<view class="question-form">
+
+  <view class="question-input-area">
+
+    <!-- 问题标题  
+    <view class="question-title-wrap">
+      <input class="question-title" placeholder="请输入标题" maxlength="40" placeholder-style="color:#b3b3b3;font-size:18px;" bindinput="handleTitleInput"></input>
+      <view class="title-input-counter">{{titleCount}}/40</view>
+    </view>-->
+
+    <!-- 问题正文  -->
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="晒晒您的心情" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
+          <view class="weui-textarea-counter">{{contentCount}}/500</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="question-images-area">
+
+    
+
+    <!-- 图片缩略图  -->
+    <view class="question-images">
+      <block wx:for="{{images}}" wx:key="*this">
+        <view class="q-image-wrap">
+          <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>
+        </view>
+      </block>
+      <image src='/images/up_img.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 9}}"></image>
+    </view>
+
+  </view>
+
+  <!-- 提交表单按钮  -->
+  <button class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+
+</view>

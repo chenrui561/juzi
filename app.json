@@ -1,0 +1,54 @@
+{
+  "plugins": {
+    "brickLayout": {
+      "version": "0.2.0",
+      "provider": "wx3c042630f3cdc175"
+    }
+  },
+  "pages":[
+    "pages/index/index",
+    "pages/index/tuan",
+    "pages/myproduct/index",
+    "pages/myproduct/list",
+    "pages/product/detail",
+    "pages/product/lilshi",
+    "pages/search/search",
+    "pages/jigou/jigou",
+    "pages/user/user",
+    "pages/user/quan",
+    "pages/web/web",
+    "pages/question-ask/question-ask",
+    "pages/question-ask/anli",
+    "pages/user/dingdan",
+    "pages/user/tuihuo",
+    "pages/user/bd",
+    "pages/user/yy",
+    "pages/user/tixian",
+    "pages/user/team",
+    "pages/user/team-user",
+    "pages/user/team-dd",
+    "pages/user/team-shouyi",
+    "pages/user/shoucang",
+    "pages/order/pay",
+    "pages/order/detail",
+    "pages/order/downline",
+    "pages/cart/cart",
+    "pages/listdetail/listdetail",
+    "pages/address/address",
+    "pages/address/user-address/user-address",
+    "pages/category/index",
+    "pages/turntable/turntable",
+    "pages/xuanze/xz_xiangmu",
+    "pages/turntable/huojiang",
+    "pages/up_anli/question-ask",
+    "pages/up_anli/down",
+    "pages/audio/index",
+    "pages/audio/list"
+      ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "桔子医美",
+    "navigationBarTextStyle":"black"
+  }
+}

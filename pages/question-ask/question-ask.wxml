@@ -1,0 +1,75 @@
+<view class="question-form">
+<view class='tips'><image class='tips_ico' src='/images/tips.png'></image><text class='tips_text'>分享您的变美案例，就有机会赚钱</text></view>
+<!--选择医院/项目-->
+<picker   bindchange="bindPickerChange" value="{{index}}" range="{{yiyuan}}" class="qbdd mt10" >
+      <span class="font_14 c3">选择医院</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+        <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{yiyuan[yiyuan_index]}}</text>
+        <text wx:else>请选择医院</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
+  <picker   bindchange="bindPickerChange2" value="{{index}}" range="{{xiangmu}}" class="qbdd mt10" >
+      <span class="font_14 c3">选择项目</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+      <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{xiangmu[xiangmu_index]}}</text>
+      <text wx:else>请先选择医院</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
+  <view class="question-images-area">
+    <view class='img_text'>上传三张术后真实照片</view>
+    <!-- 图片缩略图  -->
+    <view class="question-images">
+    
+      <block wx:for="{{images}}" >
+        <view class="q-image-wrap">
+          <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+          <!--<view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>-->
+        </view>
+      </block>
+      <image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 1}}"></image><image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 2}}"></image><image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 3}}"></image>
+    </view>
+
+<!-- 图片缩略图2  -->
+    <view class='img_text'>上传三张术前真实照片</view>
+    <view class="question-images">
+      <block wx:for="{{images2}}" wx:key="*this">
+        <view class="q-image-wrap">
+          <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+         <!-- <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>-->
+        </view>
+      </block>
+      <image src='/images/nv.png' class='q-image-j' bindtap="chooseImage2" wx:if="{{images2.length < 1}}"></image>
+      <image src='/images/nv.png' class='q-image-j' bindtap="chooseImage2" wx:if="{{images2.length < 2}}"></image>
+      <image src='/images/nv.png' class='q-image-j' bindtap="chooseImage2" wx:if="{{images2.length < 3}}"></image>
+ 
+    </view>
+
+  </view>
+
+
+  <view class="question-input-area">
+
+    <!-- 标题  
+    <view class="question-title-wrap">
+      <input class="question-title" placeholder="请输入标题" maxlength="40" placeholder-style="color:#b3b3b3;font-size:18px;" bindinput="handleTitleInput"></input>
+      <view class="title-input-counter">{{titleCount}}/40</view>
+    </view>-->
+
+    <!-- 正文  -->
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="分享一下心情" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
+          <view class="weui-textarea-counter">{{contentCount}}/500</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+<view class='l_h60'></view>
+
+  <!-- 提交表单按钮  -->
+  <button class="weui-btn" bindtap="submitForm">提交</button>
+
+</view>

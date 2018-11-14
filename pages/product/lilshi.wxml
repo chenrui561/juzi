@@ -1,0 +1,11 @@
+<!--pages/product/lilshi.wxml-->
+
+
+<view class='yangshi shijian'>时间</view>
+<view class='yangshi sl'>数量</view>
+<view class='yangshi nick'>昵称</view>
+<view wx:for="{{goods_user}}">
+  <view class='yangshi2 shijian'>{{item.pay_time}}</view>
+  <view class='yangshi2 sl'>{{item.goods_number}}</view>
+  <view class='yangshi2 nick'>{{item.passwd_answer}}</view>
+</view>

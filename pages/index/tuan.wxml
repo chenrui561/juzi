@@ -1,0 +1,47 @@
+<!--pages/index/tuan.wxml-->
+
+
+<view class="page">
+        <view >    
+
+           <image mode='widthFix' style='width:100%;' src="/images/tuan_banner.jpg"></image>
+            
+
+
+                 
+                   <!--首页的现在正在拼开始-->
+                   <view  style='margin:15px 0; OVERFLOW: HIDDEN;text-align: center;'>
+                    <image style='width:135px;height:35px;margin-right:10rpx;' src="http://www.anranhaitao.com/mobile/themes/default/gl_img/xzzzp.png"></image>
+                    </view>
+                    <view  class="cont" >
+                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle" wx:for="{{new_tuan_list}}">
+                            <image class="hot_photo" src="http://www.anranhaitao.com/{{item.goods_img}}"></image>
+                          <view style="display: flex;flex-direction: column;justify-content: space-between;height: 140px;">
+                            <view class="hot_title">{{item.goods_name}}</view>
+                                <view>
+                                    <view class='price'>
+                                          <view wx:if="{{item.is_tuan == 2}}" class='price_red'>新人团:<view class="gmxx" style="font-size:18px; color: red;">¥ {{item.tuan_price}}</view></view>
+                                          
+                                          <view wx:if="{{item.is_tuan == 1}}" class='price_red'>购物团:<view class="gmxx" style="font-size:18px; color: red;">¥ {{item.tuan_price}}</view></view>
+                                          <view class="gmx">原价：¥ {{item.market_price}}</view> 
+                                    </view>
+
+                                    <view class='price'>
+                                          <view class='price_red' style="color: red;">{{item.tuan_type}}人成团</view>
+                                          <view class="b_tuan">立即开团</view> 
+                                    </view>
+                                </view>
+                          </view>
+                          </navigator>
+                    </view>
+                     <!--首页的商品推荐结束-->
+
+                    
+
+    
+  
+        </view>
+    
+
+
+  </view>

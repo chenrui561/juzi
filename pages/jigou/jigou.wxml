@@ -1,0 +1,35 @@
+<!--pages/jigou/jigou.wxml-->
+<view class='jigou_info'>
+  <view class='jigou_info1'>
+    <image src='http://www.juziyimei.com/data/brandlogo/{{jigou_info.brand_logo}}' class='jigou_logo'></image>
+    <text class='jigou_title'>{{jigou_info.brand_name}}</text>
+  </view>
+  <view class='jigou_info2'>
+    <view class='yy'><text class='jigou_info_text'>{{jigou_xiangmu_count}}</text><text class='jigou_info_text'>项目</text></view>
+    <view class='yy'><text class='jigou_info_text'>5</text><text class='jigou_info_text'>医生</text></view>
+    <view class='yy'><text class='jigou_info_text'>12</text><text class='jigou_info_text'>案例</text></view>
+  </view>
+</view>
+<view class='jigou_address'>
+  <view class='addimg'>
+    <image class='add_img' src='/images/address.png'></image>
+    <view class='add_text'>{{jigou_info.address}}</view>
+  </view>
+  <image class='right' src='/images/x_right.png'></image>
+</view>
+<view class='jigou_lb'>
+  <image class='lb_img' src='http://www.juziyimei.com/mobile/themes/default/gl_img/laba.gif'></image>
+  <view class='lb_text'>{{jigou_info.brand_desc}}</view>
+</view>
+<view class='jigou_yy'>
+  <view class='yy_info'>
+    <image src='http://www.juziyimei.com/images/201810/goods_img/7_G_1539407923993.jpg' class='yy_img'></image>
+    <view class='yy_text'>
+      <text class='yy_title'>特价5800元 上市医美 效果保证 </text>
+      <text class='yy_price'><text class='yy_price1'>￥998.00</text><text class='yy_price2'>￥9908.00</text></text>
+    </view>
+  </view>
+</view>
+<view class='jigou_ys'>
+
+</view>

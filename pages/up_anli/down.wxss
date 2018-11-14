@@ -1,0 +1,77 @@
+/* pages/up_anli/down.wxss */
+.list{
+  margin-top:10rpx;
+  width: 100%;
+}
+.img_item {
+  width: 48%;
+  margin: 1%;
+  display: inline-block;
+  vertical-align: top;
+}
+.ban {
+ width: 100%;
+  background-color: #fff;
+ /* margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.103);*/
+}
+.ban image {
+  width: 100%;
+ /* border-top-left-radius: 10px;
+  border-top-right-radius: 10px;*/
+  flex-shrink: 0;
+}
+.ellipsis_title{
+font-size:22rpx;
+color:#333;
+line-height:18px;
+margin:0;
+height:36px;
+width:90%;
+overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box;
+-webkit-line-clamp:2;
+-webkit-box-orient:vertical;
+padding:1% 5% 0 5%;
+}
+.xiangmu{
+  font-size: 10px;
+  display: flex;
+  background-color: #f2f2f2;
+  margin: 5px 5px 5px 5px;
+  line-height: 20px;
+  border-radius: 15px;
+  justify-content: space-between;
+}
+.touxiang{
+  font-size: 13px;display: flex;align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+.swiper-tab{  
+    width: 100%;  
+   /* border-top: 1px #f7f7f7 solid;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.050);*/
+    text-align: center;  
+    white-space: nowrap;
+    /*height: 32px;
+    background: linear-gradient(to bottom,#f9f9f9, rgb(255, 255, 255));   */
+    background-color: #fff;
+    overflow: hidden;
+    } 
+.swiper-tab-color{
+  color: #F14918;  
+  border-bottom: 5rpx solid #F14918;
+  }
+.swiper-tab-list{  
+ font-size: 12px; 
+  display:inline-block;
+  /*margin-left:10rpx;*/ 
+  margin-left: 8%;
+  margin-right: 8%;
+  color: #666; 
+  line-height: 25px;
+  }  

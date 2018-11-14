@@ -1,0 +1,40 @@
+<!--pages/user/team-user.wxml-->
+<!--线下-->
+<view wx:if="{{team_type == 2}}">
+  <view class='yangshi shijian'>注册时间</view>
+  <view class='yangshi sl'>昵称/手机</view>
+  <view class='yangshi nick'>级别</view>
+
+  <view wx:for="{{goods_user}}">
+    <view class='yangshi2 shijian'>{{item.reg_time}}</view>
+    <view class='yangshi2 sl'>{{item.passwd_answer}}{{item.mobile_phone}}</view>
+    <view wx:if="{{item.user_lei == 1}}" class='yangshi2 nick'>总监</view>
+    <view wx:if="{{item.user_lei == 2}}" class='yangshi2 nick'>城市合伙人</view>
+    <view wx:if="{{item.user_lei == 3}}" class='yangshi2 nick'>省联创</view>
+  </view>
+</view>
+<!--线上-->
+<view wx:if="{{team_type == 1}}">
+  <view class='yangshi shijian'>注册时间</view>
+  <view class='yangshi sl'>昵称</view>
+  <view class='yangshi nick'>手机</view>
+
+  <view wx:for="{{goods_user}}">
+    <view class='yangshi2 shijian'>{{item.reg_time}}</view>
+    <view class='yangshi2 sl'>{{item.passwd_answer}}</view>
+    <view class='yangshi2 nick'>{{item.mobile_phone}}</view>
+  </view>
+</view>
+
+<!--收益-->
+<view wx:if="{{team_type == 3}}">
+  <view class='yangshi shijian'>到院时间</view>
+  <view class='yangshi sl'>项目金额</view>
+  <view class='yangshi nick'>状态</view>
+
+  <view wx:for="{{goods_user}}">
+    <view class='yangshi2 shijian'>{{item.reg_time}}</view>
+    <view class='yangshi2 sl'>{{item.passwd_answer}}</view>
+    <view class='yangshi2 nick'>{{item.mobile_phone}}</view>
+  </view>
+</view>

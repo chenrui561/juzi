@@ -1,0 +1,9 @@
+<!--pages/turntable/huojiang.wxml-->
+<view class='yangshi shijian'>时间</view>
+<view class='yangshi sl'>奖品</view>
+
+<view wx:for="{{bonus}}">
+  <view class='yangshi2 shijian'>{{item.add_time}}</view>
+  <view class='yangshi2 sl'>{{item.jiang_id}}</view>
+
+</view>

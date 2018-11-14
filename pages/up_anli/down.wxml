@@ -1,0 +1,37 @@
+<!--pages/up_anli/down.wxml-->
+<view class='list'>
+        <scroll-view scroll-x class="swiper-tab">
+            <view class="swiper-tab-list {{z_index==1 ? 'swiper-tab-color' : ''}} " bindtap="indexChange" data-current="1">全部</view>
+          <!-- <view class="swiper-tab-list" data-current="1"  bindtap="swichNav">桔子购</view> -->
+            <view class="swiper-tab-list {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">鼻子</view>
+            <view class="swiper-tab-list {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3"  bindtap="indexChange">眼睛</view>
+            <view class="swiper-tab-list {{z_index==4 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">嘴巴</view> 
+            <view class="swiper-tab-list {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">耳朵</view> 
+            <view class="swiper-tab-list {{z_index==6 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">胸部</view> 
+            <view class="swiper-tab-list {{z_index==7 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">脂肪</view>  
+          </scroll-view>
+
+<!--瀑布流加载的隐藏部分-->
+  <view style="display:none">
+    <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
+  </view>
+<!--瀑布流加载的隐藏部分-->
+<!--瀑布流开始-->
+  <view style="width:100%">
+    <view class="img_item">
+      <view class='ban' wx:for="{{col1}}" wx:key="id">
+        <image bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.pic}}" src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
+        <view  class="act-item ellipsis_title">{{item.content}}</view>
+             
+      </view>
+    </view>
+    <view class="img_item">
+      <view url='../question-ask/anli?aid={{item.id}}&uid={{item.user_id}}' class='ban' wx:for="{{col2}}" wx:key="id">
+        <image  bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.pic}}" src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
+        <view class="act-item ellipsis_title">{{item.content}}</view>
+              
+      </view>
+    </view>
+</view>
+<!--瀑布流结束-->
+    </view>      

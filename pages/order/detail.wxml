@@ -1,0 +1,82 @@
+<!--pages/order/detail.wxml-->
+<view class="w100">
+<view style=" width:100%; height:70px; background: #F37A9C">
+  <image src="http://www.anranhaitao.com/mobile/themes/default/images/dfk.png" style="height: 50px;width:50px;float: left;padding-left: 20px;padding-top:10px;"/>
+  <text wx:if="{{orderData.pay_status == 2 && orderData.shipping_status == 0}}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">已付款未到院</text>
+  <text wx:if="{{orderData.pay_status == 0 }}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">未付款</text>
+  <text wx:if="{{orderData.pay_status == 2 && orderData.shipping_status == 1 }}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">已到院</text>
+</view>
+<!--收货人信息
+<view class="p_all bg_white mt10 font_14" style='background: #ffffff url(http://www.anranhaitao.com/mobile/themes/default/images/tiao.png) repeat-x bottom center;border-bottom: 1px solid #ffffff;padding-bottom:20px;'>
+<image src="http://www.anranhaitao.com/mobile/themes/default/images/add.png" style="width: 36px;height:36px;"/>
+			<view class="df" style='width: calc(100% - 50px);float: right;'>
+				<view class="df_1 c6">
+				<view class="l_h20">收货人：{{orderData.consignee}}<text class="fl_r mr10">{{orderData.mobile}}</text></view>
+				<view class="l_h20">地址：{{orderData.address}}</view>
+				</view>
+			</view>
+		</view>	-->
+<!--商品信息-->
+		<view style='margin-top:5px;' class="p_all bg_white df item" wx:for="{{proData}}">
+			<view class="cp_photo">			
+				<image src="{{item.goods_thumb}}"></image>
+			</view>
+			<view class="df_1">	
+				<view class="font_14 mt5 ovh1">
+		      {{item.goods_name}}
+		    </view>
+			  <text class="gm_ovh_1h red pt10">¥{{item.goods_price}}</text>
+			  <view class="sl">
+		        数量：{{item.goods_number}}
+		    </view>
+			</view>
+		</view>		
+  <view wx:if="{{orderData.qudao_tj}}" style='margin-top:5px;' class="p_all bg_white mt10 c6 l_h20 font_14">
+报备信息：{{orderData.qudao_tj}}
+	</view>
+	<view style='margin-top:5px;' class="p_all bg_white mt10 c6 l_h20 font_14">
+预约到院时间：{{orderData.dy_time}}<text style='font-size:11px;margin-left:5px;'>(15天内有效哦)</text>
+	</view>
+<!--订单信息-->
+		<view style='margin-top:5px;' class="p_all bg_white mt10 c6 l_h20 font_14">
+			<view >
+			订单编号：{{orderData.order_sn}}
+			</view>
+			<view class="mt10">
+			下单时间：{{orderData.formated_add_time}}
+			</view>  
+     <!-- <view class="mt10">
+			物流费用：{{orderData.shipping_name}}({{orderData.shipping_fee}}元)
+			</view>    -->
+      <view class="mt10">
+			订单备注：{{orderData.postscript}}
+			</view>    
+		    </view>
+
+<!--<view url="../web/web?web_type=8&kuaidi={{orderData.invoice_no}}" style="height:40px;background-color: #fff; margin-top:10px;">  
+    <view style="float:left;">
+      <text style="color: #999;font-size: 13px;line-height: 40px;margin-left:10px;">快递单号：{{orderData.invoice_no}}</text>
+         </view>     
+
+  </view>-->
+
+<view style="height:50px;background-color: #fff; margin-top:10px;">  
+    <view style="float:left;">
+      <text style="color: #c3c3c3;font-size: 11px;line-height: 50px;margin-left:10px;">已使用红包￥{{orderData.formated_bonus}} ，使用余额￥{{orderData.surplus}}</text>
+         </view>     
+  <text style="float: right;line-height: 50px;font-size: 14px;margin-right:10px;"><text style="color:#f23030;font-size: 15px;">￥</text><text style="color:#f23030;font-size: 18px;">{{orderData.total_fee}}</text></text>
+  </view>
+
+	<!--<view class="zhifu mt10 tc">金额：<span class="font_20 red">¥ {{orderData.money_paid}}</span></view>-->
+        
+
+	<view class="p_all mt10">
+		<view class="btnGreen">
+              <button wx:if="{{orderData.shipping_status !== 1}}" bindtap="removeOrder"> 取消订单 </button>
+			        <button wx:if="{{orderData.pay_status == 0}}" style="margin-top: 10px;background-color: #179B16;color: #fff;" bindtap="payOrderByWechat" > 微信支付 </button>
+        		<!--<contact-button type="default-light" session-from="orderNo_{{orderData.OrderNo}}">
+		        客服
+		        </contact-button>-->
+		</view>
+	</view>
+</view>

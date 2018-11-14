@@ -1,0 +1,12 @@
+<!--pages/web/web.wxml-->
+
+<web-view wx:if="{{web_type == 1}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=index&a=xsbk"></web-view>
+<web-view wx:if="{{web_type == 2}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=index&a=qdyl&id={{anran_id}}"></web-view>
+<!--心愿清单-->
+<web-view wx:if="{{web_type == 3}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=index&a=xyqd&id={{anran_id}}"></web-view>
+<!--红包页面-->
+<web-view wx:if="{{web_type == 4}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=user&a=bonus&id={{anran_id}}"></web-view>
+<!--提现页面-->
+<web-view wx:if="{{web_type == 5}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=user&a=zj_admin_tixian&id={{anran_id}}"></web-view>
+<!--会员中心-->
+<web-view wx:if="{{web_type == 6}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=user&a=zj_admin&id={{anran_id}}"></web-view>

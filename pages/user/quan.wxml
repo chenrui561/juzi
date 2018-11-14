@@ -1,0 +1,50 @@
+<!--pages/user/quan.wxml-->
+<view>
+  <view wx:for="{{bonus_list}}" class='quan_box'>
+    <view class='quan_up'>
+
+      <view wx:if="{{item.type_id == 12 || item.type_id == 13}}" class='quan_up_left'>
+        <view >
+          <text class='rmb'>实物</text>
+        </view>
+        <text class='djq'>兑奖券</text>
+      </view>
+
+      <view wx:if="{{item.type_id > 13 || item.type_id < 12}}" class='quan_up_left'>
+        <view >
+          <text class='rmb'>￥</text>
+          <text class='price'>{{item.type_money}}</text>
+        </view>
+        <text class='djq'>代金券</text>
+      </view>
+
+      <view class='quan_up_center'>
+      <text class='quan_type'>{{item.type_name}}</text>
+      <text class='quan_time'>有效期至：{{item.use_enddate}}</text>
+      </view>
+      <navigator  wx:if="{{item.type_id > 13 || item.type_id < 12 }}" url='../category/index' open-type = "switchTab" class='quan_up_right'>
+        <view class='liji'>立即使用</view>
+      </navigator>
+      <!--如果是二等奖兑换券-->
+      <navigator wx:if="{{item.type_id == 13}}" url='../product/detail?productId={{item.choujiang_id}}'  class='quan_up_right'>
+        <view class='liji'>立即使用</view>
+      </navigator>
+       <!--如果是一等奖兑换券-->
+      <navigator url='../product/detail?productId={{item.choujiang_id}}' wx:if="{{item.type_id == 12}}" class='quan_up_right'>
+        <view class='liji'>立即使用</view>
+      </navigator>
+    </view>
+    <view class='quan_down'>
+
+      <view class='quan_down_left'>获得方式：{{item.bonus_type_id}}</view>
+      <view wx:if="{{item.type_id > 13 || item.type_id < 12}}" class='quan_down_right'>满{{item.min_goods_amount}}元可用</view>
+      <view wx:if="{{item.type_id == 12}}" class='quan_down_right'>指定一等奖商品可用</view>
+      <view wx:if="{{item.type_id == 13}}" class='quan_down_right'>指定二等奖商品可用</view>
+    </view>
+  </view>
+
+<!--<view class='bottom'>
+  <view class='nothing'>没有更多可用券 |</view>
+  <view class='shixiao'>查看已失效的券 ></view>
+</view>-->
+</view>

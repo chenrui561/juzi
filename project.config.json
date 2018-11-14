@@ -1,0 +1,158 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wx058ea8866be28317",
+	"projectname": "%E6%A1%94%E5%AD%90%E5%8C%BB%E7%BE%8E",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 18,
+			"list": [
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "pages/myproduct/index",
+					"query": "",
+					"scene": "1007"
+				},
+				{
+					"id": -1,
+					"name": "绑定手机号",
+					"pathName": "pages/user/bd",
+					"query": ""
+				},
+				{
+					"id": 2,
+					"name": "列表",
+					"pathName": "pages/listdetail/listdetail",
+					"query": "",
+					"scene": "1007"
+				},
+				{
+					"id": -1,
+					"name": "绑定手机",
+					"pathName": "pages/user/bd",
+					"query": "",
+					"scene": "1007"
+				},
+				{
+					"id": -1,
+					"name": "分享",
+					"pathName": "pages/question-ask/question-ask",
+					"query": ""
+				},
+				{
+					"id": 5,
+					"name": "案例",
+					"pathName": "pages/question-ask/anli",
+					"query": "id=3"
+				},
+				{
+					"id": 6,
+					"name": "带推荐预约项目",
+					"pathName": "pages/product/detail",
+					"query": "productId=37&id=1&tid=1"
+				},
+				{
+					"id": -1,
+					"name": "带分享的首页",
+					"pathName": "pages/index/index",
+					"query": "id=1"
+				},
+				{
+					"id": 8,
+					"name": "机构",
+					"pathName": "pages/jigou/jigou",
+					"query": "id=3"
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/user/user",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "pages/user/dingdan",
+					"query": ""
+				},
+				{
+					"id": 11,
+					"name": "客户预约",
+					"pathName": "pages/user/yy",
+					"query": "tid=63,64"
+				},
+				{
+					"id": 12,
+					"name": "团队",
+					"pathName": "pages/user/team",
+					"query": ""
+				},
+				{
+					"id": 13,
+					"name": "选择医院",
+					"pathName": "pages/xuanze/xz_xiangmu",
+					"query": "tid=63"
+				},
+				{
+					"id": -1,
+					"name": "案例下载",
+					"pathName": "pages/myproduct/index",
+					"query": ""
+				},
+				{
+					"id": 15,
+					"name": "桔子充电宝列表",
+					"pathName": "pages/audio/list",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "案例下载",
+					"pathName": "pages/up_anli/down",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "团队成员",
+					"pathName": "pages/user/team-user",
+					"query": ""
+				},
+				{
+					"id": 18,
+					"name": "收益流水",
+					"pathName": "pages/user/team-shouyi",
+					"query": ""
+				}
+			]
+		}
+	}
+}

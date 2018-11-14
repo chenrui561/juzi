@@ -1,0 +1,141 @@
+page {
+  background: #f6f7f8;
+}
+
+/*.question-form {
+  margin: 25rpx;
+}*/
+.img_text{
+  background-color: #fff;
+  line-height: 28px;
+  text-align: center;
+}
+.weui-btn{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  color: #fff;
+  background-color: #F14918;
+  border-radius:0px;
+}
+button::after{
+border: none;
+}
+.question-input-area {
+  background-color: #fff;
+  border: 1rpx solid #f2f2f2;
+  border-radius: 10rpx;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 100px;
+}
+
+.question-title-wrap {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #ccc;
+  margin: 10rpx 30rpx;
+  padding: 20rpx 0;
+}
+
+.question-title {
+  flex: 1;
+}
+
+.weui-textarea-counter, .title-input-counter {
+  color: #b3b3b3;
+  font-size: 14px;
+  padding-left: 10rpx;
+}
+
+.weui-cell::before, .weui-cells::before, .weui-cell::after, .weui-cells::after {
+  border: none;
+}
+.tips{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.tips_ico{
+  width: 16px;
+  height: 16px;
+  }
+.tips_text{
+  font-size: 11px;
+  color: #999;
+  line-height: 30px;
+}
+.xuanze_text{
+  overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box;
+-webkit-line-clamp:1;
+-webkit-box-orient:vertical;
+width: 190px;
+}
+.xuanze_box{
+  width: 200px;text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.question-images-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 10px;
+}
+
+.question-images-tool {
+  display: flex;
+  align-items: center;
+}
+
+.question-images {
+  display: flex;
+  flex-wrap:wrap;
+  justify-content:  center;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.q-image-wrap {
+  height: 28vw;
+  width: 28vw;
+  border-radius: 5px;
+  margin: 1vw;
+  margin-bottom: 10px;
+}
+
+.q-image {
+  flex: 1;
+  height: 28vw;
+  width: 28vw;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.q-image-j {
+  height: 28vw;
+  width: 28vw;
+  border-radius: 5px;
+  margin: 1vw;
+  margin-bottom: 10px;
+}
+.q-image-remover {
+  text-align: center;
+}
+
+.qbdd{
+  background: #fff;
+  width: 100%-10px;
+  font-size: 12px;
+  color: #666;
+  padding: 4%;
+  margin: 10px;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+.xuanze{
+  width: 11px;height: 10px;margin-left: 5px;
+}

@@ -1,0 +1,33 @@
+<!--pages/user/bd.wxml-->
+<view class="page-body">
+  <view >
+
+<!--选择医院/项目-->
+<picker   bindchange="bindPickerChange" value="{{index}}" range="{{yiyuan}}" class="qbdd mt10" >
+      <span class="font_14 c3">医院</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+        <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{yiyuan[yiyuan_index]}}</text>
+        <text wx:else>请选择医院</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
+  <picker   bindchange="bindPickerChange2" value="{{goods_id[xiangmu_index]}}" range="{{xiangmu}}" class="qbdd mt10" >
+      <span class="font_14 c3">项目</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+      <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{xiangmu[xiangmu_index]}}</text>
+      <text wx:else>请先选择医院</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
+
+
+
+
+  <button style="margin-top:30px;width: 86%;color: #F14918;background-color:#fff;" bindtap='xuanze' >选择</button>
+  
+ </view>
+
+ <!--<button style="margin-top:30px;width: 86%;color: #1aad19;background-color:#fff;" bindtap="chongxin">重新加载首页</button>-->
+
+
+
+</view>
+

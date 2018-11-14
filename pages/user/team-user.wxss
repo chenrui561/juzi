@@ -1,0 +1,32 @@
+/* pages/product/lilshi.wxss */
+.yangshi{
+    float: left;
+    text-align: left;
+    height: 36px;
+    line-height: 36px;
+    font-size: 13px;
+    border-bottom: 1px solid #e1e1e1;
+    background-color: #fff;
+    margin-top: 5px;
+}
+.yangshi2{
+    float: left;
+    text-align: left;
+    height: 36px;
+    line-height: 36px;
+    font-size: 13px;
+    border-bottom: 1px solid #e1e1e1;
+    background-color: #fff;
+}
+.shijian{
+    width: 22%;
+    padding-left: 3%;
+}
+.sl{
+    width: 37%;
+    padding-left: 3%;
+}
+.nick{
+    width: 32%;
+    padding-left: 3%;
+}

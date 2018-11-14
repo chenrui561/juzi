@@ -1,0 +1,62 @@
+  <!--<view class='list_head'>
+      <view class='weizhi'>
+                <text>武汉市</text>
+                <image class='down' src='/images/down.png' ></image>
+      </view>
+      <view class='weizhi'>
+                <text>智能排序</text>
+                <image class='down' src='/images/down.png' ></image>
+      </view>
+  </view> -->
+<view class="list">
+    <block wx:for="{{shopList}}" wx:key="*this" data-id="{{item.goods_id}}">
+    <view  class="cont" >
+                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
+                            <image class="hot_photo" src="http://www.juziyimei.com/{{item.goods_img}}"></image>
+                            <view class="hot_title">{{item.goods_name}}</view>
+                            
+                            <view style="display:flex;line-height:50rpx;color:#999;margin-bottom:10rpx;">
+                              <view class="gmxx" style="font-size:28rpx;">
+                                  <view style="display:flex;line-height:50rpx;color:#999">
+                                    <view style="float: right;font-size: 12px;display: flex;align-items: center;">
+                                    
+                                      <text>{{item.brand_name}}</text> 
+                                    </view>
+                                  </view>  
+                              </view>
+                            </view>
+                            <view style="display:flex;line-height:50rpx;padding:20rpx 0;">
+                                  <view style="float: right;font-size: 12px;display: flex;align-items: center; color:#999;">
+                                      桔子价:
+                                    </view>
+                                  <view class="gmxx" style="color: #F14918;">¥ {{item.shop_price}}</view>
+                                  <view class="gmx">¥ {{item.market_price}}</view> 
+                              </view>
+                          </navigator>
+                    </view>
+        <!--<view class="ban">
+            <navigator url="../product/detail?productId={{item.goods_id}}" class="cover flex-wrp">
+                <image class="banner" src="https://www.juziyimei.com/{{item.goods_img}}" mode="widthFix"></image>
+          <view class="act-item ellipsis_title">
+             {{item.goods_name}}
+            </view>
+            <view class="act-item ellipsis" style='text-align: center;line-height:30px;' >
+                <text wx:if="{{item.goods_number > 0}}" style="color:red">¥ {{item.shop_price}}</text>
+                <text wx:if="{{item.goods_number == 0}}" style="color:#939497">¥ {{item.shop_price}}</text>
+                <text class='pro_rel_price2'>¥ {{item.market_price}}</text>
+            </view>
+            </navigator>
+        </view> -->
+        <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">fsaffffff</view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}"></view> 
+    </block>
+<view  class="clear no_more" >{{more}}</view>    
+ <navigator  url='/pages/cart/cart' class='fabu'><image style='width:20px;height:20px;' src='/images/gouwuche.png'></image></navigator>
+</view>
+
+
+
+
+
+
+

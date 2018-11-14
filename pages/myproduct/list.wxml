@@ -1,0 +1,64 @@
+<!--pages/user/user.wxml-->
+<view class="page" style='margin-top: 5px;background-color: #fff;'>
+
+ 
+   
+<view class="qbdd mt10 eglass"  >
+
+ <navigator url="../myproduct/index?tid=1"  >
+    <span class="font_16 c3">我的优享商品</span>
+    
+    <span class="fl_r c9 font_12 l_h60 list"  hover-class="none"> <image  class="x_right mt10" src="/images/x_right.png"></image></span>
+    <text style="float: right; color: #8e8e8e;">{{count}}</text>
+    </navigator>
+    </view>
+
+  <!--  <view class="qbdd mt10 zy" >
+ <navigator url="../rituall/rituall" style='border-top:1px solid #eee;'>
+    <span class="font_16 c3">我的自营商品</span>
+    <span class="fl_r c9 font_12 l_h60 list" hover-class="none"> <image  class="x_right mt10" src="/images/x_right.png"></image></span>
+    </navigator>
+    </view>-->
+
+    <view class="qbdd mt10 shouquan" >
+ <navigator url="../myproduct/index?tid=2" style='border-top:1px solid #eee;'>
+    <span class="font_16 c3">待授权商品</span>
+    <span class="fl_r c9 font_12 l_h60 list" hover-class="none"> <image  class="x_right mt10" src="/images/x_right.png"></image></span>
+    </navigator>
+    </view>
+
+
+</view>
+<view style='font-size:11px;background-image: url(/images/down.png);background-size: 16px 16px;background-position: 5px center;background-repeat: no-repeat;padding-left:50rpx;margin-top:16rpx;'>
+      我创建的优享清单
+     
+      <span bindtap="setModalStatus" data-status="1" class="fl_r c9 font_12 l_h20" hover-class="none"> <image  class=" mt10" src="/images/jiahao.png" style='margin-right:20rpx; width:16px; height:16px;'></image></span>
+    
+</view>
+
+
+<navigator  class="pr2" url=""  wx:for="{{goods_list}}">
+                            <image class="hot_photo" src="/images/goods_list.png"></image>
+
+                            
+                              <view style="line-height:50rpx;color:#999">
+                                <view class="title">{{item.title}}</view>
+                                  <view class="gmxx" style="font-size:28rpx;width:100%">
+                                    <text wx:if="{{item.count == 0}}">您的清单现在还没有商品哦！</text>
+                                    <text wx:if="{{item.count > 0}}">共{{item.count}}件商品</text>
+                                  </view>
+                              </view>
+                              
+                          </navigator>
+ <form bindsubmit="formSubmit" bindreset="formReset">
+              <view class="drawer_screen"   bindtap="setModalStatus" data-status="0" wx:if="{{showModalStatus}}"></view>
+      <view animation="{{animationData}}" style="background-color: #e8e8e8;" class="drawer_attr_box" wx:if="{{showModalStatus}}">
+              <button class="close_icon" formType="submit" bindtap="setModalStatus" data-status="0">创建</button>
+        <!--input输入-->
+              <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                      <input name="input" class="weui-input" style="font-size: 13px;width: 70%;margin: 10px;background-color: #fff;" auto-focus placeholder="请输入您的优享清单标题"/>
+                </view>
+              </view>  
+      </view>
+</form>

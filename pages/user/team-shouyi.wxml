@@ -1,0 +1,16 @@
+<!--pages/user/team-shouyi.wxml-->
+<!--线下-->
+<view >
+  <view class='yangshi shijian'>时间</view>
+  <view class='yangshi sl'>金额</view>
+  <view class='yangshi nick'>类型</view>
+  <view class='yangshi bz'>类型</view>
+  <view wx:for="{{goods_user}}">
+    <view class='yangshi2 shijian'>{{item.change_time}}</view>
+    <view wx:if="{{item.frozen_money > 0}}" class='yangshi2 sl'>{{item.frozen_money}}</view>
+    <view wx:if="{{item.user_money > 0}}" class='yangshi2 sl'>{{item.user_money}}</view>
+    <view wx:if="{{item.frozen_money > 0}}" class='yangshi2 nick'>冻结</view>
+    <view wx:if="{{item.user_money > 0}}" class='yangshi2 nick'>到账</view>
+    <view class='yangshi2 bz'>{{item.log_type}}</view>
+  </view>
+</view>

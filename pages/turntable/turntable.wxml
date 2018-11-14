@@ -1,0 +1,140 @@
+
+<view class="container">
+<view class='cjq'>
+<navigator url="../index/index" open-type = "switchTab" style="display: flex;"><image style='width:18px;height:18px;margin-left:5px;margin-right:2px;' src='/images/shouye2.png'></image><text>首页</text></navigator>
+     <button class='fx' style="margin-right: 10px;" open-type="share">点此分享，即可获得抽奖券</button>
+    
+     </view>
+
+   
+<view class='jiangchi'>倒计时<text style='color:#fff'>{{countDownHour}}:{{countDownMinute}}:{{countDownSecond}}</text>结束后</view>
+<view class='jiangchi2'>
+    <text><text style='color:#fff'>50%奖池金额</text>归最后的抽奖者：</text>
+    <image class='userinfo-avatar' src='{{last_img}}'></image>
+    <text style='color:#fff'>{{last_name}}</text>
+</view>
+  <view class="plate-wrap-box">
+    <view class="plate-border" animation="{{ aniData }}">
+      <!-- 转盘以及文字 -->
+      <view class="plate-wrap">
+        <view class="plate-box" wx:for="{{ lottery }}" wx:key="" style="top:-{{ (lottery.length - 6)<=2?(36+4*(lottery.length - 6)):50 }}rpx;transform-origin: 50% {{ (lottery.length - 6) <=2?(256+4*(lottery.length - 6)):270 }}rpx;border-top: {{ (lottery.length - 6) <=2?(256+4*(lottery.length - 6)):270 }}rpx solid #{{ index % 2==0?'ffeebe':'ffbb04' }};transform:translate(-50%,0) rotate({{ 360 / lottery.length * ( index )}}deg);border-left: {{ 440 / lottery.length * 2 }}rpx solid transparent;border-right: {{ 440 / lottery.length * 2 }}rpx solid transparent;">
+
+          <text class="text-box" style="color:#{{ index % 2==0?'ffbb04':'fff' }};">{{ item }}</text>
+        </view>
+      </view>
+      <!-- 边框的小灯泡 -->
+      <view class="plate-wrap plate-light">
+        <view class="plate-box" wx:for="{{ lottery }}" wx:key="" style="top:-{{ (lottery.length - 6)<=2?(44+4*(lottery.length - 6)):60 }}rpx; transform-origin: 50% {{ (lottery.length - 6) <=2?(294+4*(lottery.length - 6)):310 }}rpx;border-top: {{ (lottery.length - 6) <=2?(294+4*(lottery.length - 6)):310 }}rpx solid transparent;transform:translate(-50%,0) rotate({{ 360 / lottery.length * ( index )}}deg);border-left: {{ 500 / lottery.length * 2 }}rpx solid transparent;border-right: {{ 500 / lottery.length * 2 }}rpx solid transparent;">
+          <view class="bulb"></view>
+        </view>
+      </view>
+    </view>
+    <view class="plate-btn-wrap" bindtap="startRollTap">
+      <view class="plate-btn-box">
+        <view class="plate-inner-btn">
+          <text style="font-size: 11px;">累积奖池</text>
+              <text style="font-size: 11px;">  {{chi}}元</text>
+              <!--<text animation="{{ aniData2 }}" style="font-size: 9px;position:absolute;">+1</text>-->
+        </view>
+      </view>
+    </view>
+    
+
+    
+  </view>
+  <view class="djcj_tips">剩余抽奖券{{choujiang}}张</view>
+  <button wx:if="{{app_uid > 0 && app_uid !== 999999}}" class="cj_button" bindtap="startRollTap" data-can="{{can}}">点击抽奖</button>
+  <button wx:if="{{app_uid == 999999}}" class="cj_button" bindtap="shuaxin">登录成功，点击刷新</button>
+  <button wx:if="{{!app_uid}}" class="cj_button" bindgetuserinfo="bindGetUserInfo" open-type="getUserInfo" >授权登录</button>
+     
+
+    <view class='jp_list'>
+      <view class='jp_info'>
+          <view class="jp_title">一等奖</view>
+          <navigator class='jp_box' url='../product/detail?productId={{one_id}}' >
+            <view class='jp_box2' >
+              <image class='jp_img'  src='{{one_img}}'></image>
+            </view>
+            <view class='jp_text'>{{one_name}}</view>
+          </navigator>
+      </view>
+      <view class='jp_info'>
+          <view class="jp_title">二等奖</view>
+          <navigator class='jp_box' url='../product/detail?productId={{two_id}}'>
+          <view class='jp_box2' >
+            <image class='jp_img' src='{{two_img}}'></image>
+          </view>
+            <view class='jp_text'>{{two_name}}</view>
+          </navigator>
+      </view>
+      <view class='jp_info'>
+          <view class="jp_title">三等奖</view>
+          <navigator class='jp_box'>
+          <view class='jp_box2' >
+            <image class='jp_img' src='/images/10.png'></image>
+          </view>
+            <view class='jp_text'>10元代金券-满199减10元</view>
+          </navigator>
+      </view>
+      <view class='jp_info'>
+          <view class="jp_title">四等奖</view>
+          <navigator class='jp_box'>
+          <view class='jp_box2' >
+            <image class='jp_img' src='/images/5.png'></image>
+          </view>
+            <view class='jp_text'>5元代金券-满99减5元</view>
+          </navigator>
+      </view>
+    </view>
+ <view class='huojiang'>
+  <view class='my_list' style='color:#e74143'>我的获奖记录></view>
+  <view class='jpxq'>获奖信息</view>
+  <navigator url='../turntable/huojiang' class='my_list'>我的获奖记录></navigator>
+ </view> 
+  <view style="display: flex;width: 90%;height: 200px;border-radius: 10px;font-size: 13px;padding: 2%;border: 1px solid #fff;color: #fff;">
+    <swiper style='height:100%;width: 100%;display: flex;' display-multiple-items="9"  vertical="true"  autoplay="true" interval="1000" circular="{{circular}}" duration="500">
+                    <block wx:for="{{zhongjiang_info}}">
+                      <swiper-item catchtouchmove="catchTouchMove" style='height:20px;width: 100%;display: flex;'>
+                        <view class='huojiang_text' style='display: flex;align-items: center;'><image style='width:16px;height:16px;border-radius:50%;margin-right:3px;' src='{{item.tx_img}}'></image><text>{{item.user_name}}</text></view>
+                        <view class='huojiang_text' >{{item.jiang_id}}</view>
+                        <view class='huojiang_text2' >{{item.add_time}}</view>
+                      </swiper-item>
+                      
+                   </block>
+                </swiper>
+    
+  </view>
+      <view class='jpxq'>活动规则</view>
+      <view style="margin-left: 2%;">
+        <view class='hdgz'><view>1.</view><view>每次抽奖时，系统将会赠送1元现金红包进入奖池，倒计时结束后奖池的50%现金红包归最后一个抽奖者获得。</view></view>
+        <view class='hdgz'><view>2.</view><view>每次抽奖后，倒计时时间增加10分钟，倒计时最长不超过24小时。</view></view>
+        <view class='hdgz'><view>3.</view><view>获得代金券奖品时，代金券会自己动进入您的账号中，下单即可使用。</view></view>
+        <view class='hdgz'><view>4.</view><view>一、二等奖为实物奖品，获奖者可将奖品加入购物车并使用实物兑奖券下单，兑奖券15天有效，不含运费可随单。</view></view>
+        <view class='hdgz'><view>5.</view><view>实物奖品可能会因库存兑空而更换，获奖者依旧可以凭兑奖券兑换同等奖项奖品。</view></view>
+        <view class='hdgz'><view>6.</view><view>任何以作弊等不正当方式参与本活动的行为，安然海淘有权取消其活动资格。</view></view>
+      </view>
+
+<!--弹窗-->
+<view class="drawer_screen" bindtap="setModalStatus" data-status="0" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
+<view class="close_icon" bindtap="setModalStatus" data-status="0">×</view>
+<!--商品弹窗信息-->
+  <view class="drawer_attr_content">
+    <view class="text_center">
+
+         
+    </view>
+
+   
+  
+   
+  </view>
+
+ 
+
+
+</view>
+
+
+
+</view>

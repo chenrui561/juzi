@@ -1,0 +1,199 @@
+/* pages/user/user.wxss */
+.me{
+  height: 100%;
+}
+.eglass{
+background-image: url(https://xcx.anranhaitao.com/Data/xcx_image/eglass-buy.png);background-size: 32px 32px;background-position: 15px center;background-repeat: no-repeat;padding-left:110rpx;
+}
+.zy{
+background-image: url(https://xcx.anranhaitao.com/Data/xcx_image/zy.png);background-size: 32px 32px;background-position: 15px center;background-repeat: no-repeat;padding-left:110rpx;
+}
+.shouquan{
+background-image: url(https://xcx.anranhaitao.com/Data/xcx_image/shouquan.png);background-size: 32px 32px;background-position: 15px center;background-repeat: no-repeat;padding-left:110rpx;
+}
+.userinfo{
+  position: relative;
+  width: 750rpx;
+  height: 320rpx;
+  background: #E02E24;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  display: block;
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx;
+  margin-top: 50rpx;
+  border-radius: 50%;
+  border:2px solid #fff;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+}
+
+.userinfo-nickname {
+  color: #fff;
+  font-size: 14px;
+}
+
+.sc{
+  background: #fff;
+  width: 100%;
+  font-size: 12px;
+  line-height: 16px;
+  color: #666;
+  padding: 4% 0;
+}
+.sc image{
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+.bte{
+  border-top: 1px solid #eee;
+}
+.qbdd{
+  width: 100% - 60px;
+  font-size: 12px;
+  color: #666;
+  height: 60px;
+  line-height: 60px;
+  
+}
+.list{
+margin-right: 10px;
+}
+.c33{
+  float: left;
+  color: #000
+}
+
+contact-button{
+  position: relative;
+  left:-50px;
+  opacity: 0;
+}
+.pr2 {
+margin-bottom:10px;
+background:#fff;
+display:inline-block;
+width:100%;
+}
+.hot_photo{
+  height:120rpx;
+  width:120rpx;
+  float:left;
+  margin:20rpx;
+}
+.fx_photo{
+  height:120rpx;
+  width:120rpx;
+  float: right;
+  margin:20rpx;
+}
+.title{
+width: 100%;
+font-size: 16px;
+height: 50px;
+line-height: 50px;
+color: #333;
+}
+
+
+/*弹窗*/
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.2;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+}
+
+.drawer_attr_box {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  background: #fff;
+}
+
+.close_icon {
+  width: 120rpx;
+  height: 50rpx;
+  line-height: 25rpx;
+  font-size: 13px;
+  float: right;
+  right: 5rpx;
+  top:5rpx;
+  padding: 10rpx;
+  color: #fff;
+  margin: 9px 12px;
+  /*border: 1rpx solid #ccc;*/
+  border-radius: 2px;
+  text-align: center;
+  background: #fe1540;
+}
+/*结束弹窗*/
+
+.drawer_attr_content {
+  padding: 20rpx;
+  /*height: 600rpx;*/
+  overflow-y: scroll;
+}
+.text_center{
+ width: 100%;
+}
+.mingcheng{
+width: 60%;
+display: inline-block;
+font-size:35rpx;
+line-height: 50rpx;
+margin-left: 40rpx;
+}
+.drawer_image {
+  width: 28%;
+  height: 200rpx;
+}
+
+.drawer_desc{
+    font-size:28rpx;
+    margin:20rpx;
+    height: 150rpx;  
+    width: 100%;
+}
+.cun{
+  margin: 5px;font-size:30rpx; 
+  padding-left: 20rpx;
+  width: 20%
+}
+
+.chi{
+  width: 40%;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  border: 1px solid #999;
+  display: inline-block;
+  margin: 5px;
+}
+.btn {
+  width: 80%;
+  padding: 15rpx 0;
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+.open_btn {
+  margin: 40rpx 10%;
+  border-radius: 10rpx;
+  background: #20bb21;
+  color: #fff;
+}
