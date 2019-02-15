@@ -6,6 +6,19 @@ page {
   font-size: 32rpx;
   line-height: 1.6;
 }
+.xiugai{
+  font-size: 13px;
+  background-color: #F14918;
+  border-radius: 5px;
+  line-height: 2.5em;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+  position: absolute;
+  right: 10px;
+  z-index: 9999;
+  
+}
 .yzm{
   font-size: 13px;
   background-color: #F14918;
@@ -14,6 +27,9 @@ page {
   padding-left: 10px;
   padding-right: 10px;
   color: #fff;
+  position: absolute;
+  right: 10px;
+  z-index: 9999;
 }
 .yzm_djs{
   font-size: 13px;
@@ -23,6 +39,9 @@ page {
   padding-left: 10px;
   padding-right: 10px;
   color: #333;
+  position: absolute;
+  right: 10px;
+  z-index: 9999;
 }
 .page-body {
   padding: 20rpx 0;
@@ -37,4 +56,13 @@ page {
   position: fixed;width: 80%;z-index: 9999;margin-top: 40%;margin-left: 10%;border-radius:5px;height: 200px;background-color: #fff;
   display:flex;flex-direction:column;
   align-items:center;
+}
+.xieyi1{
+  margin-left: 10px;
+  color: #999;
+  font-size: 14px;
+}
+.xieyi2{
+  color: #1aad19;
+  font-size: 14px;
 }

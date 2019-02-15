@@ -1,4 +1,13 @@
-<view class="question-form">
+<!--【上传案例】-->
+<view wx:if="{{type_id == 0}}" class="question-form">
+
+<picker   bindchange="bindPickerChange2" value="{{index}}" range="{{lx_info.name}}" class="qbdd mt10" >
+      <span class="font_14 c3">选择分类</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+      <text class='xuanze_text' wx:if="{{lx_id > 0 }}">{{lx_info.name[shunxu]}}</text>
+      <text wx:else>请选择分类</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
 
   <view class="question-input-area">
 
@@ -12,7 +21,52 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="晒晒您的心情" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
+          <textarea class="weui-textarea" placeholder="晒晒您的心情" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" value='{{anli_text.content}}' style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
+          <view class="weui-textarea-counter">{{contentCount}}/500</view>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="question-images-area">
+
+    
+
+    <!-- 图片缩略图  -->
+    <view wx:if="{{id == 0}}" class="question-images">
+      <block wx:for="{{images}}" wx:key="*this">
+        <view class="q-image-wrap">
+          <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>
+        </view>
+      </block>
+      <image src='/images/up_img.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 9}}"></image>
+    </view>
+
+  </view>
+
+  <!-- 提交表单按钮  -->
+  <button wx:if="{{id == 0}}" class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+  <button wx:else class="weui-btn" type="primary" bindtap="submitForm2">修改</button>
+</view>
+<!--【意见反馈】-->
+
+<view wx:if="{{type_id == 1}}" class="question-form">
+
+  <view class="question-input-area">
+
+    <!-- 问题标题  
+    <view class="question-title-wrap">
+      <input class="question-title" placeholder="请输入标题" maxlength="40" placeholder-style="color:#b3b3b3;font-size:18px;" bindinput="handleTitleInput"></input>
+      <view class="title-input-counter">{{titleCount}}/40</view>
+    </view>-->
+
+    <!-- 问题正文  -->
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="请输入您对我们桔子放心美的意见和建议" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
           <view class="weui-textarea-counter">{{contentCount}}/500</view>
         </view>
       </view>
@@ -39,5 +93,37 @@
 
   <!-- 提交表单按钮  -->
   <button class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+
+</view>
+
+<!--【知乎提出问题】-->
+
+<view wx:if="{{type_id == 2}}" class="question-form">
+  <view class="question-input-area">
+    <!-- 问题标题  -->
+    <view class="question-title-wrap">
+      <input class="question-title" placeholder="输入您的问题" maxlength="40" placeholder-style="color:#b3b3b3;font-size:18px;" bindinput="handleTitleInput"></input>
+      <view class="title-input-counter">{{titleCount}}/40</view>
+    </view>
+
+    <!-- 问题正文  -->
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea class="weui-textarea" placeholder="问题描述（选填）" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px 10px;" bindinput="handleContentInput" />
+          <view class="weui-textarea-counter">{{contentCount}}/500</view>
+        </view>
+      </view>
+    </view>
+  </view>
+<!--<picker   bindchange="bindPickerChange2" value="{{index}}" range="{{lx_info.name}}" class="qbdd mt10" >
+      <span class="font_14 c3">选择分类</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+      <text class='xuanze_text' wx:if="{{lx_id > 0 }}">{{lx_info.name[shunxu]}}</text>
+      <text wx:else>请选择分类</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>-->
+  <!-- 提交表单按钮  -->
+  <button class="weui-btn tijiao" type="primary" bindtap="submitForm3">提交</button>
 
 </view>

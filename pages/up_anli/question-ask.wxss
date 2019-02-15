@@ -16,7 +16,7 @@ page {
   display: flex;
   align-items: center;
   border-bottom: 1rpx solid #ccc;
-  margin: 10rpx 30rpx;
+  margin: 10rpx 20rpx;
   padding: 20rpx 0;
 }
 
@@ -64,4 +64,28 @@ page {
 }
 .q-image-remover {
   text-align: center;
+}
+.qbdd{
+  background: #fff;
+  width: 100%-10px;
+  font-size: 12px;
+  color: #666;
+  padding: 4%;
+  margin:  10px 0;
+  border-top-left-radius: 10rpx;
+  border-top-right-radius: 10rpx;
+}
+.xuanze{
+  width: 11px;height: 10px;margin-left: 5px;
+}
+.xuanze_box{
+  width: 200px;text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.tijiao{
+  position: fixed;
+  bottom: 10px;
+  width: calc(100% - 25px);
 }

@@ -37,7 +37,7 @@
 </view>
 
 
-<navigator  class="pr2" url=""  wx:for="{{goods_list}}">
+<navigator  class="pr2" url=""  wx:for="{{goods_list}}" wx:key="key">
                             <image class="hot_photo" src="/images/goods_list.png"></image>
 
                             

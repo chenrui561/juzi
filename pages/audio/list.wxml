@@ -1,24 +1,15 @@
 <!--pages/audio/list.wxml-->
-<view class="page__bd">
-    <view class="section section_gap audio_1">
-      <audio class='audio' src="{{info.url}}" poster="{{current.poster}}" name="{{info.name}}" author="{{author}}" action="{{audioAction}}" bindplay="audioPlayed" bindtimeupdate="audioTimeUpdated" controls></audio>
-    </view>
-
-    <view class="section section_gap">
-    <view class="body-view">
-      <slider block-size="15" bindchange="timeSliderChanged" left-icon="cancel" right-icon="success_no_circle"/>
-    </view>
-  </view>
-  </view>
+<view class="search df">
+    <input class="df_1" placeholder="请输入您要搜索的内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+    <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
+</view>
 
 
 <view class='audio_list'>
-  <view wx:for="{{list}}" bindtap='on_audio_info' data-aid="{{item.aid}}" class="qbdd  {{info.aid==item.aid ? 'back_in' : ''}}">
-  <view >
+  <navigator url='../audio/index?id={{item.aid}}&title={{item.name}}' wx:for="{{list}}" wx:key="key" data-aid="{{item.aid}}" class="qbdd  {{info.aid==item.aid ? 'back_in' : ''}}">
+    <view >
       <span class="font_14">{{item.name}}</span>
       <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
       </view>
-  </view> 
-
-
+  </navigator> 
 </view>

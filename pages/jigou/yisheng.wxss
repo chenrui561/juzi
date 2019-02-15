@@ -1,0 +1,146 @@
+/* pages/jigou/jigou.wxss */
+.jigou_info{
+  display: flex;
+  flex-direction: column;
+}
+.jigou_info1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fff;
+  padding-top: 10px;
+}
+.yy_num{
+  font-size: 13px;
+  color: #999;
+}
+.jigou_logo{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.jigou_title{
+  margin-top: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.jigou_info2{
+  display: flex;
+  background-color: #fff;
+  align-items: center;
+  justify-content: space-between;
+  padding:0 40px;
+  margin-bottom: 5px;
+}
+.yy{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 13px;
+  color: #999;
+  margin:10px 20px;
+}
+.jigou_address{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  margin: 10px 0;
+}
+.addimg{
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+.add_img{
+  width: 16px;
+  height: 16px;
+  margin-left: 20px;
+  margin-right: 10px;
+
+}
+.right{
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+}
+.add_text{
+  font-size: 14px;
+  line-height: 20px;
+}
+.jigou_lb{
+  display: flex;
+  justify-content: flex-start;
+  background-color: #fff;
+  padding: 5px 10px;
+  border-bottom: 1px solid #eee;
+}
+.lb_img{
+  width: 18px;
+  height: 18px;
+  margin: 10px;
+}
+.lb_text{
+  font-size: 14px;
+  width: 95%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  line-height: 26px;
+  overflow:hidden;
+text-overflow:ellipsis;
+display:-webkit-box;
+-webkit-box-orient:vertical;
+}
+.jigou_yy{
+  background-color: #fff;
+}
+.yy_info{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: #fff;
+}
+.yy_img{
+  width: 140rpx;
+  height: 140rpx;
+  flex-shrink:0;
+}
+.yy_text{
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  justify-content: space-between;
+  height: 70px;
+  margin: 10px;
+}
+.yy_title{
+   font-size: 15px;
+  color: #333;
+  line-height: 18px;
+  margin: 0;
+  height: 38px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  
+}
+.yy_price{
+  display: flex;
+}
+.yy_price1{
+  color: #f20;
+}
+.yy_price2{
+  color: #999;
+  font-size: 14px;
+  text-decoration:line-through;
+}
+.renzheng{
+  width: 39px;
+  height: 12px;
+  margin-top: -10px;
+}

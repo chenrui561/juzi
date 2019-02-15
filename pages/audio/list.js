@@ -8,19 +8,24 @@ Page({
   data: {
     list:[],
     info: [],
+    url:'',
+    search: '',
     author:'老汤'
   },
   audioPlayed: function (e) {
     console.log('audio is played')
+    wx.showLoading();//加载动画
   },
   audioTimeUpdated: function (e) {
     this.duration = e.detail.duration;
+    console.log('啊')
+    wx.hideLoading()//关闭加载动画
   },
 
   timeSliderChanged: function (e) {
     if (!this.duration)
       return;
-
+    console.log('哈哈')
     var time = this.duration * e.detail.value / 100;
 
     this.setData({
@@ -53,65 +58,41 @@ Page({
       }
     });
   },
-  on_audio_info:function(e){
-    var audio_id = e.currentTarget.dataset.aid 
-    var that = this;
-    console.log(audio_id);
-    wx.request({
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_audio_info',
-      method: 'POST',
-      data: {
-        id: audio_id
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        console.log(res);
-        that.setData({
-          info: res.data.audio_info[0]
-        });
-      },
-    });
+  searchValueInput: function (e) {
+    console.log(e.detail.value)
+    this.setData({
+      search: e.detail.value
+    })
+  },
+  doSearch: function (e) {
+    this.loading();
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.request({
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_audio_list',
-      method: 'post',
-      data: {
-        page: 1
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        that.setData({
-          list: res.data.audio_list
-        });
-      },
-    });
-    wx.request({
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_audio_info',
-      method: 'POST',
-      data: {
-        id: 1
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        console.log(res);
-        that.setData({
-          info: res.data.audio_info[0]
-        });
-      },
-    });
+    this.loading();
   },
-
+loading:function(){
+  var that = this;
+  var search = this.data.search;
+  wx.request({
+    url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_audio_list',
+    method: 'post',
+    data: {
+      page: 1,
+      search: search
+    },
+    header: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      that.setData({
+        list: res.data.audio_list
+      });
+    },
+  });
+},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -125,6 +106,7 @@ Page({
   onShow: function () {
 
   },
+
 
   /**
    * 生命周期函数--监听页面隐藏

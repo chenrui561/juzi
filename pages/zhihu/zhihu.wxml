@@ -1,0 +1,100 @@
+<!--pages/zhihu/zhihu.wxml-->
+<view>
+  <view class='title'>
+    <text class='wen_title'>{{title}}</text>
+    <view class='chakan_huida flex_h'>
+    <text>查看全部{{hd_count}}个回答</text>
+    <image class='right' src='/images/x_right.png'></image>
+    </view>
+  </view>
+
+  <view class='flex_h'>
+    <view class='huida_btn'>邀请回答</view>
+    <navigator wx:if="{{my_huida > 0 && my_huida_caogao == 0 && my_huida != aid}}" url='/pages/zhihu/zhihu?aid={{my_huida}}' class='huida_btn' style='border-left: 1px #ccc solid;'>查看我的回答</navigator>  
+    <navigator wx:if="{{my_huida > 0 && my_huida_caogao == 0 && my_huida == aid}}" url='/pages/zhihu/input?wid={{wid}}&hid={{my_huida}}' class='huida_btn' style='border-left: 1px #ccc solid;'>编辑我的回答</navigator>  
+    <navigator wx:if="{{my_huida > 0 && my_huida_caogao == 1}}" url='/pages/zhihu/input?wid={{wid}}&hid={{my_huida}}' class='huida_btn' style='border-left: 1px #ccc solid;'>查看我的草稿</navigator>
+    <navigator wx:if="{{my_huida == null}}" url='../zhihu/input?wid={{wid}}&title={{title}}' class='huida_btn' style='border-left: 1px #ccc solid;'>写回答</navigator> 
+  </view>
+
+  <view wx:if="{{anli_info.length > 0}}">
+
+  <!--用户基本信息和分享的内容-->
+    <view class='user_con'>
+      <view class='user_info'>
+        <view class='user_info2'>
+          <image class='user_img' src='{{anli_info[0].tx_img}}'></image>
+          <text class='user_name'>{{anli_info[0].passwd_answer}}</text>
+        </view>
+        <view class='guanzhu'>关注</view>
+      </view>
+      <import src="../../wxParse/wxParse.wxml"/> 
+        <view class="wxParse user_connet">
+            <view  style="padding-top: 10px;">
+              <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+            </view>
+        </view>
+    <text decode="{{true}}" class='user_time'>编辑于{{anli_info[0].update_time}}&nbsp;·&nbsp;著作权归作者所有</text>
+    </view>
+
+
+
+    
+  </view>
+
+<!--邀请回答-->
+<view wx:if="{{hd_count == 0}}">
+  <view  class='guoqu_box'>
+    <view class='flex_s_l p10'>
+      <view class='yaoqing_text'>邀请回答</view>
+      <view class='yaoqing_text2'>您可以邀请下面用户，快速获得回答</view>
+    </view>
+<!--邀请用户-->
+  <view class='yaoqing_user'>
+    <view class='yaoqing_user_box flex_h_b'>
+        <view class='yaoqing_user_info flex_h'>
+            <image class='tx_img' src='https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLwy91cM7wGk9MwqKVsKrfVLWqtaUYx7fvQgFCMzjZ4AJbPOgKbgNMcuWklzTBOOEH5rqJphjb2eg/132'></image>
+            <view class='yaoqing_user_name flex_s_l'>
+              <view class='user_name'>安然</view>
+              <view class='yaoqing_text2'>最近回答过类似问题</view>
+            </view>
+        </view>
+        <view class='yaoqing_btn'>邀请</view>
+    </view>
+  </view>
+  </view>
+  <view class='no_huida'>暂时没有回答</view>
+</view>
+  <!--评论-->
+<view wx:else class='guoqu_box'>
+  <view class='title'>评论：</view>
+  <view class='pl_input'>
+    <image class='pl_img' src='{{HeadUrl}}'></image>
+    <textarea placeholder="添加评论..." auto-height='true' maxlength="-1" bindconfirm="dopl" bindfocus="panduan" focus="{{focus}}" bindinput="searchValueInput"  class='pl_inputs'></textarea>
+  </view>
+  <view class='pl_box' wx:for="{{pl}}">
+    <view class='pl_info_all'>
+      <image class='pl_img' src='{{item.tx_img}}'></image>
+      <view class='pl_info'>
+        <text style='color:#333'>{{item.passwd_answer}}</text>
+        <text style='margin-right:10px;'>{{item.add_time}}</text>
+      </view>
+    </view>
+    <view class='pl_content'>{{item.content}}</view>
+  </view>
+  <view wx:if="{{pl == null}}" class='pl_no'>
+    <text class='pl_no_text'>暂时还没有评论</text>
+  </view>
+  <view>
+  
+  </view>
+</view>
+
+
+
+
+
+
+
+</view>
+
+

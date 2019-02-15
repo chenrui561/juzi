@@ -10,10 +10,14 @@ Page({
     more: '下拉加载更多',
     productData:[],
     historyKeyList:[],
+    user_lei:'',
     hotKeyList:[]
   },
   onLoad:function(options){
     var that = this;
+    this.setData({
+      user_lei: wx.getStorageSync('user_lei')
+    })
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=search_info',
       method:'post',

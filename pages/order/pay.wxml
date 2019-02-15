@@ -2,7 +2,7 @@
 <view class="w100">
 
 
-		<view class="p_all bg_white df item" style="margin-top: 10px;" wx:for="{{goods_info}}">
+		<view class="p_all bg_white df item" style="margin-top: 10px;" wx:for="{{goods_info}}" wx:key="key">
 			<view class="cp_photo" style='width:20%;'>			
 				<image src="http://www.juziyimei.com/{{item.goods_img}}"></image>
 			</view>
@@ -15,14 +15,22 @@
       <view style='margin-left:5%;' >
 			<text wx:if="{{tuanid == 0}}" class="gm_ovh_1h red pt10">¥{{item.goods_price}}</text>
       <text wx:if="{{tuanid > 0}}" class="gm_ovh_1h red pt10">¥{{item.tuan_price}}</text>
-			<text class="gm_ovh_1h pt10">×{{item.goods_number}}</text>
+      <view class="stepper">
+            <!-- 减号 -->
+                  <text data-rid="{{item.rec_id}}" data-num="{{item.goods_number}}" bindtap="bindMinus" >-</text>
+            <!-- 数值 -->
+                      <text type="number">{{item.goods_number}}</text>
+            <!-- 加号 -->
+                    <text class="normal" bindtap="bindPlus" data-num="{{item.goods_number}}" data-rid="{{item.rec_id}}">+</text>
+      </view> 
+
       </view>
 			</view>
 		</view>		
 
 <!-- 到院时间-->
   <view class="info" style="margin-top: 10px;">		
-  <picker mode="date" value="{{date}}"   bindchange="bindDateChange">
+  <picker mode="date" value="{{date}}" start="{{now}}"   bindchange="bindDateChange">
     <view class="picker">
       请选择到院时间: {{date}}
     </view>
@@ -37,8 +45,8 @@
   <label style="display: flex" class="xuan" bindtap="getvou" data-id="0" data-price="0">
     <radio value="0" checked="true">不使用</radio>
   </label>
-    <label style="display: flex" wx:for="{{user_bonus}}" class="xuan" bindtap="getvou" data-id="{{item.bonus_id}}" data-price="{{item.type_money}}">
-    <radio value="{{item.bonus_id}}" >{{item.type_name}}</radio>
+    <label style="display: flex" wx:for="{{user_bonus}}" wx:key="key" wx:if="{{item.type_money > 0}}" class="xuan" bindtap="getvou" data-id="{{item.bonus_id}}" data-price="{{item.type_money}}">
+    <radio value="{{item.bonus_id}}" >{{item.type_name}}【{{item.type_money}}元】</radio>
   </label>
   
   </radio-group>

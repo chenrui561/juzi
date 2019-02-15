@@ -2,9 +2,10 @@
 <view class="w100">
 <view style=" width:100%; height:70px; background: #F37A9C">
   <image src="http://www.anranhaitao.com/mobile/themes/default/images/dfk.png" style="height: 50px;width:50px;float: left;padding-left: 20px;padding-top:10px;"/>
-  <text wx:if="{{orderData.pay_status == 2 && orderData.shipping_status == 0}}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">已付款未到院</text>
+  <text wx:if="{{orderData.pay_status == 2 && orderData.shipping_status == 0}}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">已预约未到院</text>
+  <text wx:if="{{orderData.pay_status == 2 && orderData.shipping_status == 5}}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">已到院未结算</text>
   <text wx:if="{{orderData.pay_status == 0 }}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">未付款</text>
-  <text wx:if="{{orderData.pay_status == 2 && orderData.shipping_status == 1 }}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">已到院</text>
+  <text wx:if="{{orderData.pay_status == 2 && orderData.shipping_status == 1 }}" style="font-size:20px;color:#fff;float: left;padding-left: 20px;line-height:70px;">已付款到院</text>
 </view>
 <!--收货人信息
 <view class="p_all bg_white mt10 font_14" style='background: #ffffff url(http://www.anranhaitao.com/mobile/themes/default/images/tiao.png) repeat-x bottom center;border-bottom: 1px solid #ffffff;padding-bottom:20px;'>
@@ -17,7 +18,7 @@
 			</view>
 		</view>	-->
 <!--商品信息-->
-		<view style='margin-top:5px;' class="p_all bg_white df item" wx:for="{{proData}}">
+		<view style='margin-top:5px;' class="p_all bg_white df item" wx:for="{{proData}}" wx:key="key">
 			<view class="cp_photo">			
 				<image src="{{item.goods_thumb}}"></image>
 			</view>
@@ -25,16 +26,37 @@
 				<view class="font_14 mt5 ovh1">
 		      {{item.goods_name}}
 		    </view>
-			  <text class="gm_ovh_1h red pt10">¥{{item.goods_price}}</text>
-			  <view class="sl">
-		        数量：{{item.goods_number}}
-		    </view>
+        <view class="font_12 c9 ovh1">{{item.brand_name}}</view>
+        <form  bindsubmit="baocun" data-recid='{{item.rec_id}}'>
+        <view class='flex_h_b'>
+          <view class='flex_h'>
+            <view class="sl">预约金：</view>
+            <text wx:if="{{price_change == 0}}" class="gm_ovh_1h red pt10">¥{{item.juzi_price}}</text>
+            <view class="sl">
+              x{{item.goods_number}}
+          </view>
+        </view>
+          
+            <input class='price_input' name="input" wx:if="{{user_lei > 9 && price_change == 1}}" type='digit' value='{{item.juzi_price}}'></input>
+            <text wx:if="{{user_lei > 9  && price_change == 0}}"  bindtap="price_change" class="gm_ovh_1h pt10">修改</text>
+            <button  wx:if="{{user_lei > 9  && price_change == 1}}" formType="submit" class="gm_ovh_1h pt10">保存</button>
+        </view>
+			  </form>
+			  
 			</view>
+          
 		</view>		
+
+    <view wx:if="{{orderData.qudao_tj}}" style='margin-top:5px;' class="p_all bg_white mt10 c6 l_h20 font_14">
+报备人：{{orderData.passwd_answer}}/{{orderData.rel_name}}
+	</view>
   <view wx:if="{{orderData.qudao_tj}}" style='margin-top:5px;' class="p_all bg_white mt10 c6 l_h20 font_14">
 报备信息：{{orderData.qudao_tj}}
 	</view>
-	<view style='margin-top:5px;' class="p_all bg_white mt10 c6 l_h20 font_14">
+  <view wx:if="{{orderData.yiyuan_id > 0}}" style='margin-top:5px;' class="p_all bg_white mt10 c6 l_h20 font_14">
+预约医院：{{orderData.brand_name}}
+	</view>
+	<view class="p_all bg_white c6 l_h20 font_14">
 预约到院时间：{{orderData.dy_time}}<text style='font-size:11px;margin-left:5px;'>(15天内有效哦)</text>
 	</view>
 <!--订单信息-->
@@ -64,7 +86,7 @@
     <view style="float:left;">
       <text style="color: #c3c3c3;font-size: 11px;line-height: 50px;margin-left:10px;">已使用红包￥{{orderData.formated_bonus}} ，使用余额￥{{orderData.surplus}}</text>
          </view>     
-  <text style="float: right;line-height: 50px;font-size: 14px;margin-right:10px;"><text style="color:#f23030;font-size: 15px;">￥</text><text style="color:#f23030;font-size: 18px;">{{orderData.total_fee}}</text></text>
+  <text style="float: right;line-height: 50px;font-size: 14px;margin-right:10px;"><text style="color:#f23030;font-size: 15px;">待支付：￥</text><text style="color:#f23030;font-size: 18px;">{{orderData.order_amount}}</text></text>
   </view>
 
 	<!--<view class="zhifu mt10 tc">金额：<span class="font_20 red">¥ {{orderData.money_paid}}</span></view>-->
@@ -73,10 +95,51 @@
 	<view class="p_all mt10">
 		<view class="btnGreen">
               <button wx:if="{{orderData.shipping_status !== 1}}" bindtap="removeOrder"> 取消订单 </button>
+              
 			        <button wx:if="{{orderData.pay_status == 0}}" style="margin-top: 10px;background-color: #179B16;color: #fff;" bindtap="payOrderByWechat" > 微信支付 </button>
         		<!--<contact-button type="default-light" session-from="orderNo_{{orderData.OrderNo}}">
 		        客服
 		        </contact-button>-->
 		</view>
 	</view>
+
+  <view wx:if="{{user_lei > 0}}" class="p_all mt10">
+        <text class='flex_s font_14 c6 l_h30'>以下仅合作伙伴/内部人员可见</text>
+        <view style='margin-top:5px;' class="p_all bg_white mt10 c6 l_h20 font_14">
+      真实姓名/微信昵称：{{orderData.rel_name}}/{{orderData.passwd_answer}}
+        </view>
+        <view  class="p_all bg_white c6 l_h20 font_14">
+      电话：{{orderData.mobile_phone}}
+        </view>
+        <view wx:for="{{fanli}}" class="p_all bg_white c6 l_h20 font_14">
+      返利情况：{{item.rel_name}}获得返点{{item.fanli_money}}元。
+        </view>
+	</view>
+
+    <!--评论-->
+    <view wx:if="{{user_lei > 0}}" class='guoqu_box'>
+                <view class='title' style='border-bottom:1px solid #eee;'>项目情况:</view>
+                          <view class='pl_box' wx:for="{{genjin}}">
+                                    <view class='pl_info_all'>
+                                            <image class='pl_img' src='{{item.tx_img}}'></image>
+                                            <view class='pl_info'>
+                                              <text style='color:#333'>{{item.passwd_answer}}</text>
+                                              <text style='margin-right:10px;'>{{item.add_time}}</text>
+                                            </view>
+                                    </view>
+                                    <view class='pl_content'>{{item.content}}</view>
+                                    <view wx:if="{{item.user_id == user_id}}" data-aid="{{item.aid}}" bindtap="del" class='pl_del'>删除</view>
+                          </view>
+                          <view wx:if="{{genjin == null}}" class='pl_no'>
+                            <text class='pl_no_text'>此项目还没有跟进情况</text>
+                          </view>
+                          <view class='pl_input'>
+                            <image class='pl_img' src='{{HeadUrl}}'></image>
+                            <input placeholder="请工作人员填写该项目的跟进情况" bindconfirm="dopl" focus="{{focus}}" bindinput="searchValueInput" class='pl_inputs'></input>
+                          </view>
+                <view>
+    </view>
+
+</view>
+
 </view>

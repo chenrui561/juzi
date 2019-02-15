@@ -1,0 +1,45 @@
+<!-- index.wxmi -->
+<view wx:if="{{shouquan == 0}}" class='shouquan'></view>
+<view class='shouquan_b' wx:if="{{shouquan == 0}}">
+    <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
+    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子放心美</text>
+    <button style="bottom: 0;position: absolute;width: 100%;color: #F14918;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+<view wx:if="{{zhuanpan_off > 0}}" class='shouquan'></view>
+<view wx:if="{{zhuanpan_off > 0}}" class='zhuanpan'>
+  <navigator url="../turntable/turntable">
+  <image mode='aspectFill' class='zhuanpan_img' src='http://www.juziyimei.com/images/tanchuang.jpg'></image>
+  </navigator>
+  <image bindtap='close_choujiang' mode='aspectFit' class='zhuanpan_close' src='/images/close.png'></image>
+</view>
+
+ <!-- 商城页面开始-->
+<view class="page">
+<!--首页头部-->
+    <view class='index_head'>
+          <view class='index_sousuo'>
+              <view class='weizhi'>
+                <text>武汉市</text>
+                <image class='down' src='/images/down.png' ></image>
+              </view>
+              <navigator url='../search/search' class='search'>
+                <image class='search_img' src='/images/search.png'></image>
+                <text class='search_text'>搜索在您身边的美</text>
+              </navigator>
+          </view>
+    </view>
+<!--首页头部end-->
+
+
+<navigator url='/pages/ruzhu/ruzhu' class='fabu'><image style='width:20px;height:20px;' src='/images/fabu.png'></image></navigator>
+<!--第一页结束-->
+<!--找优惠-开始-->
+
+<!--第二页-找优惠-开始-->
+<!--第四页-找医生-开始-->
+<!--第四页-找医生-结束-->
+</view>
+
+
+
+

@@ -1,0 +1,74 @@
+<!--pages/up_anli/down.wxml-->
+<view class="sc1 df">
+        <view class="df_1 tc">
+          <navigator url="../user/tixian" hover-class="none">
+            <view class='cash'><text style='font-size:11px;'></text>{{all== null? 0:all}}/{{yonghu== null? 0:yonghu}}</view>
+            <text>累计日记（公司/用户）</text>
+          </navigator> 
+        </view>
+      
+        <view class="df_1 tc">
+          <navigator url="" hover-class="none">
+            <view class='cash'><text style='font-size:11px;'></text>{{count_gs== null? 0:count_gs}}/{{count_s== null? 0:count_s}}</view>
+            <text>待审核（公司/用户）</text>
+          </navigator>
+        </view>
+    </view> 
+<view class='list'>
+
+
+<!--瀑布流加载的隐藏部分-->
+  <view style="display:none">
+    <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
+  </view>
+<!--瀑布流加载的隐藏部分-->
+<!--瀑布流开始-->
+  <view scroll-y="true" style="width:100%" style="height:{{scrollH}}px" bindscrolltolower="loadImages">
+    <view class="img_item">
+      <navigator url='../question-ask/anli?aid={{item.id}}&shenhe=1' class='ban' wx:for="{{col1}}" wx:key="id">
+        <image bindtap="big_img" data-con="{{item.content}}" data-bigimg="{{item.img_arr}}" data-img="{{item.pic}}" src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
+        <view  class="act-item ellipsis_title">{{item.content}}</view>
+        <view wx:if="{{item.goods_name}}" class='xiangmu'>
+                <text class='xiangmu_name'>{{item.goods_name}}</text>
+                <text style='margin-right:5px; color:#F14918;'>￥{{item.juzi_price}}</text>
+              </view>
+
+              <view class='touxiang' >
+                <view style="display: flex;">
+                  <image wx:if="{{item.tx_img == ''}}" style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="http://www.juziyimei.com/mobile/themes/default/user_images/head.png"></image>
+                  <image wx:else style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="{{item.tx_img}}"></image>
+                  <text wx:if="{{item.user_id < 2590 || item.user_id > 2781}}">{{item.nick_name}}</text> 
+                </view>
+                <view style="display: flex;margin-right: 8px;">
+                  <image style='width:16px;height:16px;border-radius:50%;margin:0 10rpx;' src="/images/xin.png"></image>
+                  <text style="color:#999;font-size:11px;">{{item.zan}}</text> 
+                </view>
+              </view>      
+      </navigator>
+    </view>
+    <view class="img_item">
+      <navigator url='../question-ask/anli?aid={{item.id}}&shenhe=1' class='ban' wx:for="{{col2}}" wx:key="id">
+        <image  bindtap="big_img" data-con="{{item.content}}" data-bigimg="{{item.img_arr}}" data-img="{{item.pic}}" src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
+        <view class="act-item ellipsis_title">{{item.content}}</view>
+         <view wx:if="{{item.goods_name}}" class='xiangmu'>
+                <text class='xiangmu_name'>{{item.goods_name}}</text>
+                <text style='margin-right:5px; color:#F14918;'>￥{{item.juzi_price}}</text>
+              </view>
+
+              <view class='touxiang' >
+                <view style="display: flex;">
+                  <image wx:if="{{item.tx_img == ''}}" style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="http://www.juziyimei.com/mobile/themes/default/user_images/head.png"></image>
+                  <image wx:else style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="{{item.tx_img}}"></image>
+                  <text wx:if="{{item.user_id < 2590 || item.user_id > 2781}}">{{item.nick_name}}</text> 
+                </view>
+                <view style="display: flex;margin-right: 8px;">
+                  <image style='width:16px;height:16px;border-radius:50%;margin:0 10rpx;' src="/images/xin.png"></image>
+                  <text style="color:#999;font-size:11px;">{{item.zan}}</text> 
+                </view>
+              </view>      
+      </navigator>
+    </view>
+</view>
+<!--瀑布流结束-->
+
+    </view>      

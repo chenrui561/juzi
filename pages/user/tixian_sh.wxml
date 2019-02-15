@@ -1,0 +1,17 @@
+<!--pages/user/team-shouyi.wxml-->
+<!--线下-->
+<view >
+  <view class='yangshi shijian'>时间</view>
+  <view class='yangshi sl'>昵称/姓名</view>
+  <view class='yangshi nick'>提现金额</view>
+  <view class='yangshi bz'>状态</view>
+  <navigator url='../user/tixian_info?id={{item.Id}}&log_id={{item.log_id}}&user_id={{item.user_id}}' wx:for="{{goods_user}}" wx:key="key">
+    <view class='yangshi2 shijian'>{{item.shenqing_time}}</view>
+    <view class='yangshi2 sl'>{{item.passwd_answer}}/{{item.rel_name}}</view>
+    <view  class='yangshi2 nick'>{{item.cash}}元</view>
+    <view wx:if="{{item.cash_state == 0}}" class='yangshi2 bz'>申请中</view>
+    <view wx:if="{{item.cash_state == 1}}" class='yangshi2 bz'>已完成</view>
+    <view wx:if="{{item.cash_state == 2}}" class='yangshi2 bz'>已拒绝</view>
+  </navigator>
+  
+</view>

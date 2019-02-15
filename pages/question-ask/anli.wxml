@@ -30,24 +30,24 @@
      
     </swiper>
   </view>
-<!--用户基本信息和分享的内容-->
-<view class='user_con'>
   <view class='user_info'>
     <view class='user_info2'>
       <image src='{{anli_info.tx_img}}' class='user_img' mode='aspectFill'></image>
       <text class='user_name'>{{anli_info.passwd_answer}}</text>
-      <view wx:if="{{guanzhu_off == 0}}" bindtap='guanzhu' class='guanzhu'>关注</view>
-      <view wx:if="{{guanzhu_off > 0}}" bindtap='del_guanzhu' class='guanzhu2'>已关注</view>
     </view>
-    <view class='user_time'>{{anli_info.add_time}}</view>
+    <view wx:if="{{guanzhu_off == 0}}" bindtap='guanzhu' class='guanzhu'>关注</view>
+    <view wx:if="{{guanzhu_off > 0}}" bindtap='del_guanzhu' class='guanzhu2'>已关注</view>
   </view>
+<!--用户基本信息和分享的内容-->
+<view class='user_con'>
+  
   <import src="../../wxParse/wxParse.wxml"/> 
     <view class="wxParse user_connet">
-        <view  >
+        <view  style="padding-top: 10px;">
            <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
         </view>
     </view>
-
+<view class='user_time'>{{anli_info.add_time}}</view>
 </view>
 <!--过去的她
 <view class='guoqu_box'>
@@ -62,23 +62,57 @@
 
 <!--案例评论结束-->
 <!--用户的医院/项目-->
-<view class='guoqu_box'>
+<view wx:if="{{anli_info.brand_id}}" class='guoqu_box'>
   <view class='title' style='padding-bottom:0px;'>改变她的是：</view>
+
   <navigator url='../product/detail?productId={{anli_info.goods_id}}&tid={{anli_info.user_id}}' class='xiangmu'>
     <image mode='aspectFill' class='xiangmu_img'   src='{{anli_info.goods_img}}'></image>
     <view class='xiangmu_info'>
       <view class='xiangmu_title'>{{anli_info.goods_name}}</view>
       <view class='xiangmu_yiyuan'>{{anli_info.brand_name[0].brand_name}}</view>
-      <view class='xiangmu_price'>￥{{anli_info.juzi_price}}</view>
+      <!--<view class='xiangmu_price'>￥{{anli_info.juzi_price}}<text class='gmx'>￥{{anli_info.market_price}}</text></view>-->
     </view>
   </navigator>
+  <navigator wx:if="{{anli_info.goods_id_2 > 0}}" url='../product/detail?productId={{anli_info.goods_info_2[0].goods_id}}&tid={{anli_info.user_id}}' class='xiangmu'>
+    <image mode='aspectFill' class='xiangmu_img'   src='{{anli_info.goods_info_2[0].goods_img}}'></image>
+    <view class='xiangmu_info'>
+      <view class='xiangmu_title'>{{anli_info.goods_info_2[0].goods_name}}</view>
+      <view class='xiangmu_yiyuan'>{{anli_info.brand_name_2[0].brand_name}}</view>
+      <!--<view class='xiangmu_price'>￥{{anli_info.juzi_price}}<text class='gmx'>￥{{anli_info.market_price}}</text></view>-->
+    </view>
+  </navigator>
+  <navigator wx:if="{{anli_info.goods_id_3 > 0}}" url='../product/detail?productId={{anli_info.goods_info_3[0].goods_id}}&tid={{anli_info.user_id}}' class='xiangmu'>
+    <image mode='aspectFill' class='xiangmu_img'   src='{{anli_info.goods_info_3[0].goods_img}}'></image>
+    <view class='xiangmu_info'>
+      <view class='xiangmu_title'>{{anli_info.goods_info_3[0].goods_name}}</view>
+      <view class='xiangmu_yiyuan'>{{anli_info.brand_name_3[0].brand_name}}</view>
+      <!--<view class='xiangmu_price'>￥{{anli_info.juzi_price}}<text class='gmx'>￥{{anli_info.market_price}}</text></view>-->
+    </view>
+  </navigator>
+  <navigator wx:if="{{anli_info.goods_id_4 > 0}}" url='../product/detail?productId={{anli_info.goods_info_4[0].goods_id}}&tid={{anli_info.user_id}}' class='xiangmu'>
+    <image mode='aspectFill' class='xiangmu_img'   src='{{anli_info.goods_info_4[0].goods_img}}'></image>
+    <view class='xiangmu_info'>
+      <view class='xiangmu_title'>{{anli_info.goods_info_4[0].goods_name}}</view>
+      <view class='xiangmu_yiyuan'>{{anli_info.brand_name_4[0].brand_name}}</view>
+      <!--<view class='xiangmu_price'>￥{{anli_info.juzi_price}}<text class='gmx'>￥{{anli_info.market_price}}</text></view>-->
+    </view>
+  </navigator>
+  <navigator wx:if="{{anli_info.goods_id_5 > 0}}" url='../product/detail?productId={{anli_info.goods_info_5[0].goods_id}}&tid={{anli_info.user_id}}' class='xiangmu'>
+    <image mode='aspectFill' class='xiangmu_img'   src='{{anli_info.goods_info_5[0].goods_img}}'></image>
+    <view class='xiangmu_info'>
+      <view class='xiangmu_title'>{{anli_info.goods_info_5[0].goods_name}}</view>
+      <view class='xiangmu_yiyuan'>{{anli_info.brand_name_5[0].brand_name}}</view>
+      <!--<view class='xiangmu_price'>￥{{anli_info.juzi_price}}<text class='gmx'>￥{{anli_info.market_price}}</text></view>-->
+    </view>
+  </navigator>
+  
 </view>
 <!--评论-->
 <view class='guoqu_box'>
-  <view class='title' style='border-bottom:1px solid #eee;'>案例评论：</view>
+  <view class='title' style='border-bottom:1px solid #eee;'>日记评论：</view>
   <view class='pl_input'>
     <image class='pl_img' src='{{HeadUrl}}'></image>
-    <input placeholder="请留下您的评论" bindconfirm="dopl" bindinput="searchValueInput" class='pl_inputs'></input>
+    <input placeholder="请留下您的评论" bindconfirm="dopl" bindfocus="panduan" focus="{{focus}}" bindinput="searchValueInput" class='pl_inputs'></input>
   </view>
   <view class='pl_box' wx:for="{{pl}}">
     <view class='pl_info_all'>
@@ -91,15 +125,15 @@
     <view class='pl_content'>{{item.content}}</view>
   </view>
   <view wx:if="{{pl == null}}" class='pl_no'>
-    <text class='pl_no_text'>此案例暂时还没有评论</text>
+    <text class='pl_no_text'>此日记暂时还没有评论</text>
   </view>
   <view>
   
   </view>
 </view>
 <!--底部开始-->
-<view class="footfixed">
-  <view class="fl_l font_12 hui03 df" style="height: 50px;">
+<view wx:if="{{shenhe == 0}}" class="footfixed">
+    <view class="fl_l font_12 hui03 df" style="height: 50px; width:100%;">
                 <view wx:if="{{zan_off == 0}}" class="zan" bindtap='zan' style='border-right:1px solid #999;'>
                   <image class="icon_kf"src="/images/xin_b.png"></image>
                   <text class="dbtext" style="margin-top: 2px;">赞 · {{zan}} </text>
@@ -108,17 +142,36 @@
                   <image class="icon_kf"src="/images/xin_on.png"></image>
                   <text class="dbtext" style="margin-top: 2px;">赞 · {{zan}} </text>
                 </view >
-                <view class="zan" style='border-right:1px solid #999;'>
+                <view class="zan" bindtap="bindButtonTap" style='border-right:1px solid #999;'>
                   <image class="icon_kf2"src="/images/pl.png"></image>
-                  <text class="dbtext" style="margin-top: 4px;">评论 · 0 </text>
+                  <text class="dbtext" style="margin-top: 4px;">评论 · {{pl_count}} </text>
                 </view >
 
-  </view>
+    </view>
+    <view wx:if="{{anli_info.brand_id}}" class='bottom_xiangmu'>
       <navigator url='../product/detail?productId={{anli_info.goods_id}}&tid={{anli_info.user_id}}' class="fl_l yiyuan_block">
       <image class="icon_kf2"src="/images/gwc.png"></image>
         <text class='yiyuan_text'>{{anli_info.goods_name}}</text>
-        <text class='yiyuan_price'>￥{{anli_info.juzi_price}}</text>
+       <!-- <view class='bottom_xiangmu_price'>
+          <text class='yiyuan_price'>￥{{anli_info.juzi_price}}</text>
+          <text class='yiyuan_price2'>￥{{anli_info.market_price}}</text>
+        </view>-->
+        
       </navigator>
+      </view>
+   </view>
+
+  <view wx:if="{{shenhe == 1}}" class="footfixed">
+  <view class="fl_l font_12 hui03 df" style="height: 50px; width:100%;">
+                <view bindtap='shenhe_no' class="zan" style='border-right:1px solid #999;'>
+                  <text class="dbtext" style="margin-top: 2px;">拒绝</text>
+                </view >
+
+                <view bindtap='shenhe_ok' class="zan" style='border-right:1px solid #999;'>
+                  <text class="dbtext" style="margin-top: 4px;">通过</text>
+                </view >
+
+    </view>
    </view>
 
 <view class='bottom'></view>

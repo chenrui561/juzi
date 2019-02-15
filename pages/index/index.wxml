@@ -1,394 +1,81 @@
-<!-- index.wxml -->
+<!-- index.wxmi -->
 <view wx:if="{{shouquan == 0}}" class='shouquan'></view>
 <view class='shouquan_b' wx:if="{{shouquan == 0}}">
     <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
-    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子医美</text>
+    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子放心美</text>
     <button style="bottom: 0;position: absolute;width: 100%;color: #F14918;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
 </view>
-<!--转盘弹窗<view wx:if="{{zhuanpan_off > 0}}" class='shouquan'></view>
+<view wx:if="{{zhuanpan_off > 0}}" class='shouquan'></view>
 <view wx:if="{{zhuanpan_off > 0}}" class='zhuanpan'>
   <navigator url="../turntable/turntable">
-  <image mode='aspectFit' class='zhuanpan_img' src='/images/zhuanpan.png'></image>
+  <image mode='aspectFill' class='zhuanpan_img' src='http://www.juziyimei.com/images/tanchuang.jpg'></image>
   </navigator>
   <image bindtap='close_choujiang' mode='aspectFit' class='zhuanpan_close' src='/images/close.png'></image>
-</view>-->
-<!--底部tab-->
-<view class="flex fix_nav_wp" >
-  <view class="nav_link" data-tab='1'  bindtap='tabchange'>
-    <button class="defalut_btn {{on_cor1}}">
-      <icon class="iconfont icon-juzi del_ico idx_ico"></icon>     
-      <text class="txt">首页</text>
-    </button>
-  </view>
-  
-  <navigator url='../question-ask/question-ask' class="nav_link ">
-    <button class="defalut_btn" bindtap='gotopublish'>
-      <view class="plus_wp">
-        <image src='/images/icons/jiahao.png' class="plus_ico" />
-      </view>
-      <text class="txt txt_fb">分享</text>
-    </button>
-  </navigator>  
-<!--
-  <navigator url='../user/user' open-type="redirect" class="nav_link">
-    <button class="defalut_btn" bindtap='bindViewMy'>
-      <icon class="iconfont icon-wode del_ico mine_ico my_ico"></icon>
-      <text class="txt">我的</text>
-    </button>
-  </navigator>-->
-  <view url='../user/user' data-tab='2' bindtap='tabchange' class="nav_link">
-    <button class="defalut_btn {{on_cor2}}" >
-      <icon class="iconfont icon-wode del_ico mine_ico my_ico"></icon>
-      <text class="txt">我的</text>
-    </button>
-  </view>
-</view>  
-<!--底部tab-->
-<view class="page {{none_1}}">
+</view>
+
+ <!-- 商城页面开始-->
+<view class="page {{none_3}}">
 <!--首页头部-->
     <view class='index_head'>
           <view class='index_sousuo'>
-              <view class='weizhi'>
-                <text>武汉市</text>
-                <image class='down' src='/images/down.png' ></image>
-              </view>
+              
               <navigator url='../search/search' class='search'>
                 <image class='search_img' src='/images/search.png'></image>
-                <text class='search_text'>搜索</text>
+                <text class='search_text'>搜索您感兴趣的话题</text>
               </navigator>
           </view>
-<scroll-view scroll-x class="swiper-tab">
-            <view class="swiper-tab-list {{z_index==1 ? 'swiper-tab-color' : ''}} " bindtap="indexChange" data-current="1">首页</view>
-          <!-- <view class="swiper-tab-list" data-current="1"  bindtap="swichNav">桔子购</view> -->
-            <view class="swiper-tab-list {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">找优惠</view>
-            <view class="swiper-tab-list {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3"  bindtap="indexChange">找机构</view>
-            <view class="swiper-tab-list {{z_index==4 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">找医生</view>  
-          </scroll-view>
-        </view>
+  <!--<view class='flex_h'>
+    <scroll-view scroll-x class="swiper-tab">
+                <view class="swiper-tab-list {{z_index==1 ? 'swiper-tab-color' : ''}} " bindtap="indexChange" data-current="1">首页</view>
+            <view class="swiper-tab-list" data-current="1"  bindtap="swichNav">桔子购</view>
+                <view class="swiper-tab-list2 {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">推荐 </view>
+                <view class="swiper-tab-list2 {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3"  bindtap="indexChange">美发</view>
+                <view class="swiper-tab-list2 {{z_index==4 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">美容</view>
+                <view class="swiper-tab-list2 {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="5"  bindtap="indexChange">微整形</view>
+                <view class="swiper-tab-list2 {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="5"  bindtap="indexChange">抗衰老</view>
+                <view class="swiper-tab-list2 {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="5"  bindtap="indexChange">医疗美容</view>
+                <view class="swiper-tab-list2 {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="5"  bindtap="indexChange">皮肤管理</view>
+              </scroll-view>
+              
+              <view class='jiahao'>
+                <view  class='left_yy' style='background-image: url(https://www.juziyimei.com/images/left.png);'></view>
+                <image style='width:20px;height:20px;' src='/images/jiahao.png'>
+              </image></view>
+   </view>-->
+
+</view>
 <!--首页头部end-->
-<!--瀑布流加载的隐藏部分-->
-  <view style="display:none">
-    <image wx:for="{{images}}" wx:key="id" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
-  </view>
-<!--瀑布流加载的隐藏部分-->
-        <!--<view class='fx_box'><text class='fx_box1'>{{fenxiang}}</text><button class='fx_box2' open-type="share">分享</button></view> -->
-            <scroll-view scroll-y="true" style="height:{{scrollH}}px" bindscrolltolower="loadImages" class="scoll-h {{z_index==1 ? 'z_index2' : 'z_index1'}}" scroll-y="true"  >
-                <block >
-                <!--banner开始-->  
-                <swiper style='height:122px;' indicator-dots="{{indicatorDots}}"  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-                    <block wx:for="{{imgUrls}}">
-                      <swiper-item>
-                        <image src="{{item.photo}}" class="slide-image" width="100%" height="200"  />
-                      </swiper-item>
-                    </block>
-                </swiper>
-                <!--banner结束-->  
-
-                <!--小喇叭开始   -->    
-                <swiper class='laba_h'  indicator-dots="{{indicatorDots}}" vertical="true"  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-                    <block wx:for="{{laba}}">
-                      <swiper-item>
-                      <image style='width:20px;height:20px;float:left; margin:10px 5px 12px 15px;' src="http://www.juziyimei.com/mobile/themes/default/gl_img/laba.gif"></image>
-                        <text class='laba'>{{item.title}}</text>
-                      </swiper-item>
-                    </block>
-                </swiper>
-                <!--小喇叭结束-->  
-
-                <!--四个icon开始https://www.cnblogs.com/dragondean/p/5922740.html-->  
-             <swiper style='height: 170px;background-color: #fff;' class='' indicator-active-color="#F14918" indicator-dots="true" interval="{{interval}}" duration="{{duration}}">
-             <swiper-item>
-                    <view class='lx_icon' >
-                      <navigator url="../listdetail/listdetail?type_id=14&title=玻尿酸"><image class='yuan' src="/images/lx/1.jpg" ></image><view class='yuan_text'>玻尿酸</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=53&title=眼部"><image class='yuan' src="/images/lx/2.jpg" ></image><view class='yuan_text'>眼部</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=55&title=皮肤"><image class='yuan' src="/images/lx/3.jpg" ></image><view class='yuan_text'>皮肤</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=美体"><image class='yuan' src="/images/lx/4.jpg" ></image><view class='yuan_text'>美体</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=54&title=面部"><image class='yuan' src="/images/lx/5.jpg" ></image><view class='yuan_text'>面部</view></navigator>
-                      </view>
-                      <view class='lx_icon' style='padding-bottom:12px; ' >
-                      <navigator url="../listdetail/listdetail?type_id=56&title=胸部"><image class='yuan' src="/images/lx/6.jpg" ></image><view class='yuan_text'>胸部</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=64&title=植发"><image class='yuan' src="/images/lx/7.jpg" ></image><view class='yuan_text'>植发</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=63&title=口腔"><image class='yuan' src="/images/lx/8.jpg" ></image><view class='yuan_text'>口腔</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=52&title=鼻部"><image class='yuan' src="/images/lx/9.jpg" ></image><view class='yuan_text'>鼻部</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=58&title=脂肪"><image class='yuan' src="/images/lx/zhi.jpg" ></image><view class='yuan_text'>脂肪</view></navigator>
-                    </view>
-                    </swiper-item>
-                    <swiper-item>
-                    <view class='lx_icon' >
-                      <navigator url="../listdetail/listdetail?type_id=59&title=吸脂"><image class='yuan' src="/images/lx/1.jpg" ></image><view class='yuan_text'>吸脂</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=60&title=肉毒素"><image class='yuan' src="/images/lx/rou.jpg" ></image><view class='yuan_text'>肉毒素</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=61&title=水光针"><image class='yuan' src="/images/lx/1.jpg" ></image><view class='yuan_text'>水光针</view></navigator>
-
-                      </view>
-                      <view class='lx_icon' style='padding-bottom:12px; ' >
-         
-                    </view>
-                    </swiper-item>
-          </swiper>
-
-
-<view class='list'>
-<!--瀑布流开始-->
-  <view style="width:100%">
-    <view class="img_item">
-      <navigator url='../question-ask/anli?aid={{item.id}}&uid={{item.user_id}}' class='ban' wx:for="{{col1}}" wx:key="id">
-        <image src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
-        <view class="act-item ellipsis_title">{{item.content}}</view>
-            <view class='xiangmu'>
-                <text class='xiangmu_name'>{{item.goods_name}}</text>
-                <text style='margin-right:5px; color:#F14918;'>￥{{item.juzi_price}}</text>
-              </view>
-
-              <view class='touxiang' >
-                <view style="display: flex;">
-                  <image wx:if="{{item.tx_img == ''}}" style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="http://www.juziyimei.com/mobile/themes/default/user_images/head.png"></image>
-                  <image wx:else style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="{{item.tx_img}}"></image>
-                  <text class='list_name'>{{item.nick_name}}</text> 
-                </view>
-                <view style="display: flex;margin-right: 8px;">
-                  <image style='width:16px;height:16px;border-radius:50%;margin:0 10rpx;' src="/images/xin.png"></image>
-                  <text style="color:#333;font-size:12px;">{{item.zan}}</text> 
-                </view>
-              </view> 
-      </navigator>
+<!--内容-->   
+<view class='huati_list'>
+  <navigator wx:for="{{zhihu_index}}" url='/pages/zhihu/zhihu?aid={{item.id}}&wid={{item.wid}}' class='huati flex_s_l'>
+    <view class='huati_title'>{{item.title}}</view>
+    <view class='huati_info flex_h_b'>
+      <view class='huati_text'>{{item.jianjie}}</view>
+      <image wx:if="{{item.fengmian != ''}}" class='huati_img' mode='aspectFill' src='{{item.fengmian}}'></image>
     </view>
-    <view class="img_item">
-      <navigator url='../question-ask/anli?aid={{item.id}}&uid={{item.user_id}}' class='ban' wx:for="{{col2}}" wx:key="id">
-        <image src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
-        <view class="act-item ellipsis_title">{{item.content}}</view>
-            <view class='xiangmu'>
-                <text class='xiangmu_name'>{{item.goods_name}}</text>
-                <text style='margin-right:5px; color:#F14918;'>￥{{item.juzi_price}}</text>
-              </view>
-
-              <view class='touxiang' >
-                <view style="display: flex;">
-                  <image wx:if="{{item.tx_img == ''}}" style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="http://www.juziyimei.com/mobile/themes/default/user_images/head.png"></image>
-                  <image wx:else style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="{{item.tx_img}}"></image>
-                  <text class='list_name'>{{item.nick_name}}</text> 
-                </view>
-                <view style="display: flex;margin-right: 8px;">
-                  <image style='width:16px;height:16px;border-radius:50%;margin:0 10rpx;' src="/images/xin.png"></image>
-                  <text style="color:#333;font-size:12px;">{{item.zan}}</text> 
-                </view>
-              </view> 
-      </navigator>
+    <view class='huati_last flex_h_b'>
+      
+      <text>3625个赞同 · 125评论</text>
     </view>
-</view>
-<!--瀑布流结束-->
-    </view>        
-
-                </block>
-            </scroll-view>
-<!--第一页结束-->
-<!--第二页-找优惠-开始-->
-<scroll-view scroll-y="true" lower-threshold="100" bindscrolltolower="index2_jiazai" class="scoll-h {{z_index==2 ? 'z_index2' : 'z_index1'}}">
-  <view class='lx_icon' >
-                      <navigator url="../listdetail/listdetail?type_id=14&title=玻尿酸"><image class='yuan' src="/images/lx/1.jpg" ></image><view class='yuan_text'>玻尿酸</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=唇部"><image class='yuan' src="/images/lx/2.jpg" ></image><view class='yuan_text'>唇部</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=皮肤"><image class='yuan' src="/images/lx/3.jpg" ></image><view class='yuan_text'>皮肤</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=美体"><image class='yuan' src="/images/lx/4.jpg" ></image><view class='yuan_text'>美体</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=面部"><image class='yuan' src="/images/lx/5.jpg" ></image><view class='yuan_text'>面部</view></navigator>
-                      </view>
-                      <view class='lx_icon' style='padding-bottom:12px; ' >
-                      <navigator url="../listdetail/listdetail?type_id=14&title=胸部"><image class='yuan' src="/images/lx/6.jpg" ></image><view class='yuan_text'>胸部</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=植发"><image class='yuan' src="/images/lx/7.jpg" ></image><view class='yuan_text'>植发</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=口腔"><image class='yuan' src="/images/lx/8.jpg" ></image><view class='yuan_text'>口腔</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=鼻部"><image class='yuan' src="/images/lx/9.jpg" ></image><view class='yuan_text'>鼻部</view></navigator>
-                      <navigator url="../listdetail/listdetail?type_id=14&title=私密"><image class='yuan' src="/images/lx/10.jpg" ></image><view class='yuan_text'>私密</view></navigator>
-                     
-                    </view>
-  <view  class="cont" wx:for="{{xzzzp}}">
-                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
-                            <image class="hot_photo" src="http://www.juziyimei.com/{{item.goods_img}}"></image>
-                            <view class="hot_title">{{item.goods_name}}</view>
-                            
-                            <view style="display:flex;line-height:50rpx;color:#999;margin-bottom:10rpx;">
-                              <view class="gmxx" style="font-size:28rpx;">
-                                  <view style="display:flex;line-height:50rpx;color:#999">
-                                    <view style="float: right;font-size: 12px;display: flex;align-items: center;">
-                                    
-                                      <text>{{item.brand_name}}</text> 
-                                    </view>
-                                  </view>  
-                              </view>
-                            </view>
-                            <view style="display:flex;line-height:50rpx;padding:20rpx 0;">
-                                  <view style="float: right;font-size: 12px;display: flex;align-items: center; color:#999;">
-                                      桔子价:
-                                    </view>
-                                  <view class="gmxx" style="  color: red;">¥ {{item.juzi_price}}</view>
-                                  <view class="gmx">¥ {{item.market_price}}</view> 
-                              </view>
-                          </navigator>
-                    </view>
-</scroll-view>
-<!--第二页-找优惠-开始-->
-<!--第三页-找机构-开始-->
-<scroll-view scroll-y="true" class="scoll-h {{z_index==3 ? 'z_index2' : 'z_index1'}}">
-<view  class="cont" wx:for="{{jigou}}">
-                        <navigator class='jigou_lb'>
-                                <view class="jigou_address">
-                                  <image src='http://www.juziyimei.com/mobile/themes/default/gl_img/laba.gif' class='jigou_address_img'></image>
-                                  <view class='jigou_jj' >{{item.brand_desc}}</view>
-                                </view>
-                          </navigator>
-                          <navigator  class="pr3" url="../jigou/jigou?jigou_id={{item.brand_id}}" hover-class="changestyle">
-                            <image class="yiyuan_photo" src="http://www.juziyimei.com/data/brandlogo/{{item.brand_logo}}"></image>
-                            <view class='jigou_right_info'>
-                          
-                                <view class="jigou_title">{{item.brand_name}}</view>
-                                <view class="jigou_address">
-                                  <text>18位医生 | 32个案例</text>
-                                </view>
-                                <view class="jigou_address">
-                                  <image src='/images/address.png' class='jigou_address_img'></image>
-                                  <text class='jigou_address_text'>{{item.address}}</text>
-                                </view>
-                                
-                              
-                            </view>
-                          </navigator>
-                          <navigator class='jigou_yy'>
-                                <view class='chakan_yy'>查看全部{{item.count_xiangmu}}项预约</view>
-                          </navigator>
-                    </view>
-                    <view class='l_h60'></view>
-</scroll-view>
-<!--第三页-找机构-结束-->
-<!--第四页-找医生-开始-->
-<scroll-view scroll-y="true" class="scoll-h {{z_index==4 ? 'z_index2' : 'z_index1'}}">
-  <view class='no_more'>没有更多</view>
-</scroll-view>
-<!--第四页-找医生-结束-->
-  </view>
-
-  <!--我的页面开始-->
-  <view class="page {{none_2}}">
-    <view url="../user/bd" class="userinfo">
-        <navigator url="../user/bd" wx:if="{{u_info.mobile_phone == '' && u_info.user_lei == 0}}" class='huiyuan' style='background-image:url(https://www.anranhaitao.com/mobile/themes/default/images/putong.png);'>临时会员  ></navigator>
-        <navigator url="../user/bd" wx:if="{{u_info.user_lei == 0 && u_info.mobile_phone !== ''}}" class='huiyuan' style='background-image:url(https://www.anranhaitao.com/mobile/themes/default/images/putong.png);'>普通会员  ></navigator>
-        <navigator url="../user/team" wx:if="{{u_info.user_lei == 1}}" class='huiyuan' style='background-image:url(https://www.anranhaitao.com/mobile/themes/default/images/putong.png);'>总监  ></navigator>
-        <navigator url="../user/team" wx:if="{{u_info.user_lei == 2}}" class='huiyuan' style='background-image:url(https://www.anranhaitao.com/mobile/themes/default/images/putong.png);'>城市合伙人  ></navigator>
-        <navigator url="../user/team" wx:if="{{u_info.user_lei == 3}}" class='huiyuan' style='background-image:url(https://www.anranhaitao.com/mobile/themes/default/images/putong.png);'>省联创  ></navigator>
-        <navigator url="../user/team" wx:if="{{u_info.user_lei == 9}}" class='huiyuan' style='background-image:url(https://www.anranhaitao.com/mobile/themes/default/images/putong.png);'>医院  ></navigator>
-          <navigator url='../user/bd' class='user_info'>
-            <image class="userinfo-avatar fl_l" src="{{u_info.tx_img}}" background-size="cover"></image>
-            <view class='user_text'>
-              <text class="fl_l" style="font-size: 16px;line-height:20px;" >{{u_info.nick_name}}</text>
-              <text wx:if="{{mobile_phone}}" class="fl_l" style="font-size: 14px;line-height:20px;" >{{mobile_phone}}</text>
-              <text wx:else class="fl_l" style="font-size: 14px;line-height:20px;" >您还未绑定手机号</text>
-            </view>
-          </navigator>
-      </view>
-    <view class="sc1 df">
-        <view class="df_1 tc">
-          <navigator url="../user/quan" hover-class="none">
-            <view class='cash'>{{b_count}}</view>
-            <text>优惠券</text>
-          </navigator>
-        </view>
-        <view class="df_1 tc">
-          <navigator url="../user/tixian" hover-class="none">
-            <view class='cash'>{{u_info.user_money}}</view>
-            <text>钱包余额</text>
-          </navigator>
-        </view>
-    </view> 
-    <!--订单详情-->
-    <view class="qbdd" style='border-bottom: 1px solid #f2f2f2'>
-    <span class="font_14 c3">我的订单</span>
-    <navigator class="fl_r c9 font_12 l_h20" url="../user/dingdan?currentTab=0" hover-class="none" >全部订单 <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span></navigator>
-    </view>
-    <view class="sc df tc " style='margin:0px 10px'>
-    <navigator class="df_1" url="../user/dingdan?currentTab=0&otype=pay" hover-class="none" >
-        <view>
-        <image src="/images/dfk.png"></image> 
-       </view>
-        <text class="font_12">待付款<text style="color:red"></text></text>
-      </navigator>
-
-     <navigator class="df_1" url="../user/dingdan?currentTab=1&otype=deliver" hover-class="none" >
-      <view><image src="/images/dfh.png"></image></view>
-        <text class="font_12">已预约</text>      
-      </navigator> 
-
-      <navigator class="df_1" url="../user/dingdan?currentTab=2&otype=receive" hover-class="none" >
-          <view><image src="/images/dpl.png"></image></view>
-          <text class="font_12">已完成<text style="color:red"></text></text>
-      </navigator>
-
-    <navigator class="df_1" url="../user/dingdan?currentTab=3&otype=finish" hover-class="none" >
-          <view><image src="/images/tksh.png"></image></view>
-          <text  class="font_12">已取消<text style="color:red"></text></text>
-      </navigator>
-
+  </navigator>
+ 
+<navigator wx:for="{{zhihu_nobody}}" url='/pages/zhihu/zhihu?wid={{item.wid}}' class='huati flex_s_l'>
+    <view class='huati_title'>{{item.title}}</view>
     
-    <!--<navigator class="df_1" url="../user/dingdan?currentTab=4&otype=fenxiang" hover-class="none" >
-          <view><image src="/images/tksh.png"></image></view>
-          <text class="font_12">拼团订单<text style="color:red"></text></text>
-       </navigator>-->
-    </view>
-
-
-
-<navigator url="../cart/cart" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
- <view >
-    <span class="font_14 c3">购物车</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-
-<navigator url="/pages/user/shoucang" class="qbdd" style='margin:10px 10px 0px 10px'>
- <view >
-    <span class="font_14 c3">我的收藏</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-<navigator url="" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">我的案例</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>  
-<navigator url="" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">我的关注</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>  
-
-
-<navigator wx:if="{{u_info.user_lei > 0 && u_info.user_lei < 4}}" url="/pages/user/yy" class="qbdd" style='margin:10px 10px 0px 10px'>
- <view >
-    <span class="font_14 c3">客户预约</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-<navigator wx:if="{{u_info.user_lei > 0 && u_info.user_lei < 4}}" url="../up_anli/down" class="qbdd" style='border-bottom-left-radius: 0rpx;border-bottom-right-radius: 0rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">案例下载</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator> 
-<navigator wx:if="{{u_info.user_lei > 0 && u_info.user_lei < 4}}" url="../audio/list" class="qbdd" style='border-bottom-left-radius: 0rpx;border-bottom-right-radius: 0rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">桔子充电宝</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator> 
-<navigator wx:if="{{u_info.user_lei > 0 && u_info.user_lei < 4}}" url="../user/team" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;margin-bottom:40px; '>
- <view >
-    <span class="font_14 c3">团队详情</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>   
-
-
-<view class='l_h60'></view>
+    <view class='huati_last'>3关注</view>
+  </navigator>
 </view>
-<!--我的结束-->
+
+
+<navigator url='/pages/up_anli/question-ask?type_id=2' class='fabu'><image style='width:20px;height:20px;' src='/images/fabu.png'></image></navigator>
+<!--第一页结束-->
+<!--找优惠-开始-->
+
+<!--第二页-找优惠-开始-->
+<!--第四页-找医生-开始-->
+<!--第四页-找医生-结束-->
+</view>
+
+
+
 

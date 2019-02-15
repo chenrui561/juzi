@@ -1,16 +1,39 @@
 <!--pages/user/team-shouyi.wxml-->
 <!--线下-->
+<view class="sc1 df">
+        <view class="df_1 tc">
+          <navigator url="../user/tixian" hover-class="none">
+            <view class='cash'><text style='font-size:11px;'>￥</text>{{user_info.user_money}}</view>
+            <text>可用提现金额</text>
+          </navigator> 
+        </view>
+      
+        <view class="df_1 tc">
+          <navigator url="" hover-class="none">
+            <view class='cash'><text style='font-size:11px;'>￥</text>{{user_info.frozen_money}}</view>
+            <text>冻结金额</text>
+          </navigator>
+        </view>
+    </view> 
+
 <view >
   <view class='yangshi shijian'>时间</view>
   <view class='yangshi sl'>金额</view>
   <view class='yangshi nick'>类型</view>
-  <view class='yangshi bz'>类型</view>
-  <view wx:for="{{goods_user}}">
+  <view class='yangshi bz'>备注</view>
+  <view class='yangshi cx'>详情</view>
+  <view wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.change_time}}</view>
     <view wx:if="{{item.frozen_money > 0}}" class='yangshi2 sl'>{{item.frozen_money}}</view>
-    <view wx:if="{{item.user_money > 0}}" class='yangshi2 sl'>{{item.user_money}}</view>
+    <view wx:if="{{item.user_money > 0 || item.user_money < 0}}" class='yangshi2 sl'>{{item.user_money}}</view>
+    <view wx:if="{{item.user_money == 0 && item.frozen_money == 0}}" class='yangshi2 sl'>0.00</view>
     <view wx:if="{{item.frozen_money > 0}}" class='yangshi2 nick'>冻结</view>
     <view wx:if="{{item.user_money > 0}}" class='yangshi2 nick'>到账</view>
+    <view wx:if="{{item.user_money < 0}}" class='yangshi2 nick'>提现</view>
+    <view wx:if="{{item.user_money == 0 && item.frozen_money == 0}}" class='yangshi2 nick'>无</view>
     <view class='yangshi2 bz'>{{item.log_type}}</view>
+    <navigator url='../order/detail?orderId={{item.order_id}}' class='yangshi2 cx'>查看</navigator>
+     
   </view>
 </view>
+<navigator url="../user/tixian" class="weui-btn" data-off='1' bindtap="submitForm">我要提现</navigator>

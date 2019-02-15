@@ -5,7 +5,7 @@
             <text>暂时还没有收藏/(ㄒoㄒ)/~~</text>
         </view>
 
-    <view class="shop df" wx:for="{{productData}}">        
+    <view class="shop df" wx:for="{{productData}}" wx:key="key">        
         <navigator class="sh_slt" url="/pages/product/detail?productId={{item.goods_id}}"><image class="sh_slt" src="{{item.goods_img}}"></image></navigator>
         <view class="df_1">            
             <view class="sp_text">

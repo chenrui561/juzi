@@ -7,6 +7,8 @@ Page({
    */
   data: {
     jigou_info:[],
+    xiangmu_list:[],
+    user_lei:'',
     jigou_xiangmu_count:'',
   },
 
@@ -16,6 +18,9 @@ Page({
   onLoad: function (options) {
     var that = this; 
     var jigou_id = options.jigou_id
+    this.setData({
+      user_lei: wx.getStorageSync('user_lei')
+    })
     wx.request({//加载首页推荐商品
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_jigou_info',
       method: 'post',
@@ -29,7 +34,8 @@ Page({
        
         that.setData({
           jigou_info: res.data.jigou_info[0],
-          jigou_xiangmu_count: res.data.jigou_xiangmu_count
+          jigou_xiangmu_count: res.data.jigou_xiangmu_count,
+          xiangmu_list: res.data.xiangmu_list
         });
       },
       fail: function (e) {

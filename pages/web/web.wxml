@@ -10,3 +10,9 @@
 <web-view wx:if="{{web_type == 5}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=user&a=zj_admin_tixian&id={{anran_id}}"></web-view>
 <!--会员中心-->
 <web-view wx:if="{{web_type == 6}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=user&a=zj_admin&id={{anran_id}}"></web-view>
+<!--注册协议-->
+<web-view wx:if="{{web_type == 7}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=indem&a=xieyi"></web-view>
+<!--入驻协议-->
+<web-view wx:if="{{web_type == 8}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=indem&a=xieyi2"></web-view>
+<!--数据统计-->
+<web-view wx:if="{{web_type == 99}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=indem&a=tongji"></web-view>

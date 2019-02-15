@@ -22,7 +22,8 @@ Page({
     yiyuan_index: '',//医院序号
     yiyuan_id: [],//医院对应的ID
     xiangmu: [],
-    xiangmu_index: ''//项目序号
+    xiangmu_index: '',//项目序号
+    
   },
 
   /**
@@ -126,17 +127,12 @@ Page({
     var tj_goods_id = that.data.tj_goods_id;
     var tid = that.data.tid;
     if (tj_goods_id > 0){//如果存在选择的项目id
-      if (tid == '') {//如果传过来没有的tid
-
-        wx.redirectTo({//跳转
-          url: '../user/yy?tid=' + tj_goods_id
-        });
-      }else{
-
-        wx.redirectTo({//跳转
-          url: '../user/yy?tid=' + tid + ',' + tj_goods_id,
-        });
-      }
+      let pages = getCurrentPages();//当前页面
+      let prevPage = pages[pages.length - 2];//上一页面
+      prevPage.setData({//直接给上移页面赋值
+        new_goods_id: tj_goods_id
+      });
+      wx.navigateBack()
       
     }else{
       wx.showToast({
@@ -162,6 +158,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
+
 
   },
 

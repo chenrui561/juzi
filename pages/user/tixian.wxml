@@ -9,7 +9,7 @@
         <view class="weui-cells__title" >提现金额</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input name="name" class="weui-input"  placeholder="请输入要提现的金额" />
+            <input name="cash" class="weui-input" type='digit' placeholder="请输入要提现的金额" />
           </view>
         </view>
       </view>
@@ -17,7 +17,7 @@
       <view class="weui-cells__title" >支付宝账号</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input name="name" class="weui-input"  placeholder="请输入支付宝账号" />
+            <input name="zhifubao" class="weui-input"  placeholder="请输入支付宝账号" />
           </view>
         </view>
      
@@ -25,7 +25,7 @@
        <view class="weui-cells__title" >实名</view>
         <view class="weui-cells weui-cells_after-title">
           <view class="weui-cell weui-cell_input">
-            <input name="name" class="weui-input"  placeholder="请输入支付宝实名" />
+            <input name="rel_name" class="weui-input"  placeholder="请输入支付宝实名" />
           </view>
         </view>
 

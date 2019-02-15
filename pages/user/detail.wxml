@@ -1,0 +1,46 @@
+<!--pages/order/detail.wxml-->
+<view class="w100">
+	  
+<!--用户信息-->
+		<view  class="p_all bg_white mt10 c6 l_h20 font_14">
+			<view class="">用户昵称：{{user_info[0].nick_name}}</view>
+      <view class="mt10">真实姓名：{{user_info[0].rel_name}}</view>
+      <view class="mt10">手机号：{{user_info[0].mobile_phone}}</view>
+			<view class="mt10">注册时间：{{user_info[0].reg_time}}</view>    
+      <view class="mt10">备注：{{user_info[0].beizhu}}</view>    
+    </view>
+
+   <view style='margin-top:10px;' class="p_all flex_h_b bg_white c6 l_h20 font_14">
+      <text wx:if="{{user_info[0].gj_states == 0}}">当前用户状态：{{states_array[user_info[0].gj_states].name}}</text>
+      <picker  bindchange="bindPickerChange" value="{{index}}" range="{{states_name_array}}">修改状态</picker>
+    </view> 
+    <view class='pl_no'>
+            <text class='pl_no_text'>暂无历史变更记录</text>
+    </view>
+    <!--评论-->
+    <view style='margin-top:10px;' wx:if="{{user_lei > 0}}" class='guoqu_box'>
+                <view class='title' style='border-bottom:1px solid #eee;'>跟进情况:</view>
+                     <view class='pl_box' wx:for="{{genjin_info}}">
+                          <view class='pl_info_all'>
+                               <image class='pl_img' src='{{item.tx_img}}'></image>
+                                  <view class='pl_info'>
+                                      <text style='color:#333'>{{item.passwd_answer}}</text>
+                                      <text style='margin-right:10px;'>{{item.add_time}}</text>
+                                  </view>
+                          </view>
+                          <view class='pl_content'>{{item.content}}</view>
+                          <view wx:if="{{item.user_id == user_id}}" data-aid="{{item.aid}}" bindtap="del" class='pl_del'>删除</view>
+                          </view>
+                          <view wx:if="{{genjin == null}}" class='pl_no'>
+                            <text class='pl_no_text'>此项目还没有跟进情况</text>
+                          </view>
+                          <view class='pl_input'>
+                            <image class='pl_img' src='{{HeadUrl}}'></image>
+                            <input placeholder="相关人员可在此填写该用户的跟进情况" bindconfirm="dopl" focus="{{focus}}" bindinput="searchValueInput" class='pl_inputs'></input>
+                          </view>
+                <view>
+    </view>
+
+</view>
+
+</view>

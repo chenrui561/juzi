@@ -10,7 +10,8 @@ Page({
     page:2,
     catId:0,
     type_id:'',
-    brandId: 0
+    brandId: 0,
+    paixu:0 //排序规则，0：默认排序，1：按价格从低到高排序，2：按价格从高到低排序，3按优惠力度从大到小，4优惠从小到大，5预约数从多到少，6从少到多
   },
 showModal: function () {
     // 显示遮罩层
@@ -52,58 +53,77 @@ hideModal: function () {
    })
   }.bind(this), 200)
 },
-
-//点击加载更多
-/*getMore:function(e){
-  var that = this;
-  var page = that.data.page;
-  wx.request({
-    url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_async_goods_list',
-      method:'post',
-      data: {
-        page:page,
-        cat_id:that.data.catId,
-      },
-      header: {
-        'Content-Type':  'application/x-www-form-urlencoded'
-      },
-      success: function (res) {  
-        var prolist = res.data;
-        if(prolist==''){
-          wx.showToast({
-            title: '没有更多数据！',
-            duration: 2000
-          });
-          return false;
-        }
-        //that.initProductData(data);
-        that.setData({
-          page: page+1,
-          shopList:that.data.shopList.concat(prolist)
-        });
-        
-        //endInitData
-      },
-      fail:function(e){
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
-        });
-      }
-    })
-},*/
+price_px:function(){//按价格排序
+ var paixu =  this.data.paixu;
+ if(paixu == 1){
+   this.setData({
+     paixu: 2
+   })
+ }
+    if (paixu == 2) {
+      this.setData({
+        paixu: 1
+      })
+    }
+    if(paixu > 2 ||paixu == 0){
+      this.setData({
+        paixu: 1
+      })
+    }
+    this.load();
+  },
+  youhui_px: function () {//按价格排序
+    var paixu = this.data.paixu;
+    if (paixu == 3) {
+      this.setData({
+        paixu: 4
+      })
+    }
+    if (paixu == 4) {
+      this.setData({
+        paixu: 3
+      })
+    }
+    if (paixu > 4 || paixu < 3) {
+      this.setData({
+        paixu: 3
+      })
+    }
+    this.load();
+  },
+  yy_px: function () {//按价格排序
+    var paixu = this.data.paixu;
+    if (paixu == 5) {
+      this.setData({
+        paixu: 6
+      })
+    }
+    if (paixu == 6) {
+      this.setData({
+        paixu: 5
+      })
+    }
+    if (paixu > 6 || paixu < 5) {
+      this.setData({
+        paixu: 5
+      })
+    }
+    this.load();
+  },
 //下拉加载更多
   onReachBottom: function (e) {
   var that = this;
   var page = that.data.page;
     var type_id = that.data.type_id;
+    var paixu = that.data.paixu;
   wx.request({
     url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_async_goods_list',
     method: 'post',
     data: {
       page: page,
       type_id: type_id,
-      cat_id: that.data.catId
+      cat_id: that.data.catId,
+      paixu: paixu
     },
     header: {
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -153,19 +173,30 @@ onLoad: function (options) {
     var type_id = options.type_id;
     var that = this;
     var page = that.data.page;
+    var paixu = that.data.paixu;
     that.setData({
       ptype: ptype,
       catId: cat_id,
       type_id: type_id,
       brandId: brandId
     })
+    
+   this.load();
+
+  },
+  load:function(){
+    var type_id = this.data.type_id;
+    var paixu = this.data.paixu;
+    var that = this;
+    wx.showLoading();//加载动画
     //ajax请求数据
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_async_goods_list',
-      method:'post',
+      method: 'post',
       data: {
         type_id: type_id,
-        page:1
+        page: 1,
+        paixu: paixu
       },
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -175,16 +206,15 @@ onLoad: function (options) {
         that.setData({
           shopList: shoplist
         })
+        wx.hideLoading()//关闭加载动画
       },
-      error: function(e){
+      error: function (e) {
         wx.showToast({
           title: '网络异常！',
           duration: 2000
         });
       }
     })
-   
-
   },
   //详情页跳转
   lookdetail: function (e) {

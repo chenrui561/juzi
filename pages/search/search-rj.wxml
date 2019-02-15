@@ -1,0 +1,57 @@
+<!--pages/search/search.wxml-->
+<view class="search df">
+    <input class="df_1" placeholder="请输入您要搜索的内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+    <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
+</view>
+<view class="cont" wx:if="{{hotKeyShow}}">
+    <text class="font_14">热门搜索</text>
+    <view class="w100">
+        <button wx:for="{{hotKeyList}}" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
+    </view>
+    <text class="font_14 mt10">历史搜索</text>
+    <view class="w100">
+        <button wx:for="{{historyKeyList}}" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
+    </view>
+</view>
+<view class="search_no" wx:if="{{!!searchValue && !productData.length}}">
+    <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
+    <text>没有找到您要的宝贝/(ㄒoㄒ)/~~</text>
+</view>
+<!--<view class="shop" wx:for="{{productData}}"> 
+    <navigator url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">      
+        <image class="sh_slt" src="http://www.anranhaitao.com/{{item.goods_img}}"></image>
+        <view class="sp_text">
+            <view class="sp_tit ovh1">{{item.goods_name}}</view>
+            <view class="sp_jg">￥ {{item.shop_price}}</view>
+            <view class="sp_jg">￥ {{item.market_price}}</view>
+        </view>
+    </navigator>
+</view>-->
+
+<view style='padding-top: 48px;'>
+<view class="ban" wx:for="{{productData}}">
+      
+            <navigator url="../question-ask/anli?aid={{item.comment_id}}&uid={{item.user_id}}" class="cover flex-wrp">
+            
+             <image class="banner" src="{{item.goods_img}}" mode="aspectFill"></image>
+              <view class="act-item ellipsis_title">{{item.content}}</view>
+                <view class='xiangmu'>
+                    <text class='xiangmu_name'>{{item.goods_name}}</text>
+                    <text style='margin-right:5px; color:#F14918;'>￥{{item.juzi_price}}</text>
+                  </view>
+
+                  <view class='touxiang' >
+                    <view style="display: flex;">
+                      <image wx:if="{{item.tx_img == ''}}" style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="http://www.juziyimei.com/mobile/themes/default/user_images/head.png"></image>
+                      <image wx:else style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="{{item.tx_img}}"></image>
+                      <text class='list_name'>{{item.nick_name}}</text> 
+                    </view>
+                    <view style="display: flex;margin-right: 8px;">
+                      <image style='width:16px;height:16px;border-radius:50%;margin:0 10rpx;' src="/images/xin.png"></image>
+                      <text style="color:#333;font-size:12px;">{{item.zan}}</text> 
+                    </view>
+                  </view> 
+            </navigator>
+        </view> 
+        <view wx:if="{{!hotKeyShow}}" class="clear mt10" >{{more}}</view>  
+  </view>

@@ -1,6 +1,6 @@
 <!--pages/user/quan.wxml-->
 <view>
-  <view wx:for="{{bonus_list}}" class='quan_box'>
+  <view wx:for="{{bonus_list}}" wx:key="key" class='quan_box'>
     <view class='quan_up'>
 
       <view wx:if="{{item.type_id == 12 || item.type_id == 13}}" class='quan_up_left'>
@@ -13,33 +13,32 @@
       <view wx:if="{{item.type_id > 13 || item.type_id < 12}}" class='quan_up_left'>
         <view >
           <text class='rmb'>￥</text>
-          <text class='price'>{{item.type_money}}</text>
+          <text wx:if="{{item.b_type == 0}}" class='price'>{{item.type_money}}</text>
+          <text wx:if="{{item.b_type == 1}}" class='price'>{{item.cz_money}}</text>
         </view>
-        <text class='djq'>代金券</text>
+        <text wx:if="{{item.b_type == 0}}" class='djq'>代金券</text>
+        <text  wx:if="{{item.b_type == 1}}" class='djq'>储值代金券</text>
       </view>
 
       <view class='quan_up_center'>
       <text class='quan_type'>{{item.type_name}}</text>
       <text class='quan_time'>有效期至：{{item.use_enddate}}</text>
       </view>
-      <navigator  wx:if="{{item.type_id > 13 || item.type_id < 12 }}" url='../category/index' open-type = "switchTab" class='quan_up_right'>
+      <navigator wx:if="{{item.choujiang_id > 0}}"  url='../product/detail?productId={{item.choujiang_id}}'  class='quan_up_right'>
+        <view class='liji'>立即使用</view>
+        </navigator>
+      <navigator wx:if="{{item.choujiang_id == 0 && item.bonus_type_id != 19}}"  url='../cart/cart'  class='quan_up_right'>
         <view class='liji'>立即使用</view>
       </navigator>
-      <!--如果是二等奖兑换券-->
-      <navigator wx:if="{{item.type_id == 13}}" url='../product/detail?productId={{item.choujiang_id}}'  class='quan_up_right'>
-        <view class='liji'>立即使用</view>
-      </navigator>
-       <!--如果是一等奖兑换券-->
-      <navigator url='../product/detail?productId={{item.choujiang_id}}' wx:if="{{item.type_id == 12}}" class='quan_up_right'>
+      <navigator wx:if="{{item.bonus_type_id == 19}}"  url='../huodong/huodong?xiangmu_type=2'  class='quan_up_right'>
         <view class='liji'>立即使用</view>
       </navigator>
     </view>
     <view class='quan_down'>
 
-      <view class='quan_down_left'>获得方式：{{item.bonus_type_id}}</view>
-      <view wx:if="{{item.type_id > 13 || item.type_id < 12}}" class='quan_down_right'>满{{item.min_goods_amount}}元可用</view>
-      <view wx:if="{{item.type_id == 12}}" class='quan_down_right'>指定一等奖商品可用</view>
-      <view wx:if="{{item.type_id == 13}}" class='quan_down_right'>指定二等奖商品可用</view>
+      <view class='quan_down_left'>获得方式：{{item.hdfs}}</view>
+      <view class='quan_down_right'>{{item.keyong}}</view>
+      
     </view>
   </view>
 

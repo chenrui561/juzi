@@ -16,19 +16,42 @@ Page({
     uid:'',//案例人id
     HeadUrl:'',
     pl:[],
+    pl_count:0,
+    shenhe:0,//默认审核为，0，1为可审核状态
     searchValue:'',//评论输入的信息
   },
-
+  bindButtonTap: function () {
+    this.setData({
+      focus: true
+    })
+  },
+  panduan:function(){
+    if(this.data.phone == ''){
+      wx.showToast({
+        title: ' 请先绑定手机号！',
+        icon: 'none',
+        duration: 1500
+      });
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '../user/bd'
+        });//要延时执行的代码
+      }, 1500)
+      return;
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var aid = options.aid;
     var uid = options.uid;
+    var shenhe = options.shenhe;
     var that = this;
     that.setData({
       aid: aid,
       uid: uid,
+      shenhe: shenhe,
       HeadUrl: wx.getStorageSync('HeadUrl')
     });
     wx.showLoading();//加载动画 
@@ -45,14 +68,16 @@ Page({
       success: function (res) {
         var anli_info = res.data.anli_info[0];
         var content = res.data.anli_info[0].content;
-     
+        var phone = res.data.phone;
         WxParse.wxParse('content', 'html', content, that, 3);
         that.setData({
           anli_info: anli_info,
           zan: anli_info.zan,
           zan_off: anli_info.zan_off,
           guanzhu_off: anli_info.guanzhu_off,
-          pl:res.data.pl
+          pl:res.data.pl,
+          pl_count: res.data.pl_count,
+          phone:phone
         });
 
         //endInitData
@@ -179,6 +204,14 @@ zan:function(e){
   },
   dopl:function(e){
     var that = this;
+    if (that.data.searchValue == ''){
+      wx.showToast({
+        title:'评论不能为空',
+        icon:'none',
+        duration: 2000
+      });
+      return
+    }
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_pl_input',
       method: 'post',
@@ -242,7 +275,80 @@ zan:function(e){
   onReady: function () {
 
   },
+  shenhe_ok: function () {
+    var that = this;
+    var page = that.data.page;
+    var aid = that.data.aid;
+    wx.showLoading();//加载动画 
+    wx.request({
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=riji_shenhe',
+      method: 'post',
+      data: {
+        id: wx.getStorageSync('id'),
+        aid: aid
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        wx.showToast({
+          title: '操作成功！',
+          duration: 2000
+        });
 
+        setTimeout(function () {//延时10秒关闭弹出层
+          wx.navigateBack({
+          })
+        }, 2000)
+        //endInitData
+        wx.hideLoading()//关闭加载动画
+      },
+      fail: function (e) {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      },
+    });
+
+  },
+  shenhe_no: function () {
+    var that = this;
+    var page = that.data.page;
+    var aid = that.data.aid;
+    wx.showLoading();//加载动画 
+    wx.request({
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=riji_shenhe_no',
+      method: 'post',
+      data: {
+        id: wx.getStorageSync('id'),
+        aid: aid
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        wx.showToast({
+          title: '操作成功！',
+          duration: 2000
+        });
+
+        setTimeout(function () {//延时10秒关闭弹出层
+          wx.navigateBack({
+          })
+        }, 2000)
+        //endInitData
+        wx.hideLoading()//关闭加载动画
+      },
+      fail: function (e) {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      },
+    });
+
+  },
   /**
    * 生命周期函数--监听页面显示
    */

@@ -1,14 +1,14 @@
 /* pages/order/detail.wxss */
 .item .cp_photo{ 
-    width: 60px; 
-    height: 60px;
+    width: 65px; 
+    height: 65px;
     overflow: hidden; 
     border-radius: 3px; 
     margin-right: 10px;
 }
 .item .cp_photo image{ 
-    width: 60px; 
-    height: 60px;
+    width: 65px; 
+    height: 65px;
 }
 .gm_ovh_2h{
     line-height:25px; 
@@ -22,7 +22,7 @@
     font-size: 16px;
 }
 .gm_ovh_1h{
-    line-height:25px; 
+    line-height:23px; 
     height: 25px; 
     margin:0; 
     overflow:hidden;  
@@ -32,6 +32,9 @@
     -webkit-box-orient:vertical; 
     font-size: 16px;
 } 
+.price_input{
+  background-color: #eee;
+}
 .h10_hui{
     height: 10px;
     width: 100%;
@@ -124,6 +127,81 @@
 }
 
 .sl{
-  font-size: 12px;
+  font-size: 11px;
   color: #999;
+}
+.pl_box{
+  border-bottom: 1px solid #eee;
+  margin: 5px 10px;
+}
+.pl_input{
+  display: flex;
+  margin: 10px;
+  padding-bottom: 40px;
+}
+.pl_inputs{
+  background-color: #eee;
+  border-radius: 20px;
+  padding-left: 10px;
+  margin-left: 10px;
+  color: #666;
+  font-size: 13px;
+  height: 32px;
+  width: 100%
+}
+.pl_img{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  }
+.pl_img2{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  }
+  .pl_no{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  .pl_no_text{
+    font-size: 13px;
+    color: #999;
+
+  }
+  .pl_info_all{
+    display: flex;
+    margin-top: 5px;
+    align-items: center;
+  }
+  .pl_info{
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-left: 10px;
+    color: #999;
+    width: 100%;
+    
+  }
+  .pl_content{
+    font-size: 12px;
+    color: #666;
+    margin-left: 35px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+  }
+    .pl_del{
+    font-size: 12px;
+    color: #666;
+    margin-left: 35px;
+    margin-top: 3px;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  .title{
+font-size: 14px;
+padding: 5px 10px;
 }

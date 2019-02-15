@@ -1,40 +1,30 @@
 <view class="question-form">
-<view class='tips'><image class='tips_ico' src='/images/tips.png'></image><text class='tips_text'>分享您的变美案例，就有机会赚钱</text></view>
-<!--选择医院/项目-->
-<picker   bindchange="bindPickerChange" value="{{index}}" range="{{yiyuan}}" class="qbdd mt10" >
-      <span class="font_14 c3">选择医院</span>
-      <span class="fl_r c9 xuanze_box" hover-class="none"> 
-        <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{yiyuan[yiyuan_index]}}</text>
-        <text wx:else>请选择医院</text>
-        <image class='xuanze' src="/images/x_right.png"></image></span>
-  </picker>
-  <picker   bindchange="bindPickerChange2" value="{{index}}" range="{{xiangmu}}" class="qbdd mt10" >
-      <span class="font_14 c3">选择项目</span>
-      <span class="fl_r c9 xuanze_box" hover-class="none"> 
-      <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{xiangmu[xiangmu_index]}}</text>
-      <text wx:else>请先选择医院</text>
-        <image class='xuanze' src="/images/x_right.png"></image></span>
-  </picker>
+<view class='tips'><image class='tips_ico' src='/images/tips.png'></image><text class='tips_text'>分享变美日记还有高达15%的推荐返利哦！</text></view>
+
   <view class="question-images-area">
-    <view class='img_text'>上传三张术后真实照片</view>
+    <view class='img_text'>上传不超过三张的术后真实照片</view>
     <!-- 图片缩略图  -->
     <view class="question-images">
-    
-      <block wx:for="{{images}}" >
+      <block wx:for="{{images}}" wx:key="key" >
         <view class="q-image-wrap">
           <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>
+          <view class="fengmian" wx:if="{{index == 0}}" >封面</view>
           <!--<view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>-->
         </view>
       </block>
-      <image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 1}}"></image><image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 2}}"></image><image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 3}}"></image>
+      <image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 1}}"></image>
+      <image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 2}}"></image>
+      <image src='/images/nv.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 3}}"></image>
     </view>
 
 <!-- 图片缩略图2  -->
-    <view class='img_text'>上传三张术前真实照片</view>
+    <view class='img_text'>上传不超过三张的术前真实照片</view>
     <view class="question-images">
       <block wx:for="{{images2}}" wx:key="*this">
         <view class="q-image-wrap">
-          <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+          <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview2"></image>
+          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage2"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>
          <!-- <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>-->
         </view>
       </block>
@@ -45,7 +35,77 @@
     </view>
 
   </view>
-
+  <!--添加项目开始-->
+     <view  class="cont" wx:if="{{new_goods_id_1 > 0}}" >
+     <view class="q-xm-remover" data-idx="1" bindtap="remove_xm"><image src='/images/X.png' style='width:18px;height:18px;'></image></view>
+                    <navigator  class="pr2" url="../product/detail?productId={{new_goods_info_1.goods_id}}" hover-class="changestyle">
+                    <image class="hot_photo" mode='aspectFit' src="{{new_goods_info_1.goods_thumb}}"></image>
+                    <view class="hot_title">{{new_goods_info_1.goods_name}}</view>
+                      <view class="gmxx"><text>{{new_goods_info_1.goods_brand}}</text></view>
+                      <view style="display:flex;line-height:40rpx;font-size:13px;">
+                                      桔子价:
+                            <view class="gmxx" style="color: #F14918;"> ￥{{new_goods_info_1.juzi_price}}</view>
+                            <view class="gmx">¥ {{new_goods_info_1.market_price}}</view> 
+                      </view>
+                    </navigator>
+      </view>
+      <view  class="cont" wx:if="{{new_goods_id_2 > 0}}" >
+      <view class="q-xm-remover" data-idx="2" bindtap="remove_xm"><image src='/images/X.png' style='width:18px;height:18px;'></image></view>
+                    <navigator  class="pr2" url="../product/detail?productId={{new_goods_info_2.goods_id}}" hover-class="changestyle">
+                    <image class="hot_photo" mode='aspectFit'  src="{{new_goods_info_2.goods_thumb}}"></image>
+                    <view class="hot_title">{{new_goods_info_2.goods_name}}</view>
+                      <view class="gmxx"><text>{{new_goods_info_2.goods_brand}}</text></view>
+                      <view style="display:flex;line-height:40rpx;font-size:13px;">
+                                      桔子价:
+                            <view class="gmxx" style="color: #F14918;"> ￥{{new_goods_info_2.juzi_price}}</view>
+                            <view class="gmx">¥ {{new_goods_info_2.market_price}}</view> 
+                      </view>
+                    </navigator>
+      </view>
+      <view  class="cont" wx:if="{{new_goods_id_3 > 0}}" >
+      <view class="q-xm-remover" data-idx="3" bindtap="remove_xm"><image src='/images/X.png' style='width:18px;height:18px;'></image></view>
+                    <navigator  class="pr2" url="../product/detail?productId={{new_goods_info_3.goods_id}}" hover-class="changestyle">
+                    <image class="hot_photo" mode='aspectFit'  src="{{new_goods_info_3.goods_thumb}}"></image>
+                    <view class="hot_title">{{new_goods_info_3.goods_name}}</view>
+                      <view class="gmxx"><text>{{new_goods_info_3.goods_brand}}</text></view>
+                      <view style="display:flex;line-height:40rpx;font-size:13px;">
+                                      桔子价:
+                            <view class="gmxx" style="color: #F14918;"> ￥{{new_goods_info_3.juzi_price}}</view>
+                            <view class="gmx">¥ {{new_goods_info_3.market_price}}</view> 
+                      </view>
+                    </navigator>
+      </view>
+      <view  class="cont" wx:if="{{new_goods_id_4 > 0}}" >
+      <view class="q-xm-remover" data-idx="4" bindtap="remove_xm"><image src='/images/X.png' style='width:18px;height:18px;'></image></view>
+                    <navigator  class="pr2" url="../product/detail?productId={{new_goods_info_4.goods_id}}" hover-class="changestyle">
+                    <image class="hot_photo" mode='aspectFit'  src="{{new_goods_info_4.goods_thumb}}"></image>
+                    <view class="hot_title">{{new_goods_info_4.goods_name}}</view>
+                      <view class="gmxx"><text>{{new_goods_info_4.goods_brand}}</text></view>
+                      <view style="display:flex;line-height:40rpx;font-size:13px;">
+                                      桔子价:
+                            <view class="gmxx" style="color: #F14918;"> ￥{{new_goods_info_4.juzi_price}}</view>
+                            <view class="gmx">¥ {{new_goods_info_4.market_price}}</view> 
+                      </view>
+                    </navigator>
+      </view>
+      <view  class="cont" wx:if="{{new_goods_id_5 > 0}}" >
+      <view class="q-xm-remover" data-idx="5" bindtap="remove_xm"><image src='/images/X.png' style='width:18px;height:18px;'></image></view>
+                    <navigator  class="pr2" url="../product/detail?productId={{new_goods_info_5.goods_id}}" hover-class="changestyle">
+                    <image class="hot_photo" mode='aspectFit' src="{{new_goods_info_5.goods_thumb}}"></image>
+                    <view class="hot_title">{{new_goods_info_5.goods_name}}</view>
+                      <view class="gmxx"><text>{{new_goods_info_5.goods_brand}}</text></view>
+                      <view style="display:flex;line-height:40rpx;font-size:13px;">
+                                      桔子价:
+                            <view class="gmxx" style="color: #F14918;"> ￥{{new_goods_info_5.juzi_price}}</view>
+                            <view class="gmx">¥ {{new_goods_info_5.market_price}}</view> 
+                      </view>
+                    </navigator>
+      </view>
+  <navigator wx:if="{{new_goods_id_5 == 0 ||new_goods_id_4 == 0 ||new_goods_id_3 == 0 ||new_goods_id_2 == 0 ||new_goods_id_1 == 0}}"  url='../xuanze/xz_xiangmu?tid={{xiangmu_id}}' class="xiangmu" >
+      <image class='jiahao' src="/images/jiahao.png"></image>
+      <span class="font_14 c3">添加项目</span>
+  </navigator>
+<!--添加项目结束-->
 
   <view class="question-input-area">
 
@@ -59,17 +119,35 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="分享一下心情" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
-          <view class="weui-textarea-counter">{{contentCount}}/500</view>
+          <textarea class="weui-textarea" placeholder="分享一下心情"  maxlength="2000" placeholder-style="color:#b3b3b3;font-size:14px;" value='{{anli_info.xc_content}}' style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
+          <view class="weui-textarea-counter">{{contentCount}}/2000</view>
         </view>
       </view>
     </view>
-
   </view>
+        <view class='hui font_12 ml10 mt5'>不能填写QQ、微信、电话等联系方式，以及特殊符号。</view>
+        <view class='hui font_12 ml10'>禁止上传带广告水印的图片，封面建议最好使用对比图。</view>
+<!--选择医院/项目
+<picker   bindchange="bindPickerChange" value="{{index}}" range="{{yiyuan}}" class="qbdd mt10" >
+      <span class="font_14 c3">选择医院</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+        <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{yiyuan[yiyuan_index]}}</text>
+        <text wx:else>可选择医院</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
+  <picker   bindchange="bindPickerChange2" value="{{index}}" range="{{xiangmu}}" class="qbdd mt10" >
+      <span class="font_14 c3">选择项目</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+      <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{xiangmu[xiangmu_id]}}</text>
+      <text wx:else>请先选择医院</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>-->
 
 <view class='l_h60'></view>
 
   <!-- 提交表单按钮  -->
-  <button class="weui-btn" bindtap="submitForm">提交</button>
-
+  <button class="weui-btn" data-off='1' bindtap="submitForm" wx:if="{{off == 1 && type_id == 0}}">提交</button>
+  <button class="weui-btn" data-off='1' bindtap="submitForm" wx:if="{{off == 1 && type_id > 0}}">保存</button>
+<button class="weui-btn" data-off='1' bindtap="submitForm" wx:if="{{off == 0 && type_id == 0}}" style='background-color:#999'>提交</button>
+<button class="weui-btn" data-off='1' bindtap="submitForm" wx:if="{{off == 0 && type_id > 0}}" style='background-color:#999'>保存</button>
 </view>

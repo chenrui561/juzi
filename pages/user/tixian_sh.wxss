@@ -1,0 +1,62 @@
+/* pages/product/lilshi.wxss */
+.yangshi{
+    float: left;
+    text-align: left;
+    height: 36px;
+    line-height: 36px;
+    font-size: 13px;
+    border-bottom: 1px solid #e1e1e1;
+    background-color: #fff;
+    margin-top: 5px;
+}
+.yangshi2{
+    float: left;
+    text-align: left;
+    height: 36px;
+    line-height: 36px;
+    font-size: 13px;
+    border-bottom: 1px solid #e1e1e1;
+    background-color: #fff;
+}
+.shijian{
+    width: 22%;
+    padding-left: 3%;
+}
+.sl{
+    width: 28%;
+    padding-left: 3%;
+}
+.nick{
+    width: 18%;
+    padding-left: 1%;
+}
+.bz{
+    width: 24%;
+    padding-left: 1%;
+}
+.sc1{
+  background: #fff;
+  margin: 10px;
+  width: 100%-10px;
+  font-size: 12px;
+  line-height: 24px;
+  color: #666;
+  padding: 2% 0;
+  border-radius:10rpx;
+}
+.cash{
+font-size: 16px;
+font-weight: 700;
+
+}
+.weui-btn{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  color: #fff;
+  background-color: #F14918;
+  border-radius:0px;
+  z-index: 9999;
+  line-height: 46px;
+  text-align: center;
+}

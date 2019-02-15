@@ -36,7 +36,8 @@ Page({
     pay_yue:'',//动态的余额支付金额
     on_pay_yue:0,//最终确认的余额支付金额
     manjian:'',
-    date: '2016-09-01',
+    date: '无',
+    now:'',
     input:false //默认余额的输入状态
 
   },
@@ -44,7 +45,8 @@ Page({
     var uid = app.d.userId;
     var cart_goods_id = options.cartId
     var g_id = options.g_id
-    var date = util.formatTime(new Date());
+    var date = this.data.date;
+    var now = util.formatTime(new Date());
     this.setData({
       cartId: options.cartId,
       userId: uid,
@@ -53,7 +55,8 @@ Page({
       tuanid: options.tuanid,
       g_id: options.g_id,
       tid: options.tid,
-      date: date
+      date: date,
+      now:now
     });
 
     this.loadProductDetail();
@@ -107,6 +110,48 @@ Page({
     })
   },
 
+
+/*加 */
+  bindPlus:function(e){
+    var num = e.currentTarget.dataset.goods_id;//获取商品id
+
+
+  },
+  /*减*/
+  bindMinus: function (e) {
+    var that = this;
+    var num = e.currentTarget.dataset.num;//获取当前的数量
+    var rec_id = e.currentTarget.dataset.rid;//获取购物车id
+    // 如果只有1件了，就不允许再减了
+    if (num > 1) {
+      num--;
+    }
+    wx.request({
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_ajax_update_cart',
+      method: 'post',
+      data: {
+        rec_id: rec_id,
+        goods_number: num,
+        anran_id: wx.getStorageSync('id')
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        
+        that.loadProductDetail();
+      },
+      fail: function () {
+        // fail
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    });
+
+
+  },
  //选择优惠券
  
   getvou:function(e){
@@ -115,8 +160,10 @@ Page({
     var zprice = this.data.zprice;
     var youhui = this.data.youhui;
     var ship_fee = this.data.ship_fee;
-    
-      var cprice = parseFloat(zprice) - parseFloat(price) + parseFloat(ship_fee);
+    var cprice = parseFloat(zprice) - parseFloat(price) + parseFloat(ship_fee);
+    if(cprice <= 0){
+      var cprice = 0;
+    }
     console.log('总价' + zprice + '优惠券' + price + '快递费' + ship_fee )
     this.setData({
       vid: vid,
@@ -182,7 +229,15 @@ Page({
   createProductOrderByWX:function(e){
     var that = this;
     var address = that.data.address;
-      this.setData({
+    var date = this.data.date;
+    if (date == '无') {
+      wx.showToast({
+        title: "请选择到院时间",
+        duration: 2000
+      });
+      return;
+    }
+      this.setData({//防止重复点击
         paytype: 'weixin',
         btnDisabled: true,//禁用按钮
       });
@@ -197,6 +252,7 @@ Page({
 
     //创建订单
     var that = this;
+    
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_done',
       method:'post',
@@ -314,19 +370,11 @@ Page({
                   title:"支付成功!",
                   duration:2000,
                 });
-                if (tuanid > 0){//表示来自拼团商品，
-                  wx.navigateTo({//支付完成后跳转拼团页面
-                    url: '../product/detail?productId=' + goods_id + '&tuan=' + re_tuan_sn,
-                  });
-
-                }else{
                   setTimeout(function () {
                     wx.navigateTo({
                       url: '../user/dingdan?currentTab=1&otype=deliver',
                     });
-                  }, 2500);
-                }
-                
+                  }, 2000);
               },
               fail: function(res) {
                 wx.showToast({
@@ -335,7 +383,7 @@ Page({
                 });
                 setTimeout(function () {
                   wx.navigateTo({
-                    url: '../user/dingdan?currentTab=0&otype=pay',
+                    url: '../user/dingdan?currentTab=1&otype=deliver',
                   });
                 }, 200);
               }

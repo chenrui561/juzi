@@ -2,12 +2,12 @@
 <!--线下-->
 <view wx:if="{{team_type == 2}}">
   <view class='yangshi shijian'>注册时间</view>
-  <view class='yangshi sl'>昵称/手机</view>
+  <view class='yangshi sl'>姓名/手机</view>
   <view class='yangshi nick'>级别</view>
 
-  <view wx:for="{{goods_user}}">
+  <view wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.reg_time}}</view>
-    <view class='yangshi2 sl'>{{item.passwd_answer}}{{item.mobile_phone}}</view>
+    <view class='yangshi2 sl'>{{item.passwd_answer}}/{{item.mobile_phone}}</view>
     <view wx:if="{{item.user_lei == 1}}" class='yangshi2 nick'>总监</view>
     <view wx:if="{{item.user_lei == 2}}" class='yangshi2 nick'>城市合伙人</view>
     <view wx:if="{{item.user_lei == 3}}" class='yangshi2 nick'>省联创</view>
@@ -19,7 +19,7 @@
   <view class='yangshi sl'>昵称</view>
   <view class='yangshi nick'>手机</view>
 
-  <view wx:for="{{goods_user}}">
+  <view wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.reg_time}}</view>
     <view class='yangshi2 sl'>{{item.passwd_answer}}</view>
     <view class='yangshi2 nick'>{{item.mobile_phone}}</view>
@@ -32,7 +32,7 @@
   <view class='yangshi sl'>项目金额</view>
   <view class='yangshi nick'>状态</view>
 
-  <view wx:for="{{goods_user}}">
+  <view wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.reg_time}}</view>
     <view class='yangshi2 sl'>{{item.passwd_answer}}</view>
     <view class='yangshi2 nick'>{{item.mobile_phone}}</view>

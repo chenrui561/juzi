@@ -54,7 +54,7 @@ Page({
 
     }
 
-    var app_uid = app.d.anran_id;//获取app.js里的用户id
+    var app_uid = wx.getStorageSync('id');//获取app.js里的用户id
     var hx_uid = wx.getStorageSync('id');//获取缓存里面的用户id
 
 

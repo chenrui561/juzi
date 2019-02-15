@@ -1,0 +1,59 @@
+<!--pages/huodong/huodong.wxml-->
+
+<view wx:if="{{shouquan == 0}}" class='shouquan'></view>
+<view class='shouquan_b' wx:if="{{shouquan == 0}}">
+    <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
+    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子放心美</text>
+    <button style="bottom: 0;position: absolute;width: 100%;color: #1aad19;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+<!--头部-->
+<view class='head' >
+  <navigator class='flex_h' url='../index/index'>
+    <image class='head_img' mode='widthFix' src='http://www.juziyimei.com/images/toubu_j.png'></image>
+  </navigator>
+   <view bindtap='qr' class='flex_h'>
+    <image mode="widthFix" class="pyq_img"  src='http://www.juziyimei.com/images/qr.jpg'></image>
+     </view>
+</view>
+<image  mode="widthFix" class="bj_img" src='http://www.juziyimei.com/images/huodong_nv3.jpg'></image>
+<navigator wx:if="{{card == 0}}"  class="fx_btn" url='../product/detail?productId=688' >
+  <image mode="widthFix" class="fx_img" src='http://www.juziyimei.com/images/goumai.gif'></image>
+</navigator>
+<view wx:if="{{card == 1}}"  class="card" >
+  <image mode="widthFix" class="card_img" src='http://www.juziyimei.com/images/nv_card3.png'>
+  <text wx:if="{{card == 1}}"  class='card_text1'>卡内余额：{{card_info[0].cz_money}}元</text>
+  
+  <text wx:if="{{card == 1}}"  class='card_text3'>购卡时间：{{card_info[0].buy_time}}</text>
+  <text wx:if="{{card == 1}}"  class='card_text4'>到期时间：{{card_info[0].new_add_time}}</text>
+  </image>
+</view>
+
+
+<view class='flex_h_c xiangmu_tab_head'>
+  <view bindtap='change_xiangmu' class="xiangm_tab {{xiangmu_type == 1 ? 'xiangm_on':'xiangm_off'}} ">免费激光</view>
+  <view bindtap='change_xiangmu' class="xiangm_tab {{xiangmu_type == 2 ? 'xiangm_on':'xiangm_off'}}">免费整形</view>
+</view>
+<view class='box1'>
+  <view  class='goods_box' wx:for="{{goods_info}}" >
+      <navigator url='../product/detail?productId={{item.goods_id}}' class='goods_img_box'>
+        <image class='goods_img' src='http://www.juziyimei.com/{{item.goods_img}}'></image>
+        <view class='goods_info_box'>
+          <text class='goods_info1 ovh1'>{{item.goods_name}}</text>
+          <text wx:if="{{xiangmu_type == 1}}" class='goods_info2'>原价:<text class='juzi_cor' style='text-decoration:line-through;'>{{item.shop_price}}</text>元</text>
+          <text wx:if="{{xiangmu_type == 2}}" class='goods_info2'>桔子价:<text class='juzi_cor' >{{item.shop_price}}</text>元</text>
+          <text wx:if="{{xiangmu_type == 1}}" class='goods_info3'>女神卡仅需操作费<text class='juzi_cor' style='font-weight:700'>{{item.huodong_price}}</text>元</text>
+          <text wx:if="{{xiangmu_type == 2}}" class='goods_info3'>可使用女神卡内储值消费</text>
+        </view>  
+      </navigator>
+      
+      <navigator url='../product/detail?productId={{item.goods_id}}' class='goods_btn' data-bid='{{item.bid}}' >
+        <text class='juzi_cor' style='font-weight:700' >立即购买</text>
+      </navigator>
+      
+  </view>
+  <view class='hdsm_box'>
+    <text class='hdsm'>活动说明</text> 
+    <text class='hdsm_text' wx:for="{{hdsm}}">{{item.title}}</text>
+
+ </view>
+</view>

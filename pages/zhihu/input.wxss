@@ -1,0 +1,89 @@
+/* pages/zhihu/input.wxss */
+.text_input{
+ margin-bottom: 5px;
+ margin-top: 5px;
+}
+.input_img{
+  width: 100%;
+  position: relative;
+}
+.huida_text{
+  font-size: 16px;
+  width: 96%;
+  padding: 0 2%;
+  line-height: 24px;
+  background-color: #fff;
+  word-break:break-all;
+}
+.huida_textarea{
+  background-color: #fff;
+  height: 12rem;
+  width: 96%;
+  font-size: 14px;
+  margin-top: 5px;
+  padding: 2%;
+  margin-bottom: 50px;
+}
+.change_textarea{
+  background-color: #f9f9f9;
+  width: 100%;
+  font-size: 16px;
+}
+.g_btn{
+  background-color: #fff;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 25px;
+  font-size: 12px;
+  color: #999;
+  padding: 0 15px;
+  margin-left: 5px;
+}
+.juzi_col{
+  background-color: #F14918;
+  color: #fff;
+  margin-right: 5px;
+}
+.y_col{
+  background-color: #999;
+  color: #fff;
+  margin-right: 5px;
+}
+.h_image{
+  width: 100%;
+}
+.fengefu_box{
+    position: relative;
+}
+.fengefu{
+  width: 80%;
+  height: 20px;
+  margin: 0 10%;
+  padding: 10px 10px;
+  border-bottom: 1px #eee solid;
+
+}
+.yaoqing_text{
+  font-size: 14px;
+  line-height: 26px;
+  font-weight: 700;
+  padding: 5px 2%;
+  width: 96%;
+  border-bottom: 1px #eee solid;
+  background-color: #fff;
+}
+.ctrl_bottom{
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  padding: 5px 0;
+  background-color: #EBEBEB;
+  z-index: 999;
+}
+.del{
+  width:20px;
+  height:20px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}

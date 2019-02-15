@@ -18,7 +18,7 @@
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
 
-    <view class="shop " wx:for="{{orderList0}}">   
+    <view class="shop " wx:for="{{orderList0}}" wx:key="key">   
       <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1"><text>订单号：{{item.order_sn}}</text><text style="float: right;margin-right: 20px;color: #F14918;">待支付</text></view></view>
       <view class="df">
         <image class="sh_slt" src="{{item.img}}"></image>
@@ -48,23 +48,22 @@
         <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
-    <view class="shop" wx:for="{{orderList1}}">
+    <view class="shop" wx:for="{{orderList1}}" wx:key="key">
     <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1"><text>订单号：{{item.order_sn}}</text><text style="float: right;margin-right: 20px;color: #F14918;">已预约</text></view></view>
     <view class="df">
         <image class="sh_slt" src="{{item.img}}"></image>
         <navigator url="../order/detail?orderId={{item.order_id}}" class="df_1">             
             <view class="sp_text">
                 <view class="sp_neb">下单时间：{{item.order_time}}</view>
-                <view class="sp_neb">共{{item.all_goods_number}}件商品</view>
-                <view class="sp_jg">预约时间：{{item.dy_time}}</view>
+                <view class="sp_neb">到院时间：{{item.dy_time}}，共{{item.all_goods_number}}个项目</view>
+                <view class="sp_neb">留言：{{item.postscript}}</view>
+                <view class="sp_jg">报备人：{{item.rel_name}}/{{item.passwd_answer}}</view>
             </view>
         </navigator>
        </view>
         <view style="height:40px;width:100%;line-height: 36px;background-color:#fff;">
-                <view wx:if="{{item.qudao_tj}}" class="yyj">报备：{{item.qudao_tj}}</view>    
+                <view wx:if="{{item.qudao_tj}}" class="yyj">渠道<text class='juzi_cor'>{{item.rel_name}}</text>，报备<text class='juzi_cor'>{{item.qudao_tj}}</text></view>    
                 <view wx:else class="yyj">预约金：￥<text style='color:#F14918;font-size:14px;'>{{item.total_fee}}</text></view>  
-                <view class="black_bnt2 font_12 red fl_r mr_5" bindtap="removeOrder" data-orderid="{{item.order_id}}">取消订单</view>
-         
           </view>
     </view>
     </scroll-view>
@@ -78,23 +77,24 @@
             <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
             <text>没有可用订单/(ㄒoㄒ)/~~</text>
         </view>
-        <view class="shop" wx:for="{{orderList2}}">     
-        <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1"><text>订单号：{{item.order_sn}}</text><text style="float: right;margin-right: 20px;color: #F14918;">已完成</text></view></view>   
+        <view class="shop" wx:for="{{orderList2}}" wx:key="key">     
+        <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1"><text>订单号：{{item.order_sn}}</text>
+        <text wx:if="{{item.order_status3 == 5}}" style="float: right;margin-right: 20px;color: #F14918;">已到院未结算</text>
+        <text wx:else style="float: right;margin-right: 20px;color: #F14918;">已结算</text>
+        </view></view>   
       <view class="df">  
         <image class="sh_slt" src="{{item.img}}"></image>
         <navigator url="../order/detail?orderId={{item.order_id}}" class="df_1">           
             <view class="sp_text">
-                
-                <view class="sp_neb">下单时间：{{item.order_time}}</view>
-                <view class="sp_neb">共{{item.all_goods_number}}件商品</view>
-                <view class="sp_jg">预约时间：{{item.dy_time}}</view>
-
-                
+              <view class="sp_neb">下单时间：{{item.order_time}}</view>
+                <view class="sp_neb">到院时间：{{item.dy_time}}，共{{item.all_goods_number}}个项目</view>
+                <view class="sp_neb">留言：{{item.postscript}}</view>
+                <view class="sp_jg">报备人：{{item.rel_name}}/{{item.passwd_answer}}</view>
             </view>
         </navigator>
       </view>
         <view style="height:40px;width:100%;line-height: 36px;background-color:#fff;">
-                <view class="yyj">预约金：￥<text style='color:#F14918;font-size:14px;'>{{item.total_fee}}</text></view>    
+                <view class="yyj">预约金：￥<text style='color:#F14918;font-size:14px;'>{{item.goods_amount}}</text></view>    
                 <view class="black_bnt2 font_12 red fl_r mr_5" bindtap="removeOrder" data-orderid="{{item.order_id}}">申请退款</view>
          
           </view>
@@ -109,7 +109,7 @@
         <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
-    <view class="shop" wx:for="{{orderList3}}">   
+    <view class="shop" wx:for="{{orderList3}}" wx:key="key">   
       <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1">
       <text>订单号：{{item.order_sn}}</text>
       <text wx:if="{{item.order_status1 == 2}}" style="float: right;margin-right: 20px;color: #999;">已取消</text>
@@ -128,7 +128,7 @@
         </navigator>
         </view>
         <view style="height:40px;width:100%;line-height: 36px;background-color:#fff;">
-                <view class="yyj">预约金：￥<text style='color:#F14918;font-size:14px;'>{{item.total_fee}}</text><text wx:if="{{item.order_status1 == 2}}" style='color:#999;font-size:11px;'>（已退余额）</text></view>    
+                <view class="yyj">预约金：￥<text style='color:#F14918;font-size:14px;'>{{item.goods_amount}}</text></view>    
                 <view class="black_bnt2 font_12 red fl_r mr_5" bindtap="removeOrder" data-orderid="{{item.order_id}}">订单详情</view>
          
           </view>

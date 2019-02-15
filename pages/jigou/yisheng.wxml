@@ -1,0 +1,41 @@
+<!--pages/jigou/jigou.wxml-->
+<view class='jigou_info'>
+  <view class='jigou_info1'>
+    <image src='{{yisheng_info.d_img}}' class='jigou_logo'></image>
+    <image class='renzheng' src='/images/renzheng.png' ></image>
+    <text class='jigou_title'>{{yisheng_info.name}}</text>
+  </view>
+  <view class='jigou_info2'>
+    <view class='yy'><text class='jigou_info_text'>12</text><text class='jigou_info_text'>日记</text></view>
+    <view class='yy'><text class='jigou_info_text'>{{jigou_xiangmu_count}}</text><text class='jigou_info_text'>项目</text></view>
+  </view>
+</view>
+<!--<view class='jigou_address'>
+  <view class='addimg'>
+    <image class='add_img' src='/images/address.png'></image>
+    <view class='add_text'>{{jigou_info.address}}</view>
+  </view>
+  <image class='right' src='/images/x_right.png'></image>
+</view>-->
+<view class='jigou_lb'>
+  <image class='lb_img' src='/images/yiyuan_address.png'></image>
+  <view class='lb_text'>{{yisheng_info.brand_name}}</view>
+  <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-top: 15px;' src="/images/x_right.png"></image></span>
+</view>
+<navigator url='../jigou/jigou?jigou_id={{item.yiyuan_id}}' class='jigou_lb'>
+  <image class='lb_img' src='http://www.juziyimei.com/mobile/themes/default/gl_img/laba.gif'></image>
+  <view class='lb_text'>{{yisheng_info.info}}</view>
+</navigator>
+<view>
+  <navigator url='../product/detail?productId={{item.goods_id}}'  class='yy_info' wx:for="{{xiangmu_list}}">
+    <image mode='aspectFit' src='http://www.juziyimei.com/{{item.goods_img}}' class='yy_img'></image>
+    <view class='yy_text'>
+      <text class='yy_title'>{{item.goods_name}}</text>
+      <text class='yy_num'>预约数：{{item.yy_num}}</text>
+      <text class='yy_price'><text class='yy_price1'>￥{{item.juzi_price}}</text><text class='yy_price2'>￥{{item.market_price}}</text></text>
+    </view>
+  </navigator>
+</view>
+<view class='jigou_ys'>
+
+</view>

@@ -20,6 +20,12 @@ Page({
     });
     if (team_type == 1){//加载线上数据
       wx.showLoading();//加载动画
+      //更改头部标题
+      wx.setNavigationBarTitle({
+        title: '我的推荐',
+        success: function () {
+        },
+      });
       var that = this;
       var goods_id = options.id;
       wx.request({

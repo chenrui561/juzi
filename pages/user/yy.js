@@ -99,7 +99,24 @@ Page({
     console.log('form发生了submit事件，携带数据为：', phone)
     if (name == '' || phone == '') {
       wx.showToast({
-        title: '不能为空！',
+        title: '客户信息不能为空！',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
+    if (this.data.tj_yiyuan_id == ''){
+      wx.showToast({
+        title: '医院不能为空！',
+        icon:'none',
+        duration: 2000
+      });
+      return false;
+    } 
+    if (this.data.dy_time == '') {
+      wx.showToast({
+        title: '到院时间不能为空！',
+        icon: 'none',
         duration: 2000
       });
       return false;

@@ -1,22 +1,40 @@
 {
+  "usingComponents": {
+    "audio-player": "plugin://myPlugin/audio-player"
+  },
   "plugins": {
-    "brickLayout": {
-      "version": "0.2.0",
-      "provider": "wx3c042630f3cdc175"
+    "myPlugin": {
+      "version": "1.0.0",
+      "provider": "wxbb9d84aea28a6dba"
+    }
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
   "pages":[
     "pages/index/index",
+    "pages/index/index_t",
+    "pages/index/index2",
+    "pages/zhihu/zhihu",
+    "pages/zhihu/wenti_huida_list",
+    "pages/zhihu/input",
     "pages/index/tuan",
     "pages/myproduct/index",
     "pages/myproduct/list",
     "pages/product/detail",
     "pages/product/lilshi",
     "pages/search/search",
+    "pages/search/search-rj",
     "pages/jigou/jigou",
+    "pages/jigou/yisheng",
     "pages/user/user",
     "pages/user/quan",
     "pages/web/web",
+    "pages/huodong/huodong",
+    "pages/huodong/huodong2",
+    "pages/huodong/fenxiang",
     "pages/question-ask/question-ask",
     "pages/question-ask/anli",
     "pages/user/dingdan",
@@ -24,11 +42,18 @@
     "pages/user/bd",
     "pages/user/yy",
     "pages/user/tixian",
+    "pages/user/tixian_sh",
+    "pages/user/tixian_sh2",
+    "pages/user/tixian_info",
     "pages/user/team",
+    "pages/user/jiaofei",
+    "pages/user/team-fazhan",
     "pages/user/team-user",
     "pages/user/team-dd",
     "pages/user/team-shouyi",
     "pages/user/shoucang",
+    "pages/user/fankui",
+    "pages/user/my-anli",
     "pages/order/pay",
     "pages/order/detail",
     "pages/order/downline",
@@ -42,13 +67,44 @@
     "pages/turntable/huojiang",
     "pages/up_anli/question-ask",
     "pages/up_anli/down",
+    "pages/up_anli/shenhe",
     "pages/audio/index",
-    "pages/audio/list"
+    "pages/audio/list",
+    "pages/test/test",
+    "pages/ruzhu/ruzhu",
+    "pages/ruzhu/ruzhu_info"
       ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "桔子医美",
+    "navigationBarTitleText": "桔子放心美",
     "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#F14918",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/icons/huati_2.png",
+        "selectedIconPath": "images/icons/huati_1.png",
+        "text": "话题"
+      },
+
+      {
+        "pagePath": "pages/index/index2",
+        "iconPath": "images/icons/btn-tabs_01.png",
+        "selectedIconPath": "images/icons/btn-tabs_07.png",
+        "text": "优惠"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "images/icons/btn-tabs_06.png",
+        "selectedIconPath": "images/icons/btn-tabs_10.png",
+        "text": "我的"
+      }
+    ]
   }
 }

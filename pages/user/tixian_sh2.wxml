@@ -1,0 +1,38 @@
+<!--pages/user/team-shouyi.wxml-->
+<!--线下-->
+<view class="sc1 df">
+        <view class="df_1 tc">
+          <view  bindtap='cash' hover-class="none">
+            <view class='cash'><text style='font-size:11px;'>￥</text>{{tixian_info.cash}}</view>
+            <text wx:if="{{id == 1}}">今日提现金额</text>
+            <text wx:if="{{id == 2}}">今日成交金额</text>
+          </view> 
+        </view>
+      
+        <view class="df_1 tc">
+          <view bindtap='bishu' hover-class="none">
+            <view class='cash'>{{tixian_info.num}}<text style='font-size:11px;'>笔</text></view>
+            <text wx:if="{{id == 1}}">提现笔数</text>
+            <text wx:if="{{id == 2}}">成交笔数</text>
+          </view>
+        </view>
+    </view> 
+
+
+
+<view >
+  <view class='yangshi shijian'>时间</view>
+  <view class='yangshi sl'>昵称</view>
+  <view wx:if="{{id == 1}}" class='yangshi nick'>提现金额</view>
+  <view wx:if="{{id == 2}}" class='yangshi nick'>成交金额</view>
+  <view class='yangshi bz'>状态</view>
+  <navigator  wx:for="{{tixian_info_list}}" wx:key="key">
+    <view class='yangshi2 shijian'>{{item.time}}</view>
+    <view class='yangshi2 sl'>{{item.passwd_answer}}</view>
+    <view  class='yangshi2 nick'>{{item.cash}}元</view>
+
+    <view wx:if="{{id == 1}}" class='yangshi2 bz'>已完成</view>
+    <view wx:if="{{id == 2}}" class='yangshi2 bz'>已成交</view>
+  </navigator>
+  
+</view>

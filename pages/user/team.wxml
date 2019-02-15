@@ -1,23 +1,42 @@
 <!--pages/user/team.wxml-->
  <!--我的页面开始-->
   <view class="page">
-    <view  class="userinfo">
-        
+    <view  class="userinfo" bindtap='qr'>
           <view class='user_info'>
             <image class="userinfo-avatar fl_l" src="{{u_info.tx_img}}" background-size="cover"></image>
             <view class='user_text'>
               <text class="fl_l" style="font-size: 16px;line-height:20px;" >{{u_info.nick_name}}</text>
              <!-- <view url="../web/web?web_type=6" wx:if="{{u_info.user_lei == 3}}" class='qudao' style='background-image:url(https://www.anranhaitao.com/mobile/themes/default/images/putong.png);'>VIP渠道 </view>-->
-              <text class='db'>您的收益已经打败了86.3%的用户！</text>
+              <text class='db'>您的收益已经打败了0.00%的用户！</text>
             </view>
           </view>
-          <picker bindchange="bindPickerChange" value="{{index}}" range="{{time}}">
+         <!-- <picker bindchange="bindPickerChange" value="{{index}}" range="{{time}}">
             <view class='time'>
                 <text>{{time_on}}</text>
             <image class='down' src='/images/down.png' ></image>
             </view>
-          </picker>
+          </picker>-->
+          
+          <view >
+            <view class='yajin'>
+            <image class='yj_img' src='/images/yj.png' ></image>
+                <text>￥{{u_info.y_money}}</text>
+            
+            </view>
+          </view>
       </view>
+      
+      <view wx:if="{{u_info.user_lei == 1}}" class="sc1 df flex_h_b" data-phone='{{t_user_info.mobile_phone}}'>
+        <view class='flex_s_l'>
+          <text class='ml10 mr10'>当前级别：总监</text>
+          <view class='ml10 mr10'>支付3980元保证金即可升级为城市合伙人</view>
+        </view>     
+        <view bindtap="createProductOrder" class='shengji'>点击升级</view>   
+      </view>
+     <!-- <view class="sc1 df flex_h_b" data-phone='{{t_user_info.mobile_phone}}' bindtap='b_phone'>
+        <text class='ml10 mr10'>我的推荐人：{{t_user_info.rel_name ? t_user_info.nick_name:t_user_info.rel_name}}</text>
+        <text class='ml10 mr10'>{{t_user_info.mobile_phone}}</text>
+      </view>-->
     <view class="sc1 df">
         <view class="df_1 tc">
           <navigator url="../user/team-user?team_type=1" hover-class="none">
@@ -56,15 +75,29 @@
     <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
     </view> 
 </navigator>  
+<!--<navigator url="../user/team-shouyi" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
+ <view >
+    <span class="font_14 c3">医院点位</span>
+    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+    </view> 
+</navigator>  -->
 
-<navigator url="" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+<!--<navigator url="../user/team-fazhan?id=0&type=0&mf=0" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
  <view >
     <span class="font_14 c3">发展渠道团队</span>
     <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
     </view>
 </navigator>
 
-
+<navigator url="../user/team-fazhan?id=0&type=0&mf=1" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+ <view >
+    <span class="font_14 c3">免费发展渠道团队</span>
+    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+    </view>
+</navigator>-->
+<!--<navigator url='../huodong/huodong2'>
+  <image class='bj_img' mode='widthFix' src='https://www.juziyimei.com/images/px_banner.jpg'></image>
+</navigator>-->
 
 <view class='l_h60'></view>
 </view>

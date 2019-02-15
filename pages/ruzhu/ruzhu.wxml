@@ -1,0 +1,100 @@
+<!--pages/ruzhu/ruzhu.wxml-->
+<!--pages/user/bd.wxml-->
+<view class="page-body">
+<!--进度-->
+<view class='jindu_bj'>
+  <image wx:if="{{jindu == 1}}" class='jindu_img' mode='widthFix' src='http://www.juziyimei.com/images/jindu1.png'></image>
+  <image wx:if="{{jindu == 2}}" class='jindu_img' mode='widthFix' src='http://www.juziyimei.com/images/jindu2.png'></image>
+  <image wx:if="{{jindu == 3}}" class='jindu_img' mode='widthFix' src='http://www.juziyimei.com/images/jindu3.png'></image>
+</view>
+<!--第一步-->
+  <form wx:if="{{jindu == 1}}" bindsubmit="formSubmit" bindreset="formReset">
+  <view class="page-section">
+  <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="jigou_name" class="weui-input" value='{{info.brand_name}}' placeholder="请输入医院/机构名称" />
+      </view>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="address" class="weui-input" value='{{info.address}}' placeholder="请输入详细地址" />
+      </view>
+    </view>
+  </view>
+   <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="user_name" class="weui-input" value='{{info.user_name}}' placeholder="请输入联系人姓名" />
+      </view>
+    </view>
+  </view>
+   <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="phone" class="weui-input" value='{{info.phone}}' placeholder="请输入联系人手机号" />
+      </view>
+    </view>
+  </view>
+  <!-- 正文  -->
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <textarea name="jieshao" class="weui-textarea" placeholder="请输入医院/机构介绍"  maxlength="2000" placeholder-style="color:#b3b3b3;font-size:14px;" value='{{info.brand_desc}}' style="height: 150px;width: 100%;font-size: 14px;" bindinput="handleContentInput" />
+          <view class="weui-textarea-counter">{{contentCount}}/1000</view>
+        </view>
+      </view>
+    </view>
+
+  
+<checkbox-group style="margin-top:5px;" bindchange="xieyi">
+  <checkbox class='xieyi1 flex_h' value='1' ><navigator url='../web/web?web_type=8' class='xieyi2'><text class='xieyi1'>勾选同意</text>《桔子放心美入驻协议》</navigator></checkbox>
+</checkbox-group>
+ </view>
+  <button style="margin-top:30px;width: 86%;color: #F14918;background-color:#fff;" formType="submit">下一步</button>
+  
+ </form>
+
+ <!--<button style="margin-top:30px;width: 86%;color: #1aad19;background-color:#fff;" bindtap="chongxin">重新加载首页</button>-->
+<!--第二步-->
+<view wx:if="{{jindu == 2}}">
+<text bindtap='test'>测试</text>
+    <!-- 图片缩略图  -->
+    <view class="question-images">
+      <view class='img_text'>请上传医院/机构资质文件以便我们进行审核</view>
+      <block wx:for="{{images}}" wx:key="key" >
+        <view class="q-image-wrap">
+          <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>
+        </view>
+      </block>
+      <view class='flex_s' wx:if="{{images.length < 1}}" >
+        <view class='up_img flex_s'>
+          <image src='/images/up.png' class='up_img_info' bindtap="chooseImage" ></image>
+        </view>
+        <text class='zizhi_text'>营业执照</text>
+      </view>
+      <view class='flex_s' wx:if="{{images.length < 2}}">
+        <view class='up_img flex_s'>
+          <image src='/images/up.png' class='up_img_info' bindtap="chooseImage" ></image>
+        </view>
+        <text class='zizhi_text'>医疗机构职业许可证</text>
+      </view>
+      <view class='flex_s' wx:if="{{images.length < 3}}">
+        <view class='up_img flex_s'>
+          <image src='/images/up.png' class='up_img_info' bindtap="chooseImage" ></image>
+        </view>
+        <text class='zizhi_text'>医疗广告审查证明</text>
+      </view>
+    </view>
+  <view bindtap='shang1' class='shang'>上一步</view>
+  <button bindtap='up_img' style="margin-top:5px;width: 86%;color: #F14918;background-color:#fff;">下一步</button>
+  
+ </view>
+
+
+</view>
+
+

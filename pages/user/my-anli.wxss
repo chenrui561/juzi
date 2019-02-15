@@ -1,0 +1,79 @@
+/* pages/user/shoucang.wxss */
+.page{margin-top: 10px;}
+.clearbutton{
+    background: #fff; 
+    display: inline-block;
+    margin:3% 3% 2% 3%; 
+    color: #dd2727;
+    font-size: 14px;
+    width: 94%;
+}
+.shop{
+    background: #fff;
+    padding: 4%;
+    margin-bottom: 10px;
+}
+.price{
+  display: flex;
+  justify-content: space-between;
+}
+.sh_slt{
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    margin-right: 4%;
+    float: left;
+}
+.sp_text{
+    float: left;
+    line-height: 20px;
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    }
+.sp_tit{
+    width: 100%;
+    overflow: hidden;
+    font-size: 14px;
+}
+.sp_neb{
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    color: #999;
+}
+.sp_jg{
+    overflow: hidden;
+    font-size: 12px;
+    color: #999;
+    width: 60%;
+}
+.sp_jg1{
+    text-decoration:line-through;
+    overflow: hidden;
+    font-size: 13px;
+    color: #999;
+}
+.dle{
+    color: #999;
+    font-size: 12px;
+    float: right;
+}
+.dle image{
+    width: 18px;
+    height: 18px;
+    vertical-align: sub;
+}
+.jk_bottom{
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    width: 100%; 
+    display: inline-flex;
+    border-bottom: 1px solid #eee; 
+    font-size: 14px;
+    color: #999;       
+}
+

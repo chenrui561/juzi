@@ -18,7 +18,7 @@
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
 
-    <view class="shop " wx:for="{{orderList0}}">   
+    <view class="shop " wx:for="{{orderList0}}" wx:key="key">   
       <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1"><text>订单号：{{item.order_sn}}</text><text style="float: right;margin-right: 20px;color: #F14918;">待支付</text></view></view>
       <view class="df">
         <image class="sh_slt" src="{{item.img}}"></image>
@@ -48,7 +48,7 @@
         <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
-    <view class="shop" wx:for="{{orderList1}}">
+    <view class="shop" wx:for="{{orderList1}}" wx:key="key">
     <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1"><text>订单号：{{item.order_sn}}</text><text style="float: right;margin-right: 20px;color: #F14918;">已预约</text></view></view>
     <view class="df">
         <image class="sh_slt" src="{{item.img}}"></image>
@@ -78,7 +78,7 @@
             <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
             <text>没有可用订单/(ㄒoㄒ)/~~</text>
         </view>
-        <view class="shop" wx:for="{{orderList2}}">     
+        <view class="shop" wx:for="{{orderList2}}" wx:key="key">     
         <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1"><text>订单号：{{item.order_sn}}</text><text style="float: right;margin-right: 20px;color: #F14918;">已完成</text></view></view>   
       <view class="df">  
         <image class="sh_slt" src="{{item.img}}"></image>
@@ -109,7 +109,7 @@
         <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
         <text>没有可用订单/(ㄒoㄒ)/~~</text>
     </view>
-    <view class="shop" wx:for="{{orderList3}}">   
+    <view class="shop" wx:for="{{orderList3}}" wx:key="key">   
       <view style="height:36px;width:100%;line-height: 36px;background-color:#fff;"><view class="sp_tit ovh1">
       <text>订单号：{{item.order_sn}}</text>
       <text wx:if="{{item.order_status1 == 2}}" style="float: right;margin-right: 20px;color: #999;">已取消</text>

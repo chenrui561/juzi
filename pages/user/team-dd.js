@@ -11,6 +11,8 @@ Page({
     currentTab: 0,
     isStatus: 'deliver',//10待付款，20待发货，30待收货 40、50已完成
     page: 0,
+    type:1,
+    user_lei:'',
     refundpage: 0,
     orderList0: [],
     orderList1: [],
@@ -22,12 +24,11 @@ Page({
     this.initSystemInfo();
     this.setData({
       currentTab: parseInt(options.currentTab),
-     // isStatus: options.otype
+      isStatus: options.otype,
+      type:options.id,
+      user_lei: wx.getStorageSync('user_lei')
     });
-
-
     this.loadOrderList();
-
   },
   getOrderStatus: function () {
     return this.data.currentTab == 0 ? 1 : this.data.currentTab == 2 ? 2 : this.data.currentTab == 3 ? 3 : 0;
@@ -137,7 +138,7 @@ Page({
         uid: wx.getStorageSync('id'),
         order_type: that.data.isStatus,
         page: that.data.page,
-        type: 1
+        type: that.data.type
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'

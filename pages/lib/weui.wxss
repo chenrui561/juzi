@@ -168,6 +168,7 @@ icon {
   min-height: 40px;
   line-height: 40px;
   font-size: 14px;
+  width: 75%;
 }
 .weui-toptips {
   position: fixed;

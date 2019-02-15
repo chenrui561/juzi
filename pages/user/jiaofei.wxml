@@ -1,0 +1,68 @@
+<!--pages/user/team-shouyi.wxml-->
+<!--线下-->
+<view wx:if="{{id == 1}}" >
+  <view class='yangshi shijian'>支付时间</view>
+  <view class='yangshi sl'>昵称/姓名</view>
+  <view class='yangshi nick'>金额</view>
+  <view class='yangshi bz'>类型</view>
+  <view  wx:for="{{goods_user}}" wx:key="key">
+    <view class='yangshi2 shijian'>{{item.pay_time}}</view>
+    <view class='yangshi2 sl'>{{item.passwd_answer}}/{{item.rel_name}}</view>
+    <view  class='yangshi2 nick'>{{item.money_paid}}元</view>
+    <view wx:if="{{item.tuijian > 0 && item.type_id == 1}}" class='yangshi2 bz'>线下报备</view>
+    <view wx:if="{{item.type_id == 2}}" class='yangshi2 bz'>渠道缴费</view>
+    <view wx:if="{{item.tuijian == 0 && item.type_id == 1}}" class='yangshi2 bz'>线上预约</view>
+  </view>
+  
+</view>
+
+<view wx:if="{{id == 2}}" >
+  <view class='yangshi shijian'>时间</view>
+  <view class='yangshi sl'>报备人</view>
+  <view class='yangshi nick'>报备信息</view>
+  <view class='yangshi bz'>状态</view>
+
+  <view  wx:for="{{goods_user}}" wx:key="key">
+    <view class='yangshi2 shijian'>{{item.pay_time}}</view>
+    <view class='yangshi2 sl'>{{item.passwd_answer}}/{{item.rel_name}}</view>
+    <view  class='yangshi2 nick'>{{item.money_paid}}元</view>
+    <view wx:if="{{item.tuijian > 0 && item.type_id == 1}}" class='yangshi2 bz'>线下报备</view>
+    <view wx:if="{{item.type_id == 2}}" class='yangshi2 bz'>渠道缴费</view>
+    <view wx:if="{{item.tuijian == 0 && item.type_id == 1}}" class='yangshi2 bz'>线上预约</view>
+  </view>
+  
+</view>
+<!--渠道信息-->
+<view wx:if="{{id == 3}}" >
+  <view class='yangshi shijian'>加入时间</view>
+  <view class='yangshi nick '>微信昵称</view>
+  <view class='yangshi sl'>姓名/级别</view>
+  <view class='yangshi bz'>手机号</view>
+
+  <view  wx:for="{{goods_user}}" wx:key="key">
+    <view class='yangshi2 shijian'>{{item.reg_time}}</view>
+    <view class='yangshi2 nick '>{{item.passwd_answer}}</view>
+    <view  wx:if="{{item.user_lei == 1}}" class='yangshi2 sl'>{{item.rel_name}}/总监</view>
+    <view  wx:if="{{item.user_lei == 2}}" class='yangshi2 sl'>{{item.rel_name}}/城市合伙人</view>
+    <view  wx:if="{{item.user_lei == 3}}" class='yangshi2 sl'>{{item.rel_name}}/省代</view>
+    <view class='yangshi2 bz'>{{item.mobile_phone}}</view>
+  </view>
+  
+</view>
+
+<!--直客信息-->
+<text>{{count}}</text>
+<view wx:if="{{id == 4}}"  >
+  <view class='yangshi shijian'>时间</view>
+  <view class='yangshi nick '>昵称</view>
+  <view class='yangshi sl'>手机号</view>
+  <view class='yangshi bz'>状态</view>
+
+  <navigator url='../user/detail?id={{item.user_id}}' wx:for="{{goods_user}}" wx:key="key">
+    <view class='yangshi2 shijian'>{{item.reg_time}}</view>
+    <view class='yangshi2 nick '>{{item.passwd_answer}}</view>
+    <view class='yangshi2 sl'>{{item.mobile_phone}}</view>
+    <view wx:if="{{item.gj_states == 0}}" class='yangshi2 bz'>未跟进</view>
+  </navigator>
+  
+</view>

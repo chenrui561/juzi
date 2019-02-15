@@ -11,9 +11,9 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "2.4.3",
 	"appid": "wx058ea8866be28317",
-	"projectname": "%E6%A1%94%E5%AD%90%E5%8C%BB%E7%BE%8E",
+	"projectname": "%E6%A1%94%E5%AD%90%E4%B8%80%E8%B5%B7%E7%BE%8E",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 18,
+			"current": 35,
 			"list": [
 				{
 					"id": -1,
@@ -63,10 +63,10 @@
 					"scene": "1007"
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "分享",
 					"pathName": "pages/question-ask/question-ask",
-					"query": ""
+					"query": "id=242"
 				},
 				{
 					"id": 5,
@@ -123,9 +123,9 @@
 					"query": "tid=63"
 				},
 				{
-					"id": -1,
+					"id": 14,
 					"name": "案例下载",
-					"pathName": "pages/myproduct/index",
+					"pathName": "pages/up_anli/down",
 					"query": ""
 				},
 				{
@@ -135,7 +135,7 @@
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 16,
 					"name": "案例下载",
 					"pathName": "pages/up_anli/down",
 					"query": ""
@@ -151,6 +151,107 @@
 					"name": "收益流水",
 					"pathName": "pages/user/team-shouyi",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "我的案例",
+					"pathName": "pages/user/my-anli",
+					"query": ""
+				},
+				{
+					"id": 20,
+					"name": "发展渠道-邀请",
+					"pathName": "pages/user/team-fazhan",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "发展渠道-免费邀请",
+					"pathName": "pages/user/team-fazhan",
+					"query": "mf=1"
+				},
+				{
+					"id": 22,
+					"name": "发展渠道-被邀请",
+					"pathName": "pages/user/team-fazhan",
+					"query": "id=2&type_id=1"
+				},
+				{
+					"id": 23,
+					"name": "发展渠道-被免费邀请",
+					"pathName": "pages/user/team-fazhan",
+					"query": "id=1&mf=1&&type_id=1"
+				},
+				{
+					"id": -1,
+					"name": "搜索日记",
+					"pathName": "pages/search/search-rj",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "提现",
+					"pathName": "pages/user/tixian",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "音频",
+					"pathName": "pages/audio/index",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "案例审核",
+					"pathName": "pages/up_anli/shenhe",
+					"query": ""
+				},
+				{
+					"id": 28,
+					"name": "提现审核",
+					"pathName": "pages/user/tixian_sh2",
+					"query": ""
+				},
+				{
+					"id": 29,
+					"name": "播放详情",
+					"pathName": "pages/audio/index",
+					"query": "id=10&title=123456"
+				},
+				{
+					"id": 30,
+					"name": "活动",
+					"pathName": "pages/huodong/huodong",
+					"query": "id=1"
+				},
+				{
+					"id": -1,
+					"name": "活动",
+					"pathName": "pages/huodong/huodong2",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "直客",
+					"pathName": "pages/user/jiaofei",
+					"query": "id=4"
+				},
+				{
+					"id": -1,
+					"name": "测试",
+					"pathName": "pages/test/test",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "申请入驻桔子",
+					"pathName": "pages/ruzhu/ruzhu",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "写回答",
+					"pathName": "pages/zhihu/input"
 				}
 			]
 		}

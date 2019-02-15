@@ -10,7 +10,7 @@
 </view>
 <view class=" carts-list">
 <!--勾-->
-     <view  wx:for="{{carts}}" class="carts-item" data-title="{{item.pro_name}}" id="{{item.id}}">
+     <view  wx:for="{{carts}}" wx:key="key" class="carts-item" data-title="{{item.pro_name}}" id="{{item.id}}">
           <icon wx:if="{{item.is_onclick == 0}}" type="success_circle" data-recid="{{item.rec_id}}"   size="20" bindtap="bindCheckbox" data-index="{{index}}"/>
           <icon wx:else type="circle" size="20" bindtap="bindCheckbox" data-recid="{{item.rec_id}}" data-index="{{index}}"/>
           <!--img-->

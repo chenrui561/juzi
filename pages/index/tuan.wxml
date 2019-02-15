@@ -14,7 +14,7 @@
                     <image style='width:135px;height:35px;margin-right:10rpx;' src="http://www.anranhaitao.com/mobile/themes/default/gl_img/xzzzp.png"></image>
                     </view>
                     <view  class="cont" >
-                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle" wx:for="{{new_tuan_list}}">
+                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle" wx:for="{{new_tuan_list}}" wx:key="key">
                             <image class="hot_photo" src="http://www.anranhaitao.com/{{item.goods_img}}"></image>
                           <view style="display: flex;flex-direction: column;justify-content: space-between;height: 140px;">
                             <view class="hot_title">{{item.goods_name}}</view>

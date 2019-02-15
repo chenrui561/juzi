@@ -1,0 +1,5 @@
+<!--pages/huodong/huodong2.wxml-->
+<image class='bj_img' mode='widthFix' src='https://www.juziyimei.com/images/px1.jpg'></image>
+<image wx:if="{{count == 0}}" class='bj_img po' bindtap="createProductOrder" mode='widthFix' src='https://www.juziyimei.com/images/px2.jpg'></image>
+<image wx:if="{{count > 0}}" class='bj_img po' mode='widthFix' src='https://www.juziyimei.com/images/px2_2.jpg'></image>
+<image class='bj_img' mode='widthFix' src='https://www.juziyimei.com/images/px3.jpg'></image>

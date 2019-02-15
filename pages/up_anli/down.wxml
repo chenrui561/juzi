@@ -1,15 +1,16 @@
 <!--pages/up_anli/down.wxml-->
+<view class="search df flex_s">
+<view class='search2 df'>
+    <input class="df_1" placeholder="请输入您要搜索的内容，无内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+    <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
+</view>
+<scroll-view scroll-x class="swiper-tab">
+              <view wx:for="{{lx}}" wx:key="key" class="swiper-tab-list {{item.id==lx_id ? 'swiper-tab-color' : ''}} " bindtap="indexChange" data-lxid="{{item.id}}">{{item.name}}</view>
+  </scroll-view>
+</view>
+
 <view class='list'>
-        <scroll-view scroll-x class="swiper-tab">
-            <view class="swiper-tab-list {{z_index==1 ? 'swiper-tab-color' : ''}} " bindtap="indexChange" data-current="1">全部</view>
-          <!-- <view class="swiper-tab-list" data-current="1"  bindtap="swichNav">桔子购</view> -->
-            <view class="swiper-tab-list {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">鼻子</view>
-            <view class="swiper-tab-list {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3"  bindtap="indexChange">眼睛</view>
-            <view class="swiper-tab-list {{z_index==4 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">嘴巴</view> 
-            <view class="swiper-tab-list {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">耳朵</view> 
-            <view class="swiper-tab-list {{z_index==6 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">胸部</view> 
-            <view class="swiper-tab-list {{z_index==7 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">脂肪</view>  
-          </scroll-view>
+        
 
 <!--瀑布流加载的隐藏部分-->
   <view style="display:none">
@@ -17,21 +18,29 @@
   </view>
 <!--瀑布流加载的隐藏部分-->
 <!--瀑布流开始-->
-  <view style="width:100%">
+  <view scroll-y="true" style="width:100%" style="height:{{scrollH}}px" bindscrolltolower="loadImages">
     <view class="img_item">
       <view class='ban' wx:for="{{col1}}" wx:key="id">
-        <image bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.pic}}" src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
+      
+        <image bindtap="big_img" data-con="{{item.content}}" data-bigimg="{{item.img_arr}}" data-img="{{item.pic}}" src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
         <view  class="act-item ellipsis_title">{{item.content}}</view>
-             
+        <view class='flex_h_b'>
+          <navigator url='/pages/up_anli/question-ask?id={{item.id}}' wx:if="{{user_lei > 9}}" class="remover"  >编辑</navigator> 
+          <view wx:if="{{user_lei > 9}}" class="remover" data-aid="{{item.id}}" bindtap="removeImage">删除</view>
+        </view>
       </view>
     </view>
     <view class="img_item">
       <view url='../question-ask/anli?aid={{item.id}}&uid={{item.user_id}}' class='ban' wx:for="{{col2}}" wx:key="id">
-        <image  bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.pic}}" src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
+        <image  bindtap="big_img" data-con="{{item.content}}" data-bigimg="{{item.img_arr}}" data-img="{{item.pic}}" src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
         <view class="act-item ellipsis_title">{{item.content}}</view>
-              
+        <view class='flex_h_b'>
+          <navigator url='/pages/up_anli/question-ask?id={{item.id}}' wx:if="{{user_lei > 9}}" class="remover"  >编辑</navigator> 
+          <view wx:if="{{user_lei > 9}}" class="remover" data-aid="{{item.id}}" bindtap="removeImage">删除</view>    
+        </view> 
       </view>
     </view>
 </view>
 <!--瀑布流结束-->
+<navigator wx:if="{{user_lei > 9}}" url='/pages/up_anli/question-ask' class='fabu'><image style='width:20px;height:20px;' src='/images/fabu.png'></image></navigator>
     </view>      

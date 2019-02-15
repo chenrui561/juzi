@@ -17,7 +17,7 @@ Page({
     var that = this;
     var web_type = options.web_type
     var kuaidi = options.kuaidi
-    var jm_id = ((app.d.anran_id)*33+254)*22 
+    var jm_id = ((wx.getStorageSync('id'))*33+254)*22 
     that.setData({
       web_type: web_type,
       anran_id: jm_id,

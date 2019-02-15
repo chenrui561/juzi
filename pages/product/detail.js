@@ -41,7 +41,9 @@ Page({
     none_on:'none',
     shouquan: 999,
     is_promote:0,
-    
+    phone:0,
+    user_lei:0,
+    zixun:1  //0就是显示咨询提示，1不显示
   },
   bindGetUserInfo: function (e) {
     var that = this;
@@ -73,7 +75,24 @@ Page({
     }
   },
 
-  
+  /**
+ * 生命周期函数--监听页面显示
+ */
+  onShow: function () {
+  var that = this;
+    this.loadProductDetail();
+    this.car_count();
+    setTimeout(function () {//延时1秒弹出
+      that.setData({
+      zixun:0
+    })
+    }, 1000)
+   setTimeout(function () {//延时5秒关闭弹出
+      that.setData({
+        zixun: 1,
+      });
+    }, 5000)
+  },
 
  
   // 传值
@@ -123,12 +142,16 @@ Page({
         tid: tid
       });
     } 
-    //this.initNavHeight();
+    this.initNavHeight();
+    
+
     var that = this;
     that.setData({
-      productId: option.productId
+      productId: option.productId,
+      nick_name: wx.getStorageSync('NickName'),
+      head_img: wx.getStorageSync('HeadUrl'),
     });
-    that.loadProductDetail();
+
     var hx_id = wx.getStorageSync('id')//从缓存中获取用户id
      if (hx_id > 0){}else {//判断是否已经登录
         app.getOpenid().then(function (openid) {
@@ -149,6 +172,33 @@ Page({
     }
     
   },
+/*购物车数量 */
+car_count:function(){
+  var that = this;
+  wx.request({
+    url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_count_cart',
+    method: 'post',
+    data: {
+      user_id: wx.getStorageSync('id')
+    },
+    header: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      var count_car = res.data.count_car;
+      that.setData({
+        count_car: count_car,
+      });
+      wx.hideLoading()//关闭加载动画
+    },
+    error: function (e) {
+      wx.showToast({
+        title: '网络异常！',
+        duration: 2000,
+      });
+    },
+  });
+},
 // 商品详情数据获取
   loadProductDetail:function(){
     
@@ -165,14 +215,15 @@ Page({
       },
       success: function (res) {
         //--init data 
-           
           var pro = res.data.goods;
+          var phone = res.data.user_info;
           var content = pro.goods_desc;
-        var count_goods_user = res.data.count_goods_user; 
+          var count_goods_user = res.data.count_goods_user; 
           //that.initProductData(data);
           WxParse.wxParse('content', 'html', content, that, 3);
           that.setData({
             itemData:pro,
+            phone: phone,
             shoucang: res.data.cc,
             none_off:res.data.none_off,
             none_on: res.data.none_on,
@@ -187,7 +238,18 @@ Page({
             goods_desc:pro.goods_desc,
             is_on_sale: pro.is_on_sale,
             is_promote: pro.is_promote,
+            user_lei: res.data.user_lei
           });
+        var query = wx.createSelectorQuery();
+        query.select('.wxParse').boundingClientRect()
+        query.exec((res) => {
+          var listHeight = res[0].height; // 获取list高度
+          that.setData({
+            listHeight: listHeight
+          });
+          console.log(listHeight)
+        })
+        
         wx.hideLoading()//关闭加载动画
 
       },
@@ -254,17 +316,22 @@ Page({
 
   addShopCart:function(e){ //添加到购物车
     var that = this;
-    var sx_name = that.data.sx_name
-    var sx_id = that.data.sx_id
-    var tuan = e.currentTarget.dataset.tuan;
-    if (sx_name && sx_id == 0){
+    var phone = this.data.phone;
+    if (phone == 0){//如果没有检测到手机，就提示绑定
       wx.showToast({
-        title: '未选择属性',
-        icon: 'success',
-        duration: 2000
+        title: '未绑定手机',
+        icon: 'none',
+        duration: 1000
       });
+      setTimeout(function () {
+        wx.navigateTo({
+          url: '../user/bd'
+        });//要延时执行的代码
+      }, 1000)
       return;
+      
     }
+    wx.showLoading();//加载动画
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_add_cart',
       method:'post',
@@ -284,6 +351,7 @@ Page({
         var data = res.data;
         var cid = that.data.productId;
         var tid = that.data.tid;
+        wx.hideLoading()//关闭加载动画
         if(data.status == 1){
           if(data.res == 2){//如果返回值为2就是库存不足
             wx.showToast({
@@ -296,7 +364,7 @@ Page({
             var ptype = e.currentTarget.dataset.type;
             if(ptype == 'buynow'){//如果是直接购买
               
-              wx.redirectTo({
+              wx.navigateTo({
                 url: '../order/pay?cartId=' + cid +'&tid=' + tid
               });
               return;
@@ -314,6 +382,7 @@ Page({
               return;
 
             }else{
+              that.car_count();
                 wx.showToast({
                     title: '加入购物车成功',
                     icon: 'success',
@@ -322,6 +391,7 @@ Page({
               }    
           } 
         }else{
+          wx.hideLoading()//关闭加载动画
           wx.showToast({
                 title: data.err,
                 duration: 2000
@@ -346,18 +416,6 @@ Page({
     var title = that.data.title;
     var pro_id = that.data.goods_id;
     var tuan_sn = that.data.tuan_sn;
-    if (tuan_sn > 1) {//表示来自开团了的拼团商品，分享就要包含不同东西
-      return {
-        title: '拜托一起来拼个团吧，安然海淘的东西又靠谱又实惠，跟我一起拼' + title,
-        path: '/pages/product/detail?productId=' + pro_id + '&tuan=' + tuan_sn,
-        success: function (res) {
-          // 分享成功
-        },
-        fail: function (res) {
-          // 分享失败
-        }
-      }
-    }else{
       return {
         title: name + '分享给你' + title,
         path: '/pages/product/detail?productId=' + pro_id + '&id=' + abc,
@@ -368,13 +426,14 @@ Page({
           // 分享失败
         }
       }
-    }
+    
     
   },
   bindChange: function (e) {//滑动切换tab 
     var that = this;
     that.setData({ currentTab: e.detail.current });
   },
+
   initNavHeight:function(){////获取系统信息
     var that = this;
     wx.getSystemInfo({

@@ -2,8 +2,8 @@
 <!--pages/index/detail.wxml-->
 <view wx:if="{{shouquan == 0}}" class='shouquan'></view>
 <view class='shouquan_b' wx:if="{{shouquan == 0}}">
-    <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.jpg'></image>
-    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子医美</text>
+    <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
+    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子放心美</text>
     <button style="bottom: 0;position: absolute;width: 100%;color: #1aad19;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
 </view>
 
@@ -18,7 +18,7 @@
     <block >
       <swiper-item>
       
-        <image src="https://www.juziyimei.com/{{goods_img}}" class="slide-image" />
+        <image src="https://www.juziyimei.com/{{goods_img}}" class="slide-image" mode='aspectFill' />
       </swiper-item>
     </block>
   </swiper>
@@ -45,6 +45,25 @@
   </view>
   
 </view>
+<view wx:if="{{user_lei == 1}}" class='lishi'>
+  <text>总监级别返佣</text>
+  <span class="fl_r c9" hover-class="none">
+  {{itemData.is_huodong == 0 ? itemData.level_3 : '￥' + itemData.huodong_3}}（升单部分返{{itemData.level_3}}）
+  </span>
+</view>
+<view wx:if="{{user_lei == 2}}" class='lishi'>
+  <text>城市合伙人返佣</text>
+  <span class="fl_r c9" hover-class="none">
+{{itemData.is_huodong == 0 ? itemData.level_2 : '￥' + itemData.huodong_2}}（升单部分返{{itemData.level_2}}）
+    
+  </span>
+</view>
+<view wx:if="{{user_lei == 3}}" class='lishi'>
+  <text>省创返佣</text>
+  <span class="fl_r c9" hover-class="none">
+  {{itemData.is_huodong == 0 ? itemData.level_1 : '￥' + itemData.huodong_1}}（升单部分返{{itemData.level_1}}）
+  </span>
+</view>
 <!--<navigator wx:if="{{is_tuan == 0}}" url="../product/lilshi?id={{goods_id}}" class='lishi'>
   <text>历史交易记录({{count_goods_user}})</text>
   <span class="fl_r c9" hover-class="none">
@@ -52,7 +71,7 @@
   </span>
 </navigator>-->
 <!--医院信息-->
-<navigator url="../product/lilshi?id={{goods_id}}" class='lishi'>
+<navigator url="../jigou/jigou?jigou_id={{itemData.brand_id}}" class='lishi'>
   <view class='yiyuan_info'>
     <image class='yiyuan_img' src='{{itemData.brand_logo}}'></image>
     <view class='yiyuan_text'>
@@ -68,43 +87,42 @@
 <!--图文详情头部-->
 <view>
 <view class="swiper-tab">
-  <view class="bre swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">详情展示</view>
-  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">桔子保障</view>
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">详情展示</view>
+ <!-- <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">桔子保障</view>-->
 </view>
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
-
+<!--<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{listHeight}}px" bindchange="bindChange">-->
   <!-- 图文详情 -->
-  <swiper-item>
+  <!--<swiper-item>-->
     <import src="../../wxParse/wxParse.wxml"/> 
     <view class="wxParse">
-        <view style="height:5000rpx;" >
            <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
-             <image wx:if="{{!goods_desc}}" mode='aspectFit' src="/images/lan.png" style=" width:100%;"/>
-             
-        </view>
+             <image wx:if="{{!goods_desc}}" mode='aspectFit' src="/images/lan.jpg" style=" width:100%;"/>
     </view>
     
-  </swiper-item>
+  <!--</swiper-item>-->
   
 
 
-  <!-- 产品参数 -->
+  <!-- 产品参数 
   <swiper-item>
         <view class="p_all">
-          <image mode='aspectFit' src="https://www.anranhaitao.com/mobile/themes/default/images/goods_info_tips.jpg" style=" width:100%;"/>
-          <image mode='aspectFit' src="https://www.anranhaitao.com/mobile/themes/default/images/goods_info_tips2.jpg" style=" width:100%;"/>
-          <image mode='aspectFit' src="https://www.anranhaitao.com/mobile/themes/default/images/goods_info_tips3.jpg" style=" width:100%;"/>
+          <image mode='aspectFit' src="" style=" width:100%;"/>
+          <image mode='aspectFit' src="" style=" width:100%;"/>
+          <image mode='aspectFit' src="" style=" width:100%;"/>
     </view>
-  </swiper-item>
+  </swiper-item>-->
   
-</swiper>
+<!--</swiper>-->
 
 </view>
 
-<view style='height:200px;' class='bottom'></view>  
-          <button open-type="contact" class="kefu df_1 l_h15 pt5" style=''>
-                    <view   data-status="2" >
+
+<view class="zixun {{zixun==0 ? 'contrl' : 'contrl_none'}}">直接微信咨询客服吧！</view>
+<view class="triangle_border_right {{zixun==0 ? 'contrl' : 'contrl_none'}}"></view>
+          <button open-type="contact" session-from='{"nickName":"{{nick_name}}","avatarUrl":"{{head_img}}"}' class="kefu df_1 l_h15 pt5" style=''>
+                    <view class='flex_s white font_10'  data-status="2" >
                       <image class="icon_wx"src="/images/weixin.png"></image>
+                      <text>咨询</text>
                     </view >
             </button>       
 
@@ -115,11 +133,15 @@
         <view class='yyj_title'>预约金：</view>
         <view class='yyj_price'>￥{{itemData.shop_price}}</view>
       </view>
-        <view class='yyj_tips'>在线支付，到院双倍抵扣</view>
     </view>
-      <view class="fl_l w50">
-        <view class="w50 bg_m white fl_l c3" bindtap="addShopCart" data-type="addcart" >加入购物车</view>
-        <view class="bg_red white w50 fl_l" bindtap="addShopCart" data-type="buynow">立即预约</view>
+      <view class="fl_l w80">
+        <navigator url='../cart/cart' class="w20 fl_l flex_s" style="background-color: #f5f8fa;position: relative;">
+          <view wx:if="{{count_car > 0}}" class='car_count juzi_cor'>{{count_car}}</view>
+          <image style="width:18px;height:18px;margin-top:3px;" src='/images/car.png'></image>
+          <view class='font_10 c6 l_h20'>购物车</view>
+        </navigator>
+        <view class="w40 bg_f white fl_l c3" bindtap="addShopCart" data-type="addcart" >加入购物车</view>
+        <view class="bg_red white w40 fl_l" bindtap="addShopCart" data-type="buynow">立即购买</view>
       </view>
   
 </view>

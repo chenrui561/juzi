@@ -1,0 +1,46 @@
+<!--pages/zhihu/input.wxml-->
+<view class="text_input flex_s_l">
+<view wx:if="{{content_info.length > 0}}" class='yaoqing_text'>草稿预览：<text class='font_14 hui'>(上次保存时间：{{update_time}})</text></view>
+  <view  class='huida_text' wx:for="{{content_info}}" wx:key="key">
+<!--文本-->
+    <view data-idx="{{index}}" bindtap='change_input' wx:if="{{item.type == 0}}">
+      <textarea  wx:if="{{change_content_key == index}}" data-idx="{{index}}" auto-height='true' fixed='true' class="change_textarea" bindblur="change_over"  maxlength="-1" placeholder-style="color:#b3b3b3;font-size:11px;" value='{{item.con}}' />
+      <text wx:else>{{item.con}}</text>
+    </view>
+<!--加黑文本-->
+    <view data-idx="{{index}}" bindtap='change_input' wx:if="{{item.type == 2}}">
+      <textarea  wx:if="{{change_content_key == index}}" data-idx="{{index}}" auto-height='true' class="change_textarea" bindblur="change_over"  maxlength="-1" placeholder-style="color:#b3b3b3;font-size:14px;" value='{{item.con}}' />
+      <text style='font-weight:700' wx:else>{{item.con}}</text>
+    </view>
+ <!--分隔符-->
+   <view wx:if="{{item.type == 3 && item.con.length > 0}}" data-idx="{{index}}" bindtap='change_input' class='flex_s fengefu_box'>
+      <view  class='fengefu'></view>
+      <view  class='fengefu'></view>
+   <image wx:if="{{change_content_key == index}}" data-idx="{{index}}" bindtap='del_img' src="/images/dleicon.png" class='del' ></image>
+   </view>
+<!--图片-->
+    <image data-idx="{{index}}" bindtap='change_input' class='input_img' mode='widthFix' wx:if="{{item.type == 1 && item.con.length > 0}}" data-test="{{item.con.length}}" src='{{item.con}}'>
+        <image wx:if="{{change_content_key == index}}" data-idx="{{index}}" bindtap='del_img' src="/images/dleicon.png" class='del' ></image>
+    </image>
+    
+  </view>
+  
+  <textarea class="huida_textarea" maxlength="-1" placeholder="请输入您的回答" placeholder-style="color:#b3b3b3;font-size:14px;" value='{{input_content}}' bindconfirm="test"  bindinput="handleContentInput" />
+  
+
+
+</view>
+
+
+<view class='flex_h_b ctrl_bottom'>
+    <view class='flex_h'>
+      <view  bindtap="chooseImage" class='g_btn'>插入图片</view>
+      <view  bindtap="jiahei" class='g_btn'>加黑</view>
+      <view  bindtap="fenge" class='g_btn'>分隔符</view>
+    </view> 
+    <view class='flex_h'>
+    <!--<view bindtap="test2" class='g_btn y_col'>预览2</view>-->
+      <view bindtap="test" class='g_btn y_col'>预览草稿</view>
+      <view bindtap='tijiao' data-off="1" class='g_btn juzi_col'>发布</view>
+    </view>  
+  </view>

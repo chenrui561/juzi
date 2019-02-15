@@ -1,0 +1,137 @@
+<!--pages/user/team.wxml-->
+ <!--我的页面开始-->
+ <!--pages/index/detail.wxml-->
+<view wx:if="{{shouquan == 0}}" class='shouquan'></view>
+<view class='shouquan_b' wx:if="{{shouquan == 0}}">
+    <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
+    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子放心美</text>
+    <button style="bottom: 0;position: absolute;width: 100%;color: #1aad19;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+
+  <view class="page">
+    <view  class="userinfo">
+              <text wx:if="{{id == 0}}" class='db'>邀请新的合作伙伴加入桔子，您可以获得他的业绩奖励哦！</text>
+              <text wx:if="{{id > 0}}" class='db'>加入桔子，成为桔子的合作伙伴，您可以享受更实在的推荐奖励！</text>
+      </view>
+
+<view class='mt20'>
+<!--总监-->
+<view wx:if="{{id == 0 && mf == 0}}"  class="qbdd {{type_id == 1 ? 'color' : ''}}" style='margin:10px 10px 0px 10px'>
+ <view class='box' bindtap="type_id_1" >
+    <span class="font_14 {{type_id == 1 ? 'white' : 'c3'}}">邀请总监</span>
+    <span class="fl_r {{type_id == 1 ? 'white' : 'c9'}}" hover-class="none">保证金：980元</span>
+    </view>
+    <button wx:if="{{type_id == 1}}" class='font_14 c3 mt10' open-type="share">发送邀请</button>
+</view>
+
+<view wx:if="{{mf == 1 && id == 0 && mf_qd >= 1 && mf_qd <= 3}}"  class="qbdd {{type_id == 1 ? 'color' : ''}}" style='margin:10px 10px 0px 10px'>
+ <view class='box' bindtap="type_id_1" >
+    <span class="font_14 {{type_id == 1 ? 'white' : 'c3'}}">邀请总监【免保证金】</span>
+    <span class="fl_r {{type_id == 1 ? 'white' : 'c9'}}" style='text-decoration: line-through;' hover-class="none">保证金：980元</span>
+    </view>
+    <button wx:if="{{type_id == 1}}" class='font_14 c3 mt10' open-type="share">发送邀请</button>
+</view>
+
+<button wx:if="{{id > 0 && mf == 0 && type_id == 1}}" bindtap="createProductOrder" data-off="{{off}}" class="qbdd" style='margin:10px 10px 0px 10px;border-color:#F14918;'>
+ <view class='box'>
+    <span class="font_16 juzi_cor">点击成为总监</span>
+    <span class="fl_r c9" hover-class="none">保证金：980元</span>
+    </view>
+</button>
+<button wx:if="{{id > 0 && mf == 1 && type_id == 1}}" bindtap="mf_done" class="qbdd" style='margin:10px 10px 0px 10px;border-color:#F14918;'>
+ <view class='box'>
+    <span class="font_16 juzi_cor">点击成为总监【免保证金】</span>
+    <span class="fl_r c9" style='text-decoration: line-through;' hover-class="none">保证金：980元</span>
+    </view>
+</button>
+
+<!--城市合伙人-->
+<view wx:if="{{id == 0 && mf == 0}}" class="qbdd {{type_id == 2 ? 'color' : ''}}" style='margin:10px 10px 0px 10px'>
+ <view class='box' bindtap="type_id_2" >
+    <span class="font_14 {{type_id == 2 ? 'white' : 'c3'}}">邀请城市合伙人</span>
+    <span class="fl_r {{type_id == 2 ? 'white' : 'c9'}}" hover-class="none">保证金：3980元</span>
+    </view>
+    <button wx:if="{{type_id == 2}}" open-type="share" class='font_14 c3 mt10' open-type="share">发送邀请</button>
+</view>
+
+<view wx:if="{{mf == 1 && id == 0 && mf_qd >= 2 && mf_qd <= 3 || mf_qd == 4}}" class="qbdd {{type_id == 2 ? 'color' : ''}}" style='margin:10px 10px 0px 10px'>
+ <view class='box' bindtap="type_id_2" >
+    <span class="font_14 {{type_id == 2 ? 'white' : 'c3'}}">邀请城市合伙人【免保证金】</span>
+    <span class="fl_r {{type_id == 2 ? 'white' : 'c9'}}" style='text-decoration: line-through;' hover-class="none">保证金：3980</span>
+    </view>
+  <button wx:if="{{type_id == 2}}" open-type="share" class='font_14 c3 mt10' open-type="share">发送邀请</button>
+</view>
+
+<button wx:if="{{id > 0 && mf == 0 && type_id == 2}}" bindtap="createProductOrder" open-type="share" class="qbdd" style='margin:10px 10px 0px 10px;border-color:#F14918;'>
+ <view class='box'>
+    <span class="font_16 juzi_cor">点击成为城市合伙人</span>
+    <span class="fl_r c9" hover-class="none">保证金：3980元</span>
+    </view>
+</button>
+<button wx:if="{{id > 0 && mf == 1 && type_id == 2}}" bindtap="mf_done" class="qbdd" style='margin:10px 10px 0px 10px;border-color:#F14918;'>
+ <view class='box'>
+    <span class="font_16 juzi_cor">点击成为城市合伙人【免保证金】</span>
+    <span class="fl_r c9" style='text-decoration: line-through;' hover-class="none">保证金：3980元</span>
+    </view>
+</button>
+
+<!--省级联合创始人-->
+<view wx:if="{{id == 0 && mf == 0 && user_lei > 9 }}"  class="qbdd {{type_id == 3 ? 'color' : ''}}" style='margin:10px 10px 0px 10px'>
+ <view class='box' bindtap="type_id_3" >
+    <span class="font_14 {{type_id == 3 ? 'white' : 'c3'}}">邀请省级联合创始人</span>
+    <span class="fl_r {{type_id == 3 ? 'white' : 'c9'}}" hover-class="none">保证金：19800元</span>
+    </view>
+  <button wx:if="{{type_id == 3}}" open-type="share" class='font_14 c3 mt10' open-type="share">发送邀请</button>
+</view>
+
+<view wx:if="{{mf == 1 && id == 0 && mf_qd == 3 || mf_qd == 5}}" class="qbdd {{type_id == 3 ? 'color' : ''}}" style='margin:10px 10px 0px 10px'>
+ <view class='box' bindtap="type_id_3" >
+    <span class="font_14 {{type_id == 3 ? 'white' : 'c3'}}">邀请省级联合创始人【免保证金】</span>
+    <span class="fl_r {{type_id == 3 ? 'white' : 'c9'}}" style='text-decoration: line-through;' hover-class="none">保证金：19800元</span>
+    </view>
+  <button wx:if="{{type_id == 3}}" open-type="share" class='font_14 c3 mt10' open-type="share">发送邀请</button>
+</view>
+
+<button wx:if="{{id > 0 && mf == 0 && type_id == 3 }}" bindtap="createProductOrder" open-type="share" class="qbdd" style='margin:10px 10px 0px 10px;border-color:#F14918;'>
+ <view class='box'>
+    <span class="font_16 juzi_cor">点击成为省级联合创始人</span>
+    <span class="fl_r c9" hover-class="none">保证金：19800元</span>
+    </view>
+</button>
+
+<button wx:if="{{id > 0 && mf == 1 && type_id == 3}}" bindtap="mf_done" class="qbdd" style='margin:10px 10px 0px 10px;border-color:#F14918;'>
+ <view class='box'>
+    <span class="font_16 juzi_cor">点击成为省级联合创始人【免保证金】</span>
+    <span class="fl_r c9" style='text-decoration: line-through;' hover-class="none">保证金：19800元</span>
+    </view>
+</button>
+</view>
+<view class='yq_text m10' style='margin-top: 50px;'>
+  <text class='font_14 c3 font_weight'>【如何加入桔子】：</text>
+  <text class='font_14 c3 c9 ml5 l_h30'>在线支付保证金980元可成为总监;完成任务后全额退还</text>
+  <text class='font_14 c3 c9 ml5 l_h30'>在线支付3980元可  成为城市合伙人;完成任务后全额退还。
+  </text>
+  <text class='font_14 c3 font_weight'>【总监保证金退还原则】：</text>
+  <text class='font_14 c3 c9 ml5 l_h30'>个人完成≥50个用户进系统+完成≥2个总监注册或1个城市合伙人注册+完成5篇真实日记，即全额返980保证金；如未完成，则1年后全额返保证金，可自行在系统后台提现
+
+</text>
+<text class='font_14 c3 font_weight'>【城市合伙人保证金退还原则】：</text>
+  <text class='font_14 c3 c9 ml5 l_h30'>个人完成≥300个授权用户进系统+个人完成≥2个城市合伙人注册或10个总监注册+团队完成20篇真实日记，即返3980保证金；如未完成，则1年后返，可自行在系统后台提现
+</text>
+
+</view>
+<view class='img_top'>
+    <text class='font_14 c3 font_weight'>【合作伙伴权益】：</text>
+    <image mode='widthFix' class='qd_img' src='http://www.juziyimei.com/images/qd.jpg'></image>
+</view>
+<!--文案说明-->
+
+
+
+
+
+<view class='l_h60'></view>
+</view>
+<!--我的结束-->
+
+

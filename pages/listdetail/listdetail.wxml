@@ -8,11 +8,38 @@
                 <image class='down' src='/images/down.png' ></image>
       </view>
   </view> -->
+  <view class='weizhi'>
+              <view bindtap='price_px' class='paixu'>
+                
+                 <text wx:if="{{paixu == 1 || paixu == 2}}" class='juzi_cor'>按价格排序</text>
+                 <text wx:else>按价格排序</text>
+                <image wx:if="{{paixu == 1}}" class='down' src='/images/down.png' ></image>
+                <image wx:if="{{paixu == 2}}" class='up' src='/images/down.png' ></image>
+                <image wx:if="{{paixu > 2 || paixu < 1}}" class='down' src='/images/down.png' ></image>
+              </view>
+              <view bindtap='youhui_px' class='paixu'>
+                <text wx:if="{{paixu == 3 || paixu == 4}}" class='juzi_cor'>按优惠力度排序</text>
+                <text wx:else>按优惠力度排序</text>
+                <image wx:if="{{paixu == 3}}" class='down' src='/images/down.png' ></image>
+                <image wx:if="{{paixu == 4}}"  class='up' src='/images/down.png' ></image>
+                <image wx:if="{{paixu > 4 || paixu < 3}}" class='down' src='/images/down.png' ></image>
+              </view>
+              <view bindtap='yy_px' class='paixu'>
+              <text wx:if="{{paixu == 5 || paixu == 6}}" class='juzi_cor'>按预约数排序</text>
+                <text wx:else>按预约数排序</text>
+                <image wx:if="{{paixu == 5}}" class='down' src='/images/down.png' ></image>
+                <image wx:if="{{paixu == 6}}"  class='up' src='/images/down.png' ></image>
+                <image wx:if="{{paixu > 6 || paixu < 5}}" class='down' src='/images/down.png' ></image>
+              </view>
+
+      </view>
 <view class="list">
+      
+
     <block wx:for="{{shopList}}" wx:key="*this" data-id="{{item.goods_id}}">
     <view  class="cont" >
                           <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
-                            <image class="hot_photo" src="http://www.juziyimei.com/{{item.goods_img}}"></image>
+                            <image class="hot_photo" mode='aspectFill' src="http://www.juziyimei.com/{{item.goods_img}}"> <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image></image>
                             <view class="hot_title">{{item.goods_name}}</view>
                             
                             <view style="display:flex;line-height:50rpx;color:#999;margin-bottom:10rpx;">
@@ -29,7 +56,7 @@
                                   <view style="float: right;font-size: 12px;display: flex;align-items: center; color:#999;">
                                       桔子价:
                                     </view>
-                                  <view class="gmxx" style="color: #F14918;">¥ {{item.shop_price}}</view>
+                                  <view class="gmxx" style="color: #F14918;">¥ {{item.juzi_price}}</view>
                                   <view class="gmx">¥ {{item.market_price}}</view> 
                               </view>
                           </navigator>

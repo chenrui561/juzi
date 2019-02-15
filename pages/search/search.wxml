@@ -4,13 +4,15 @@
     <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
 </view>
 <view class="cont" wx:if="{{hotKeyShow}}">
-    <text class="font_14">热门搜索</text>
-    <view class="w100">
-        <button wx:for="{{hotKeyList}}" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
-    </view>
-    <text class="font_14 mt10">历史搜索</text>
-    <view class="w100">
-        <button wx:for="{{historyKeyList}}" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
+    <view style='padding-top:50px;'>
+        <text class="font_14" >热门搜索</text>
+        <view class="w100">
+            <button wx:for="{{hotKeyList}}" wx:key="key" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
+        </view>
+        <text class="font_14 mt10">历史搜索</text>
+        <view class="w100">
+            <button wx:for="{{historyKeyList}}" wx:key="key" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
+        </view>
     </view>
 </view>
 <view class="search_no" wx:if="{{!!searchValue && !productData.length}}">
@@ -29,7 +31,7 @@
 </view>-->
 
 <view style='padding-top: 48px;'>
-<view class="ban" wx:for="{{productData}}">
+<!--<view class="ban" wx:for="{{productData}}">
       
             <navigator url="../product/detail?productId={{item.goods_id}}" class="cover flex-wrp">
             
@@ -41,10 +43,46 @@
                 <text style="color:red">¥ {{item.shop_price}}</text>
                 <text class='pro_rel_price2'>¥ {{item.market_price}}</text>
             </view>
-              <!--<view class="act-item ellipsis" >
-                <text style="color:#999999;font-size:25rpx">库存：{{item.goods_number}}</text>
-            </view>-->
             </navigator>
         </view> 
         <view wx:if="{{!hotKeyShow}}" class="clear mt10" >{{more}}</view>  
-  </view>
+  </view>-->
+
+  <view  class="cont" wx:for="{{productData}}" wx:key="key">
+                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
+                            
+                            <image class="hot_photo" mode='aspectFill' src="http://www.juziyimei.com/{{item.goods_img}}">
+                              <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
+                            </image>
+                            <view class="hot_title">{{item.goods_name}}</view>
+                            
+                            <view style="display:flex;line-height:32rpx;color:#999;margin-top:5px;">
+                              <view class="gmxx" style="font-size:28rpx;">
+                                  <view style="display:flex;line-height:32rpx;color:#999">
+                                    <view style="float: right;font-size: 12px;display: flex;align-items: center;">
+                                      <text>{{item.brand_name}}</text> 
+                                    </view>
+                                  </view>  
+                              </view>
+                            </view>
+                            <view style="display:flex;font-size: 12px;line-height:32rpx;color:#999;justify-content:space-between;">
+                                  <text>预约数：{{item.yy_num}}</text>
+                                  <text wx:if="{{user_lei == 99 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_3}}/￥{{item.huodong_2}}/￥{{item.huodong_1}}</text> 
+                                  <text wx:if="{{user_lei == 99 && item.is_huodong == 0}}" >返佣：{{item.level_3}}%/{{item.level_2}}%/{{item.level_1}}%</text> 
+                                  <text wx:if="{{user_lei == 3 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_1}}</text> 
+                                  <text wx:if="{{user_lei == 2 && item.is_huodong == 1}}">返佣：￥{{item.huodong_2}}</text>  
+                                  <text wx:if="{{user_lei == 1 && item.is_huodong == 1}}">返佣：￥{{item.huodong_3}}</text> 
+                                  <text wx:if="{{user_lei == 3 && item.is_huodong == 0}}" >返佣：{{item.level_1}}%</text> 
+                                  <text wx:if="{{user_lei == 2 && item.is_huodong == 0}}">返佣：{{item.level_2}}%</text>  
+                                  <text wx:if="{{user_lei == 1 && item.is_huodong == 0}}">返佣：{{item.level_3}}%</text>
+                            </view>
+                            <view style="display:flex;line-height:50rpx;margin-top:3px;">
+                                  <view style="float: right;font-size: 12px;display: flex;align-items: center; color:#999;">
+                                      桔子价:
+                                    </view>
+                                  <view class="gmxx" style="  color: red;">¥ {{item.juzi_price}}</view>
+                                  <view class="gmx">¥ {{item.market_price}}</view> 
+                              </view>
+                          </navigator>
+                    </view>
+</view>

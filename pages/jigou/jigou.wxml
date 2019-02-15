@@ -5,30 +5,39 @@
     <text class='jigou_title'>{{jigou_info.brand_name}}</text>
   </view>
   <view class='jigou_info2'>
+    <view class='yy'><text class='jigou_info_text'>12</text><text class='jigou_info_text'>日记</text></view>
     <view class='yy'><text class='jigou_info_text'>{{jigou_xiangmu_count}}</text><text class='jigou_info_text'>项目</text></view>
     <view class='yy'><text class='jigou_info_text'>5</text><text class='jigou_info_text'>医生</text></view>
-    <view class='yy'><text class='jigou_info_text'>12</text><text class='jigou_info_text'>案例</text></view>
   </view>
 </view>
-<view class='jigou_address'>
+<!--<view class='jigou_address'>
   <view class='addimg'>
     <image class='add_img' src='/images/address.png'></image>
     <view class='add_text'>{{jigou_info.address}}</view>
   </view>
   <image class='right' src='/images/x_right.png'></image>
-</view>
+</view>-->
 <view class='jigou_lb'>
   <image class='lb_img' src='http://www.juziyimei.com/mobile/themes/default/gl_img/laba.gif'></image>
   <view class='lb_text'>{{jigou_info.brand_desc}}</view>
 </view>
-<view class='jigou_yy'>
-  <view class='yy_info'>
-    <image src='http://www.juziyimei.com/images/201810/goods_img/7_G_1539407923993.jpg' class='yy_img'></image>
+<view>
+  <navigator url='../product/detail?productId={{item.goods_id}}'  class='yy_info' wx:for="{{xiangmu_list}}" wx:key="key">
+    <image mode='aspectFit' src='http://www.juziyimei.com/{{item.goods_img}}' class='yy_img'>
+     <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
+    </image>
     <view class='yy_text'>
-      <text class='yy_title'>特价5800元 上市医美 效果保证 </text>
-      <text class='yy_price'><text class='yy_price1'>￥998.00</text><text class='yy_price2'>￥9908.00</text></text>
+      <text class='yy_title'>{{item.goods_name}}</text>
+       <view style="display:flex;font-size: 12px;line-height:32rpx;color:#999;justify-content:space-between;">
+          <text class='yy_num'>预约数：{{item.yy_num}}</text>
+          <text wx:if="{{user_lei == 99 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_3}}/{{item.huodong_2}}/{{item.huodong_1}}</text> 
+          <text wx:if="{{user_lei == 3 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_1}}</text> 
+          <text wx:if="{{user_lei == 2 && item.is_huodong == 1}}">返佣：￥{{item.huodong_2}}</text>  
+          <text wx:if="{{user_lei == 1 && item.is_huodong == 1}}">返佣：￥{{item.huodong_3}}</text> 
+        </view>  
+      <text class='yy_price'><text class='yy_price1'>￥{{item.juzi_price}}</text><text class='yy_price2'>￥{{item.market_price}}</text></text>
     </view>
-  </view>
+  </navigator>
 </view>
 <view class='jigou_ys'>
 

@@ -1,0 +1,30 @@
+<!--pages/user/shoucang.wxml-->
+<view class="page">
+    <view class="search_no" wx:if="{{!productData.length}}">
+            <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
+            <text>暂时还没有收藏/(ㄒoㄒ)/~~</text>
+        </view>
+
+    <view class="shop df" wx:for="{{productData}}" wx:key="key">        
+        <navigator class="sh_slt" url="../question-ask/anli?aid={{item.comment_id}}"><image mode='aspectFill' class="sh_slt" src="{{item.comment_img}}"></image></navigator>
+        <view class="df_1">            
+            <view class="sp_text">
+                <navigator url="../question-ask/anli?aid={{item.comment_id}}">
+                    <view class="sp_tit ovh2">{{item.content}}</view>
+                </navigator>
+                <view class='price '>
+                  <view class="sp_jg ovh1">{{item.goods_name}}</view>
+                  <view wx:if="{{item.shenhe == 0}}" class="dle" >审核中</view>
+                  <view wx:if="{{item.shenhe == 1}}" class="dle" >已通过</view>
+                  <view wx:if="{{item.shenhe == 2}}" class="dle" >不通过</view>
+                  <navigator class="dle" url='../question-ask/question-ask?id={{item.comment_id}}'>编辑</navigator>
+                  <view class="dle" data-goodsid="{{item.comment_id}}" bindtap="removeFavorites">删除</view>
+    
+                </view>
+            </view>
+        </view>
+    </view>
+
+</view>
+
+

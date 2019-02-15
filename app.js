@@ -28,7 +28,7 @@ App({
     const updateManager = wx.getUpdateManager()
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
-      console.log(res.hasUpdate)
+
     })
 
     updateManager.onUpdateReady(function () {
@@ -102,9 +102,14 @@ App({
               typeof cb == "function" && cb(that.globalData.userInfo);
               //get user sessionKey
               //get sessionKey
-            //  if (wx.getStorageSync('id') > 0) {}else{
+              if (wx.getStorageSync('ctrl') == 1){//启用免获取openid登录
+                if (wx.getStorageSync('id') > 0) { } else {
+                  that.getUserSessionKey(code);//调下一个方法
+                }
+              }else{
                 that.getUserSessionKey(code);//调下一个方法
-             // }
+              }
+              
 
               resolve(66);//回调66，表示授权成功666
             },
@@ -207,6 +212,7 @@ App({
           that.globalData.userInfo['anran_id'] = data.anran_id;//把安然海淘的用户id写到userinfo里
           that.d.anran_id = data.anran_id;//
           wx.setStorageSync('id', data.anran_id)//把自己的id写入缓存
+          //wx.setStorageSync('id', '131')//进别人的号
           wx.setStorageSync('NickName', data.NickName)//NickName
           wx.setStorageSync('HeadUrl', data.HeadUrl)//HeadUrl 
           wx.setStorageSync('choujiang', data.choujiang)//把抽奖券数量写入缓存
