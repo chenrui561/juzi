@@ -1,16 +1,17 @@
 <!--pages/zhihu/zhihu.wxml-->
-<view>
-  <view class='title'>
+<view class='{{noscroll}}'>
+
+  <navigator url='/pages/zhihu/wenti_huida_list?wid={{wid}}' class='title'>
     <text class='wen_title'>{{title}}</text>
     <view class='chakan_huida flex_h'>
     <text>查看全部{{hd_count}}个回答</text>
     <image class='right' src='/images/x_right.png'></image>
     </view>
-  </view>
+  </navigator>
 
   <view class='flex_h'>
     <view class='huida_btn'>邀请回答</view>
-    <navigator wx:if="{{my_huida > 0 && my_huida_caogao == 0 && my_huida != aid}}" url='/pages/zhihu/zhihu?aid={{my_huida}}' class='huida_btn' style='border-left: 1px #ccc solid;'>查看我的回答</navigator>  
+    <navigator wx:if="{{my_huida > 0 && my_huida_caogao == 0 && my_huida != aid}}" url='/pages/zhihu/zhihu?aid={{my_huida}}&wid={{wid}}' class='huida_btn' style='border-left: 1px #ccc solid;'>查看我的回答</navigator>  
     <navigator wx:if="{{my_huida > 0 && my_huida_caogao == 0 && my_huida == aid}}" url='/pages/zhihu/input?wid={{wid}}&hid={{my_huida}}' class='huida_btn' style='border-left: 1px #ccc solid;'>编辑我的回答</navigator>  
     <navigator wx:if="{{my_huida > 0 && my_huida_caogao == 1}}" url='/pages/zhihu/input?wid={{wid}}&hid={{my_huida}}' class='huida_btn' style='border-left: 1px #ccc solid;'>查看我的草稿</navigator>
     <navigator wx:if="{{my_huida == null}}" url='../zhihu/input?wid={{wid}}&title={{title}}' class='huida_btn' style='border-left: 1px #ccc solid;'>写回答</navigator> 
@@ -25,7 +26,9 @@
           <image class='user_img' src='{{anli_info[0].tx_img}}'></image>
           <text class='user_name'>{{anli_info[0].passwd_answer}}</text>
         </view>
-        <view class='guanzhu'>关注</view>
+       
+        <view wx:if="{{guanzhu_off == 0}}" data-id='{{anli_info[0].user_id}}' bindtap='guanzhu' class='guanzhu'>关注</view>
+        <view wx:if="{{guanzhu_off > 0}}" data-id='{{anli_info[0].user_id}}' bindtap='del_guanzhu' class='guanzhu2'>已关注</view>
       </view>
       <import src="../../wxParse/wxParse.wxml"/> 
         <view class="wxParse user_connet">
@@ -66,31 +69,131 @@
 </view>
   <!--评论-->
 <view wx:else class='guoqu_box'>
-  <view class='title'>评论：</view>
-  <view class='pl_input'>
-    <image class='pl_img' src='{{HeadUrl}}'></image>
-    <textarea placeholder="添加评论..." auto-height='true' maxlength="-1" bindconfirm="dopl" bindfocus="panduan" focus="{{focus}}" bindinput="searchValueInput"  class='pl_inputs'></textarea>
-  </view>
+  <view class='title' bindtap='dopl'>评论：</view>
+  <!--评论内容-->
   <view class='pl_box' wx:for="{{pl}}">
     <view class='pl_info_all'>
       <image class='pl_img' src='{{item.tx_img}}'></image>
       <view class='pl_info'>
         <text style='color:#333'>{{item.passwd_answer}}</text>
-        <text style='margin-right:10px;'>{{item.add_time}}</text>
       </view>
     </view>
-    <view class='pl_content'>{{item.content}}</view>
+    <view class='pl_content2'>{{item.content}}</view>
   </view>
+  <view bindtap='takeCoupon' wx:if="{{pl.length == 5}}" class='pl_no'>
+    <text class='pl_no_text'>查看全部{{pl_count}}条评论</text>
+  </view>
+
   <view wx:if="{{pl == null}}" class='pl_no'>
     <text class='pl_no_text'>暂时还没有评论</text>
   </view>
   <view>
-  
+ 
+<!--评论提交-->
+  <view bindtap='takeCoupon' data-id='1' class='ml10 flex_h mt10'>
+    <image class='pl_img' src='{{HeadUrl}}'></image>
+    <view class='pl_input_t'>添加评论...</view>
+  </view>
+
+  </view>
+</view>
+ <view class='l_h90'></view>
+<navigator url='/pages/zhihu/zhihu?aid={{next}}&wid={{wid}}' wx:if="{{next}}" class='next'><image style='width:12px;height:12px;' src='/images/next.png'></image></navigator>
+
+<!--底部悬浮栏-->
+<view class='zhihu_bottom flex_h_b' style="padding-bottom:{{padding_bottom}}">
+
+<!--赞同/反对-->
+  <view class='flex_h'>
+    <navigator open-type='switchTab' url='/pages/index/index' wx:if="{{bd_id > 0}}" class='flex_h_c zantong'>
+      <icon class="iconfont icon-juzi ico_juzi"></icon>
+      <text class='shouye_text ico_in'>首页</text>
+    </navigator>
+    <view wx:if="{{zan_off == 0}}" class='flex_h_c zantong' bindtap='zan' data-idx='1'>
+      <icon class="iconfont icon-triangle-top ico {{zan.zan==1 ? 'ico_in' : ''}}"></icon>
+      <text wx:if="{{zan_count > 0}}" class="zantong_text {{zan.zan==1 ? 'ico_in' : ''}}">赞同{{zan_count}}</text>
+      <text wx:else class="zantong_text {{zan.zan==1 ? 'ico_in' : ''}}">赞同</text>
+    </view>
+    <view wx:else class='flex_h_c zantong' data-idx='1'>
+      <icon class="iconfont icon-triangle-top ico "></icon>
+      <image style='height:14px;width:14px;' src='/images/loading.gif'></image>
+    </view>
+
+    <view wx:if="{{fandui_off == 0}}" class='zantong' bindtap='zan' data-idx='2'>
+      <icon class="iconfont icon-triangle-bottom ico {{zan.fandui==1 ? 'ico_in' : ''}}"></icon>
+    </view>
+    <view wx:else class='zantong ' data-idx='2'>
+      <image style='height:14px;width:14px;' src='/images/loading.gif'></image>
+    </view>
+
+  </view>
+<!--收藏/评论-->
+  <view class='flex_h_c'>
+    <view bindtap='shoucang' class='flex_s shoucang'>
+      <icon class="iconfont icon-shoucang ico2 {{shoucang==1 ? 'ico_in' : ''}}"></icon>
+      <text class="yaoqing_text2 {{shoucang==1 ? 'ico_in' : ''}}" >{{shoucang==1 ? '已收藏' : '收藏'}}</text>
+    </view>
+    <view bindtap='takeCoupon' class='flex_s mr10'>
+      <icon class="iconfont icon-icon_comment ico2"></icon>
+      <text class='yaoqing_text2'>评论{{pl_count}}</text>
+    </view>
   </view>
 </view>
 
 
+<!--全部评论弹出层-->
+ <view bindtap='takeCouponClose' class='couponLayerBox' animation="{{animMaskData}}" style='height:{{LayerBoxHeight}};'></view>
+  <view class='couponLayer' animation="{{animContentData}}">
+      <view class='title flex_h_b'>
+         <image class='couponIcon'  bindtap='takeCouponClose' src='/images/guanbi.png'></image>
+         <text>全部{{pl_count}}条评论</text>
+         <view class='close'> </view>
+      </view>
+    <scroll-view class='pl_con' style='height:calc(100% - {{pl_input_height}}px)' scroll-y="true">
 
+      <view class='pl_box' wx:for="{{pl_all}}" wx:if="{{item.huifu_id == 0}}">
+        <view class='pl_info_all'>
+            <image class='pl_img2' src='{{item.tx_img}}'></image>
+            <view class='pl_info'>
+              <text style='color:#333'>{{item.passwd_answer}}</text>
+              <image class='del_pl' data-id='{{item.pid}}' bindtap='del_pl' src='/images/dleicon.png'></image>
+            </view>
+        </view>
+        <view class='pl_content'>{{item.content}}</view>
+        <view    class='flex_h_b ml35'>
+          <text class='font_12 hui'>{{item.add_time}}</text>
+          <icon bindtap='huifu' data-huifuid='{{item.pid}}' data-name='{{item.passwd_answer}}' class="iconfont icon-icon_comment ico_huifu mr10"></icon>
+        </view>
+        <view class='ml35' wx:for="{{hf}}" wx:for-item="huifu_item" wx:if="{{item.pid == huifu_item.huifu_id }}">
+            <view class='pl_info_all'>
+                <image class='pl_img' src='{{huifu_item.tx_img}}'></image>
+                <view class='pl_info'>
+                  <text style='color:#333'>{{huifu_item.passwd_answer}}</text>
+                  <image class='del_pl' data-id='{{huifu_item.pid}}' bindtap='del_pl' src='/images/dleicon.png'></image>
+                </view>
+            </view>
+            <view class='pl_content'>{{huifu_item.content}}</view>
+            <view    class='flex_h_b ml35'>
+              <text class='font_12 hui'>{{huifu_item.add_time}}</text>
+              <icon bindtap='huifu' data-huifuid='{{huifu_item.pid}}' data-name='{{huifu_item.passwd_answer}}' class="iconfont icon-icon_comment ico_huifu mr10"></icon>
+            </view>
+        
+        </view>
+      </view>
+
+    </scroll-view>
+
+      <!--评论提交-->
+        <view  class='pl_input_box'>
+          <view wx:if="{{huifu_id == 0}}" class='ml5 font_12 hui'>评论给<text class='font_12 font_weight hui'>(作者)</text></view>
+          <view wx:if="{{huifu_id > 0}}" class='ml5 font_12 hui'>回复给<text class='font_12 font_weight hui'>{{huifu_name}}</text></view>
+          <view class='pl_input' >
+            <textarea placeholder="添加评论..." auto-height='true' cursor-spacing="20px" maxlength="-1" bindconfirm="dopl" bindfocus="panduan" focus="{{focus}}" bindblur="input_out" value='{{input_value}}' bindinput="searchValueInput" fixed="true" class='pl_inputs'></textarea>
+          </view>
+
+        </view>
+
+    </view>
 
 
 

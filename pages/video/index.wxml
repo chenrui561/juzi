@@ -1,0 +1,31 @@
+<!--授权弹窗-->
+<view wx:if="{{shouquan == 0}}" class='shouquan'></view>
+<view class='shouquan_b' wx:if="{{shouquan == 0}}">
+    <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
+    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录放心美</text>
+    <button style="bottom: 0;position: absolute;width: 100%;color: #1aad19;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+<!--授权弹窗-->
+
+<view class="page-body">
+  <view class="page-section tc">
+    <video id="myVideo" class='video' src="{{src}}" autoplay binderror="videoErrorCallback" danmu-list="{{danmuList}}" bindplay="bindplay_states" bindpause="bindpause_states" enable-danmu danmu-btn controls></video>
+
+    <!--<view class="weui-cells">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">弹幕内容</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input bindblur="bindInputBlur" value='{{text}}' class="weui-input" type="text" placeholder="在此处输入弹幕内容" />
+        </view>
+      </view>
+    </view>-->
+    <view class="btn-area">
+     <!-- <button bindtap="bindSendDanmu" class="page-body-button" type="primary" formType="submit">发送弹幕</button>-->
+      <button wx:if="{{states == 0}}" bindtap="bindPlay" class="page-body-button" type="primary">播放</button>
+      <button wx:if="{{states == 1}}" bindtap="bindPause" class="page-body-button" style='background-color:#999' type="primary">暂停</button>
+    </view>
+  </view>
+</view>
+

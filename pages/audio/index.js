@@ -63,15 +63,7 @@ Page({
       title: name +'分享一段音频'+ title,
       path: '/pages/audio/index?id=' + id + '&bd_id=' + abc ,
       success: function (res) {
-        // 分享成功
-        wx.showModal({
-          title: '分享成功！',
-          content: '好友授权登录后您就可在此页面领取礼品',
-          showCancel: false,
-          confirmText: '好的',
-          success: function (res) {
-          }
-        })
+       
       },
       fail: function (res) {
         // 分享失败
@@ -101,6 +93,11 @@ Page({
         bd_id: bd_id
       });
     }
+    if (wx.getStorageSync('id') == '') {//如果缓存里面没有id，那就弹授权
+      that.setData({
+        shouquan: 0,
+      });
+    }
     /* if (anran_id > 0) {
            this.user_info();
            wx.hideLoading()//关闭加载动画
@@ -108,7 +105,7 @@ Page({
         } else {//判断是否已经登录
         */
     wx.hideLoading()//关闭加载动画
-    app.getOpenid().then(function (openid) {
+    /*app.getOpenid().then(function (openid) {
 
       if (openid == 66) {
         that.setData({
@@ -125,7 +122,7 @@ Page({
         console.log(88)
       }
 
-    });
+    });*/
     this.setData({
       title:options.title,
       aid:options.id

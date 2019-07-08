@@ -1,4 +1,4 @@
-
+ 
 <!--pages/index/detail.wxml-->
 <view wx:if="{{shouquan == 0}}" class='shouquan'></view>
 <view class='shouquan_b' wx:if="{{shouquan == 0}}">
@@ -9,42 +9,41 @@
 
 <!--内容开始-->
 <view class="cont">
-      <button open-type="share" class="fenxiang"><image class="fenxiang_img" src='/images/fx.png'></image></button>
+      <view bindtap='takeCoupon' class="fenxiang"><image class="fenxiang_img" src='/images/fx.png'></image></view>
+      <navigator wx:if="{{bd_id > 0 || gg_id > 0}}" open-type='switchTab' url='/pages/index/index' class="shouye">
+        <image class="shouye_img" src='/images/shouye.png'></image>
+        <text class='white font_12'>去首页</text>
+      </navigator>
+
       <view wx:if="{{tid > 0}}" class="tuijian">
       <image class="tuijian_img" src='{{t_user.tx_img}}'></image>由{{t_user.nick_name}}推荐
       </view>
   <!--<image class="tp_image" src="{{itemData.photo_d}}"></image>-->
-  <swiper style="height:100VW" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+   <image lazy-load src="https://www.juziyimei.com/{{goods_img}}" class="slide-image" mode='widthFix' />
+ <!-- <swiper style="height:100VW" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
     <block >
       <swiper-item>
       
         <image src="https://www.juziyimei.com/{{goods_img}}" class="slide-image" mode='aspectFill' />
       </swiper-item>
     </block>
-  </swiper>
-  <view class="title">{{title}}</view>
-  
-  <view class="gmxx">
-    <view class='juzi_price'>
-      <view>
-        <text class='juzijia'>桔子价：￥</text>
-        <span wx:if="{{goods_number > 0 && is_on_sale == 1}}" class="jiage">{{itemData.juzi_price}}</span>
-        <span wx:if="{{goods_number == 0 || is_on_sale == 0 }}" style="color:#999;" class="jiage">{{itemData.juzi_price}}</span>
-      </view>
-      <view bindtap="addFavorites" wx:if="{{bd_id == 0}}" class="" >
-                
-                    <image class="icon_kf" style='display:{{none_off}}' src="/images/shc.png" ></image>
-                    <image class="icon_kf" style='display:{{none_on}}' src="/images/shced.png" ></image>
-                    
-      </view>
-    </view>
-    <view class='yuanjia' style='height:30px;'>
-      <view class="font_14 c6 goods_info">原价：<text style='text-decoration: line-through;'>￥{{market_price}}</text></view>
-      <view class="font_14 c6 goods_info">武汉市</view>
-    </view>
-  </view>
-  
+  </swiper>-->
+<!--<view class="title">{{title}}</view>
+      <view class="gmxx">
+        <view class='juzi_price'>
+          <view>
+            <text class='juzijia'>活动价：￥</text>
+            <span wx:if="{{goods_number > 0 && is_on_sale == 1}}" class="jiage">{{itemData.juzi_price}}</span>
+            <span wx:if="{{goods_number == 0 || is_on_sale == 0 }}" style="color:#999;" class="jiage">{{itemData.juzi_price}}</span>
+          </view>
+        </view>
+        <view class='yuanjia' style='height:30px;'>
+          <view class="font_14 c6 goods_info">原价：<text style='text-decoration: line-through;'>￥{{market_price}}</text></view>
+          <view class="font_14 c6 goods_info">武汉市</view>
+        </view>
+      </view>-->
 </view>
+<!--
 <view wx:if="{{user_lei == 1}}" class='lishi'>
   <text>总监级别返佣</text>
   <span class="fl_r c9" hover-class="none">
@@ -55,7 +54,6 @@
   <text>城市合伙人返佣</text>
   <span class="fl_r c9" hover-class="none">
 {{itemData.is_huodong == 0 ? itemData.level_2 : '￥' + itemData.huodong_2}}（升单部分返{{itemData.level_2}}）
-    
   </span>
 </view>
 <view wx:if="{{user_lei == 3}}" class='lishi'>
@@ -63,42 +61,60 @@
   <span class="fl_r c9" hover-class="none">
   {{itemData.is_huodong == 0 ? itemData.level_1 : '￥' + itemData.huodong_1}}（升单部分返{{itemData.level_1}}）
   </span>
-</view>
+</view>-->
 <!--<navigator wx:if="{{is_tuan == 0}}" url="../product/lilshi?id={{goods_id}}" class='lishi'>
   <text>历史交易记录({{count_goods_user}})</text>
   <span class="fl_r c9" hover-class="none">
     <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
   </span>
 </navigator>-->
-<!--医院信息-->
-<navigator url="../jigou/jigou?jigou_id={{itemData.brand_id}}" class='lishi'>
-  <view class='yiyuan_info'>
-    <image class='yiyuan_img' src='{{itemData.brand_logo}}'></image>
-    <view class='yiyuan_text'>
-      <text>{{itemData.goods_brand}}</text>
-      <text class='hui'>{{itemData.address}}</text>
-    </view>
-  </view>
-  <span class="fl_r c9" hover-class="none">
-    <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
-  </span>
-</navigator>
 
 <!--图文详情头部-->
 <view>
-<view class="swiper-tab">
+<!--<view class="swiper-tab">
   <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">详情展示</view>
- <!-- <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">桔子保障</view>-->
-</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">桔子保障</view>
+</view>-->
 <!--<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{listHeight}}px" bindchange="bindChange">-->
   <!-- 图文详情 -->
   <!--<swiper-item>-->
     <import src="../../wxParse/wxParse.wxml"/> 
     <view class="wxParse">
            <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
-             <image wx:if="{{!goods_desc}}" mode='aspectFit' src="/images/lan.jpg" style=" width:100%;"/>
+             <image lazy-load wx:if="{{!goods_desc}}" mode='aspectFit' src="/images/lan.jpg" style=" width:100%;"/>
     </view>
-    
+
+<view class='mt10 mb10 bg_white l_h24 c3 p5'>
+  <view class='font_14 font_weight ml5'>预约说明</view>
+  <!--<view class='font_12 font_weight ml5'>有效期</view>
+  <view class='font_12 ml5'><text class='ml5 mr5'>●</text>预约后7天内有效</view>-->
+
+  <view class='font_12 ml5'><text class='ml5 mr5'>●</text>免费预约到院咨询</view>
+</view>
+
+<view class='mt10 mb10 bg_white l_h24 c3 p5'>
+  <view class='font_14 font_weight ml5'>项目信息</view>
+  <view class='font_12 ml5'><text class='ml5 mr5'>●</text>{{goods_info_text}}</view>
+  <view wx:if="{{goods_info_text2}}" class='font_12 ml5'><text class='ml5 mr5'>●</text>{{goods_info_text2}}</view>
+</view>
+
+<!--医院信息-->
+<view  class='lishi'>
+  <navigator url="../jigou/jigou?jigou_id={{itemData.brand_id}}" >
+    <view class='yiyuan_info'>
+      <image class='yiyuan_img' src='{{itemData.brand_logo}}'></image>
+      <view class='yiyuan_text'>
+        <text>{{itemData.goods_brand}}</text>
+        <text class='hui'>{{itemData.address}}</text>
+      </view>
+    </view>
+  </navigator>
+  <span class="fl_r c9" hover-class="none">
+    <image style='width: 20px;height: 20px;margin-left: 5px;' src="/images/x_right.png"></image>
+  </span>
+</view>
+<view class='l_h60'></view>
+<!--医院信息end--> 
   <!--</swiper-item>-->
   
 
@@ -116,8 +132,41 @@
 
 </view>
 
+<!--弹出层-->
+  <view bindtap='takeCouponClose' class='couponLayerBox' animation="{{animMaskData}}" style='height:{{LayerBoxHeight}};'></view>
+  <view class='couponLayer' animation="{{animContentData}}">
+      <view class='title flex_h_b'>
+         <view class='close'> </view>
+         <text>分享</text>
 
-<view class="zixun {{zixun==0 ? 'contrl' : 'contrl_none'}}">直接微信咨询客服吧！</view>
+         <image class='couponIcon'  bindtap='takeCouponClose' src='/images/guanbi.png'></image>
+      </view>
+      <view class='flex_h mb30 mt30'>
+        <!--推荐好友-->
+        <view class='flex_s w50'>
+          <button open-type="share" class="fenxiang_py">
+            <image class="icon_wx2"src="/images/weixin.png"></image>
+          </button>
+          <view class='font_14 haoyou'>好友</view>
+        </view>
+        <!--推荐好友-->
+        <view class='flex_s w50'>
+          <button bindtap='qr' class="fenxiang_py" style='background-color:#F37A9C'>
+            <image class="icon_wx2"src="/images/weixin.png"></image>
+          </button>
+          <view class='font_14 haoyou'>小程序码</view>
+        </view>
+        <!--生成图片-->
+        <view class='flex_s w50'>
+          <navigator url='../product/fenxiang?goods_id={{goods_id}}' class="fenxiang_tp">
+            <image class="icon_wx_pyq"src="/images/pyq.png"></image>
+          </navigator>
+          <view class='font_14 haoyou'>图片</view>
+        </view>
+      </view>
+  </view>
+
+<!--<view class="zixun {{zixun==0 ? 'contrl' : 'contrl_none'}}">直接微信咨询客服吧！</view>
 <view class="triangle_border_right {{zixun==0 ? 'contrl' : 'contrl_none'}}"></view>
           <button open-type="contact" session-from='{"nickName":"{{nick_name}}","avatarUrl":"{{head_img}}"}' class="kefu df_1 l_h15 pt5" style=''>
                     <view class='flex_s white font_10'  data-status="2" >
@@ -125,23 +174,38 @@
                       <text>咨询</text>
                     </view >
             </button>       
+-->
+
 
 <!---底部开始-->
 <view class="footfixed tc">
     <view class='yyj'>
       <view class='yyj_info'>
-        <view class='yyj_title'>预约金：</view>
-        <view class='yyj_price'>￥{{itemData.shop_price}}</view>
+        <view class='yyj_title'>桔子价：</view>
+        <view class='yyj_price'>￥{{itemData.weikuan_price}}</view>
+      </view>
+      <view class='yyj_info'>
+        <view class='yyj_tips' >原价:<text style="text-decoration: line-through;">￥{{itemData.market_price}}</text></view>
       </view>
     </view>
       <view class="fl_l w80">
-        <navigator url='../cart/cart' class="w20 fl_l flex_s" style="background-color: #f5f8fa;position: relative;">
-          <view wx:if="{{count_car > 0}}" class='car_count juzi_cor'>{{count_car}}</view>
-          <image style="width:18px;height:18px;margin-top:3px;" src='/images/car.png'></image>
-          <view class='font_10 c6 l_h20'>购物车</view>
-        </navigator>
-        <view class="w40 bg_f white fl_l c3" bindtap="addShopCart" data-type="addcart" >加入购物车</view>
-        <view class="bg_red white w40 fl_l" bindtap="addShopCart" data-type="buynow">立即购买</view>
+        <view url='../cart/cart' class="w20 fl_l flex_s" style="background-color: #f5f8fa;position: relative;">
+          <!--<image style="width:18px;height:18px;margin-top:3px;" src='/images/car.png'></image>
+          <view class='font_10 c6 l_h20'>购物车</view>-->
+          <view bindtap="addFavorites" wx:if="{{bd_id == 0}}" class="fl_l" >
+            <image class="icon_kf" style='display:{{none_off}}' src="/images/shc.png" ></image>
+            <image class="icon_kf" style='display:{{none_on}}' src="/images/shced.png" ></image>
+          </view>
+        </view>
+       <form bindsubmit='formid' report-submit="true">
+        <button formType="submit" class='no_button'>
+          <view class="bg_f white w40 fl_l l_h50" bindtap="addShopCart" data-type="buynow">在线预约</view>
+        </button>
+        </form>
+        <button class="w40 bg_green flex_h_c white fl_l c3 zixun_bottom" open-type="contact" bindcontact="handleContact" session-from='{{brand_id}},{{productId}}' >
+          <image class="icon_wx"src="/images/weixin.png"></image>
+          <text>立即咨询</text>
+        </button>
       </view>
   
 </view>

@@ -52,13 +52,19 @@
                                   </view>  
                               </view>
                             </view>
-                            <view style="display:flex;line-height:50rpx;padding:20rpx 0;">
+                            <view style="display:flex;line-height:50rpx;padding:10px 0 0 0;">
                                   <view style="float: right;font-size: 12px;display: flex;align-items: center; color:#999;">
                                       桔子价:
                                     </view>
                                   <view class="gmxx" style="color: #F14918;">¥ {{item.juzi_price}}</view>
                                   <view class="gmx">¥ {{item.market_price}}</view> 
                               </view>
+                              <text class="juli" wx:if="{{user_lei == 99}}">返佣：{{item.huodong_1}}/{{item.huodong_2}}/{{item.huodong_3}}<text class='c3'>|{{item.kefu_fan}}</text></text>
+            <text class="juli" wx:if="{{user_lei == 1}}">返佣：{{item.huodong_1}}</text>
+            <text class="juli" wx:if="{{user_lei == 2}}">总监返佣：{{item.huodong_1}}/合伙人返佣：{{item.huodong_2}}</text>
+            <text class="juli" wx:if="{{user_lei == 11 || user_lei == 12}}">总监返佣：{{item.huodong_1}}/合伙人返佣：{{item.huodong_2}}<text class='c3'>|{{item.kefu_fan}}</text></text>
+            <text class="juli" wx:if="{{user_lei == 3}}">总监返佣：{{item.huodong_1}}/合伙人返佣：{{item.huodong_2}}</text>
+            <text class="juli" wx:if="{{user_lei == 6}}">自己消费返佣：{{item.huodong_1}}</text>
                           </navigator>
                     </view>
         <!--<view class="ban">
@@ -74,11 +80,14 @@
             </view>
             </navigator>
         </view> -->
-        <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}">fsaffffff</view>
-<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}"></view> 
     </block>
 <view  class="clear no_more" >{{more}}</view>    
- <navigator  url='/pages/cart/cart' class='fabu'><image style='width:20px;height:20px;' src='/images/gouwuche.png'></image></navigator>
+   <button open-type="contact" session-from='shouye' class="kefu  l_h15 pt5" style=''>
+      <view class='flex_s white font_10' data-status="2">
+        <image class="icon_wx" src="/images/weixin.png"></image>
+        <text class='l_h15'>客服</text>
+      </view>
+    </button>
 </view>
 
 

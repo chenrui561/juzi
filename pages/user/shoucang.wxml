@@ -1,11 +1,17 @@
 <!--pages/user/shoucang.wxml-->
 <view class="page">
-    <view class="search_no" wx:if="{{!productData.length}}">
+<view scroll-x="true" class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" data-otype="pay" bindtap="change">话题收藏</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" data-otype="deliver" bindtap="change2">商品收藏</view> 
+</view>
+
+<view class='mt50'>
+    <view class="search_no" wx:if="{{!productData.length && currentTab == 1}}">
             <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
             <text>暂时还没有收藏/(ㄒoㄒ)/~~</text>
         </view>
 
-    <view class="shop df" wx:for="{{productData}}" wx:key="key">        
+    <view wx:if="{{currentTab == 1}}" class="shop df mt50" wx:for="{{productData}}" wx:key="key">        
         <navigator class="sh_slt" url="/pages/product/detail?productId={{item.goods_id}}"><image class="sh_slt" src="{{item.goods_img}}"></image></navigator>
         <view class="df_1">            
             <view class="sp_text">
@@ -13,15 +19,30 @@
                     <view class="sp_tit ovh2">{{item.goods_name}}</view>
                 </navigator>
                 <view class='price'>
-                  <view class="sp_jg">￥：{{item.shop_price}}<view class="sp_jg1">￥：{{item.market_price}}</view></view>
-                  
+                  <view class="sp_jg">￥{{item.shop_price}}<view class="sp_jg1">￥{{item.market_price}}</view></view>
                   <view class="dle" data-goodsid="{{item.goods_id}}" bindtap="removeFavorites">取消收藏</view>
-    
                 </view>
             </view>
         </view>
     </view>
 
+
+<view class="search_no" wx:if="{{!shoucang_list.length && currentTab == 0}}">
+            <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
+            <text>暂时还没有收藏/(ㄒoㄒ)/~~</text>
+        </view>
+<navigator wx:if="{{currentTab == 0}}" wx:for="{{shoucang_list}}" url='/pages/zhihu/zhihu?aid={{item.id}}&wid={{item.wid}}' class='huati flex_s_l'>
+      <view class="huati_title {{item.type == 1 ? 'hui':''}}">{{item.title}}</view>
+      <view class='huati_info flex_h_b'>
+        <view class="huati_text {{item.type == 1 ? 'hui':''}}">{{item.jianjie}}</view>
+        <image wx:if="{{item.fengmian != ''}}" class='huati_img' mode='aspectFill' src='{{item.fengmian}}'></image>
+      </view>
+      <view class='huati_last flex_h_b'>
+        
+        <text>{{item.zan}}个赞同 · {{item.pl}}评论</text>
+        <text wx:if="{{item.type == 1}}">草稿</text>
+      </view>
+    </navigator>
 </view>
 
-
+</view>

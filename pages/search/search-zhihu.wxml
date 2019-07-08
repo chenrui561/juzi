@@ -1,0 +1,91 @@
+<!--pages/search/search.wxml-->
+    <view class='index_head'>
+          <view class='index_sousuo'>
+<view class="search df">
+    <image class="searchcion" src="/images/search.png"></image>
+    <input class="df_1" placeholder="请输入您要搜索的内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+    
+</view>
+</view>
+</view>
+<view>{{zhihu_title}}</view>
+<view class="cont" wx:if="{{hotKeyShow}}">
+    <view style='padding-top:50px;'>
+        <text class="font_14" >热门搜索</text>
+        <view class="w100">
+            <button wx:for="{{hotKeyList}}" wx:key="key" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
+        </view>
+        <text class="font_14 mt10">历史搜索</text>
+        <view class="w100">
+            <button wx:for="{{historyKeyList}}" wx:key="key" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
+        </view>
+    </view>
+</view>
+<view class="search_no" style='margin-top:0px;padding-top:50px;' wx:if="{{!zhihu_search.length}}">
+    <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
+    <text>没有找到您要的内容/(ㄒoㄒ)/~~</text>
+</view>
+<!--<view class="shop" wx:for="{{productData}}"> 
+    <navigator url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">      
+        <image class="sh_slt" src="http://www.anranhaitao.com/{{item.goods_img}}"></image>
+        <view class="sp_text">
+            <view class="sp_tit ovh1">{{item.goods_name}}</view>
+            <view class="sp_jg">￥ {{item.shop_price}}</view>
+            <view class="sp_jg">￥ {{item.market_price}}</view>
+        </view>
+    </navigator>
+</view>-->
+
+<view style='padding-top: 48px;'>
+<!--<view class="ban" wx:for="{{productData}}">
+      
+            <navigator url="../product/detail?productId={{item.goods_id}}" class="cover flex-wrp">
+            
+                <image class="banner" src="https://www.juziyimei.com/{{item.goods_img}}" mode="widthFix"></image>
+          <view class="act-item ellipsis_title">
+             {{item.goods_name}}
+            </view>
+            <view class="act-item ellipsis" style='text-align: center;line-height:30px;' >
+                <text style="color:red">¥ {{item.shop_price}}</text>
+                <text class='pro_rel_price2'>¥ {{item.market_price}}</text>
+            </view>
+            </navigator>
+        </view> 
+        <view wx:if="{{!hotKeyShow}}" class="clear mt10" >{{more}}</view>  
+  </view>-->
+
+        <navigator wx:for="{{searchResultDatas}}" wx:key="key" url='/pages/zhihu/zhihu?aid={{item.id}}&wid={{item.wid}}' class='huati flex_s_l'>
+          <view class='huati_title'>
+          <!--跟进搜索内容变化标题颜色-->
+              <view class="search-result-item">
+                <searchHighlightTextView 
+                class="result-item" 
+                datas='{{searchData[index]}}' 
+                bindtap="chooseSearchResultAction" 
+                data-id='{{item.ganhuo_id}}'
+                />
+              </view>
+           <!--跟进搜索内容变化标题颜色end-->   
+          </view>
+
+          <view class='huati_info flex_h_b'>
+            <view class='huati_text'>
+              <!--跟进搜索内容变化标题颜色-->
+              <view class="search-result-item">
+                <searchHighlightTextView 
+                class="result-item" 
+                datas='{{jianjie[index]}}' 
+                bindtap="chooseSearchResultAction"  
+                />
+              </view>
+           <!--跟进搜索内容变化标题颜色end-->   
+            </view>
+            <image wx:if="{{item.fengmian != ''}}" class='huati_img' mode='aspectFill' src='{{item.fengmian}}'></image>
+          </view>
+          <view class='huati_last flex_h_b'>
+            
+            <text>{{item.zan}}个赞同 · {{item.pl}}评论</text>
+          </view>
+        </navigator>                  
+
+</view>

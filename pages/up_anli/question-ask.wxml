@@ -1,12 +1,13 @@
 <!--【上传案例】-->
 <view wx:if="{{type_id == 0}}" class="question-form">
 
-<picker   bindchange="bindPickerChange2" value="{{index}}" range="{{lx_info.name}}" class="qbdd mt10" >
-      <span class="font_14 c3">选择分类</span>
-      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+  <picker bindchange="bindPickerChange2" value="{{index}}" range="{{lx_info.name}}" class="qbdd mt10">
+    <span class="font_14 c3">选择分类</span>
+    <span class="fl_r c9 xuanze_box" hover-class="none">
       <text class='xuanze_text' wx:if="{{lx_id > 0 }}">{{lx_info.name[shunxu]}}</text>
       <text wx:else>请选择分类</text>
-        <image class='xuanze' src="/images/x_right.png"></image></span>
+      <image class='xuanze' src="/images/x_right.png"></image>
+    </span>
   </picker>
 
   <view class="question-input-area">
@@ -21,7 +22,8 @@
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
         <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="晒晒您的心情" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" value='{{anli_text.content}}' style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
+          <textarea class="weui-textarea" placeholder="晒晒您的心情" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" value='{{anli_text.content}}' style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput"
+          />
           <view class="weui-textarea-counter">{{contentCount}}/500</view>
         </view>
       </view>
@@ -31,14 +33,16 @@
 
   <view class="question-images-area">
 
-    
+
 
     <!-- 图片缩略图  -->
     <view wx:if="{{id == 0}}" class="question-images">
       <block wx:for="{{images}}" wx:key="*this">
         <view class="q-image-wrap">
           <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
-          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>
+          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage">
+            <image src='/images/X.png' style='width:20px;height:20px;'></image>
+          </view>
         </view>
       </block>
       <image src='/images/up_img.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 9}}"></image>
@@ -50,23 +54,14 @@
   <button wx:if="{{id == 0}}" class="weui-btn" type="primary" bindtap="submitForm">提交</button>
   <button wx:else class="weui-btn" type="primary" bindtap="submitForm2">修改</button>
 </view>
-<!--【意见反馈】-->
-
-<view wx:if="{{type_id == 1}}" class="question-form">
-
-  <view class="question-input-area">
-
-    <!-- 问题标题  
-    <view class="question-title-wrap">
-      <input class="question-title" placeholder="请输入标题" maxlength="40" placeholder-style="color:#b3b3b3;font-size:18px;" bindinput="handleTitleInput"></input>
-      <view class="title-input-counter">{{titleCount}}/40</view>
-    </view>-->
-
-    <!-- 问题正文  -->
+<!--意见反馈-->
+<view wx:if="{{type_id == 4}}" class="question-form">
+     <!-- 问题正文  -->
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell">
-        <view class="weui-cell__bd">
-          <textarea class="weui-textarea" placeholder="请输入您对我们桔子放心美的意见和建议" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
+        <view class="weui-cell__bd" >
+          <textarea class="weui-textarea" placeholder="您的建议是我们前进的动力" maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" value='{{anli_text.content}}' style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;padding:5px;margin: 5px;" bindinput="handleContentInput"
+          />
           <view class="weui-textarea-counter">{{contentCount}}/500</view>
         </view>
       </view>
@@ -74,16 +69,15 @@
 
   </view>
 
-  <view class="question-images-area">
-
-    
-
+  <view wx:if="{{type_id == 4}}" class="question-images-area">
     <!-- 图片缩略图  -->
-    <view class="question-images">
+    <view  class="question-images">
       <block wx:for="{{images}}" wx:key="*this">
         <view class="q-image-wrap">
           <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
-          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>
+          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage">
+            <image src='/images/X.png' style='width:20px;height:20px;'></image>
+          </view>
         </view>
       </block>
       <image src='/images/up_img.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 9}}"></image>
@@ -92,7 +86,143 @@
   </view>
 
   <!-- 提交表单按钮  -->
-  <button class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+  <button wx:if="{{type_id == 4}}" class="weui-btn m5" type="primary"  bindtap="submitForm_fk">提交</button>
+<!--【评价晒图】-->
+<view wx:if="{{type_id == 1}}" class="question-form">
+
+<!--已评价内容start-->
+    <view  class="shaidan_list" wx:if="{{states == 1 }}" >
+       <view class='no_more'>原评价</view>
+      <view wx:for="{{shaidan}}">
+
+        <!--医院和评分-->
+    <view class='question-input-area pingfen2 flex_h_b'>
+      <view class='font_16 m15 no_next_text text_lue'>{{brand_name}}</view>
+      <view class='flex_h_c mr10'>
+            <icon class="iconfont icon-wujiaoxing {{item.fen >= 1 ? 'icon_5_in':'icon_5'}} "></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen >= 2 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen >= 3 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen >= 4 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen >= 5 ? 'icon_5_in':'icon_5'}}"></icon>
+      </view>
+    </view>
+<!--医生-->
+<view class='question-input-area pingfen2 flex_h_b'>
+      <view class='font_16 m15 no_next_text text_lue'>{{yisheng_name}}</view>
+      <view class='flex_h_c mr10'>
+            <icon class="iconfont icon-wujiaoxing {{item.fen2 >= 1 ? 'icon_5_in':'icon_5'}} "></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen2 >= 2 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen2 >= 3 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen2 >= 4 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen2 >= 5 ? 'icon_5_in':'icon_5'}}"></icon>
+      </view>
+    </view>
+<!--咨询师-->
+  <view class='question-input-area pingfen2 flex_h_b'>
+      <view class='font_16 m15 no_next_text text_lue'>{{zixu_name}}</view>
+      <view class='flex_h_c mr10'>
+            <icon class="iconfont icon-wujiaoxing {{item.fen3 >= 1 ? 'icon_5_in':'icon_5'}} "></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen3 >= 2 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen3 >= 3 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen3 >= 4 ? 'icon_5_in':'icon_5'}}"></icon>
+            <icon class="iconfont icon-wujiaoxing {{item.fen3 >= 5 ? 'icon_5_in':'icon_5'}}"></icon>
+      </view>
+    </view> 
+        <view class="comment_sd" style="margin-bottom: 10px;">
+          <text style="font-size:14px; ">{{item.content}}</text>
+        </view>
+        <!--用户名和用户留言结束-->
+        <!--如果是一张图的情况-->
+
+        <view wx:if="{{item.comment_img && !item.comment_img2}}" class="comment_sd onbig_img" style="display: -webkit-box; ">
+          <image bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img}}" mode='aspectFill' src="{{item.comment_img}}" style="max-width: 250px;max-height: 180px;"></image>
+
+        </view>
+        <!--如果是大于一张图的情况-->
+        <view wx:if="{{item.comment_img2}}">
+          <view class="comment_sd onbig_img" style="display: -webkit-box;width:calc(100% - 30px); margin:0 auto;">
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img}}" style=" background-image:url({{item.comment_img}}); background-size: cover;background-position-x: center; margin-left:30px;" class="shaidan_img"></view>
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img2}}" style=" background-image:url({{item.comment_img2}}); background-size: cover;background-position-x: center;" class="shaidan_img"></view>
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img3}}" style=" background-image:url({{item.comment_img3}});background-size: cover;background-position-x: center;" class="shaidan_img"></view>
+          </view>
+          <view wx:if="{{item.comment_img4}}" class="comment_sd onbig_img" style="display: -webkit-box;width:calc(100% - 30px); margin:0 auto;">
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img4}}" style=" background-image:url({{item.comment_img4}}); background-size: cover;background-position-x: center; margin-left:30px;" class="shaidan_img"></view>
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img5}}" style=" background-image:url({{item.comment_img5}}); background-size: cover;background-position-x: center;" class="shaidan_img"></view>
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img6}}" style=" background-image:url({{item.comment_img6}});background-size: cover;background-position-x: center;" class="shaidan_img"></view>
+          </view>
+          <view wx:if="{{item.comment_img7}}" class="comment_sd onbig_img" style="display: -webkit-box;width:calc(100% - 30px); margin:0 auto;">
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img7}}" style=" background-image:url({{item.comment_img7}}); background-size: cover;background-position-x: center; margin-left:30px;" class="shaidan_img"></view>
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img8}}" style=" background-image:url({{item.comment_img8}}); background-size: cover;background-position-x: center;" class="shaidan_img"></view>
+            <view bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img9}}" style=" background-image:url({{item.comment_img9}});background-size: cover;background-position-x: center;" class="shaidan_img"></view>
+          </view>
+        </view>
+        <view>
+        </view>
+      </view>
+    </view>
+<!--已评价内容结束-->
+  <view>
+  <view wx:if="{{states == 1}}" class='no_more mt10 bte'>新的修改将覆盖原评价哦</view>
+    <view class='question-input-area pingfen flex_h_b'>
+      <view class='font_16 m15 no_next_text text_lue'><text class='red'>*</text>{{brand_name}}</view>
+      <view class='flex_h_c mr10'>
+        <icon bindtap='pingfen' data-pf='1' class="iconfont icon-wujiaoxing {{fen >= 1 ? 'icon_5_in':'icon_5'}} "></icon>
+        <icon bindtap='pingfen' data-pf='2' class="iconfont icon-wujiaoxing {{fen >= 2 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen' data-pf='3' class="iconfont icon-wujiaoxing {{fen >= 3 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen' data-pf='4' class="iconfont icon-wujiaoxing {{fen >= 4 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen' data-pf='5' class="iconfont icon-wujiaoxing {{fen >= 5 ? 'icon_5_in':'icon_5'}}"></icon>
+      </view>
+    </view>
+    <view wx:if="{{ys_list.length > 0}}" class='question-input-area pingfen flex_h_b'>
+      <picker range='{{ys_pick}}' bindchange="ys_pick" value=''  class='font_16 m15 no_next_text text_lue'>{{up_ys_pick == 0 ? '请选择医生':up_ys_pick.brand_name}}</picker>
+      <view class='flex_h_c mr10'>
+        <icon bindtap='pingfen2' data-pf='1' class="iconfont icon-wujiaoxing {{fen2 >= 1 ? 'icon_5_in':'icon_5'}} "></icon>
+        <icon bindtap='pingfen2' data-pf='2' class="iconfont icon-wujiaoxing {{fen2 >= 2 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen2' data-pf='3' class="iconfont icon-wujiaoxing {{fen2 >= 3 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen2' data-pf='4' class="iconfont icon-wujiaoxing {{fen2 >= 4 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen2' data-pf='5' class="iconfont icon-wujiaoxing {{fen2 >= 5 ? 'icon_5_in':'icon_5'}}"></icon>
+      </view>
+    </view>
+    <view wx:if="{{zx_list.length > 0}}" class='question-input-area pingfen flex_h_b'>
+      <picker range='{{zx_pick}}' bindchange="zx_pick" value='' class='font_16 m15 no_next_text text_lue'>{{up_zx_pick == 0 ? '请选择咨询师':up_zx_pick.brand_name}}</picker>
+      <view class='flex_h_c mr10'>
+        <icon bindtap='pingfen3' data-pf='1' class="iconfont icon-wujiaoxing {{fen3 >= 1 ? 'icon_5_in':'icon_5'}} "></icon>
+        <icon bindtap='pingfen3' data-pf='2' class="iconfont icon-wujiaoxing {{fen3 >= 2 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen3' data-pf='3' class="iconfont icon-wujiaoxing {{fen3 >= 3 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen3' data-pf='4' class="iconfont icon-wujiaoxing {{fen3 >= 4 ? 'icon_5_in':'icon_5'}}"></icon>
+        <icon bindtap='pingfen3' data-pf='5' class="iconfont icon-wujiaoxing {{fen3 >= 5 ? 'icon_5_in':'icon_5'}}"></icon>
+      </view>
+    </view>
+    <view class="question-input-area">
+      <!-- 问题正文  -->
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell">
+          <view class="weui-cell__bd">
+            <textarea class="weui-textarea" placeholder="您的评价对我们很重要..." maxlength="500" placeholder-style="color:#b3b3b3;font-size:14px;" style="height: 12rem;height: 12rem;width: 100%;font-size: 14px;margin: 5px;" bindinput="handleContentInput" />
+            <view class="weui-textarea-counter">{{contentCount}}/500</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="question-images-area">
+      <!-- 图片缩略图  -->
+      <view class="question-images">
+        <block wx:for="{{images}}" wx:key="*this">
+          <view class="q-image-wrap">
+            <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+            <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage">
+              <image src='/images/X.png' style='width:20px;height:20px;'></image>
+            </view>
+          </view>
+        </block>
+        <image src='/images/up_img.png' class='q-image-j' bindtap="chooseImage" wx:if="{{images.length < 9}}"></image>
+      </view>
+    </view>
+    <!-- 提交表单按钮  -->
+    <button  class="weui-btn" type="primary" bindtap="submitForm">提交</button>
+    
+  </view>
 
 </view>
 
@@ -116,7 +246,7 @@
       </view>
     </view>
   </view>
-<!--<picker   bindchange="bindPickerChange2" value="{{index}}" range="{{lx_info.name}}" class="qbdd mt10" >
+  <!--<picker   bindchange="bindPickerChange2" value="{{index}}" range="{{lx_info.name}}" class="qbdd mt10" >
       <span class="font_14 c3">选择分类</span>
       <span class="fl_r c9 xuanze_box" hover-class="none"> 
       <text class='xuanze_text' wx:if="{{lx_id > 0 }}">{{lx_info.name[shunxu]}}</text>
@@ -125,5 +255,52 @@
   </picker>-->
   <!-- 提交表单按钮  -->
   <button class="weui-btn tijiao" type="primary" bindtap="submitForm3">提交</button>
+</view>
 
+<!--发帖/回帖-->
+<view class="container" style='padding:0;' wx:if="{{type_id == 3}}">
+  <view class="page-body">
+    <view class='wrapper' style='padding:1px;'>
+      <view class='toolbar' bindtap="format">
+        <i class="iconfont icon-zitijiacu {{formats.bold ? 'ql-active' : ''}}" data-name="bold"></i>
+        <i class="iconfont icon-zitixieti {{formats.italic ? 'ql-active' : ''}}" data-name="italic"></i>
+        <i class="iconfont icon-zitixiahuaxian {{formats.underline ? 'ql-active' : ''}}" data-name="underline"></i>
+        <i class="iconfont icon-zitishanchuxian {{formats.strike ? 'ql-active' : ''}}" data-name="strike"></i>
+        <i class="iconfont icon-zuoduiqi {{formats.align === 'left' ? 'ql-active' : ''}}" data-name="align" data-value="left"></i>
+        <i class="iconfont icon-juzhongduiqi {{formats.align === 'center' ? 'ql-active' : ''}}" data-name="align" data-value="center"></i>
+        <i class="iconfont icon-youduiqi {{formats.align === 'right' ? 'ql-active' : ''}}" data-name="align" data-value="right"></i>
+        
+
+        <i class="iconfont icon-fontsize {{formats.fontSize === '24px' ? 'ql-active' : ''}}" data-name="fontSize" data-value="24px"></i>
+
+      <!--  <i class="iconfont icon-text_color {{formats.color === '#0000ff' ? 'ql-active' : ''}}" data-name="color" data-value="#0000ff"></i>
+        <i class="iconfont icon-fontbgcolor {{formats.backgroundColor === '#00ff00' ? 'ql-active' : ''}}" data-name="backgroundColor" data-value="#00ff00"></i>
+        <i class="iconfont icon--checklist" data-name="list" data-value="check"></i>-->
+        <i class="iconfont icon-youxupailie {{formats.list === 'ordered' ? 'ql-active' : ''}}" data-name="list" data-value="ordered"></i>
+        <i class="iconfont icon-wuxupailie {{formats.list === 'bullet' ? 'ql-active' : ''}}" data-name="list" data-value="bullet"></i>
+        <i class="iconfont icon-undo" bindtap="undo"></i>
+        <i class="iconfont icon-redo" bindtap="redo"></i>
+
+        <i class="iconfont icon-fengexian" bindtap="insertDivider"></i>
+        <i class="iconfont icon-charutupian" bindtap="insertImage"></i>
+
+
+        <!-- <i class="iconfont icon-quanping"></i> -->
+        <i class="iconfont icon-shanchu" bindtap="clear"></i>
+        
+        <view class='tijiao2' bindtap="tijiao">提交</view>
+      </view>
+<!-- 标题  -->
+    <view wx:if="{{sid == 0}}" class="question-title-wrap2" style='margin-top:90px;'>
+      <input style='font-size:18px;font-weight:700;' class="question-title" placeholder="请输入标题" maxlength="40" placeholder-style="color:#b3b3b3;font-size:18px;" bindinput="handleTitleInput"></input>
+      <view class="title-input-counter">{{titleCount}}/40</view>
+    </view>
+      <editor id="editor" class="ql-container {{sid == 0 ? '':'mt90'}} " placeholder="来吧！尽情发挥吧！" bindfocus="bindfocus" showImgSize showImgToolbar showImgResize bindstatuschange="onStatusChange"  read-only="{{readOnly}}"  bindready="onEditorReady">
+      </editor>
+
+      <!-- <view>
+        <button bindtap="readOnlyChange">{{readOnly ? '可写':'只读'}}</button>
+      </view> -->
+    </view>
+  </view>
 </view>

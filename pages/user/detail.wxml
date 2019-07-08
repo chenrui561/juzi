@@ -1,46 +1,145 @@
 <!--pages/order/detail.wxml-->
 <view class="w100">
-	  
-<!--用户信息-->
-		<view  class="p_all bg_white mt10 c6 l_h20 font_14">
-			<view class="">用户昵称：{{user_info[0].nick_name}}</view>
-      <view class="mt10">真实姓名：{{user_info[0].rel_name}}</view>
-      <view class="mt10">手机号：{{user_info[0].mobile_phone}}</view>
-			<view class="mt10">注册时间：{{user_info[0].reg_time}}</view>    
-      <view class="mt10">备注：{{user_info[0].beizhu}}</view>    
+
+  <!--用户信息-->
+  <view class="p_all bg_white mt10 c6 l_h20 font_14">
+    <view class="">用户昵称：{{user_info[0].nick_name}}</view>
+    <view class="mt10">真实姓名：{{user_info[0].rel_name}}</view>
+    <view class="mt10">手机号：
+      <text class='blue' bindtap='phone_call' data-phone='{{user_info[0].mobile_phone}}'>{{user_info[0].mobile_phone}}</text>
+    </view>
+    <view class="mt10">注册时间：{{user_info[0].reg_time}}</view>
+    <view wx:if="{{user_info[0].user_lei == 0}}" class="mt10">身份：普通用户</view>
+    <view wx:if="{{user_info[0].user_lei == 1}}" class="mt10 ">身份：<text class='font_weight'>总监</text></view>
+    <view wx:if="{{user_info[0].user_lei == 2}}" class="mt10">身份：<text class='font_weight'>城市合伙人</text></view>
+    <view wx:if="{{user_info[0].user_lei == 3}}" class="mt10">身份：<text class='font_weight'>市联合创始人</text></view>
+    <view wx:if="{{user_info[0].user_lei == 6}}" class="mt10">身份：<text class='font_weight'>会员</text></view>
+    <view wx:if="{{user_info[0].user_lei > 6}}" class="mt10">身份：<text class='font_weight'>内部员工</text></view>
+        <view wx:if="{{user_info[0].qudao_time}}" class="mt10">合作时间：{{user_info[0].qudao_time}}</view>
+    <view class="mt10">区域：{{user_info[0].quyu}}</view>
+    <view class="mt10 flex_h_b">
+      <text>专属客服：{{user_info[0].zixun_id}}</text>
+      <picker wx:if="{{my_user_info[0].user_lei == 99}}" range="{{kefu}}" bindchange='change_kefu'>修改</picker>
+    </view>
+    <view wx:if="{{my_user_info[0].user_lei > 9}}" class="mt10 flex_h_b">
+      <text>下次跟进时间：{{user_info[0].gj_time}}</text>
+      <picker  mode="date" bindchange='next_genjin_time'>修改</picker>
+    </view>
+    <view class="mt10">备注：{{user_info[0].beizhu}}</view>
+  </view>
+  <!--钱包信息-->
+  <navigator wx:if="{{my_user_info[0].user_lei == 99}}" url='../user/tixian_info?user_id={{user_info[0].user_id}}' class="p_all bg_white mt10 c6 l_h20 flex_h_b font_14">
+     <text>钱包信息</text>
+    <view>
+        <text class="hui">管理员权限</text>
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+     </view>
+  </navigator>
+
+  <!--上级用户信息-->
+  <view class="p_all bg_white mt10 c6 l_h20 font_14">
+    <view class='flex_h_b' >
+      <view class='flex_h'>
+        <text>上级推荐人：</text>
+        <navigator wx:if="{{user_info2[0].user_id > 0}}" url='../user/detail?id={{user_info2[0].user_id}}' class="blue ">{{user_info2[0].nick_name}}/{{user_info2[0].rel_name}}</navigator>
+        <navigator wx:else url='' class="blue ">无</navigator>
+      </view>
+      <navigator wx:if="{{my_user_info[0].user_lei == 99}}" url='../user/jiaofei?id=7&change_id={{gj_user_id}}' class="">修改</navigator>
+    </view>
+    <view class="mt10 flex_h_b">
+    <view class='flex_h'>
+        <text>上级会员：</text>
+        <navigator wx:if="{{user_info3[0].user_id > 0}}" url='../user/detail?id={{user_info3[0].user_id}}' class="blue ">{{user_info3[0].nick_name}}/{{user_info3[0].rel_name}}</navigator>
+        <navigator wx:else url='' class="blue ">无</navigator>
+    </view>
+    <navigator wx:if="{{my_user_info[0].user_lei == 99}}" url='../user/jiaofei?id=8&change_id={{gj_user_id}}' class="">修改</navigator>
+    </view>
+  </view>
+
+   <!--下级用户信息-->
+  <view wx:if="{{my_user_info[0].user_lei > 6}}" class="p_all bg_white mt10 c6 l_h20 font_14">
+    <navigator class='flex_h_b l_h40 bbe' url="../user/team-user?team_type=1&anyone_id={{user_info[0].user_id}}">
+      <text>线上推荐</text>
+
+      <view>
+        <text class="hui ">{{count_tj}}人</text>
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+       </view>
+
+    </navigator>
+
+    <navigator url="../user/team-user?team_type=2&anyone_id={{user_info[0].user_id}}" class=" flex_h_b l_h40">
+      <text>线下团队</text>
+      <view>
+        <text class="hui">{{count_qd}}人</text>
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+     </view>
+
+    </navigator>
+
+  </view>
+
+  <!--用户状态-->
+  <view style='margin-top:10px;' class="p_all bbe flex_h_b bg_white c6 l_h20 font_14">
+    <text>当前用户状态：{{states_array[user_info[0].gj_states].name}}</text>
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{states_name_array}}">修改状态</picker>
+  </view>
+  <view class="p_all flex_h_b bg_white c6 l_h20 bbe font_14">
+    <text>当前用户级别：{{jibie_array[user_info[0].user_lei].name}}</text>
+    <picker wx:if="{{my_user_info[0].user_lei == 99}}" bindchange="bindPickerChange2" value="{{jibie_array[user_info[0].user_lei].id}}" range="{{jibie_name_array}}">修改级别</picker>
+  </view>
+  <view wx:if="{{my_user_info[0].user_lei >= 10}}" class="p_all flex_h_b bg_white c6 l_h20 font_14">
+    <text>当前用户类别：{{genjin_lei_array[user_info[0].genjin_lei].name}}</text>
+    <picker  bindchange="bindPickerChange3" value="{{genjin_lei_array[user_info[0].genjin_lei].id}}" range="{{genjin_lei_name_array}}">修改类别</picker>
+  </view>
+
+    <view wx:if="{{list_info}}" wx:for="{{list_info}}" class='flex_h_b bg_white p_all'>
+      <text class='pl_no_text'>{{item.nick_name}}于{{item.change_time}}</text>
+      <text wx:if="{{item.user_lei == -1}}" class='pl_no_text'>将该用户变更为{{item.states}}</text>    
+      <text wx:if="{{item.states == -1}}" class='pl_no_text'>将该用户变更为{{item.user_lei}}</text>    
     </view>
 
-   <view style='margin-top:10px;' class="p_all flex_h_b bg_white c6 l_h20 font_14">
-      <text wx:if="{{user_info[0].gj_states == 0}}">当前用户状态：{{states_array[user_info[0].gj_states].name}}</text>
-      <picker  bindchange="bindPickerChange" value="{{index}}" range="{{states_name_array}}">修改状态</picker>
-    </view> 
-    <view class='pl_no'>
-            <text class='pl_no_text'>暂无历史变更记录</text>
+  <view wx:if="{{!list_info}}" class='pl_no'>
+    <text class='pl_no_text'>暂无历史变更记录</text>
+  </view>
+  <!--评论-->
+  <view style='margin-top:10px;' wx:if="{{user_lei > 0}}" class='guoqu_box'>
+    <view class='title' style='border-bottom:1px solid #eee;'>跟进情况:</view>
+    <!--下次跟进-->
+    <view class='flex_h_b mt10'>
+      <span class="font_14 c3 flex_h w100" style="white-space:nowrap;">
+            <picker bindchange="next_genjin_time" wx:if="{{orderData.genjin_state == 0}}" mode="date" start="{{now}}"  class='font_14'>下次跟进时间：
+              <text class='c3 font_12'>{{orderData.gj_time}}</text>
+            </picker>
+            <view wx:if="{{orderData.genjin_state == 1}}" class='font_14'>下次跟进时间：
+              <text   class='c3 font_12'>无需跟进</text>
+            </view>
+      </span>
+      <switch wx:if="{{orderData.genjin_state == 0}}" checked bindchange="genjin_states" />
+      <switch wx:if="{{orderData.genjin_state == 1}}"  bindchange="genjin_states" />
     </view>
-    <!--评论-->
-    <view style='margin-top:10px;' wx:if="{{user_lei > 0}}" class='guoqu_box'>
-                <view class='title' style='border-bottom:1px solid #eee;'>跟进情况:</view>
-                     <view class='pl_box' wx:for="{{genjin_info}}">
-                          <view class='pl_info_all'>
-                               <image class='pl_img' src='{{item.tx_img}}'></image>
-                                  <view class='pl_info'>
-                                      <text style='color:#333'>{{item.passwd_answer}}</text>
-                                      <text style='margin-right:10px;'>{{item.add_time}}</text>
-                                  </view>
-                          </view>
-                          <view class='pl_content'>{{item.content}}</view>
-                          <view wx:if="{{item.user_id == user_id}}" data-aid="{{item.aid}}" bindtap="del" class='pl_del'>删除</view>
-                          </view>
-                          <view wx:if="{{genjin == null}}" class='pl_no'>
-                            <text class='pl_no_text'>此项目还没有跟进情况</text>
-                          </view>
-                          <view class='pl_input'>
-                            <image class='pl_img' src='{{HeadUrl}}'></image>
-                            <input placeholder="相关人员可在此填写该用户的跟进情况" bindconfirm="dopl" focus="{{focus}}" bindinput="searchValueInput" class='pl_inputs'></input>
-                          </view>
-                <view>
+    <!--列表-->
+    <view class='pl_box' wx:if="{{genjin_info}}" wx:for="{{genjin_info}}">
+      <view class='pl_info_all'>
+        <image class='pl_img' src='{{item.tx_img}}'></image>
+        <view class='pl_info'>
+          <text style='color:#333'>{{item.passwd_answer}}</text>
+          <text style='margin-right:10px;'>{{item.add_time}}</text>
+        </view>
+      </view>
+      <view class='pl_content'>{{item.content}}</view>
+      <view wx:if="{{user_lei > 9}}" data-aid="{{item.aid}}" bindtap="pl_del" class='pl_del'>删除</view>
     </view>
+    <view wx:if="{{!genjin_info}}" class='pl_no'>
+      <text class='pl_no_text'>还没有跟进情况</text>
+    </view>
+    <view class='pl_input'>
+     <!-- <image class='pl_img' src='{{HeadUrl}}'></image>-->
+      <input placeholder="相关人员可在此填写该用户的跟进情况" bindconfirm="dopl" focus="{{focus}}" bindinput="searchValueInput" class='pl_inputs'></input>
+    </view>
+    <view>
+    </view>
+  </view>
 
-</view>
 
 </view>

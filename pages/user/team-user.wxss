@@ -17,16 +17,17 @@
     font-size: 13px;
     border-bottom: 1px solid #e1e1e1;
     background-color: #fff;
+    white-space:nowrap;
 }
 .shijian{
-    width: 22%;
+    width: 25%;
     padding-left: 3%;
 }
 .sl{
-    width: 37%;
+    width: 35%;
     padding-left: 3%;
 }
 .nick{
-    width: 32%;
+    width: 30%;
     padding-left: 3%;
 }

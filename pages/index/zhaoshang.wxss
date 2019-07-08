@@ -1,0 +1,351 @@
+/* pages/index/zhaoshang.wxss */
+.bg1{ background-color: #fe5e2c; width: 100%; padding-bottom: 20px;}
+.image_zs{width:100%;height:100%;display: block; }
+.youshi{background-color:#fffbf2;  margin: 10px auto 0 auto; width: 90%; border-radius: 15px;}
+.zhifu{ margin-left: 5%;  bottom: 0px;}
+.zhifu_icon1{margin:0 2px; width: 25vw;}
+.zhifu_icon2{margin:0 2px; width: 44vw;}
+.zhifu_icon3{margin:0 2px; width: 44vw;}
+.ys_icon{float: left; margin:0 8px; width: 14vw;height: 14vw;}
+.ys_txt{margin:10px 0;width: 76%;}
+.ys_title{font-size: 4vw;line-height: 22px; font-weight: 700; color: #000000;}
+.ys_xiangxi{font-size: 12px;line-height:18px; color: #666;}
+.flex_s_c{display: flex;align-items: center;}
+.bg2{background-color:#fff; width: 100%; padding-bottom: 20px; padding-top: 20px;}
+.productlist{ width: 90%; margin: 0 auto; display: flex;flex-direction: row; justify-content:space-between;}
+.productlist2{ width: 100%; display: flex;flex-direction: row;}
+.product{width:48%;  border:1px #a0a0a0 solid;border-radius:15px; padding-top: 15px; padding-bottom: 2%;}
+.product2{width:31%;  border:1px #a0a0a0 solid;border-radius:15px; padding-top: 15px; padding-bottom: 2%; margin-top: 10px; margin-left: 5px;}
+.product_p{width:100%; }
+.product_txt{ width: 100%;line-height: 25px;}
+.product_txt2{width: 100%}
+.flex_r_c{display:flex;flex-direction: row;justify-content:center;}
+.zhongjian{ font-size: 25rpx;}
+.chuangshiren{font-size: 20rpx;}
+.mflq{ color: #e51d15; font-size: 30rpx; font-weight: 700;}
+.flex_c_c{display:flex;flex-direction:column;align-items:center;}
+.zs_title{ margin-bottom: 20px; padding-top: 20px;}
+.zs_title_b{font-size:24px;  font-weight: 700;}
+.zs_title_s{font-size:12px;}
+.color_hei{color: #000;}
+.color_fff{ color: #fff;}
+.img_width{width: 100%;}
+.zs_jjigou{ background-color: #fff; border-radius:15px; width: 90%; margin: 0 auto; padding: 10px 8px;}
+.moshi{ background-color: #fff; border-radius:15px; width: 90%; margin: 0 auto; padding: 10px 8px; margin-bottom: 8px;}
+.zs_jiejian{background-color: #fff; border-radius:15px; width: 86%; margin: 0 auto; padding: 15px 15px;}
+.zs_jiejian_txt{color: #101010; font-size: 14px; line-height: 21px; margin-top: 5px;}
+.zs_liuchen{ margin-top: 10px;margin-bottom: 60px;}
+
+/*商品*/
+.cont .pr:nth-child(even) {
+margin-bottom:10rpx;
+background:#f7f7f7;
+display:inline-block;
+width:48.5%; 
+margin-left: 1%;
+}
+.cont .pr:nth-child(odd) {
+margin-bottom:10rpx;
+background:#f7f7f7;
+display:inline-block;
+width:48.5%;
+margin-left:1%;
+}
+.co {
+  width: 100%;
+  background: #fff;
+  padding-top: 10rpx;
+  padding-bottom: 20rpx;
+}
+.cont .title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  line-height: 20px;
+  margin: 0;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding: 1% 5% 0 5%;
+
+}
+.brand_name{
+  background-color: #F2949C; width:50%;border-radius: 10px 0px 0px 10px; font-size:11px; color:#fff;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.goods_bottom{
+  display:flex;line-height:20px;color:#999;margin-bottom: 5px;justify-content:space-between;
+  margin-top: 5px;
+}
+.photo{
+  height:48.5vw;
+  width:48.5vw;
+
+}
+.hot_photo{
+  height:200rpx;
+  width:200rpx;
+  float:left;
+  margin:20rpx;
+  position: relative;
+}
+.goods_bottom{
+  display:flex;line-height:20px;color:#999;margin-bottom: 5px;justify-content:space-between;
+  margin-top: 5px;
+}
+.gmx {
+text-align: left;
+ font-size: 13px;
+  margin-left:5%; text-decoration:line-through;
+  white-space:nowrap;
+color: #999}
+.juli{
+text-align: left;
+ font-size: 13px;
+  margin-left:5%; 
+  white-space:nowrap;
+color: #999}
+.no_button {
+  font-size: 28rpx;
+  background-color: #f7f7f7;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  text-align: inherit;
+}
+button::after{
+border:none;
+}
+.jiaobiao{
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.cont{
+  background-color: #fff;
+  margin-top: 5px;
+  position: relative;
+}
+/*商品end*/
+/*底部*/
+.footfixed2 {
+position:fixed;
+bottom:20px;
+margin-left: 7%;
+background:#fe5e2c;
+/*border: 2px #fe5e2c solid;*/
+z-index:100;
+width:63%;
+font-size:18px;
+line-height: 48px;
+text-align: center;
+border-bottom-left-radius: 30px;
+border-top-left-radius: 30px;
+border-bottom-right-radius: 0px;
+border-top-right-radius: 0px;
+border:1px #e7e7e7 solid;
+color: #fff;
+}
+.footfixed3 {
+position:fixed;
+bottom:20px;
+margin-left: 68%;
+background:#02bf02;
+/*border: 2px #fe5e2c solid;*/
+z-index:100;
+width:25%;
+font-size:16px;
+line-height: 48px;
+text-align: center;
+border-bottom-left-radius: 0px;
+border-top-left-radius: 0px;
+border-bottom-right-radius: 30px;
+border-top-right-radius: 30px;
+color: #fff;
+border-right: 1px #e7e7e7 solid;
+border-top: 1px #e7e7e7 solid;
+border-bottom:1px #e7e7e7 solid;
+}
+.icon_wx{
+  width: 24px;
+  height:18px;
+  flex-shrink:0;
+  margin-right: 5px;
+}
+/*分享悬浮*/
+.fenxiang{
+width:40px;
+height:40px;
+right: 10px;
+top: 5px;
+padding: 0;
+margin: 0;
+border-radius:50%;
+background-color:#333;
+border:0px solid #fff;
+position: fixed;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+opacity: 0.8;
+}
+.shouye{
+width:70px;
+height:28px;
+left: 10px;
+top: 5px;
+padding: 0;
+margin: 5px;
+border-radius:30px;
+background-color:#333;
+border:0px solid #fff;
+position: fixed;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+opacity: 0.8;
+}
+.fenxiang_img{
+  width: 20px;
+  height:20px;
+}
+.shouye_img{
+  width: 16px;
+  height:16px;
+}
+/*首页/分享end*/
+/*弹出层css*/
+.couponLayerBox{
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  top:0rpx;
+  left: 0rpx;
+  opacity: 0;
+  z-index: 9;
+}
+.couponLayer{
+  width: 100%;
+  background-color: #fff;
+  position: fixed;
+  left: 0rpx;
+  bottom: 0rpx;
+  height: 30%;
+  z-index: 9999;
+  transform:translateY(100%);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.couponLayer .title{
+  height: 80rpx;
+  line-height: 80rpx;
+  padding:0 25rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.couponLayer .title .couponIcon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 18rpx;
+}
+.couponLayer .title text{
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #363636;
+}
+.couponLayer .title .close{
+  padding:20rpx;
+  width: 22rpx;
+  height: 22rpx;
+  float: right;
+  margin-top: 10rpx;
+}
+.couponLayer .title .close image{
+  margin-bottom: 30rpx;
+}
+.pl_con{
+  height: calc(100% - 91px);
+}
+.huifu_ico{
+height: 16px;
+width: 16px;
+}
+.del_pl{
+  height: 16px;
+  width: 16px;
+  margin-right: 10px;
+}
+.fenxiang_py{
+width:50px;
+height:50px;
+padding: 0;
+margin: 0;
+border-radius:50%;
+background-color:#02bf02;
+border:0px solid #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+opacity: 0.8;
+}
+
+.fenxiang_tp{
+width:50px;
+height:50px;
+padding: 0;
+margin: 0;
+border-radius:50%;
+background-color:#F7A93A;
+border:0px solid #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+opacity: 0.8;
+}
+.tuijian{
+left: 10px;
+top: 10px;
+padding: 3px 8px;
+margin: 0;
+position: fixed;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+background-color: #fff;
+opacity: 0.8;
+font-size: 14px;
+line-height: 24px;
+border-radius: 16px;
+}
+button::after{
+border:none;
+}
+.icon_wx{
+  width: 24px;
+  height:18px;
+  flex-shrink:0;
+}
+.icon_wx2{
+  width: 32px;
+  height:24px;
+  flex-shrink:0;
+}
+.icon_wx_pyq{
+  width: 32px;
+  height:32px;
+  flex-shrink:0;
+}
+/*弹出层css-end*/

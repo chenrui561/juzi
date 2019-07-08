@@ -33,14 +33,27 @@
       <span class="font_14 c3">添加项目</span>
       
   </navigator>-->
-  
-<picker   bindchange="bindPickerChange" value="{{index}}" range="{{yiyuan}}" class="qbdd mt10" >
+  <navigator url="../search/search?type_id=4&yy=1" class="qbdd mt10" >
+      <span class="font_14 c3">医院</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+        <text wx:if="{{tj_yiyuan_id > 0}}">{{tj_yiyuan_name}}</text>
+        <text wx:else>请选择医院</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </navigator>
+  <picker   bindchange="bindPickerChange_huodong" value="{{index}}" range="{{huodong}}" class="qbdd mt10" >
+      <span class="font_14 c3">是否参加活动</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+        <text class='xuanze_text' wx:if="{{is_huodong < 2}}">{{huodong[is_huodong]}}</text>
+        <text wx:else>请选择</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
+<!--<picker   bindchange="bindPickerChange" value="{{index}}" range="{{yiyuan}}" class="qbdd mt10" >
       <span class="font_14 c3">医院</span>
       <span class="fl_r c9 xuanze_box" hover-class="none"> 
         <text class='xuanze_text' wx:if="{{yiyuan_index > 0 }}">{{yiyuan[yiyuan_index]}}</text>
         <text wx:else>请选择医院</text>
         <image class='xuanze' src="/images/x_right.png"></image></span>
-  </picker>
+  </picker>-->
 
   <picker mode="date" value="{{dy_time}}" class="qbdd mt10"  bindchange="bindDateChange">
     <span class="font_14 c3">到院时间</span>
@@ -61,10 +74,10 @@
         </view>
       </view>
 
-    <view class="weui-cells__title">手机号</view>
+    <view class="weui-cells__title">手机号/身份证号</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
-        <input name="phone" type='number' bindinput='input_mobile' class="weui-input" maxlength="11" placeholder="客户的手机号" />
+        <input name="phone" type='number' bindinput='input_mobile' class="weui-input" maxlength="18" placeholder="客户的手机号/身份证" />
 
       </view>
     </view>
@@ -72,7 +85,7 @@
     <view class="weui-cells__title">预约项目备注</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
-        <textarea style="height: 100px;width: 100%;font-size: 14px;margin: 5px;" name="bz" bindinput='input_mobile' class=""  placeholder="请填写备注" />
+        <textarea maxlength="-1" style="height: 100px;width: 100%;font-size: 14px;margin: 5px;" name="bz" bindinput='input_mobile' class=""  placeholder="请填写备注" />
       </view>
     </view>
 

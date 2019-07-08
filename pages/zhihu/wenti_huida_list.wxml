@@ -1,2 +1,69 @@
-<!--pages/zhihu/wenti_huida_list.wxml-->
-<text>pages/zhihu/wenti_huida_list.wxml</text>
+<!--pages/zhihu/zhihu.wxml-->
+<view class='{{noscroll}}'>
+
+  <view class='title flex_s_l'>
+    <text class='wen_title'>{{title}}</text>
+    <text class='font_12 hui l_h20'>{{title_info}}</text>
+
+  </view>
+
+  <view class='flex_h'>
+    <view class='huida_btn'>邀请回答</view>
+    <navigator wx:if="{{my_huida.length > 0 && my_huida[0].type == 0 }}" url='/pages/zhihu/zhihu?aid={{my_huida[0].Id}}&wid={{wid}}' class='huida_btn' style='border-left: 1px #ccc solid;'>查看我的回答</navigator>  
+    <navigator wx:if="{{my_huida.length > 0 && my_huida[0].type == 1}}" url='/pages/zhihu/input?wid={{wid}}&hid={{my_huida[0].Id}}' class='huida_btn' style='border-left: 1px #ccc solid;'>查看我的草稿</navigator>
+    <navigator wx:if="{{my_huida.length == 0}}" url='../zhihu/input?wid={{wid}}&title={{title}}' class='huida_btn' style='border-left: 1px #ccc solid;'>写回答</navigator> 
+  </view>
+
+
+<!--邀请回答-->
+<view wx:if="{{hd_count == 0}}">
+  <view  class='guoqu_box'>
+    <view class='flex_s_l p10'>
+      <view class='yaoqing_text'>邀请回答</view>
+      <view class='yaoqing_text2'>您可以邀请下面用户，快速获得回答</view>
+    </view>
+<!--邀请用户-->
+  <view class='yaoqing_user'>
+    <view class='yaoqing_user_box flex_h_b'>
+        <view class='yaoqing_user_info flex_h'>
+            <image class='tx_img' src='https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLwy91cM7wGk9MwqKVsKrfVLWqtaUYx7fvQgFCMzjZ4AJbPOgKbgNMcuWklzTBOOEH5rqJphjb2eg/132'></image>
+            <view class='yaoqing_user_name flex_s_l'>
+              <view class='user_name'>安然</view>
+              <view class='yaoqing_text2'>最近回答过类似问题</view>
+            </view>
+        </view>
+        <view class='yaoqing_btn'>邀请</view>
+    </view>
+  </view>
+  </view>
+  <view class='no_huida'>暂时没有回答</view>
+</view>
+<!--邀请用户end-->
+<view wx:else>
+  <view class='flex_h_b l_h20 m10 font_14 hui'>
+    <text>{{hd_count}}个回答</text>
+    <picker>默认排序</picker>
+  </view>
+  <view class=''>
+    <navigator wx:for="{{huida_list}}" url='/pages/zhihu/zhihu?aid={{item.Id}}&wid={{item.wid}}' class='huati flex_s_l'>
+      <view class='huati_title'>{{item.title}}</view>
+      <view class='huati_info flex_h_b'>
+        <view class='huati_text'>{{item.jianjie}}</view>
+        <image wx:if="{{item.fengmian != ''}}" class='huati_img' mode='aspectFill' src='{{item.fengmian}}'></image>
+      </view>
+      <view class='huati_last flex_h_b'>
+        
+        <text>{{item.zan}}个赞同 · {{item.pl}}评论</text>
+      </view>
+    </navigator>
+  </view>
+</view>
+
+
+
+
+
+
+</view>
+
+

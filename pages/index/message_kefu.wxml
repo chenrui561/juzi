@@ -1,0 +1,52 @@
+<!--pages/index/message_kefu.wxml-->
+<scroll-view scroll-with-animation="true" scroll-y="true" scroll-top="{{top}}" bindscroll="bindscroll" class='message_list'>
+  <view class='message_info' wx:for="{{message_info}}">
+  <!--收客户发过来的消息，显示在屏幕左边-->
+    <view class='left' wx:if="{{item.fff == 0}}">
+      <navigator url='../user/detail?id={{item.user_id}}' class='user_info'>
+        <image src='{{item.tx_img}}' class='big_tx_img'></image>
+        <view class='font_12 l_h32'>{{item.passwd_answer}}【{{item.user_lei > 0 ? '会员':'直客'}}】</view>
+      </navigator>
+      
+      <view wx:if="{{item.type_id == 0}}" class='text_info2'>{{item.info}}</view>
+      <navigator url='../index/zhaoshang' wx:if="{{item.type_id == 5}}" class='text_info3'>{{item.info}}</navigator>
+      <navigator url='../index/index' wx:if="{{item.type_id == 6}}" class='text_info3'>{{item.info}}</navigator>
+      <view wx:if="{{item.type_id == 99}}" class='text_info2'>{{item.info}}</view>
+
+      <navigator url='../product/detail?productId={{item.goods_id}}' wx:if="{{item.type_id == 9 && item.goods_id > 0}}" class='text_info3'>{{item.info}}</navigator>
+      <navigator url='../jigou/jigou?jigou_id={{item.brand_id}}' wx:if="{{item.type_id == 9 && item.brand_id > 0 && item.goods_id == 0}}" class='text_info3'>点开机构/店铺</navigator>
+      <image class='m10' bindtap="big_img" data-bigimg="{{item.info}}" data-img="{{item.info}}" mode='aspectFill' wx:if="{{item.type_id == 8}}" src='{{item.info}}'></image>
+      <view class='font_11 bbb'>{{item.add_time}}</view>
+    </view>
+    <!--桔子的回复在右边-->
+    <view class='right' wx:if="{{item.fff == 1}}">
+      <view wx:if="{{brand_info[0].brand_logo}}" class='user_info' style='style="margin-right: 10px;"'>
+         <image src='http://www.juziyimei.com/data/brandlogo/{{brand_info[0].brand_logo}}' class='big_tx_img'></image>
+      </view>
+      <view wx:else class='user_info' style='style="margin-right: 10px;"'>
+         <image src='http://www.juziyimei.com/images/logo.png' class='big_tx_img'></image>
+      </view>
+     <image class='m10' bindtap="big_img" data-bigimg="{{item.info}}" data-img="{{item.info}}" mode='aspectFill' wx:if="{{item.type_id == 8}}" src='{{item.info}}'></image>
+      <view wx:if="{{item.type_id != 8}}" class='text_info'>{{item.info}}</view>
+      <view class='font_11 bbb mr5'>{{item.h_name}}回复于{{item.add_time}}</view>
+    </view>
+    
+  </view>
+</scroll-view>
+
+
+<!--<view class='input_bottom flex_h' style="padding-bottom:{{padding_bottom}}">
+  <input class='input' bindinput="input" confirm-type="send" bindconfirm="send_message" value='{{input_content}}'></input>
+  <view class='w12 flex_h_c'><icon class="iconfont icon-jia ico zan_cor jia"></icon></view>
+</view>-->
+
+<view class='input_bottom flex_h' >
+  <textarea style="margin-bottom:{{padding_bottom}}" class='input mt20' maxlength='-1' cursor-spacing="30" fixed="true" auto-height="true" bindinput="input" confirm-type="send" bindconfirm="send_message" value='{{input_content}}'></textarea>
+  <view bindtap='chooseImage' style="margin-bottom:{{padding_bottom}}" class='w12 flex_h_c mt20'><icon class="iconfont icon-jia ico zan_cor jia"></icon></view>
+</view>
+
+
+
+
+
+

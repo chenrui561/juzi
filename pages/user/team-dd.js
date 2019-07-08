@@ -2,38 +2,171 @@
 //index.js  
 //获取应用实例  
 var app = getApp();
+var util = require('../../utils/util.js');
 var common = require("../../utils/common.js");
 Page({
   data: {
     winWidth: 0,
     winHeight: 0,
+    now:'',
     // tab切换  
     currentTab: 0,
     isStatus: 'deliver',//10待付款，20待发货，30待收货 40、50已完成
     page: 0,
     type:1,
+    more0:'点击加载更多',
+    more1: '点击加载更多',
+    more2: '点击加载更多',
+    more3: '点击加载更多',
+    more4: '点击加载更多',
     user_lei:'',
+    genjin:0,//根据跟进时间排序
+    dy_date:0,//到院时间
     refundpage: 0,
+    genjin_states: ['全部状态', '需跟进', '无需跟进'],
+    genjin_states_id:0,
+    daoyuan_states_list:['全部','待到院','未到院'],
+    daoyuan_states:0,
+    jiesuan_states_list: ['全部', '已成交', '未成交'],
+    jiesuan2_states_list: ['全部'],
+    quxiao_states_list: ['全部'],
+    jiesuan_states:0,
     orderList0: [],
     orderList1: [],
     orderList2: [],
     orderList3: [],
     orderList4: [],
+    yy_time_start:'0',//预约时间开始
+    yy_time_end: '0',//预约时间结束
+    dy_time_start: '0',//到院时间开始
+    dy_time_end: '0',//到院时间结束
+    next_gj_time_start: '0',
+    next_gj_time_end: '0',
+    last_gj_time_start: '0',
+    last_gj_time_end: '0',
+    js_time_start: '0',
+    js_time_end: '0',
+  },
+  /**清空 */
+  qingkong:function(e){
+    this.setData({
+      yy_time_start: '0',//预约时间开始
+      yy_time_end: '0',//预约时间结束
+      dy_time_start: '0',//到院时间开始
+      dy_time_end: '0',//到院时间结束
+      next_gj_time_start: '0',
+      next_gj_time_end: '0',
+      last_gj_time_start: '0',
+      last_gj_time_end: '0',
+      js_time_start: '0',
+      js_time_end: '0',
+    })
+    this.loadOrderList();
+  },
+  /*预约时间查询 */
+  yy_time_start:function(e){
+    this.setData({
+      yy_time_start: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  yy_time_end: function (e) {
+    this.setData({
+      yy_time_end: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  dy_time_start: function (e) {
+    this.setData({
+      dy_time_start: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  dy_time_end: function (e) {
+    this.setData({
+      dy_time_end: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  next_gj_time_start: function (e) {
+    this.setData({
+      next_gj_time_start: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  next_gj_time_end: function (e) {
+    this.setData({
+      next_gj_time_end: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  last_gj_time_start: function (e) {
+    this.setData({
+      last_gj_time_start: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  last_gj_time_end: function (e) {
+    this.setData({
+      last_gj_time_end: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  js_time_start: function (e) {
+    this.setData({
+      js_time_start: e.detail.value
+    })
+    this.loadOrderList();
+  },
+  js_time_end: function (e) {
+    this.setData({
+      js_time_end: e.detail.value
+    })
+    this.loadOrderList();
   },
   onLoad: function (options) {
+    var now = util.formatTime(new Date());
     this.initSystemInfo();
     this.setData({
       currentTab: parseInt(options.currentTab),
       isStatus: options.otype,
       type:options.id,
+      now:now,
       user_lei: wx.getStorageSync('user_lei')
     });
+
     this.loadOrderList();
+  },
+  genjin:function(){
+    if(this.data.genjin == 0){
+      this.setData({
+        genjin: 1
+      })
+      this.loadOrderList();
+    }else{
+      this.setData({
+        genjin: 0
+      })
+      this.loadOrderList();
+    }
+  },
+  genjin_states: function (e) {
+    this.setData({
+      genjin_states_id: e.detail.value
+    })
+      this.loadOrderList();
+    
   },
   getOrderStatus: function () {
     return this.data.currentTab == 0 ? 1 : this.data.currentTab == 2 ? 2 : this.data.currentTab == 3 ? 3 : 0;
   },
-
+  bindDateChange:function(e){
+    var that = this;
+    this.setData({
+      dy_date: e.detail.value
+    })
+    this.loadOrderList();
+  },
   //取消订单
   removeOrder: function (e) {
     var that = this;
@@ -127,6 +260,24 @@ Page({
       }
     });
   },
+//筛选已预约的到院状态
+daoyuan_states:function(e){
+  var that = this;
+  this.setData({
+    daoyuan_states: e.detail.value,
+    jiesuan_states: 0
+  })
+  this.loadOrderList();
+},
+//筛选已到院的结算状态
+  jiesuan_states: function (e) {
+    var that = this;
+    this.setData({
+      daoyuan_states: 0,
+      jiesuan_states: e.detail.value
+    })
+    this.loadOrderList();
+  },
 
   loadOrderList: function () {
     wx.showLoading();//加载动画
@@ -137,8 +288,23 @@ Page({
       data: {
         uid: wx.getStorageSync('id'),
         order_type: that.data.isStatus,
-        page: that.data.page,
-        type: that.data.type
+        daoyuan_states: that.data.daoyuan_states,
+        jiesuan_states: that.data.jiesuan_states,
+        page: 1,
+        genjin_states_id: that.data.genjin_states_id,
+        genjin:that.data.genjin,
+        type: that.data.type,
+        dy_time:that.data.dy_date,
+        yy_time_start: that.data.yy_time_start,//预约时间开始
+        yy_time_end: that.data.yy_time_end,
+        dy_time_start: that.data.dy_time_start,
+        dy_time_end: that.data.dy_time_end,
+        next_gj_time_start: that.data.next_gj_time_start,
+        next_gj_time_end: that.data.next_gj_time_end,
+        last_gj_time_start: that.data.last_gj_time_start,
+        last_gj_time_end: that.data.last_gj_time_end,
+        js_time_start: that.data.js_time_start,
+        js_time_end: that.data.js_time_end,
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -149,30 +315,38 @@ Page({
         wx.hideLoading()//关闭加载动画
         var status = res.data.status;
         var list = res.data;
+        that.setData({
+          page:1
+        })
         switch (that.data.currentTab) {
           case 0:
             that.setData({
               orderList0: list,
+              count0:list.length
             });
             break;
           case 1:
             that.setData({
               orderList1: list,
+              count1: list.length
             });
             break;
           case 2:
             that.setData({
               orderList2: list,
+              count2: list.length
             });
             break;
           case 3:
             that.setData({
               orderList3: list,
+              count3: list.length
             });
             break;
           case 4:
             that.setData({
               orderList4: list,
+              count4: list.length
             });
             break;
         }
@@ -186,9 +360,116 @@ Page({
       }
     });
   },
+  /**
+  * 页面上拉触底事件的处理函数
+  */
+  onReachBottom: function () {
+    this.loadOrderList2();
 
 
+  },
 
+  loadOrderList2: function () {//下拉加载
+    wx.showLoading();//加载动画
+    var that = this;
+    wx.request({
+      url: app.d.anranUrl + '/index.php?c=indem&a=xcx_order_list',
+      method: 'post',
+      data: {
+        uid: wx.getStorageSync('id'),
+        order_type: that.data.isStatus,
+        daoyuan_states: that.data.daoyuan_states,
+        jiesuan_states: that.data.jiesuan_states,
+        page: that.data.page + 1,
+        genjin: that.data.genjin,
+        type: that.data.type,
+        dy_time: that.data.dy_date,
+        yy_time_start: that.data.yy_time_start,//预约时间开始
+        yy_time_end: that.data.yy_time_end,
+        dy_time_start: that.data.dy_time_start,
+        dy_time_end: that.data.dy_time_end,
+        next_gj_time_start: that.data.next_gj_time_start,
+        next_gj_time_end: that.data.next_gj_time_end,
+        last_gj_time_start: that.data.last_gj_time_start,
+        last_gj_time_end: that.data.last_gj_time_end,
+        js_time_start: that.data.js_time_start,
+        js_time_end: that.data.js_time_end,
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+
+      success: function (res) {
+        //--init data        
+        wx.hideLoading()//关闭加载动画
+        var status = res.data.status;
+        var list = res.data;
+        console.log(list.length);
+        that.setData({
+          page: that.data.page + 1
+        })
+        switch (that.data.currentTab) {
+          case 0:
+            that.setData({
+              orderList0: that.data.orderList0.concat(list),
+            });
+            if(list.length == 0){
+              that.setData({
+                more0: '没有更多'
+              })
+            }
+            break;
+          case 1:
+            that.setData({
+              orderList1: that.data.orderList1.concat(list),
+            });
+            if (list.length == 0) {
+              that.setData({
+                more1: '没有更多'
+              })
+            }
+            break;
+          case 2:
+            that.setData({
+              orderList2: that.data.orderList2.concat(list),
+            });
+            if (list.length == 0) {
+              that.setData({
+                more2: '没有更多'
+              })
+            }
+            break;
+          case 3:
+            that.setData({
+              orderList3: that.data.orderList3.concat(list),
+            });
+            if (list.length == 0) {
+              that.setData({
+                more3: '没有更多'
+              })
+            }
+            break;
+          case 4:
+            that.setData({
+              orderList4: that.data.orderList4.concat(list),
+            });
+            if (list.length == 0) {
+              that.setData({
+                more4: '没有更多'
+              })
+            }
+            break;
+        }
+      },
+      fail: function () {
+        // fail
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    });
+  },
   // returnProduct:function(){
   // },
   initSystemInfo: function () {
@@ -217,23 +498,23 @@ Page({
         currentTab: parseInt(current),
         isStatus: e.target.dataset.otype,
       });
-
-      //没有数据就进行加载
+      console.log(current)
+      //进行加载
       switch (that.data.currentTab) {
         case 0:
-          !that.data.orderList0.length && that.loadOrderList();
+          that.loadOrderList();
           break;
         case 1:
-          !that.data.orderList1.length && that.loadOrderList();
+          that.loadOrderList();
           break;
         case 2:
-          !that.data.orderList2.length && that.loadOrderList();
+          that.loadOrderList();
           break;
         case 3:
-          !that.data.orderList3.length && that.loadOrderList();
+          that.loadOrderList();
           break;
         case 4:
-          !that.data.orderList4.length && that.loadOrderList();
+          that.loadOrderList();
           break;
       }
     };

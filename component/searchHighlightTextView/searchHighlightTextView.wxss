@@ -1,0 +1,9 @@
+/* component/searchHilightTextView.wxss */
+
+
+.highlight {
+  color:#F14918;
+}
+.normal {
+  color: #484848;
+}

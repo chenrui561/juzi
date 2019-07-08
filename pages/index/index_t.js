@@ -235,7 +235,7 @@ close_choujiang:function(e){
       wx.setStorageSync('bd_id', bd_id)//把转发的人id写入缓存
       }
 
-    app.getOpenid().then(function (openid) {
+    /*app.getOpenid().then(function (openid) {
       if (openid == 66){
         that.setData({
           shouquan: 999,
@@ -246,7 +246,7 @@ close_choujiang:function(e){
           shouquan: 0
         });
       } 
-    });
+    });*/
     this.jiazai()
     
   },

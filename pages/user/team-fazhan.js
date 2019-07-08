@@ -68,10 +68,13 @@ Page({
         },
       });
     }
+    if (wx.getStorageSync('id') == '') {//如果缓存里面没有id，那就弹授权
+      that.setData({
+        shouquan: 0,
+      });
+    }
     if (hx_id > 0) { } else {//判断是否已经登录
-      app.getOpenid().then(function (openid) {
-
-
+     /* app.getOpenid().then(function (openid) {
         if (openid == 66) {
           that.setData({
             shouquan: 999
@@ -83,7 +86,7 @@ Page({
           });
         }
 
-      });
+      });*/
     }
     wx.showLoading();//加载动画
 
@@ -134,13 +137,15 @@ mf_done: function(e){
         }
         if (res.confirm) {//点击了确定，去支付
           wx.navigateTo({//绑定成功之后重新加载小程序，并回到首页
-            url: '../user/bd',
+            url: '../user/bd?type_id=' + type_id + '&id=' + id,
           })
         }
       }
     })
     return;
   }
+  console.log('真名' + rel_name);
+  console.log('手机' + mobile_phone);
   wx.request({
     url: app.d.anranUrl + '/index.php?m=default&c=indem&a=mf_qd_done',
     method: 'post',
@@ -195,29 +200,8 @@ mf_done: function(e){
     var off = e.currentTarget.dataset.off;
     var id = that.data.id;
     var type_id = that.data.type_id;
-    
     var rel_name = that.data.user_info.rel_name
     var mobile_phone = that.data.user_info.mobile_phone
-    console.log(rel_name)
-    if (rel_name == '' || mobile_phone == '') {
-
-      wx.showModal({//弹窗
-        content: "成为合作伙伴需要先完善用户信息，现在就去完善？",
-        showCancel: true,
-        confirmText: '确定',
-        success: function (res) {
-          if (res.cancel) {//点击了取消
-            return;
-          }
-          if (res.confirm) {//点击了确定，去支付
-            wx.navigateTo({//绑定成功之后重新加载小程序，并回到首页
-              url: '../user/bd?jf=1',
-            })
-          }
-        }
-      })
-      return;
-    }
     wx.showModal({//弹窗
       content: "确定成为桔子合作伙伴？",
       showCancel: true,

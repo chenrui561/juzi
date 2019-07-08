@@ -3,16 +3,28 @@ var app = getApp();
 Page({
   data:{
     page:1,
+    currentTab:0,
     productData:[],
+    shoucang_list:[],
   },
   onLoad:function(options){
-    this.loadProductData();
+    this.loadProductData2();//先加载回答
   },
   onShow:function(){
-    // 页面显示
+
+  },
+  change: function (e) {
+    this.setData({
+      currentTab: 0
+    })
+    this.loadProductData2();
+  },
+  change2: function (e) {
+    this.setData({
+      currentTab: 1
+    })
     this.loadProductData();
   },
-  
   removeFavorites:function(e){
     var that = this;
     var goodsid = e.currentTarget.dataset.goodsid;
@@ -81,5 +93,25 @@ Page({
       },
     });
   },
- 
+  loadProductData2: function () {
+    var that = this;
+    wx.request({
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=zhihu_shoucang_list',
+      method: 'post',
+      data: {
+        user_id: wx.getStorageSync('id'),
+
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+
+        that.setData({
+          shoucang_list: res.data.shoucang_list,
+        });
+        //endInitData
+      },
+    });
+  },
 });

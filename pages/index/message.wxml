@@ -1,0 +1,70 @@
+<!--pages/index/message.wxml-->
+<input wx:if="{{search == 1}}" class='search_input' placeholder="请输入您要搜索的内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+<view class='flex_h_b hui font_14 bg_white mt10 bbe font_weight p10'>
+  <text bindtap='doSearch'>通知列表</text>
+  <view bindtap='all_du'>全部已读</view>
+</view>
+<!--消息内容-->
+<view>
+<!--赞-->
+<block wx:for="{{list}}">
+<!--如果是咨询-->
+  <navigator url='/pages/index/message_kefu?open_id={{item.open_id}}&brand_id={{item.brand_id}}' wx:if="{{item.kid > 0}}"   class='flex padding bg_white w96'>
+      <view wx:if="{{item.kid > 0}}">
+        <image wx:if="{{item.tx_img}}" src='{{item.tx_img}}' class='big_tx_img'></image>
+        <icon wx:else class="iconfont icon-qunfengxiaoxitongzhi ico juzi_cor "></icon>
+      </view>
+      <view class='font_14 ml10 l_h24 flex_s_l bbe w100' >
+        <view  class="font_weight flex_h_b w100">
+          <text wx:if="{{item.kid > 0}}">{{item.passwd_answer}} </text>
+          <view wx:if="{{item.du == 0}}" class='dian'></view>
+          <view wx:if="{{item.fff == 0 && search_states == 0}}" class='whf'>未回复</view>
+        </view>
+        <text wx:if="{{item.fff == 0}}" class='hui'>{{item.passwd_answer}}向你咨询</text>
+        <text wx:if="{{item.fff == 1}}" class='hui'>客服回复</text>
+        <text wx:if="{{search_states == 0}}" class='ovh1'>{{item.info}}</text>
+        <!--跟进搜索内容变化标题颜色-->
+              <view wx:if="{{search_states == 1}}" class="search-result-item">
+                <searchHighlightTextView 
+                class="result-item" 
+                datas='{{search_info[index]}}' 
+                bindtap="chooseSearchResultAction" 
+                />
+              </view>
+           <!--跟进搜索内容变化标题颜色end--> 
+           
+           
+        <text class='font_12 bbb mb10'>{{item.add_time}}</text>
+      </view>
+  </navigator>
+
+
+
+  
+  <!--赞2-->
+  <view wx:else bindtap='onclick' data-hid='{{item.hid}}' data-type='{{item.type}}' data-id='{{item.id}}' class='flex padding bg_white w96'>
+    <view wx:if="{{item.type == 1}}"><icon class="iconfont icon-qunfengfuwuzhongxin ico zan_cor "></icon></view>
+    <view wx:if="{{item.type == 2 ||item.type == 3}}"><icon class="iconfont icon-qunfengxiaoxitongzhi ico pl_cor  "></icon></view>
+    <view wx:if="{{item.type == 4}}"><icon class="iconfont icon-qunfengcainixihuan ico guanzhu_cor "></icon></view>
+    <view wx:if="{{item.type == 5}}"><icon class="iconfont icon-qunfengyijianfankui ico yaoqing_cor  "></icon></view>
+    <view class='font_14 ml10 l_h24 flex_s_l bbe w100' >
+      <view  class="font_weight flex_h_b w100">
+        <text wx:if="{{item.type == 1}}">赞</text>
+        <text wx:if="{{item.type == 2 ||item.type == 3}}">评论与回复</text>
+        <text wx:if="{{item.type == 4}}">关注</text>
+        <text wx:if="{{item.type == 5}}">邀请</text>
+        <view wx:if="{{item.du == 0}}" class='dian'></view>
+      </view>
+      <text wx:if="{{item.type == 1}}" class='hui'>{{item.passwd_answer}}赞同了你的回答</text>
+      <text wx:if="{{item.type == 2}}" class='hui'>{{item.passwd_answer}}评论了你的回答</text>
+      <text wx:if="{{item.type == 3}}" class='hui'>{{item.passwd_answer}}回复了你的评论</text>
+      <text wx:if="{{item.type == 4}}" class='hui'>{{item.passwd_answer}}关注了你</text>
+      <text wx:if="{{item.type == 5}}" class='hui'>{{item.passwd_answer}}邀请你回答</text>
+      <text wx:if="{{item.type != 4 && item.kid == ''}}" class='ovh1'>{{item.title}}</text>
+      <text class='font_12 bbb mb10'>{{item.add_time}}</text>
+    </view>
+  </view>
+
+</block>
+  <view class='no_more' style='margin-bottom:20px;'>{{more}}</view> 
+</view>

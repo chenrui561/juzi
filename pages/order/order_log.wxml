@@ -1,0 +1,12 @@
+<!--pages/order/order_log.wxml-->
+<view class='flex_h font_14 l_h30 bg_white no_next_text p5 mt5'>
+  <view class='w20 ml10'>时间</view>
+  <view class='w80 ml10'>操作者</view>
+
+</view>
+<view wx:for="{{log}}" wx:key="{{key}}" class='flex_h font_14 l_h30 bg_white no_next_text p5 mt5'>
+  <view class='w20 ml10'>{{item.log_time}}</view>
+  <view class='w80 ml10 flex_h'>
+  <navigator url='../user/detail?id={{item.user_id}}' class='blue'>{{item.passwd_answer}}/{{item.rel_name}}</navigator>
+  {{item.action_note}}</view>
+</view>

@@ -14,5 +14,7 @@
 <web-view wx:if="{{web_type == 7}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=indem&a=xieyi"></web-view>
 <!--入驻协议-->
 <web-view wx:if="{{web_type == 8}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=indem&a=xieyi2"></web-view>
+<!--会员协议-->
+<web-view wx:if="{{web_type == 9}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=indem&a=xieyi3"></web-view>
 <!--数据统计-->
-<web-view wx:if="{{web_type == 99}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=indem&a=tongji"></web-view>
+<web-view wx:if="{{web_type == 99}}" src="https://www.juziyimei.com/mobile/index.php?m=default&c=indem&a=tongji&user_id={{user_id}}&yue=1"></web-view>

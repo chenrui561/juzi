@@ -12,6 +12,11 @@ page {
   position: fixed;
   width: 100%;
 }
+.juli{
+text-align: left;
+ font-size: 11px;
+  white-space:nowrap;
+color: #999}
 .weizhi{
   font-size: 13px;
   display: flex;

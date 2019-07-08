@@ -59,6 +59,8 @@
     background: #f2f2f2;
    /* padding: 4%;*/
     margin-bottom: 5px;
+    border-top: 1px #eee solid;
+    border-bottom: 1px #eee solid;
 }
 .shop checkbox{ 
     margin-top: 27px;
@@ -91,7 +93,7 @@
   border-radius: 5px;float:right;margin-right:0.5em;width: 25%;height: 2.2em;margin-top: 0.6em;text-align: center; line-height: 2.3em;background-color: #179B16;color: #fff;
 }
 .black_bnt2{
-  border-radius: 5px;float:right;margin-right:0.5em;width: 25%;height: 2.2em;margin-top: 0.6em;text-align: center; line-height: 2.3em;background-color: #ccc;color: #fff;
+  border-radius: 5px;float:right;margin-right:0.5em;width: 25%;height: 2.2em;margin-top: 0.6em;text-align: center; line-height: 2.3em;background-color: #F37A9C;color: #fff;
 }
 .sp_neb{
     width: 100%;

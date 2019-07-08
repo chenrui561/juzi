@@ -5,25 +5,28 @@
   <view class='yangshi sl'>姓名/手机</view>
   <view class='yangshi nick'>级别</view>
 
-  <view wx:for="{{goods_user}}" wx:key="key">
+  <navigator url='../user/detail?id={{item.user_id}}' wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.reg_time}}</view>
     <view class='yangshi2 sl'>{{item.passwd_answer}}/{{item.mobile_phone}}</view>
     <view wx:if="{{item.user_lei == 1}}" class='yangshi2 nick'>总监</view>
     <view wx:if="{{item.user_lei == 2}}" class='yangshi2 nick'>城市合伙人</view>
     <view wx:if="{{item.user_lei == 3}}" class='yangshi2 nick'>省联创</view>
-  </view>
+  </navigator>
 </view>
 <!--线上-->
 <view wx:if="{{team_type == 1}}">
-  <view class='yangshi shijian'>注册时间</view>
-  <view class='yangshi sl'>昵称</view>
-  <view class='yangshi nick'>手机</view>
+  <view class='yangshi shijian'>用户昵称</view>
+  <view class='yangshi sl'>注册时间</view>
+  <view class='yangshi nick'>手机号</view>
 
-  <view wx:for="{{goods_user}}" wx:key="key">
-    <view class='yangshi2 shijian'>{{item.reg_time}}</view>
-    <view class='yangshi2 sl'>{{item.passwd_answer}}</view>
+  <navigator url='../user/detail?id={{item.user_id}}' wx:for="{{goods_user}}" wx:key="key">
+    <view class='yangshi2 shijian flex_h'>
+      <image class='tx_img' src='{{item.tx_img}}'></image>
+      {{item.passwd_answer}}
+    </view>
+    <view class='yangshi2 sl'>{{item.reg_time}}</view>
     <view class='yangshi2 nick'>{{item.mobile_phone}}</view>
-  </view>
+  </navigator>
 </view>
 
 <!--收益-->
@@ -32,9 +35,9 @@
   <view class='yangshi sl'>项目金额</view>
   <view class='yangshi nick'>状态</view>
 
-  <view wx:for="{{goods_user}}" wx:key="key">
+  <navigator url='../user/detail?id={{item.user_id}}'  wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.reg_time}}</view>
     <view class='yangshi2 sl'>{{item.passwd_answer}}</view>
     <view class='yangshi2 nick'>{{item.mobile_phone}}</view>
-  </view>
+  </navigator>
 </view>

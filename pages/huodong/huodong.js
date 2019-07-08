@@ -112,6 +112,11 @@ Page({
         bd_id: bd_id
       });
     }
+    if (wx.getStorageSync('id') == '') {//如果缓存里面没有id，那就弹授权
+      that.setData({
+        shouquan: 0,
+      });
+    }
    /* if (anran_id > 0) {
           this.user_info();
           wx.hideLoading()//关闭加载动画
@@ -119,7 +124,7 @@ Page({
        } else {//判断是否已经登录
        */
       wx.hideLoading()//关闭加载动画
-      app.getOpenid().then(function (openid) {
+    /*  app.getOpenid().then(function (openid) {
 
         if (openid == 66) {
           that.setData({
@@ -136,7 +141,7 @@ Page({
           console.log(88)
         }
 
-      });
+      });*/
     //}
   },
 jianting_id:function(e){//每隔三秒检测一下状态，知道缓存里面有id为止

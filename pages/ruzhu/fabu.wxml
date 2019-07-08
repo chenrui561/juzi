@@ -1,0 +1,80 @@
+<!--pages/ruzhu/ruzhu.wxml-->
+<!--pages/user/bd.wxml-->
+<view class="page-body">
+<!--第一步-->
+  <form  bindsubmit="formSubmit" bindreset="formReset">
+  <picker bindchange="bindPickerChange2" value="{{index}}" range="{{lx_info}}" class="qbdd mt10" >
+      <span class="font_14 c3">是否公开</span>
+      <span class="fl_r c9 xuanze_box" hover-class="none"> 
+      <text class='xuanze_text' wx:if="{{lx < 9 }}">{{lx_info[lx]}}</text>
+      <text wx:else>请选择</text>
+        <image class='xuanze' src="/images/x_right.png"></image></span>
+  </picker>
+  <view class="page-section">
+  <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="name" class="weui-input" value='{{name}}' placeholder="请输入优惠名称" />
+      </view>
+    </view>
+  </view>
+  <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input type='digit' name="youhuijia" class="weui-input" value='{{youhuijia}}' placeholder="请输入优惠价" />
+      </view>
+    </view>
+  </view>
+   <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input type='digit' name="yuanjia" class="weui-input" value='{{yuanjia}}' placeholder="请输入原价" />
+      </view>
+    </view>
+  </view>
+   <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input type='digit' name="fandian" class="weui-input" value='{{fandian}}' placeholder="请输入预约金" />
+        
+      </view>
+    </view>
+  </view>
+ </view>
+
+ 
+
+ <!--<button style="margin-top:30px;width: 86%;color: #1aad19;background-color:#fff;" bindtap="chongxin">重新加载首页</button>-->
+<!--第二步-->
+<view >
+    <!-- 图片缩略图  -->
+    <view class="question-images">
+      <view class='img_text'>请上传优惠图片</view>
+      <!--循环上传图-->
+      <block wx:for="{{images}}" wx:key="key" >
+        <view wx:if="{{item != ''}}" class="q-image-wrap">
+          <image class="q-image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+          <view class="q-image-remover" data-idx="{{index}}" bindtap="removeImage"><image src='/images/X.png' style='width:20px;height:20px;'></image></view>
+        </view>
+        <view wx:else class='flex_s' >
+        <view class='up_img flex_s'>
+          <image src='/images/up.png' class='up_img_info' data-px='{{index}}' bindtap="chooseImage" ></image>
+        </view>
+        <text wx:if="{{index == 0}}" class='zizhi_text'>优惠头图（列表页显示建议为正方形）</text>
+        <text wx:if="{{index == 1}}" class='zizhi_text'>优惠详情图</text>
+      </view>
+      </block>
+       <!--循环上传图end-->
+      
+    </view>
+  <!--<view bindtap='shang1' class='shang'>预览</view>-->
+  
+  <button wx:if="{{goods_id > 0}}" style="margin-bottom:30px;width: 86%;color: #F14918;background-color:#fff;" formType="submit">修改</button>
+  <button wx:else style="margin-bottom:30px;width: 86%;color: #F14918;background-color:#fff;" formType="submit">提交</button>
+ </view>
+
+ 
+ </form>
+</view>
+
+

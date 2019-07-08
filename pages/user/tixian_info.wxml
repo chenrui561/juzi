@@ -1,5 +1,6 @@
 <!--pages/user/team-shouyi.wxml-->
 <!--线下-->
+<block wx:if="{{id > 0}}">
 <view class='cash user_info' wx:if="{{goods_user.cash_state == 1}}">当前状态：转账已完成</view>
 <view class='cash user_info' wx:if="{{goods_user.cash_state == 0}}">当前状态：未转账</view>
 <view class='cash user_info' wx:if="{{goods_user.cash_state == 2}}">当前状态：已拒绝</view>
@@ -44,7 +45,8 @@
     </view>
   </view>
 </view>
-<view class='user_info'>该用户的钱包信息</view>
+</block>
+<view class='user_info'>该用户当前的钱包信息</view>
 <view class="sc1 df">
         <view class="df_1 tc">
           <navigator url="../user/tixian" hover-class="none">

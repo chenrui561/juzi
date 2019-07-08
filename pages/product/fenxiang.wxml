@@ -1,0 +1,4 @@
+<!--pages/huodong/fenxiang.wxml-->
+
+<image mode='widthFix' class='img_url' bindtap='big_img' src='{{img_url}}'></image>
+<button bindtap='down' class='img_down' >{{fxfx}}</button>

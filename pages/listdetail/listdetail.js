@@ -6,11 +6,13 @@ Page({
     get_more:'',
     more:'下拉加载更多',
     ptype:'',
+    user_lei:'',
     title:'宠物美容学校',
     page:2,
     catId:0,
+    diqu_info_id:0,//地区
     type_id:'',
-    brandId: 0,
+    brand_id: 0,
     paixu:0 //排序规则，0：默认排序，1：按价格从低到高排序，2：按价格从高到低排序，3按优惠力度从大到小，4优惠从小到大，5预约数从多到少，6从少到多
   },
 showModal: function () {
@@ -121,7 +123,10 @@ price_px:function(){//按价格排序
     method: 'post',
     data: {
       page: page,
+      user_id: wx.getStorageSync('id'),
       type_id: type_id,
+      diqu_info_id: this.data.diqu_info_id,
+      brand_id: this.data.brand_id,
       cat_id: that.data.catId,
       paixu: paixu
     },
@@ -165,11 +170,13 @@ onLoad: function (options) {
       success: function() {
       },
     });
-
+  this.setData({
+    user_lei: wx.getStorageSync('user_lei'),
+  })
     //页面初始化 options为页面跳转所带来的参数
     var cat_id = options.cat_id;
     var ptype = options.ptype;
-    var brandId = options.brandId;
+  var brand_id = options.brand_id;
     var type_id = options.type_id;
     var that = this;
     var page = that.data.page;
@@ -178,7 +185,8 @@ onLoad: function (options) {
       ptype: ptype,
       catId: cat_id,
       type_id: type_id,
-      brandId: brandId
+      diqu_info_id: options.diqu_info_id,
+      brand_id: brand_id,
     })
     
    this.load();
@@ -195,7 +203,10 @@ onLoad: function (options) {
       method: 'post',
       data: {
         type_id: type_id,
+        brand_id: this.data.brand_id,
         page: 1,
+        diqu_info_id: this.data.diqu_info_id,
+        user_id: wx.getStorageSync('id'),
         paixu: paixu
       },
       header: {

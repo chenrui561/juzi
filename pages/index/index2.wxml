@@ -1,4 +1,5 @@
 <!-- index.wxmi -->
+<!--授权登录-->
 <view wx:if="{{shouquan == 0}}" class='shouquan'></view>
 <view class='shouquan_b' wx:if="{{shouquan == 0}}">
     <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
@@ -12,544 +13,83 @@
   </navigator>
   <image bindtap='close_choujiang' mode='aspectFit' class='zhuanpan_close' src='/images/close.png'></image>
 </view>
-
-<view class="page {{none_1}}">
-<!--首页头部-->
-    <view class='index_head'>
-    <view class="fx_box {{f_fenxiang==0 ? 'contrl' : 'contrl_none'}}"><text class='fx_box1'>分享给好友，可获得好友消费的2%~15%分享奖励哦</text><button class='fx_box2' open-type="share">分享</button></view> 
-          <view class='index_sousuo'>
-              <view class='weizhi'>
-                <text>{{city}}</text>
-                <image class='down' src='/images/down.png' ></image>
-              </view>
-              <navigator url='../search/search-rj' class='search'>
-                <image class='search_img' src='/images/search.png'></image>
-                <text class='search_text'>搜索日记</text>
-              </navigator>
-          </view>
-<scroll-view scroll-x class="swiper-tab" >
-            <view class="swiper-tab-list {{cat_id==item.cat_id ? 'swiper-tab-color' : ''}} " wx:for="{{category_list}}" wx:key="key" bindtap="r_change" data-current="{{item.sort_order}}" data-catid="{{item.cat_id}}">{{item.cat_name}}</view>
-            <view class="swiper-tab-list {{cat_id==item.cat_id ? 'swiper-tab-color' : ''}} "  wx:if="{{user_lei == 99}}" bindtap="r_change" data-current="{{item.sort_order}}" data-catid="9999">用户上传的日记</view>
-          <!-- <view class="swiper-tab-list" data-current="1"  bindtap="swichNav">桔子购</view> 
-            <view class="swiper-tab-list {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">眼睛</view>
-            <view class="swiper-tab-list {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3"  bindtap="indexChange">鼻子</view>
-            <view class="swiper-tab-list {{z_index==4 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">面部</view> --> 
-          </scroll-view>
-          <!--小喇叭开始   -->    
-                <swiper class='laba_h' indicator-dots="{{indicatorDots}}" vertical="true"  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-                    <block wx:for="{{laba}}" wx:key="key">
-                      <swiper-item catchtouchmove="stopTouchMove">
-                      <image style='width:20px;height:20px;float:left; margin:10px 5px 12px 15px;' src="http://www.juziyimei.com/mobile/themes/default/gl_img/laba.gif"></image>
-                        <text class='laba'>{{item.title}}</text>
-                      </swiper-item>
-                    </block>
-                </swiper>
-        </view>
-        
-<!--首页头部end-->
-<!--瀑布流加载的隐藏部分-->
-  <view style="display:none">
-    <image wx:for="{{images}}"  wx:key="id" id="{{item.id}}" src="{{item.pic}}" bindload="onImageLoad"></image>
-  </view>
-<!--瀑布流加载的隐藏部分-->
-        <!--<view class='fx_box'><text class='fx_box1'>{{fenxiang}}</text><button class='fx_box2' open-type="share">分享</button></view> -->
-            <view scroll-y="true"  bindscrolltolower="loadImages" class="scoll-h2  {{f_fenxiang==0 ? 'scoll-h-c' : ''}} {{z_index==1 ? 'z_index2' : 'z_index1'}}" scroll-y="true"  >
-                
-
-<view class='list'>
-<!--瀑布流开始-->
-  <view style="width:100%">
-    <view class="img_item">
-      <navigator url='../question-ask/anli?aid={{item.id}}&uid={{item.user_id}}' class='ban' wx:for="{{col1}}" wx:key="id">
-        <image src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
-        <view class="act-item ellipsis_title">{{item.content}}</view>
-            <view wx:if="{{item.goods_name}}" class='xiangmu'>
-                <text class='xiangmu_name'>{{item.goods_name}}</text>
-                <text style='margin-right:5px; color:#F14918;'>￥{{item.juzi_price}}</text>
-              </view>
-
-              <view class='touxiang' >
-                <view style="display: flex;">
-                  <image wx:if="{{item.tx_img == ''}}" style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="http://www.juziyimei.com/mobile/themes/default/user_images/head.png"></image>
-                  <image wx:else style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="{{item.tx_img}}"></image>
-                  <text class='list_name'>{{item.nick_name}}</text> 
-                </view>
-                <view style="display: flex;margin-right: 8px;">
-                  <image style='width:16px;height:16px;border-radius:50%;margin:0 10rpx;' src="/images/xin.png"></image>
-                  <text style="color:#999;font-size:11px;">{{item.zan}}</text> 
-                </view>
-              </view> 
-      </navigator>
-    </view>
-    <view class="img_item">
-      <navigator url='../question-ask/anli?aid={{item.id}}&uid={{item.user_id}}' class='ban' wx:for="{{col2}}" wx:key="id">
-        <image src="{{item.pic}}" style="width:100%;height:{{item.height}}px"></image>
-        <view class="act-item ellipsis_title">{{item.content}}</view>
-            <view wx:if="{{item.goods_name}}" class='xiangmu'>
-                <text class='xiangmu_name'>{{item.goods_name}}</text>
-                <text style='margin-right:5px; color:#F14918;'>￥{{item.juzi_price}}</text>
-              </view>
-
-              <view class='touxiang' >
-                <view style="display: flex;">
-                  <image wx:if="{{item.tx_img == ''}}" style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="http://www.juziyimei.com/mobile/themes/default/user_images/head.png"></image>
-                  <image wx:else style='width:20px;height:20px;border-radius:50%;margin:0 10rpx;' src="{{item.tx_img}}"></image>
-                  <text class='list_name'>{{item.nick_name}}</text> 
-                </view>
-                <view style="display: flex;margin-right: 8px;">
-                  <image style='width:16px;height:16px;border-radius:50%;margin:0 10rpx;' src="/images/xin.png"></image>
-                  <text style="color:#999;font-size:11px;">{{item.zan}}</text> 
-                </view>
-              </view> 
-      </navigator>
-    </view>
-</view>
-<!--瀑布流结束-->
-    </view>        
-
-
-            </view>
-<!--第一页结束-->
-
-  </view>
-
+<!--授权登录end-->
  <!-- 商城页面开始-->
-<view class="page {{none_3}}">
+<view  class="page">
 <!--首页头部-->
     <view class='index_head'>
-    <view class="fx_box {{f_fenxiang==0 ? 'contrl' : 'contrl_none'}}"><text class='fx_box1'>分享给好友，可获得好友消费的2%~15%分享奖励哦</text><button class='fx_box2' open-type="share">分享</button></view> 
           <view class='index_sousuo'>
-              <view class='weizhi'>
-                <text>武汉市</text>
-                <image class='down' src='/images/down.png' ></image>
-              </view>
-              <navigator url='../search/search' class='search'>
+              <navigator url='../search/search-zhihu' class='search'>
                 <image class='search_img' src='/images/search.png'></image>
-                <text class='search_text'>搜索项目</text>
+                <text class='search_text'>搜索您感兴趣的话题</text>
               </navigator>
           </view>
-<scroll-view wx:if="{{user_lei > 0}}" scroll-x class="swiper-tab">
-             <!--<view class="swiper-tab-list {{z_index==1 ? 'swiper-tab-color' : ''}} " bindtap="indexChange" data-current="1">首页</view>
-         <view class="swiper-tab-list" data-current="1"  bindtap="swichNav">桔子购</view>-->
-            <view class="swiper-tab-list2 {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">找优惠</view>
-            <view class="swiper-tab-list2 {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3"  bindtap="indexChange">找机构</view>
-            <view class="swiper-tab-list2 {{z_index==4 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">找医生</view>  
-          </scroll-view>
-        </view>
-<!--首页头部end-->
+  <!--<view class='flex_h'>
+    <scroll-view scroll-x class="swiper-tab">
+                <view class="swiper-tab-list {{z_index==1 ? 'swiper-tab-color' : ''}} " bindtap="indexChange" data-current="1">首页</view>
+            <view class="swiper-tab-list" data-current="1"  bindtap="swichNav">桔子购</view>
+                <view class="swiper-tab-list2 {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">推荐 </view>
+                <view class="swiper-tab-list2 {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3"  bindtap="indexChange">美发</view>
+                <view class="swiper-tab-list2 {{z_index==4 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">美容</view>
+                <view class="swiper-tab-list2 {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="5"  bindtap="indexChange">微整形</view>
+                <view class="swiper-tab-list2 {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="5"  bindtap="indexChange">抗衰老</view>
+                <view class="swiper-tab-list2 {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="5"  bindtap="indexChange">医疗美容</view>
+                <view class="swiper-tab-list2 {{z_index==5 ? 'swiper-tab-color' : ''}}" data-current="5"  bindtap="indexChange">皮肤管理</view>
+              </scroll-view>
+              
+              <view class='jiahao'>
+                <view  class='left_yy' style='background-image: url(https://www.juziyimei.com/images/left.png);'></view>
+                <image style='width:20px;height:20px;' src='/images/jiahao.png'>
+              </image></view>
+   </view>-->
 
-<!--瀑布流加载的隐藏部分-->
-        <!--<view class='fx_box'><text class='fx_box1'>{{fenxiang}}</text><button class='fx_box2' open-type="share">分享</button></view> 
-            <view wx:if="{{new_page == 1}}" scroll-y="true"  bindscrolltolower="loadImages" class="scoll-h  {{f_fenxiang==0 ? 'scoll-h-c' : ''}} {{z_index==1 ? 'z_index2' : 'z_index1'}}" scroll-y="true"  >
-        
-            </view>-->
+</view>
+<!--首页头部end-->
+<!--内容-->   
+<view  class='huati_list'>
+  <navigator wx:for="{{zhihu_index}}" url='/pages/zhihu/zhihu?aid={{item.id}}&wid={{item.wid}}' class='huati flex_s_l'>
+    <form bindsubmit='formid' report-submit="true">
+    <button formType="submit" class='no_button'>
+      <view class='huati_title'>
+        <view class='wenioc'><image class="wenioc_img" src="/images/wen.jpg"></image></view>
+        <view class='wentitle'>{{item.title}}</view>
+      </view>
+      <view class='huidalist'>
+        <view class='huidalist_f'>
+          <view class='wenioc'><image class='wenioc_img' src='/images/huida.jpg'></image></view>
+          <view class='huati_text'>{{item.jianjie}}</view>
+        </view>
+        <image wx:if="{{item.fengmian != ''}}" class='huati_img' mode='aspectFill' src='{{item.fengmian}}'></image>
+      </view>
+      <view wx:if="{{item.id > 0}}" class='huati_last flex_h_end'>
+       
+        <view class='quesion_list'><image class='quesion_ico' src='/images/pinlun.jpg'></image>{{item.pl}}</view>
+        <view class='quesion_list' style='margin-right:0;'><image class='quesion_ico' src='/images/dianzan.jpg'></image>{{item.zan}}</view>
+      </view>
+      <view wx:else class='huati_last flex_h_b'>
+        <text>暂时没有人回答该问题，期待您的回答</text>
+      </view>
+      </button>
+    </form>
+  </navigator>
+ 
+<!--<navigator wx:for="{{zhihu_nobody}}" wx:for-item="item2" url='/pages/zhihu/zhihu?wid={{item2.wid}}' class='huati flex_s_l'>
+    <view class='huati_title'>{{item2.title}}</view>
+    <view class='huati_last'>0关注</view>
+</navigator>-->
+
+</view>
+<view  class='no_more' style='margin-bottom:50px;'>{{more}}</view>
+
+<navigator url='/pages/up_anli/question-ask?type_id=2' class='fabu'><image style='width:20px;height:20px;' src='/images/fabu.png'></image></navigator>
 <!--第一页结束-->
 <!--找优惠-开始-->
-<view wx:if="{{new_page == 2 }}" scroll-y="true" lower-threshold="100" bindscrolltolower="index2_jiazai" class="   {{f_fenxiang==0  ? 'scoll-h-c' : ''}} {{z_index==2 ? 'z_index2' : 'z_index1'}} {{user_lei == 0 ? 'scoll-h2' : 'scoll-h'}}">
-<!--banner开始-->  
-                <swiper style='height:{{banner_height}}px;' indicator-dots="{{indicatorDots}}"  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-                    <block wx:for="{{imgUrls}}" wx:key="key">
-                    <navigator url='{{item.url}}'>
-                      <swiper-item>
-                      
-                        <image src="{{item.photo}}" class="slide-image" width="100%" height="200"  />
-                       
-                      </swiper-item>
-                       </navigator>
-                    </block>
-                </swiper>
-                <!--banner结束-->  
 
-<!--分类-->
-  <swiper style='height: 170px;background-color: #fff;' class='' indicator-active-color="#F14918" indicator-dots="true" interval="{{interval}}" duration="{{duration}}">
-             <swiper-item>
-                    <view class='lx_icon'  >
-                      <navigator wx:for="{{category_list1}}" wx:key="key" url="../listdetail/listdetail?type_id={{item.cat_id}}&title={{item.cat_name}}"><image class='yuan' src="{{item.url}}" ></image><view class='yuan_text'>{{item.cat_name}}</view></navigator>
-                     
-                      </view>
-                      <view class='lx_icon' style=' ' >
-                      <navigator wx:for="{{category_list2}}" wx:key="key" url="../listdetail/listdetail?type_id={{item.cat_id}}&title={{item.cat_name}}"><image class='yuan' src="{{item.url}}" ></image><view class='yuan_text'>{{item.cat_name}}</view></navigator>
-                    </view> 
-                    </swiper-item>
-                    <swiper-item>
-                    <view class='lx_icon' >
-                     <navigator wx:for="{{category_list3}}" wx:key="key" url="../listdetail/listdetail?type_id={{item.cat_id}}&title={{item.cat_name}}"><image class='yuan' src="{{item.url}}" ></image><view class='yuan_text'>{{item.cat_name}}</view></navigator>
-
-                      </view>
-                      <view class='lx_icon' style=' ' >
-         <navigator wx:for="{{category_list4}}" wx:key="key" url="../listdetail/listdetail?type_id={{item.cat_id}}&title={{item.cat_name}}"><image class='yuan' src="{{item.url}}" ></image><view class='yuan_text'>{{item.cat_name}}</view></navigator>
-                    </view>
-                    </swiper-item>
-          </swiper>
-
-<!--活动位置-->
-<view wx:if="{{huodong_img == 1}}" class='huodong_img flex_h'>
-  <navigator url='{{huodong_info[0].url}}' class='huodong_nav1'>
-    <image class='huodong_img1' mode='aspectFill' src='{{huodong_info[0].photo}}'></image>
-  </navigator>
-  <view  class='huodong_nav2'>
-    <navigator url='{{huodong_info[1].url}}' class='huodong_nav3' >
-      <image class='huodong_img2' mode='aspectFill' src='{{huodong_info[1].photo}}'></image>
-    </navigator>
-    <navigator url='{{huodong_info[2].url}}' class='huodong_nav3'>
-      <image class='huodong_img2' mode='aspectFill' src='{{huodong_info[2].photo}}'></image>
-    </navigator>
-  </view>
-</view>
-<!--活动位置-->
-
-  <view  class="cont" wx:for="{{xzzzp}}" wx:key="key">
-                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
-                            
-                            <image class="hot_photo" mode='aspectFill' src="http://www.juziyimei.com/{{item.goods_img}}">
-                              <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
-                            </image>
-                            <view class="hot_title">{{item.goods_name}}</view>
-                            
-                            <view style="display:flex;line-height:32rpx;color:#999;margin-top:5px;">
-                              <view class="gmxx" style="font-size:28rpx;">
-                                  <view style="display:flex;line-height:32rpx;color:#999">
-                                    <view style="float: right;font-size: 12px;display: flex;align-items: center;">
-                                      <text>{{item.brand_name}}</text> 
-                                    </view>
-                                  </view>  
-                              </view>
-                            </view>
-                            <view style="display:flex;font-size: 12px;line-height:32rpx;color:#999;justify-content:space-between;">
-                                  <text>预约数：{{item.yy_num}}</text>
-                                  <text wx:if="{{u_info.user_lei == 99 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_3}}/{{item.huodong_2}}/{{item.huodong_1}}</text> 
-                                 <text wx:if="{{u_info.user_lei == 99 && item.is_huodong == 0}}" >返佣：{{item.level_3}}%/{{item.level_2}}%/{{item.level_1}}%</text> 
-                                  <text wx:if="{{u_info.user_lei == 3 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_1}}</text> 
-                                  <text wx:if="{{u_info.user_lei == 2 && item.is_huodong == 1}}">返佣：￥{{item.huodong_2}}</text>  
-                                  <text wx:if="{{u_info.user_lei == 1 && item.is_huodong == 1}}">返佣：￥{{item.huodong_3}}</text> 
-                                  <text wx:if="{{u_info.user_lei == 3 && item.is_huodong == 0}}" >返佣：{{item.level_1}}%</text> 
-                                  <text wx:if="{{u_info.user_lei == 2 && item.is_huodong == 0}}">返佣：{{item.level_2}}%</text>  
-                                  <text wx:if="{{u_info.user_lei == 1 && item.is_huodong == 0}}">返佣：{{item.level_3}}%</text>
-                            </view>
-                            <view style="display:flex;line-height:50rpx;margin-top:3px;">
-                                  <view style="float: right;font-size: 12px;display: flex;align-items: center; color:#999;">
-                                      桔子价:
-                                    </view>
-                                  <view class="gmxx" style="  color: red;">¥ {{item.juzi_price}}</view>
-                                  <view class="gmx">¥ {{item.market_price}}</view> 
-                              </view>
-                          </navigator>
-                    </view>
-                   <view  class='no_more' style='margin-bottom:70px;'>{{more}}</view>
-</view>
 <!--第二页-找优惠-开始-->
-<!--第三页-找机构-开始-->
-<view wx:if="{{new_page == 3}}" scroll-y="true" class="scoll-h {{f_fenxiang==0 ? 'scoll-h-c' : ''}} {{z_index==3 ? 'z_index2' : 'z_index1'}}">
-<view  class="cont" wx:for="{{jigou}}" wx:key="key">
-                        <navigator class='jigou_lb'>
-                                <view class="jigou_address">
-                                  <image src='http://www.juziyimei.com/mobile/themes/default/gl_img/laba.gif' class='jigou_address_img'></image>
-                                  <view class='jigou_jj' >{{item.brand_desc}}</view>
-                                </view>
-                          </navigator>
-                          <navigator  class="pr3" url="../jigou/jigou?jigou_id={{item.brand_id}}" hover-class="changestyle">
-                            <image class="yiyuan_photo" mode='aspectFit' src="http://www.juziyimei.com/data/brandlogo/{{item.brand_logo}}"></image>
-                            <view class='jigou_right_info'>
-                          
-                                <view class="jigou_title">{{item.brand_name}}</view>
-                                <view class="jigou_address">
-                                  <text>0位专家 | {{item.count_anli}}篇日记 | {{item.count_xiangmu}}项预约</text>
-                                </view>
-                                <view class="jigou_address">
-                                <text wx:if="{{u_info.user_lei == 99}}">返佣：{{item.level_3}}/{{item.level_2}}/{{item.level_1}}</text>
-                                <text wx:if="{{u_info.user_lei == 1}}">返佣：{{item.level_3}}</text>
-                                <text wx:if="{{u_info.user_lei == 2}}">返佣：{{item.level_2}}</text>
-                                <text wx:if="{{u_info.user_lei == 3}}">返佣：{{item.level_1}}</text>
-                                  <!--<image src='/images/address.png' class='jigou_address_img'></image>
-                                  <text class='jigou_address_text'>{{item.address}}</text>-->
-                                </view>
-                                
-                              
-                            </view>
-                          </navigator>
-                         <!-- <navigator class='jigou_yy'>
-                                <view class='chakan_yy'>查看全部{{item.count_xiangmu}}项预约</view>
-                          </navigator>-->
-                    </view>
-                    <!--<navigator url='/pages/ruzhu/ruzhu' class='fabu'><image style='width:20px;height:20px;' src='/images/ruzhu.png'></image></navigator>-->
-                    <view class='l_h60'></view>
-</view>
-<!--第三页-找机构-结束-->
 <!--第四页-找医生-开始-->
-<view wx:if="{{new_page == 4}}" scroll-y="true" class="scoll-h {{f_fenxiang==0 ? 'scoll-h-c' : ''}} {{z_index==4 ? 'z_index2' : 'z_index1'}}">
-<view  class="cont" wx:for="{{yisheng}}" wx:key="key">
-                       
-                          <navigator  class="pr3" url="../jigou/yisheng?yisheng_id={{item.d_id}}" hover-class="changestyle">
-                            <image class="yiyuan_photo" mode='aspectFit' src="{{item.d_img}}"></image>
-                            <view class='jigou_right_info'>
-                          
-                                <view class="yisheng_name">
-                                    <text> {{item.name}}</text>
-                                    <image class='renzheng' src='/images/renzheng.png' ></image>
-                                    
-                                </view>
-                                <view class="jigou_address">
-                                      <text>{{item.brand_name}}</text>
-                                    </view>
-                                <view class="jigou_address">
-                                  <text>擅长项目：{{item.xiangmu}}</text>
-                                </view>
-                                <view class="jigou_address ovh1">
-                                  <text class="ovh1">简介：{{item.info}}</text>
-                                </view>
-                                
-                                
-                              
-                            </view>
-                          </navigator>
-                         <!-- <navigator class='jigou_yy'>
-                                <view class='chakan_yy'>查看全部{{item.count_xiangmu}}项预约</view>
-                          </navigator>
-                          <view class='l_h60'></view>-->
-                    </view>
-                    
-  <view  class='no_more'>没有更多</view>
-</view>
 <!--第四页-找医生-结束-->
 </view>
-  <!--百科页面开始-->
-<view class='page {{none_4}}'>
-<view class="search_no"> 
-  <view class="font_14"><image class="scimg" src='/images/search_no.png' ></image></view>
-  <text>桔子百科正在建设中...</text>
-</view>
-   
-</view>
-
-  <!--我的页面开始-->
-  <view class="page {{none_2}}">
-    <view url="../user/bd" class="userinfo">
-      <view class='user_qr'>
-          <view bindtap='qr' style='background-image:url(https://www.juziyimei.com/images/qr.png);' class='qr_img'><image src='{{qr_img}}' style='display:none;'></image></view>
-          <navigator url="../user/bd" wx:if="{{u_info.mobile_phone == '' && u_info.user_lei == 0}}" class='huiyuan' >游客  ></navigator>
-          <navigator url="" wx:if="{{u_info.user_lei == 0 && u_info.mobile_phone !== ''}}" class='huiyuan' >用户  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 1}}" class='huiyuan' >总监  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 2}}" class='huiyuan' >城市合伙人  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 3}}" class='huiyuan' >省联创  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 9}}" class='huiyuan' >医院  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 10}}" class='huiyuan' >内部员工  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 99}}" class='huiyuan' >管理员  ></navigator>
-      </view>    
-          <navigator wx:if="{{mobile_phone}}" url='../user/bd' class='user_info'>
-            <image class="userinfo-avatar fl_l" src="{{u_info.tx_img}}" background-size="cover"></image>
-            <view class='user_text'>
-              <text class="fl_l" style="font-size: 16px;line-height:20px;" >{{u_info.nick_name}}</text>
-              <text  class="fl_l" style="font-size: 14px;line-height:20px;" >{{mobile_phone}}</text>
-            </view>
-          </navigator>
-          <navigator wx:else url='../user/bd' class='user_info'>
-            <image class="userinfo-avatar fl_l" src="{{u_info.tx_img}}" background-size="cover"></image>
-            <view class='user_text'>
-              <text class="fl_l" style="font-size: 16px;line-height:20px;" >{{u_info.nick_name}}</text>
-           
-              <text class="fl_l" style="font-size: 14px;line-height:20px;" >您还未绑定手机号</text>
-            </view>
-          </navigator>
-      </view>
-    <view class="sc1 df">
-        <view class="df_1 tc">
-          <navigator url="../user/quan" hover-class="none">
-            <view class='cash'>{{b_count}}</view>
-            <text>优惠券</text>
-          </navigator>
-        </view>
-        <view class="df_1 tc">
-          <navigator url="../user/team-shouyi" hover-class="none">
-            <view class='cash'><text style="font-size:11px;">￥</text>{{all_money}}</view>
-            <text>钱包余额</text>
-          </navigator>
-        </view>
-    </view> 
-    <!--订单详情-->
-    <view class="qbdd" style='border-bottom: 1px solid #f2f2f2'>
-    <span class="font_14 c3">我的订单</span>
-    <navigator class="fl_r c9 font_12 l_h20" url="../user/dingdan?currentTab=0" hover-class="none" >全部订单 <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span></navigator>
-    </view>
-    <view class="sc df tc " style='margin:0px 10px'>
-    <navigator class="df_1" url="../user/dingdan?currentTab=0&otype=pay" hover-class="none" >
-        <view > 
-        <image class='dd_box' src="/images/dfk.png"><view wx:if="{{count1 > 0}}" class='car_count juzi_cor'>{{count1}}</view></image> 
-       </view>
-        <text class="font_12">待付款<text style="color:red"></text></text>
-      </navigator>
-
-     <navigator class="df_1" url="../user/dingdan?currentTab=1&otype=deliver" hover-class="none" >
-      <view><image class='dd_box' src="/images/dfh.png"><view wx:if="{{count2 > 0}}" class='car_count juzi_cor'>{{count2}}</view></image></view>
-        <text class="font_12">已预约</text>      
-      </navigator> 
-
-      <navigator class="df_1" url="../user/dingdan?currentTab=2&otype=receive" hover-class="none" >
-          <view><image class='dd_box' src="/images/dpl.png"><view wx:if="{{count3 > 0}}" class='car_count juzi_cor'>{{count3}}</view></image></view>
-          <text class="font_12">已完成<text style="color:red"></text></text>
-      </navigator>
-
-    <navigator class="df_1" url="../user/dingdan?currentTab=3&otype=finish" hover-class="none" >
-          <view><image class='dd_box' src="/images/tksh.png"><view wx:if="{{count4 > 0}}" class='car_count juzi_cor'>{{count4}}</view></image></view>
-          <text  class="font_12">已取消<text style="color:red"></text></text>
-      </navigator>
-
-    
-    <!--<navigator class="df_1" url="../user/dingdan?currentTab=4&otype=fenxiang" hover-class="none" >
-          <view><image src="/images/tksh.png"></image></view>
-          <text class="font_12">拼团订单<text style="color:red"></text></text>
-       </navigator>-->
-    </view>
 
 
 
-<navigator url="../cart/cart" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
- <view >
-    <span class="font_14 c3">购物车</span>
-    <span class="fl_r c9" hover-class="none"> {{count_car}}<image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-
-<navigator url="/pages/user/shoucang" class="qbdd" style='margin:10px 10px 0px 10px'>
- <view >
-    <span class="font_14 c3">我的收藏</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-<navigator url="/pages/user/my-anli" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">我的日记</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>  
-<navigator wx:if="{{u_info.user_lei == 0}}" url="../user/team-user?team_type=1" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">我的推荐</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>  
-<navigator url="/pages/up_anli/question-ask?type_id=1 " class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">用户反馈</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>  
-
-<button open-type="share" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">分享给朋友</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</button>  
-
-
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="/pages/user/yy" class="qbdd" style='margin:10px 10px 0px 10px'>
- <view >
-    <span class="font_14 c3">客户预约</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="../up_anli/down" class="qbdd" style='border-bottom-left-radius: 0rpx;border-bottom-right-radius: 0rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">案例下载</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator> 
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="../audio/list" class="qbdd" style='border-bottom-left-radius: 0rpx;border-bottom-right-radius: 0rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">桔子充电宝</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator> 
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="../user/team" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px; '>
- <view >
-    <span class="font_14 c3">团队详情</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>   
-
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="../user/team-fazhan?id=0&type=0&mf=0" class="qbdd" >
- <view >
-    <span class="font_14 c3">发展团队</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-<navigator wx:if="{{u_info.user_lei > 0 && u_info.mf_qd > 0}}" url="../user/team-fazhan?id=0&type=0&mf=1" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:40px;'>
- <view >
-    <span class="font_14 c3">免费发展团队</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei == 10 || u_info.user_lei == 99}}" url="../up_anli/shenhe" class="qbdd" style='margin:10px 10px 0px 10px;'>
- <view >
-    <span class="font_14 c3">日记审核</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei == 99}}" url="../user/jiaofei?id=1" class="qbdd" style=''>
- <view >
-    <span class="font_14 c3">缴费提醒</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei == 99}}" url="../user/tixian_sh" class="qbdd" style=''>
- <view >
-    <span class="font_14 c3">提现审核</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/tixian_sh2" class="qbdd" style=''>
- <view >
-    <span class="font_14 c3">提现记录【自制】</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/tixian_sh2?id=2" class="qbdd" style=''>
- <view >
-    <span class="font_14 c3">交易记录【自制】</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=3" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
- <view >
-    <span class="font_14 c3">渠道信息</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=4" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
- <view >
-    <span class="font_14 c3">直客信息</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/team-dd?currentTab=1&otype=deliver&id=3" class="qbdd">
- <view >
-    <span class="font_14 c3">线上预约订单</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/team-dd?currentTab=1&otype=deliver&id=2" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;'>
- <view >
-    <span class="font_14 c3">线下报备订单</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei == 99}}" url="../web/web?web_type=99" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;'>
- <view >
-    <span class="font_14 c3">数据统计</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-<!--<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=2" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;'>
- <view >
-    <span class="font_14 c3">预约报备信息</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>-->
-<view class='l_h60'></view>
-</view>
-<!--我的结束-->
 

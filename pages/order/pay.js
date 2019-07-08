@@ -18,9 +18,11 @@ Page({
     address:[],
     user_bonus:[],
     tid:0,
+    more_yiyuan:[],//选择的项目id数组
     total:0,
     vprice:0,
     vid:0,
+    yue_off:0,//余额支付是否显示，0为不显示，1为显示
     sid: 10,//进来默认选择的是快递方式，ID为10
     youhui:0,
     ship_fee:0,
@@ -36,6 +38,7 @@ Page({
     pay_yue:'',//动态的余额支付金额
     on_pay_yue:0,//最终确认的余额支付金额
     manjian:'',
+    xz_yiyuan:-1,//选择的医院，默认为-1
     date: '无',
     now:'',
     input:false //默认余额的输入状态
@@ -92,6 +95,9 @@ Page({
           user_bonus: user_bonus,
           moren_fee: moren_fee,
           total: moren_fee,
+          more_yiyuan: res.data.more_yiyuan,
+          xz_brand_info: res.data.xz_brand_info,
+          yue_off: res.data.yue_off,//余额支付是否开启
           zprice: res.data.total.goods_price_formated,
           tuan_price: res.data.tuan_price,
           goods_id: goods_info[0].goods_id,
@@ -113,9 +119,36 @@ Page({
 
 /*加 */
   bindPlus:function(e){
-    var num = e.currentTarget.dataset.goods_id;//获取商品id
+    var that = this;
+    var num = e.currentTarget.dataset.num;//获取当前的数量
+    var rec_id = e.currentTarget.dataset.rid;//获取购物车id
+    // 如果只有1件了，就不允许再减了
+      num++;
+    wx.showLoading();//加载动画
+    wx.request({
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_ajax_update_cart',
+      method: 'post',
+      data: {
+        rec_id: rec_id,
+        goods_number: num,
+        anran_id: wx.getStorageSync('id')
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
 
-
+        that.loadProductDetail();
+        wx.hideLoading()//关闭加载动画
+      },
+      fail: function () {
+        // fail
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    });
   },
   /*减*/
   bindMinus: function (e) {
@@ -126,6 +159,7 @@ Page({
     if (num > 1) {
       num--;
     }
+    wx.showLoading();//加载动画
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_ajax_update_cart',
       method: 'post',
@@ -140,6 +174,7 @@ Page({
       success: function (res) {
         
         that.loadProductDetail();
+        wx.hideLoading()//关闭加载动画
       },
       fail: function () {
         // fail
@@ -209,6 +244,54 @@ Page({
       date: e.detail.value
     })
   },
+  change_yiyuan:function(e){
+
+  },
+  //选择医院
+  bindDateChange2: function (e) {
+    var that = this;
+    this.setData({
+      xz_yiyuan: e.detail.value,
+      new_goods_id: this.data.more_yiyuan[e.detail.value],
+      cartId: this.data.more_yiyuan[e.detail.value]
+    })
+    wx.showLoading();//加载动画
+    wx.request({
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_add_cart',
+      method: 'post',
+      data: {
+        anran_id: wx.getStorageSync('id'),
+        pid: that.data.new_goods_id,
+        num: 1,
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {//新添加的商品返回值是购物车id
+        // //--init data        
+        var data = res.data;
+        var cid = that.data.productId;
+        var tid = that.data.tid;
+        wx.hideLoading()//关闭加载动画
+        if (data.status == 1) {
+          that.loadProductDetail();
+        } else {
+          wx.hideLoading()//关闭加载动画
+          wx.showToast({
+            title: data.err,
+            duration: 2000
+          });
+        }
+      },
+      fail: function () {
+        // fail
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    });
+  },
   //选择快递方式
 
   getship: function (e) {
@@ -230,6 +313,13 @@ Page({
     var that = this;
     var address = that.data.address;
     var date = this.data.date;
+    if (that.data.goods_info[0].brand_id == 0) {
+      wx.showToast({
+        title: "请选择医院！",
+        duration: 2000
+      });
+      return;
+    }
     if (date == '无') {
       wx.showToast({
         title: "请选择到院时间",
@@ -237,6 +327,7 @@ Page({
       });
       return;
     }
+
       this.setData({//防止重复点击
         paytype: 'weixin',
         btnDisabled: true,//禁用按钮

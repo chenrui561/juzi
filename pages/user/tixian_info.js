@@ -24,7 +24,13 @@ Page({
       id:options.id,
       user_id:options.user_id
     })
-   this.load();
+    if (options.id > 0){
+      this.load();
+   } 
+    if (options.user_id > 0){
+      this.qianbao();
+  }
+
   },
   load:function(){
     var that = this;
@@ -54,32 +60,36 @@ Page({
         });
       },
     });
-    wx.request({
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_shouyi_liushui',
-      method: 'post',
-      data: {
-        id: that.data.user_id,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        //--init data 
-        var goods_user = res.data.goods_user;
-        that.setData({
-          goods_user2: goods_user,
-          user_info: res.data.user_info[0]
-        });
-        wx.hideLoading()//关闭加载动画
-      },
-      error: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000,
-        });
-      },
-    });
+
   },
+qianbao:function(e){
+  var that = this;
+  wx.request({
+    url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_shouyi_liushui',
+    method: 'post',
+    data: {
+      id: that.data.user_id,
+    },
+    header: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    success: function (res) {
+      //--init data 
+      var goods_user = res.data.goods_user;
+      that.setData({
+        goods_user2: goods_user,
+        user_info: res.data.user_info[0]
+      });
+      wx.hideLoading()//关闭加载动画
+    },
+    error: function (e) {
+      wx.showToast({
+        title: '网络异常！',
+        duration: 2000,
+      });
+    },
+  });
+},
 no_z:function(){
   wx.showLoading();//加载动画
   var that = this;

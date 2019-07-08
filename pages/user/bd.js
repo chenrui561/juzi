@@ -11,11 +11,73 @@ Page({
     bd_type: 1,  //默认为0，没有绑定过
     bd_name:'',
     input_mobile:'',//输入的手机号
+    wx_phone:0,//是否微信获取了手机号，1为已经成功使用微信获取了，0为没有
     yzm:'',
     xieyi:'',
     jf:0,//是否来自缴费入口
     off:1,//按钮防点击开关
-    djs:0//发送倒计时60秒
+    djs:0,//发送倒计时60秒
+    id:'',//要绑定的渠道id
+    type_id:''//级别，1为总监2城市
+  },
+  change_phone: function(){
+    this.setData({
+      wx_phone:0
+    })
+  },
+  /*获取微信手机号 */
+  getPhoneNumber(e) {
+    var that = this;
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+    var encryptedData = e.detail.encryptedData;
+    var iv = e.detail.iv;
+    app.phone().then(function (res) {//调用app文件中的方法并等待回调，res为收到的phone方法里的code
+      console.log('测试' + res)
+      wx.showLoading();//加载动画
+      //用户的订单状态
+      
+      wx.request({
+        url: app.d.anranUrl + '/index.php?m=default&c=indem&a=getsessionkey_phone',
+        method: 'post',
+        data: {
+          code: res,
+          encryptedData: encryptedData,
+          iv: iv
+        },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        success: function (res) {
+          //--init data  
+          wx.hideLoading()//关闭加载动画
+          var data = res.data.data_info;
+          if (res.data > 99999) {
+            that.setData({
+              input_mobile: res.data,
+              wx_phone:1
+            })
+            wx.showToast({
+              title: '获取成功！',
+              duration: 2000
+            });
+          }else{
+            wx.showToast({
+              title: '获取失败，请再试一次',
+              icon:'none',
+              duration: 2000
+            });
+          }
+        },
+        fail: function (e) {
+          wx.showToast({
+            title: '网络异常！err:getsessionkeys',
+            duration: 2000
+          });
+        },
+      });
+    });
   },
 
   /**
@@ -27,7 +89,9 @@ Page({
     var bd_type = that.data.bd_type;
     that.setData({
       anran_id: anran_id,
-      jf:options.jf
+      jf:options.jf,
+      type_id: options.type_id,
+      id:options.id
     });
     
     wx.request({//加载首页推荐商品
@@ -86,7 +150,7 @@ Page({
     var off = e.currentTarget.dataset.off;
     var that = this;
     var input_mobile = that.data.input_mobile;
- 
+    
     if(off == 1){//表示可以点击
       that.setData({
         off: 0,
@@ -173,11 +237,15 @@ Page({
   formSubmit: function (e) {
    // console.log('form发生了submit事件，携带数据为：', e.detail.value)
     var that = this;
-    var phone = e.detail.value.phone;
+    var phone = this.data.input_mobile;
     var xieyi = this.data.xieyi;
+    var type_id = this.data.type_id;
+    var tid = this.data.id;
     var password = e.detail.value.password;
     var nick_name = e.detail.value.nick_name;
     var rel_name = e.detail.value.rel_name;
+    var q_name = e.detail.value.q_name;
+    var wx_phone = this.data.wx_phone;
     var jf = this.data.jf;
     var yzm = this.data.yzm;
     console.log('form发生了submit事件，携带数据为：', password)
@@ -199,6 +267,14 @@ Page({
       });
       return false;
     }
+    if (jf == 1 && rel_name == '') {
+      wx.showToast({
+        title: '真实姓名不能为空！',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    }
     if (phone == '') {
       wx.showToast({
         title: '手机号不能为空！',
@@ -207,6 +283,7 @@ Page({
       });
       return false;
     }
+    if (wx_phone == 0) {//wx_phone为0表示没有启用获取手机号功能，就要验证验证码
     if (password == '' ){
       wx.showToast({
         title: '验证码不能为空！',
@@ -215,7 +292,8 @@ Page({
       });
       return false;
     }
-    if (password == yzm){//如果输入的验证码一致
+    }
+    if (password == yzm || wx_phone == 1){//如果输入的验证码一致，或者已经获取了
       wx.request({//加载首页推荐商品
         url: app.d.anranUrl + '/index.php?m=default&c=indem&a=bd_mobile',
         method: 'post',
@@ -223,7 +301,11 @@ Page({
           mobile: phone,
           yzm: password,
           nick_name: nick_name,
+          q_name: q_name,
           rel_name: rel_name,
+          type_id: type_id,
+          jf:jf,
+          tid:tid,
           xcx_user_id: wx.getStorageSync('id')
         },
         header: {

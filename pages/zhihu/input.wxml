@@ -32,15 +32,15 @@
 </view>
 
 
-<view class='flex_h_b ctrl_bottom'>
-    <view class='flex_h'>
-      <view  bindtap="chooseImage" class='g_btn'>插入图片</view>
-      <view  bindtap="jiahei" class='g_btn'>加黑</view>
-      <view  bindtap="fenge" class='g_btn'>分隔符</view>
-    </view> 
-    <view class='flex_h'>
+<cover-view class='flex_h_b ctrl_bottom'>
+    <cover-view class='flex_h'>
+      <cover-view  bindtap="chooseImage" class='g_btn'>插入图片</cover-view>
+      <cover-view  bindtap="jiahei" class='g_btn'>加黑</cover-view>
+      <cover-view  bindtap="fenge" class='g_btn'>分隔符</cover-view>
+    </cover-view> 
+    <cover-view class='flex_h'>
     <!--<view bindtap="test2" class='g_btn y_col'>预览2</view>-->
-      <view bindtap="test" class='g_btn y_col'>预览草稿</view>
-      <view bindtap='tijiao' data-off="1" class='g_btn juzi_col'>发布</view>
-    </view>  
-  </view>
+      <cover-view bindtap="test" class='g_btn y_col'>预览草稿</cover-view>
+      <cover-view bindtap='tijiao' data-off="1" class='g_btn juzi_col'>发布</cover-view>
+    </cover-view>  
+  </cover-view>

@@ -8,21 +8,52 @@ Page({
     searchValue:'',
     page:1,
     more: '下拉加载更多',
+    more_id:0,//1表示没有找到
     productData:[],
     historyKeyList:[],
     user_lei:'',
+    diqu_info_id: 0,//地区默认为武汉
+    yy:0,//1为来自预约入口
+    pick: ['优惠','机构','医生'],
+    pick_id:'0',
+    type_id:2,//2为进来选优惠，3为店铺，4为机构
     hotKeyList:[]
   },
   onLoad:function(options){
     var that = this;
     this.setData({
-      user_lei: wx.getStorageSync('user_lei')
+      user_lei: wx.getStorageSync('user_lei'),
+      type_id: options.type_id,
+      diqu_info_id: options.diqu_info_id
     })
+   /* if (options.type_id == 3){//店铺
+      this.setData({
+        pick_id:1
+      })
+      console.log(this.data.pick_id)
+    }*/
+    if (options.type_id == 4) {//机构
+      this.setData({
+        pick_id: 1
+      })
+    }
+    if (options.type_id == 5) {//医生
+      this.setData({
+        pick_id: 2
+      })
+    }
+    if(options.yy == 1){//如果来自预约界面
+      this.setData({
+        yy: 1
+      })
+      this.searchProductData();
+    }else{
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=search_info',
       method:'post',
       data: {
         user_id: wx.getStorageSync('id'),
+        diqu_info_id: this.data.diqu_info_id
         },
       header: {
         'Content-Type':  'application/x-www-form-urlencoded'
@@ -43,10 +74,20 @@ Page({
         });
       },
     })
+    }
+  },
+  pick:function(e){
+
+    this.setData({
+      pick_id: e.detail.value, //0优惠，1店铺，2机构
+      productData: []
+    })
+    this.searchProductData();
   },
   onReachBottom:function(){
     var that = this;
     var content = that.data.searchValue;
+    var pick_id = this.data.pick_id;
       //下拉加载更多多...
       this.setData({
         page:(this.data.page+1)
@@ -61,6 +102,8 @@ Page({
         content: that.data.searchValue,
         user_id: wx.getStorageSync('id'),
         page: that.data.page,
+        pick_id: pick_id,
+        diqu_info_id: this.data.diqu_info_id
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -117,14 +160,6 @@ Page({
   },
   doSearch:function(){
     var searchKey = this.data.searchValue;
-    if (!searchKey) {
-        this.setData({
-            focus: true,
-            hotKeyShow:true,
-            historyKeyShow:true,
-        });
-        return;
-    };
 
     this.setData({
       hotKeyShow:false,
@@ -165,6 +200,12 @@ Page({
     this.setData({
       searchValue:value,
     });
+    if (value == ''){//全删掉
+      this.setData({
+        productData: [],
+        more_id:0
+      });
+    }
     if(!value && this.data.productData.length == 0){
       this.setData({
         hotKeyShow:true,
@@ -174,6 +215,7 @@ Page({
   },
   searchProductData:function(){
     var that = this;
+    var pick_id = this.data.pick_id;
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_search',
       method:'post',
@@ -181,6 +223,8 @@ Page({
         content:that.data.searchValue,
         user_id: wx.getStorageSync('id'),
         page:1,
+        pick_id: pick_id,
+        diqu_info_id: this.data.diqu_info_id
       },
       header: {
         'Content-Type':  'application/x-www-form-urlencoded'
@@ -188,18 +232,11 @@ Page({
       success: function (res) {   
         var data = res.data.goods_list;
         var state = res.data.state;
-        if (state == 3) {
-          that.setData({
-            more: '没有找到相关内容',
-          });
-          wx.showToast({
-            title: '搜索关键字？',
-            duration: 2000
-          });
-        }
+
         if (state == 2){
           that.setData({
             more: '没有找到相关内容',
+            more_id:1
           });
           wx.showToast({
             title: '没有找到！',

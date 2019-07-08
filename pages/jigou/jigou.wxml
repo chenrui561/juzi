@@ -1,44 +1,388 @@
 <!--pages/jigou/jigou.wxml-->
-<view class='jigou_info'>
-  <view class='jigou_info1'>
-    <image src='http://www.juziyimei.com/data/brandlogo/{{jigou_info.brand_logo}}' class='jigou_logo'></image>
-    <text class='jigou_title'>{{jigou_info.brand_name}}</text>
-  </view>
-  <view class='jigou_info2'>
-    <view class='yy'><text class='jigou_info_text'>12</text><text class='jigou_info_text'>日记</text></view>
-    <view class='yy'><text class='jigou_info_text'>{{jigou_xiangmu_count}}</text><text class='jigou_info_text'>项目</text></view>
-    <view class='yy'><text class='jigou_info_text'>5</text><text class='jigou_info_text'>医生</text></view>
-  </view>
+<!--申请中-->
+<view wx:if="{{jigou_info.off == 2}}" class='shenhe_ing'>申请审核中...</view>
+<view wx:if="{{jigou_info.off == 0}}" class='shenhe_ing'>申请未提交...</view>
+<view wx:if="{{jigou_info.off == 3}}" class='shenhe_ing'>申请已拒绝...</view>
+<view wx:if="{{top == 1}}" class='index_head'>
+    <scroll-view  scroll-x class="swiper-tab flex_h_b" >
+      <view class="swiper-tab-list2 {{z_index==1 ? 'swiper-tab-color' : ''}}" data-current="1" bindtap="indexChange">主页</view>
+      <view class="swiper-tab-list2 {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">优惠</view>
+      <view wx:if="{{ys == 0}}" class="swiper-tab-list2 {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3" bindtap="indexChange">团队</view>  
+      <view class="swiper-tab-list2 {{z_index==4 ? 'swiper-tab-color' : ''}}" data-current="4"  bindtap="indexChange">评价</view>  
+    </scroll-view>
 </view>
-<!--<view class='jigou_address'>
-  <view class='addimg'>
-    <image class='add_img' src='/images/address.png'></image>
-    <view class='add_text'>{{jigou_info.address}}</view>
+<!--已通过-->
+<scroll-view class='scroll-view' scroll-with-animation="true" scroll-y="true" scroll-top="{{s_top}}" bindscroll="bindscroll">
+<view class='bj' ></view>
+<view class='bj_top' ></view>
+<view class='bj_c '>
+
+  <view class='jigou_info flex_s ' >
+  <!--医院标题第一部分-->
+    <navigator url='/pages/jigou/jigou_info?currentTab=0&brand_id={{jigou_info.brand_id}}' wx:if="{{bianji == 0}}" class='jigou_info1'>
+      <image lazy-load  src='http://www.juziyimei.com/data/brandlogo/{{jigou_info.brand_logo}}' mode='aspectFill' class='jigou_logo'></image>
+      <view class='flex_s_l ml10'>
+        <text class='jigou_title ovh1'>{{jigou_info.brand_name}}</text>
+        <view class='flex_h_b font_12 hui l_h30'>
+          <text class='mr5'>效果{{jigou_fen.xiaoguo}}</text>
+          <text class='mr5'>服务{{jigou_fen.fuwu}}</text>
+          <text class='mr5'>成交率{{jigou_fen.cjl}}</text>
+          <text class='mr5'>环境{{jigou_fen.hj}}</text>
+        </view>
+        <view wx:if="{{jigou_fen.fen}}" class='flex_h_b w100'>
+        
+           <image wx:if="{{jigou_fen.fen == 10}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star05.png'></image>
+           <image wx:if="{{jigou_fen.fen == 9}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star4.5.png'></image>
+           <image wx:if="{{jigou_fen.fen == 8}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star04.png'></image>
+           <image wx:if="{{jigou_fen.fen == 7}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star3.5.png'></image>
+           <image wx:if="{{jigou_fen.fen == 6}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star03.png'></image>
+           <image wx:if="{{jigou_fen.fen == 5}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star2.5.png'></image>
+           <image wx:if="{{jigou_fen.fen == 4}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star02.png'></image>
+           <image wx:if="{{jigou_fen.fen == 3}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star1.5.png'></image>
+           <image wx:if="{{jigou_fen.fen == 2}}" mode='widthFix' class='pjxx' src='https://www.juziyimei.com/images/star01.png'></image>
+           <view wx:if="{{ys == 0}}" class='ml5 hui flex_h_b font_12'>
+             <text>更多</text>
+             <image mode='widthFix' class='phone_img2' src='/images/x_right.png'></image>
+          </view>
+        </view>
+      </view> 
+    </navigator>
+    <!--医院标题第一部分end-->   
+    <!--医院标题第二部分star-->
+    <view class='jigou_info2'>
+      <view class='flex_h_b'>
+        <view class='flex_s w30' data-current="4"  bindtap="indexChange">
+          <text class='font_18 c3 '>{{count.pj}}</text>
+          <text class='font_14 hui'>评论</text>
+        </view>
+        <navigator url='/pages/jigou/jigou_info?currentTab=3&brand_id={{jigou_info.brand_id}}' class='flex_s w30'>
+          <text class='font_18 c3 '>{{count.anli}}</text>
+          <text class='font_14 hui'>案例</text>
+        </navigator>
+        <view wx:if="{{ys == 0}}" class='flex_s w30' data-current="3"  bindtap="indexChange">
+          <text class='font_18 c3 '>{{count.yisheng}}</text>
+          <text class='font_14 hui'>团队</text>
+        </view>
+        <navigator url='/pages/jigou/jigou_info?currentTab=1&brand_id={{jigou_info.brand_id}}' wx:if="{{ys == 1}}" class='flex_s w30'>
+          <text class='font_18 c3 '>{{count.zizhi}}</text>
+          <text class='font_14 hui'>资质</text>
+        </navigator>
+      </view>
+  
+      <view wx:if="{{ys == 0}}" class='flex_h_b mt15'>
+        <view class='flex_s w30' data-current="2" bindtap="indexChange">
+          <image mode='widthFix' class='phone_img' src='/images/youhui.png'></image>
+          <text class='font_14 '>优惠项目</text>
+        </view>
+        <navigator wx:if="{{ys == 0}}" url='/pages/jigou/jigou_info?currentTab=1&brand_id={{jigou_info.brand_id}}' class='flex_s w30'>
+          <image mode='widthFix' class='phone_img' src='/images/zige.png'></image>
+          <text wx:if="{{jigou_info.lx == 0}}" class='font_14 '>执业资格</text>
+          <text wx:if="{{jigou_info.lx == 1}}" class='font_14 '>资质证件</text>
+        </navigator>
+        <navigator wx:if="{{ys == 0}}"  url='/pages/jigou/jigou_info?currentTab=2&brand_id={{jigou_info.brand_id}}' class='flex_s w30'>
+          <image mode='widthFix' class='phone_img' src='/images/hj.png'></image>
+          <text wx:if="{{jigou_info.lx == 0}}" class='font_14 '>机构环境</text>
+          <text wx:if="{{jigou_info.lx == 1}}" class='font_14 '>店面环境</text>
+        </navigator>
+      </view>
+    </view>
+
+
+
   </view>
-  <image class='right' src='/images/x_right.png'></image>
-</view>-->
-<view class='jigou_lb'>
-  <image class='lb_img' src='http://www.juziyimei.com/mobile/themes/default/gl_img/laba.gif'></image>
-  <view class='lb_text'>{{jigou_info.brand_desc}}</view>
+    <!--擅长项目-->
+      <view wx:if="{{ys == 1}}" class='flex ml20 ' style="width:90%;margin-left:5%;margin-top:10px;">
+        <view style="white-space:nowrap;" class='font_14 font_weight l_h32'>擅长项目:</view>
+        <view class='flex_h wrap'><view wx:for="{{scxm}}" wx:key="key" class='font_12 bg_hui scxm l_h24'>{{item}}</view></view>
+  
+      </view>
+      <!--擅长项目-->
+  <!--店铺简介--
+  <view wx:if="{{bianji == 0}}" class='jigou_lb pr' style='color:#f20'>
+    <view wx:if="{{jigou_info.brand_desc == ''}}" class='lb_text white '>{{ys == 1 ?'该医生暂无简介...':'该店铺暂无简介...'}}</view>
+    <view wx:else bindtap='text_long' data-id='{{text_long}}' class="lb_text white {{text_long == 1?'text_long':''}} ">{{jigou_info.brand_desc}}</view>
+  </view>
+  <view wx:if="{{bianji == 1}}" class='jigou_lb pr' style='color:#f20'>
+    <textarea bindinput="jianjie_input" placeholder="{{ys == 1 ?'请输入医生简介':'请输入店铺简介'}}" placeholder-class="white" auto-height="true" value='{{jigou_info.brand_desc}}' class='lb_text ovh3 white'></textarea>
+  </view>
+  -->
 </view>
-<view>
-  <navigator url='../product/detail?productId={{item.goods_id}}'  class='yy_info' wx:for="{{xiangmu_list}}" wx:key="key">
-    <image mode='aspectFit' src='http://www.juziyimei.com/{{item.goods_img}}' class='yy_img'>
-     <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
-    </image>
-    <view class='yy_text'>
-      <text class='yy_title'>{{item.goods_name}}</text>
-       <view style="display:flex;font-size: 12px;line-height:32rpx;color:#999;justify-content:space-between;">
-          <text class='yy_num'>预约数：{{item.yy_num}}</text>
-          <text wx:if="{{user_lei == 99 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_3}}/{{item.huodong_2}}/{{item.huodong_1}}</text> 
+
+  <!--店铺地址-->
+  <block wx:if="{{ys == 0}}">
+  <view wx:if="{{bianji == 0}}" bindtap="ditu"  class='jigou_address'>
+    <view class='addimg'>
+      <icon class="iconfont icon-dizhi jigou_color"></icon> 
+      <view class='add_text'>{{jigou_info.address}}</view>
+    </view>
+    <image class='right' src='/images/x_right.png'></image>
+  </view>
+  </block>
+
+<view wx:if="{{ys == 0}}" class='cont pr' id="youhui">
+<!--优惠活动-->
+      
+      <view class='font_14 flex_h_b mb10 ml10 font_weight l_h40' >
+        <view class='flex_h'>
+          <text>优惠活动</text>
+          <navigator wx:if="{{jigou_info.shenqing_user_id == user_id }}" url='/pages/ruzhu/fabu' class='fabu_yh fl_r'>发布优惠</navigator>
+        </view>  
+        <navigator url='/pages/listdetail/listdetail?brand_id={{jigou_info.brand_id}}' class='flex_h'>
+          <text class='hui'>更多</text>
+          <image class='right' src='/images/x_right.png'></image>
+        </navigator>
+      </view>
+      <view></view>
+      <block wx:for="{{xiangmu_list}}" wx:key="key">
+      <navigator  class="pr" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
+        <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
+        <image lazy-load class="photo" mode='aspectFill' src="http://www.juziyimei.com/{{item.goods_img}}"></image>
+        <view class='h40 flex_h'>
+          <view class="title">{{item.goods_name}}</view>
+        </view>
+        <view class='flex_h font_14 l_h20 mtl-5'>
+          <view class="juzi_cor">优惠价{{item.juzi_price}}元</view>
+        </view>
+        <view class='goods_bottom' >
+          <view class="gmx">原价{{item.market_price}}元</view>
+        </view>
+       <view class='font_11 no_next_text hui'>
+        <text wx:if="{{user_lei == 99 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_3}}/{{item.huodong_2}}/{{item.huodong_1}}</text> 
           <text wx:if="{{user_lei == 3 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_1}}</text> 
           <text wx:if="{{user_lei == 2 && item.is_huodong == 1}}">返佣：￥{{item.huodong_2}}</text>  
           <text wx:if="{{user_lei == 1 && item.is_huodong == 1}}">返佣：￥{{item.huodong_3}}</text> 
-        </view>  
-      <text class='yy_price'><text class='yy_price1'>￥{{item.juzi_price}}</text><text class='yy_price2'>￥{{item.market_price}}</text></text>
-    </view>
-  </navigator>
+          </view>
+      <view wx:if="{{jigou_info.shenqing_user_id == user_id }}" class='flex_h_b'>
+          <view class='font_11 no_next_text hui' wx:if="{{item.off == 1}}">不公开显示</view>
+          <navigator url='/pages/ruzhu/fabu?goods_id={{item.goods_id}}' class='fabu_yh fl_r mt5 mb5'>编辑活动</navigator>
+      </view>
+      </navigator>
+      </block>
+  <navigator url='/pages/listdetail/listdetail?brand_id={{jigou_info.brand_id}}'  class='bte mt15 no_more l_h50 ff6633'>查看全部优惠项目</navigator>
+  <!--优惠活动-->
 </view>
-<view class='jigou_ys'>
+  <!--医师-->
+<view wx:if="{{ys == 0}}" class='jianjie' id="yishi">
+  <view class='font_14 flex_h_b mb10 ml10 font_weight l_h40' ><text>专业团队</text></view>
+  <!--推荐好物内容-->
+          <swiper wx:if="{{ys_list.length > 0}}" display-multiple-items="{{count_ys}}" indicator-dots="{{indicatorDots}}" previous-margin="0px" next-margin="0px" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style='height:200px;'>
+          
+            <block >
+              <swiper-item wx:for="{{ys_list}}"  wx:key="key"  wx:if="{{item.lx == 2}}">
+                <navigator url="../jigou/jigou?jigou_id={{item.brand_id}}&ys=1" class='tjhw flex_s f4f8f8 m5'>
+                  <image class='pl_img' mode='aspectFill' src='{{item.brand_logo}}'></image>
+                  <text class='font_16'>{{item.brand_name}}</text>
+                  <text class='font_12 hui'>{{item.jibie}}</text>
+                  <text class='font_14'>详细介绍></text>
+                </navigator>
+              </swiper-item>
+              <swiper-item wx:for="{{ys_list}}"  wx:key="key"  wx:if="{{item.lx == 3}}">
+                <navigator url="../jigou/jigou?jigou_id={{item.brand_id}}&ys=1" class='tjhw flex_s f4f8f8 m5'>
+                  <image class='pl_img' mode='aspectFill' src='{{item.brand_logo}}'></image>
+                  <text class='font_16'>{{item.brand_name}}</text>
+                  <text class='font_12 hui'>美学顾问</text>
+                  <text class='font_14'>详细介绍></text>
+                </navigator>
+              </swiper-item>
+            </block>
+          </swiper>
+          <view wx:else>
+               <view  class='l_h90 no_more'>暂无</view>
+            </view>
+          <!--推荐好物内容-->
+  
+</view>
+<!--评论end-->
+<!--医生简介-->
+<view wx:if="{{ys == 1}}" class='yisheng_desc' id="pl">
+  <view class='font_14 flex_h_b ml10 font_weight l_h40' >
+    <text>医生简介</text>
+  </view>
+  <text class='font_14 l_h24 c6 m20'>{{jigou_info.brand_desc}}</text>
+</view>
+  <!--评论-->
+<view class='jianjie' id="pl">
+  <view class='font_14 flex_h_b mb10 ml10 font_weight l_h40' >
+        <text>评价晒图</text>
+      </view>
+<!--评论列表开始-->
 
+ <view wx:for="{{pl_info}}"  wx:key="key" >
+    <view class="shaidan_list">
+      <!--处理用户头像开始-->
+      <view wx:if="{{item.tx_img}}" style=" background-image:url({{item.tx_img}}); background-size: cover;background-position: center; float:left;height: 36px;width: 36px;border-radius: 50%;background-repeat: no-repeat; ">
+      </view>
+      <!--处理用户头像结束-->
+      <!--用户名和用户留言-->
+      <view class="comment_sd font_14">
+        <view class='flex_s_l '>
+          <text class='l_h20' >{{item.passwd_answer}}</text>
+          <text class=' font_14 hui l_h20'>{{item.add_time}}</text>
+        </view>
+        <view class='pingfen'>
+          <view class='flex_h_b l_h24'>
+              <text class='font_14 hui mr5'>机构评价:</text>
+              <image lazy-load mode='widthFix' class='pjxx' src='/images/star{{item.fen}}.png'></image>
+            </view>
+            <view  class='flex_h_b l_h24' wx:if="{{item.yisheng_id > 0}}">
+              <text class='font_14 hui mr5'>{{item.ys_name}}评价:</text>
+              <image lazy-load mode='widthFix' class='pjxx' src='/images/star{{item.fen2}}.png'></image>
+            </view>
+            <view  class='flex_h_b l_h24' wx:if="{{item.zixun_id > 0}}">
+              <text class='font_14 hui mr5'>{{item.zixun_name}}评价:</text>
+              <image lazy-load mode='widthFix' class='pjxx' src='/images/star{{item.fen3}}.png'></image>
+            </view>
+          </view>
+      </view>
+      <view class="comment_sd mt15 font_14">
+        <text>{{item.content}}</text>
+      </view>
+      
+      <!--用户名和用户留言结束-->
+      <!--如果是一张图的情况-->
+      <view wx:if="{{item.comment_img && !item.comment_img2}}" class="comment_sd onbig_img" style="display: -webkit-box; ">
+        <image lazy-load bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img}}" mode='aspectFit' src="{{item.comment_img}}" style="max-width: 250px;max-height: 180px;"></image>
+      </view>
+      <!--如果是大于一张图的情况-->
+      <view wx:if="{{item.comment_img2}}">
+        <view  class="comment_sd onbig_img" style="width:calc(100% - 40px);">
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img}}" wx:if="{{item.comment_img}}" class='pl_img' src='{{item.comment_img}}'></image>
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img2}}" wx:if="{{item.comment_img2}}" class='pl_img' src='{{item.comment_img2}}'></image>
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img3}}" wx:if="{{item.comment_img3}}" class='pl_img' src='{{item.comment_img3}}'></image>
+        </view>
+        <view class="comment_sd onbig_img" style="width:calc(100% - 40px);">
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img4}}" wx:if="{{item.comment_img4}}" class='pl_img' src='{{item.comment_img4}}'></image>
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img5}}" wx:if="{{item.comment_img5}}" class='pl_img' src='{{item.comment_img5}}'></image>
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img6}}" wx:if="{{item.comment_img6}}" class='pl_img' src='{{item.comment_img6}}'></image>
+        </view>
+        <view class="comment_sd onbig_img" style="width:calc(100% - 40px);">
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img7}}" wx:if="{{item.comment_img7}}" class='pl_img' src='{{item.comment_img7}}'></image>
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img8}}" wx:if="{{item.comment_img8}}" class='pl_img' src='{{item.comment_img8}}'></image>
+          <image lazy-load mode='aspectFill' bindtap="big_img" data-bigimg="{{item.img_arr}}" data-img="{{item.comment_img9}}" wx:if="{{item.comment_img9}}" class='pl_img' src='{{item.comment_img9}}'></image>
+        </view>
+      </view>
+      <view>
+      </view>
+
+
+    </view>
+  </view>
+
+<!--评论列表结束-->
+  <view class='l_h60 no_more'>暂无更多评论</view>
 </view>
+<!--评论end-->
+
+<!--简介tab
+<view wx:if="{{page == 2}}" class='cont pr'>
+<!--优惠活动
+      <navigator wx:if="{{jigou_info.shenqing_user_id == user_id }}" url='/pages/ruzhu/fabu' class='fabu_yh fl_r'>发布优惠</navigator>
+      <view class='font_14 mb10 ml5 font_weight' style="line-height: 26px;">{{ys == 1 ?'案例介绍':'优惠活动'}}</view>
+      <view></view>
+      <block wx:for="{{xiangmu_list}}" wx:key="key">
+      <navigator  class="pr" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
+        <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
+        <image class="photo" mode='aspectFill' src="http://www.juziyimei.com/{{item.goods_img}}"></image>
+        <view class='h40 flex_h'>
+          <view class="title">{{item.goods_name}}</view>
+        </view>
+        <view class='flex_h font_14 l_h20 mtl-5'>
+          <view class="juzi_cor">优惠价{{item.juzi_price}}元</view>
+        </view>
+        <view class='goods_bottom' >
+          <view class="gmx">原价{{item.market_price}}元</view>
+        </view>
+       <view class='font_11 no_next_text hui'>
+        <text wx:if="{{user_lei == 99 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_3}}/{{item.huodong_2}}/{{item.huodong_1}}</text> 
+          <text wx:if="{{user_lei == 3 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_1}}</text> 
+          <text wx:if="{{user_lei == 2 && item.is_huodong == 1}}">返佣：￥{{item.huodong_2}}</text>  
+          <text wx:if="{{user_lei == 1 && item.is_huodong == 1}}">返佣：￥{{item.huodong_3}}</text> 
+          </view>
+      <view wx:if="{{jigou_info.shenqing_user_id == user_id }}" class='flex_h_b'>
+          <view class='font_11 no_next_text hui' wx:if="{{item.off == 1}}">不公开显示</view>
+          <navigator url='/pages/ruzhu/fabu?goods_id={{item.goods_id}}' class='fabu_yh fl_r mt5 mb5'>编辑活动</navigator>
+      </view>
+      </navigator>
+      </block>
+  <view class='l_h60 no_more'>没有更多了</view>
+  --优惠活动
+</view>-->
+<!--
+<view wx:if="{{page == 3}}" class='cont pr'>
+  简介info
+  <view  class='font_14 mb10 ml5 font_weight mt10'>{{ys == 1 ?'资质证件':'营业执照'}}</view>
+  <block wx:if="{{bianji == 0}}">
+    <view wx:if="{{jigou_info.zizhi_img_1 == ''}}" class='img'>{{ys == 1 ?'暂无资质证件':'暂无营业执照'}}</view>
+    <image wx:else data-img='{{jigou_info.zizhi_img_1}}' bindtap='big_img' class='img' mode='aspectFill' src='{{jigou_info.zizhi_img_1}}'></image>
+  </block>
+  <block wx:if="{{bianji == 1}}">
+    <view wx:if="{{img01 == ''}}" data-idx='1' bindtap='chooseImage' class='jigou_img_up'>{{ys == 1 ?'上传资质证件':'上传营业执照'}}</view>
+     <image wx:else data-idx='1' bindtap='big_img' class='img' mode='aspectFill' src='{{img01}}'></image>
+  </block>
+
+  <view class='font_14 mb10 ml5 font_weight mt10'>{{ys == 1 ?'案例介绍':'门店招牌'}}</view>
+    <block wx:if="{{bianji == 0}}">
+        <view wx:if="{{jigou_info.zizhi_img_4 == ''}}" class='img'>{{ys == 1 ?'暂无案例介绍':'暂无门店招牌'}}</view>
+        <image wx:else data-img='{{jigou_info.zizhi_img_4}}' bindtap='big_img' class='img' mode='aspectFill' src='{{jigou_info.zizhi_img_4}}'></image>
+      </block>
+      <block wx:if="{{bianji == 1}}">
+        <view wx:if="{{img02 == ''}}" data-idx='2' bindtap='chooseImage' class='jigou_img_up'>{{ys == 1 ?'上传案例介绍':'上传门店招牌'}}</view>
+        <image wx:else data-idx='1' bindtap='big_img' class='img' mode='aspectFill' src='{{img02}}'></image>
+      </block>
+  
+  <view class='font_14 mb10 ml5 font_weight mt10'>{{ys == 1 ?'案例介绍':'门店环境'}}</view>
+      <block wx:if="{{bianji == 0}}">
+        <view wx:if="{{jigou_info.zizhi_img_5 == ''}}" class='img'>{{ys == 1 ?'暂无案例介绍':'暂无门店环境'}}</view>
+        <image wx:else data-img='{{jigou_info.zizhi_img_5}}' bindtap='big_img' class='img' mode='aspectFill' src='{{jigou_info.zizhi_img_5}}'></image>
+      </block>
+      <block wx:if="{{bianji == 1}}">
+        <view wx:if="{{img03 == ''}}" data-idx='3' bindtap='chooseImage' class='jigou_img_up'>{{ys == 1 ?'上传案例介绍':'上传门店环境'}}</view>
+        <image wx:else data-idx='3' bindtap='big_img' class='img' mode='aspectFill' src='{{img03}}'></image>
+      </block>
+
+      <block wx:if="{{bianji == 0}}">
+        <view wx:if="{{jigou_info.zizhi_img_6 == ''}}" class='img'>{{ys == 1 ?'暂无案例介绍':'暂无门店环境'}}</view>
+        <image wx:else data-img='{{jigou_info.zizhi_img_6}}' bindtap='big_img' class='img' mode='aspectFill' src='{{jigou_info.zizhi_img_6}}'></image>
+      </block>
+      <block wx:if="{{bianji == 1}}">
+        <view wx:if="{{img04 == ''}}" data-idx='4' bindtap='chooseImage' class='jigou_img_up'>{{ys == 1 ?'暂无案例介绍':'暂无门店环境'}}</view>
+        <image wx:else data-idx='1' bindtap='big_img' class='img' mode='aspectFill' src='{{img04}}'></image>
+      </block>
+简介info
+</view>-->
+<!--
+<view  class='jigou_bottom flex fix_nav_wp'>
+  <view wx:if="{{ys == 0}}" class='nav_link flex_s'>
+    <button bindtap='change_page_1' class="defalut_btn {{page==1?'on_cor':''}}">
+      <icon class="iconfont icon-shangcheng del_ico idx_ico"></icon>  
+      <text class='txt'>首页</text>
+    </button >
+  </view>
+  <view class='nav_link flex_s'>
+    <button bindtap='change_page_2' class="defalut_btn {{page==2?'on_cor':''}}">
+      <icon class="iconfont icon-baojiadancc del_ico idx_ico"></icon>  
+      <text class='txt'>优惠</text>
+    </button >
+  </view>
+  <view class='nav_link flex_s'>
+    <button bindtap='change_page_3' class="defalut_btn {{page==3?'on_cor':''}}">
+      <icon class="iconfont icon-chakan del_ico idx_ico"></icon>  
+      <text class='txt'>简介</text>
+    </button >
+  </view>
+  <view class='nav_link flex_s'>
+    <button open-type="contact" session-from='{{jigou_id}}' class='defalut_btn'>
+      <icon style='color: #02bf02' class="iconfont icon-kefu del_ico idx_ico lv"></icon>  
+      <text style='color: #02bf02' class='txt'>咨询</text>
+    </button >
+  </view>
+</view>
+-->
+
+<view class='l_h600'></view>
+</scroll-view>
+
+<button open-type="contact"  session-from='{{jigou_id}}' class='footfixed3 flex_h_c'>
+    <image class="icon_wx"src="/images/weixin.png"></image>
+          <text>咨询</text>
+</button>

@@ -1,0 +1,7 @@
+{
+      "usingComponents": {
+        "searchHighlightTextView": "../../component/searchHighlightTextView/searchHighlightTextView"
+      },
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "消息"
+}

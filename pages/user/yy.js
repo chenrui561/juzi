@@ -14,12 +14,16 @@ Page({
     yzm: '',
     yy:'',//需要提交的医院
     xm:'',
+    connect:'',//筛选医院的文本
     dy_time:'',
     xiangmu_id:'',
     xiangmu_info:[],
+    huodong:['是','否'],
+    is_huodong:2,//默认为2，未选，0，是，1，否
     goods_id:[],//项目对应的id数组
     tj_goods_id:'',//提交的项目id
     tj_yiyuan_id:'',//提交的医院id
+    tj_yiyuan_name:'',
     yiyuan: ['美国', '中国', '巴西', '日本'],
     yiyuan_index: '',//医院序号
     yiyuan_id: [],//医院对应的ID
@@ -31,12 +35,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.yiyuan_id > 0){
+      this.setData({
+        tj_yiyuan_id: options.yiyuan_id,
+        tj_yiyuan_name: options.yiyuan_name
+      })
+
+    }
+    this.xcx_yiyuan();
+  },
+  xcx_yiyuan:function(e){
     var that = this;
     wx.showLoading();//加载动画
     wx.request({
       url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_yiyuan',
       method: 'post',
       data: {
+        connect:this.data.connect
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -56,7 +71,6 @@ Page({
         });
       }
     })
-
   },
   back: function (e) {
 
@@ -76,6 +90,13 @@ Page({
     this.setData({
       dy_time: e.detail.value
     })
+  },
+  bindPickerChange_huodong: function (e) {
+    var that = this;
+    this.setData({
+      is_huodong: e.detail.value,
+    })
+    console.log('picker发送选择改变，携带值为', e.detail.value)
   },
   bindPickerChange: function (e) {
     var that = this;
@@ -97,6 +118,14 @@ Page({
     var bz = e.detail.value.bz;
     console.log('form发生了submit事件，携带数据为：', name)
     console.log('form发生了submit事件，携带数据为：', phone)
+    if (this.data.is_huodong == 2) {
+      wx.showToast({
+        title: '请选择是否参加活动！',
+        icon: 'none',
+        duration: 2000
+      });
+      return false;
+    } 
     if (name == '' || phone == '') {
       wx.showToast({
         title: '客户信息不能为空！',
@@ -120,50 +149,65 @@ Page({
         duration: 2000
       });
       return false;
-    }
-      wx.request({//加载首页推荐商品
-        url: app.d.anranUrl + '/index.php?m=default&c=indem&a=yuyue',
-        method: 'post',
-        data: {
-          phone: phone,
-          name: name,
-          bz: bz,
-          tj_yiyuan_id: that.data.tj_yiyuan_id,
-          dy_time:that.data.dy_time,
-          xcx_user_id: wx.getStorageSync('id')
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: function (res) {
-          // Console.log(res)
-          if (res.data.status == 1) {//绑定成功之后，如何切换到新的账号
-            wx.showToast({
-              title: '提交成功',
-              duration: 2000
-            });
-            setTimeout(function () {
-              wx.navigateTo({
-                url: '../user/dingdan?currentTab=1&otype=deliver',
-              });
-            }, 1500);
-          }
-          if (res.data.status == 2) {//绑定成功之后，如何切换到新的账号
-            wx.showToast({
-              title: '已被预约过了',
-              duration: 2000
-            });
-            
-          }
+    } wx.showModal({//弹窗
+      content: "确定提交？",
+      showCancel: true,
+      confirmText: '确定',
+      success: function (res) {
+        if (res.cancel) {//点击了取消，去首页
+          console.log(88);
+        }
+        if (res.confirm) {//点击了确定，去支付
+          wx.showLoading();//加载动画
+          wx.request({//加载首页推荐商品
+            url: app.d.anranUrl + '/index.php?m=default&c=indem&a=yuyue',
+            method: 'post',
+            data: {
+              phone: phone,
+              name: name,
+              bz: bz,
+              is_huodong: that.data.is_huodong,
+              tj_yiyuan_id: that.data.tj_yiyuan_id,
+              dy_time: that.data.dy_time,
+              xcx_user_id: wx.getStorageSync('id')
+            },
+            header: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            success: function (res) {
+              // Console.log(res)
+              wx.hideLoading()//关闭加载动画
+              if (res.data.status == 1) {//绑定成功之后，如何切换到新的账号
+                wx.showToast({
+                  title: '提交成功',
+                  duration: 2000
+                });
+                setTimeout(function () {
+                  wx.navigateTo({
+                    url: '../user/dingdan?currentTab=1&otype=deliver',
+                  });
+                }, 1500);
+              }
+              if (res.data.status == 2) {//绑定成功之后，如何切换到新的账号
+                wx.showToast({
+                  title: '已被预约过了',
+                  duration: 2000
+                });
 
-        },
-        fail: function (e) {
-          wx.showToast({
-            title: '提交失败！',
-            duration: 2000
+              }
+
+            },
+            fail: function (e) {
+              wx.showToast({
+                title: '提交失败！',
+                duration: 2000
+              });
+            },
           });
-        },
-      });
+        }
+      }
+    })
+
    
   },
   /**

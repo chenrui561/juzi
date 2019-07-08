@@ -1,3 +1,4 @@
+
 //index.js  
 //获取应用实例  
 var app = getApp();
@@ -27,10 +28,12 @@ Page({
     buynum:1,
     bd_id:0,
     tid:0,
+    xianzhi_id:0,//限制直客购买的商品id
+    brand_id:'',//医院/机构/店面/id
     t_user:[],
     wenhao:'',
     // 产品图片轮播
-    indicatorDots: true,
+    indicatorDots: false,
     autoplay: true,
     interval: 5000,
     duration: 1000,
@@ -43,6 +46,7 @@ Page({
     is_promote:0,
     phone:0,
     user_lei:0,
+    gg_id:0,//广告id
     zixun:1  //0就是显示咨询提示，1不显示
   },
   bindGetUserInfo: function (e) {
@@ -93,12 +97,60 @@ Page({
       });
     }, 5000)
   },
+  phoneCall: function (e) {//打电话
+    wx.makePhoneCall({
 
+      phoneNumber: e.currentTarget.dataset.replyPhone,
+
+      success: function () {
+
+        console.log("成功拨打电话")
+
+      },
+
+    })
+  },
+  /*生成二维码 */
+  qr: function (e) {
+    var that = this;
+    wx.showLoading();//加载动画 
+    wx.request({
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_goods_code_test',
+      method: 'post',
+      data: {
+        id: wx.getStorageSync('id'),
+        goods_id: that.data.productId
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        that.setData({
+          qr_img: res.data.qr_img,
+          qr_arr: res.data.qr_arr
+        });
+
+        wx.previewImage({
+          current: res.data.qr_img,
+          urls: res.data.qr_arr
+        })
+        wx.hideLoading()//关闭加载动画
+      },
+      error: function (e) {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+        wx.hideLoading()//关闭加载动画
+      }
+    });
+  },
  
   // 传值
   onLoad: function (option) {    
     wx.showLoading();//加载动画
     var bd_id = option.id;//获取转发时携带的转发用户的id
+    var gg_id = option.gg_id;//获取广告id，看是否从广告进来的
     var tid = option.tid;//获取单独推荐商品的用户的ID
     var anran_id = wx.getStorageSync('id');//去取缓存里面的id，因为第二次调用的时候，app.js没执行，只能去缓存拿id
     var that = this;
@@ -112,6 +164,19 @@ Page({
         bd_id: bd_id
       });
     } 
+    //判断是否是转发打开，如果是就执行绑定推荐方法
+    if (gg_id > 0) {
+      //将转发过来的ID，放入缓存中
+      wx.setStorageSync('gg_id', gg_id)//把广告id写入缓存
+      that.setData({
+        gg_id: gg_id
+      });
+    } 
+    if (wx.getStorageSync('id') == '') {//如果缓存里面没有id，那就弹授权
+      that.setData({
+        shouquan: 0,
+      });
+    }
 //判断该商品是否有人推荐的
     if (tid > 0) {
       var that = this;
@@ -154,7 +219,7 @@ Page({
 
     var hx_id = wx.getStorageSync('id')//从缓存中获取用户id
      if (hx_id > 0){}else {//判断是否已经登录
-        app.getOpenid().then(function (openid) {
+       /* app.getOpenid().then(function (openid) {
 
             
               if (openid == 66){
@@ -168,7 +233,7 @@ Page({
                 });
               } 
 
-            });
+            });*/
     }
     
   },
@@ -199,6 +264,10 @@ car_count:function(){
     },
   });
 },
+  handleContact(e) {
+    console.log(e.path)
+    console.log(e.query)
+  },
 // 商品详情数据获取
   loadProductDetail:function(){
     
@@ -238,8 +307,16 @@ car_count:function(){
             goods_desc:pro.goods_desc,
             is_on_sale: pro.is_on_sale,
             is_promote: pro.is_promote,
-            user_lei: res.data.user_lei
+            brand_id: res.data.goods.brand_id,
+            goods_info_text: res.data.goods_info_text,
+            goods_info_text2: res.data.goods_info_text2,
+            user_lei: res.data.user_lei,
+            xianzhi_id: res.data.xianzhi_id
           });
+          /*设置title*/
+        wx.setNavigationBarTitle({
+          title: res.data.goods.goods_name
+        })
         var query = wx.createSelectorQuery();
         query.select('.wxParse').boundingClientRect()
         query.exec((res) => {
@@ -247,7 +324,7 @@ car_count:function(){
           that.setData({
             listHeight: listHeight
           });
-          console.log(listHeight)
+  
         })
         
         wx.hideLoading()//关闭加载动画
@@ -313,10 +390,37 @@ car_count:function(){
       }
     });
   },
-
+  formid: function (e) {
+    let formId = e.detail.formId;
+    console.log('form发生了submit事件，推送码为：', formId)
+    wx.request({//加载首页推荐商品
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=formid',
+      method: 'post',
+      data: {
+        formid: formId,
+        id: wx.getStorageSync('id')
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+      },
+      fail: function (e) {
+      },
+    })
+  },
   addShopCart:function(e){ //添加到购物车
     var that = this;
     var phone = this.data.phone;
+    var xianzhi_id = this.data.xianzhi_id;
+    if (this.data.productId == xianzhi_id){
+      wx.showToast({
+        title: '仅会员才可购买',
+        icon: 'none',
+        duration: 1000
+      });
+      return;
+    }
     if (phone == 0){//如果没有检测到手机，就提示绑定
       wx.showToast({
         title: '未绑定手机',
@@ -407,7 +511,67 @@ car_count:function(){
       }
     });
   },
-  
+  // 弹出层
+  takeCoupon: function (e) {
+    this.setData({
+      LayerBoxHeight: '100%',
+      noscroll: 'noscroll'//关闭背景滑动
+    })
+    if (e.currentTarget.dataset.id == 1) {
+      this.setData({
+        focus: true
+      })
+    }
+    this.createMaskShowAnim();
+    this.createContentShowAnim();
+  },
+  // 关闭弹出层
+  takeCouponClose: function () {
+    this.setData({
+      'LayerBoxHeight': '0',
+      noscroll: ''//开启背景滑动
+    })
+    this.createMaskHideAnim();
+    this.createContentHideAnim();
+  },
+  /*弹出层方法开始 */
+  createMaskShowAnim: function () {
+    const animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: 'cubic-bezier(.55, 0, .55, .2)',
+    });
+
+    this.maskAnim = animation;
+
+    animation.opacity(1).step();
+    this.setData({
+      animMaskData: animation.export(),
+    });
+  },
+  createMaskHideAnim: function () {
+    this.maskAnim.opacity(0).step();
+    this.setData({
+      animMaskData: this.maskAnim.export(),
+    });
+  },
+  createContentShowAnim: function () {
+    const animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: 'cubic-bezier(.55, 0, .55, .2)',
+    });
+    this.contentAnim = animation;
+    animation.translateY(0).step();
+    this.setData({
+      animContentData: animation.export(),
+    });
+  },
+  createContentHideAnim: function () {
+    this.contentAnim.translateY('100%').step();
+    this.setData({
+      animContentData: this.contentAnim.export(),
+    });
+  },
+ /*弹出层方法结束 */
  
   onShareAppMessage: function () {//
     var that = this;

@@ -21,6 +21,7 @@ Page({
     that.setData({
       web_type: web_type,
       anran_id: jm_id,
+      user_id: wx.getStorageSync('id'),
       kuaidi:kuaidi
     })
     //console.log(web_type);

@@ -18,14 +18,10 @@ Page({
     goods_list: [],
     count_goods_list:[],
     proCat:[],
+    zhihu_index:[],//知乎首页
+    zhihu_nobody:[],
     f_fenxiang:0,
-    page1: 1,//首页的下拉加载
-    page2: 2,//第二页-找优惠的下拉加载
-    page3: 2,//第三页-找机构的下拉加载
-    page4: 2,//第四页-找医生的下拉加载
-    index2_one: 1,//用于判断第二页的找优惠按钮是否第一次加载
-    index3_one: 1,//用于判断第三页的找机构按钮是否第一次加载
-    index4_one: 1,//用于判断第三页的找机构按钮是否第一次加载
+    page:1,
     index: 2,
     brand:[],
     xzzzp: [],
@@ -91,7 +87,25 @@ Page({
     new_page:2//新方法下的页数，新方法采用替换式,1为首页，2为找优惠，3找机构，4找医生
   },
   
-  
+  formid:function(e){
+    let formId = e.detail.formId;
+    console.log('form发生了submit事件，推送码为：', formId)
+    wx.request({//加载首页推荐商品
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=formid',
+      method: 'post',
+      data: {
+        formid: formId,
+        id: wx.getStorageSync('id')
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+      },
+      fail: function (e) {
+      },
+    })
+  },
 
   bindGetUserInfo: function (e) {
     var that = this;
@@ -140,39 +154,60 @@ close_choujiang:function(e){
   });
 },
   
-
-  //  第二页找优惠的下拉点击加载更多
-  index2_jiazai: function (e) {
+  /**
+     * 页面相关事件处理函数--监听用户下拉动作--下拉刷新
+     */
+  onPullDownRefresh: function () {
     var that = this;
-    var page2 = that.data.page2;
-    wx.showLoading();//加载动画
-    console.log(this.data.page_tab);
-    wx.request({
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_xzzzp',
+    wx.showLoading();//加载动画 
+    wx.request({//加载首页基础信息
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_zhihu',
       method: 'post',
       data: {
-        page: page2,//当前tab看到第几页了
-
+        user_lei: wx.getStorageSync('user_lei'),
+        user_id: wx.getStorageSync('id'),
+        page: 1
       },
       header: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       success: function (res) {
-        var xzzzp = res.data.xzzzp;
-        if (xzzzp == '') {
+        wx.setStorageSync('ctrl', res.data.ctrl)//把自己的id写入缓存
+        if (res.data.zhihu_index != null) {
+          that.setData({
+            zhihu_index: res.data.zhihu_index,
+          });
+
+        }
+        if (res.data.zhihu_nobody != null) {
+          that.setData({
+            zhihu_index: res.data.zhihu_nobody
+          });
+  
+        }
+
+        if (res.data.zhihu_nobody == null && res.data.zhihu_index == null) {
           wx.showToast({
-            title: '没有更多数据！',
+            title: '没有更多了',
             duration: 2000
           });
           that.setData({
-            more:'没有更多'
+            more: '没有更多'
           })
-          return false;
         }
         that.setData({
-          page2: page2 + 1,
-          xzzzp: that.data.xzzzp.concat(xzzzp)
-        });
+          page: 1
+        })
+        if (res.data.count_message > 0) {
+          wx.showTabBarRedDot({//展示消息的红点
+            index: 2
+          })
+        } else {
+          wx.hideTabBarRedDot({
+            index: 2
+          })
+        }
+
         //endInitData
         wx.hideLoading()//关闭加载动画
       },
@@ -181,232 +216,21 @@ close_choujiang:function(e){
           title: '网络异常！',
           duration: 2000
         });
-      }
-    })
-  },
-  /**
-     * 页面相关事件处理函数--监听用户下拉动作--下拉刷新
-     */
-  onPullDownRefresh: function () {
-    var page_tab = this.data.page_tab;//底部tab
-    var new_page = this.data.new_page;//头部tab
-    var cat_id = this.data.cat_id;//分类id
-    var page1 = this.data.page1;
-    var load_ing = this.data.load_ing;
-    var that = this;
-    if(page_tab == 1){//首页的下拉刷新需要判断头部tab
-      if (load_ing == 0) {//如果不是加载中的状态，就可以继续加载
-        that.setData({
-          col1: [],
-          col2: [],
-          page1: page1,
-        });
-        this.loadImages(cat_id);//按照分类加载
-        this.setData({
-          f_fenxiang: 0,
-        });
-        this.f_fenxiang();
-      }
-      
-    } else if (page_tab == 2){//我的页面
-      wx.reLaunch({//下拉刷新小程序，page_tab=1表示刷新首页，2表示刷新我的页面
-        url: '../index/index?page_tab=' + page_tab,
-      });
-    }
-    else if (page_tab == 3) {//商城
-      if (new_page == 2) {//头部tab为2时，重新加载找优惠
-        this.youhui();
-        
-      } else if (new_page == 3) {//头部tab为3时，重新加载找机构
-        this.jigou()//加载找优惠列表
-      } else if (new_page == 4) {//头部tab为4时，重新加载找医生
-        this.yisheng()//加载找医生列表
-      }
-
-    }
-    else if (page_tab == 4) {//百科
-
-
-    }
-   
-    
+      },
+    });
     wx.stopPullDownRefresh();//解决回弹问题
-    
   },
   /**
   * 页面上拉触底事件的处理函数
   */
   onReachBottom: function () {
-    var new_page = this.data.new_page;
-    var page_tab = this.data.page_tab;
-    var cat_id = this.data.cat_id;
-    if (page_tab == 1){//表示第一页即首页
-      
-      this.index2_jiazai();
-    }
-    if (new_page == 2 && page_tab == 3) {//表示商城页的找优惠，page_tab==3表示是商城页面
-      this.loadImages(cat_id);
-    }
+   
+    this.zhihu();
   },
-/*底部tab的无缝切换 */
-tabchange:function(e){
-  let formId = e.detail.formId;
-  console.log('form发生了submit事件，推送码为：', formId)
-  wx.request({//加载首页推荐商品
-    url: app.d.anranUrl + '/index.php?m=default&c=indem&a=formid',
-    method: 'post',
-    data: {
-      formid: formId,
-      id: wx.getStorageSync('id')
-    },
-    header: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    success: function (res) {
-    },
-    fail: function (e) {
-    },
-  })
-  if (e.currentTarget.dataset.tab == 1) {//如果是第一页，【首页，日记】
-    
-    this.setData({
-      none_1: '',
-      none_2: 'none',
-      none_3: 'none',
-      none_4: 'none',
-      on_cor1: 'on_cor',
-      on_cor2: '',
-      on_cor3: '',
-      on_cor4: '',
-      page_tab: 3
-    })
-    console.log('page_tab=' + this.data.page_tab);
-  }
-  if (e.currentTarget.dataset.tab == 2) {//如果是第四页,【我的页面】
-    var b_user_name = this.data.b_user_name;
-    if (b_user_name == 0) {//如果没有获取到姓名，就再获取一次
-    var that = this;
-      that.loadOrderStatus();
-    }
-    this.setData({
-      none_1: 'none',
-      none_2: '',
-      none_3: 'none',
-      none_4: 'none',
-      on_cor1: '',
-      on_cor2: 'on_cor',
-      on_cor3: '',
-      on_cor4: '',
-      page_tab:2
-    })
-    console.log('page_tab=' + this.data.page_tab);
-  }
-  if (e.currentTarget.dataset.tab == 3) {//如果是第二页，【商城】
 
-    this.setData({
-      none_1: 'none',
-      none_2: 'none',
-      none_3: '',
-      none_4: 'none',
-      on_cor1: '',
-      on_cor2: '',
-      on_cor3: 'on_cor',
-      on_cor4: '',
-      page_tab: 1,
-    })
-    console.log('page_tab=' + this.data.page_tab);
-    var index2_one = this.data.index2_one //取到找优惠的加载次数
-    if (index2_one == 1) {//如果是第一次
-      this.youhui()//加载找优惠列表
-      this.setData({
-        z_index: 2,
-        index2_one: index2_one + 1,
-        new_page: 2 //新方法的头部第二页
-      })
-    }
-  }
-  if (e.currentTarget.dataset.tab == 4) {//如果是第三页，【百科】
-    this.setData({
-      none_1: 'none',
-      none_2: 'none',
-      none_3: 'none',
-      none_4: '',
-      on_cor1: '',
-      on_cor2: '',
-      on_cor3: '',
-      on_cor4: 'on_cor',
-      page_tab: 4
-    })
-    console.log('page_tab=' + this.data.page_tab);
-  }
 
-},
 
-/*首页-日记头部点击切换分类，直接刷新分类日记即可 */
-r_change:function(e){
-  var cat_id = this.data.cat_id;
-    this.setData({
-      cat_id: e.target.dataset.catid,//选中的状态
-      col1: [],
-      col2: [],
-      page1: 1
-      //new_page: 1 //新方法的头部第一页
-    })
- /* wx.pageScrollTo({//回到顶部
-    scrollTop: 0
-  })*/
-  this.loadImages(cat_id);
-
-},
-
-  /*商城页头部点击切换 */
-  indexChange: function (e) {
-    if (e.target.dataset.current == 1) {//如果点击了首页的头部tab的第一个，且page_tab == 1，就是确实是在首页
-    this.setData({
-      z_index:1,
-      new_page: 1 //新方法的头部第一页
-    })
-    }
-    if (e.target.dataset.current == 2) {//需要判断第一次加载
-      var index2_one = this.data.index2_one //取到找优惠的加载次数
-      if (index2_one == 1){//如果是第一次
-        this.youhui()//加载找优惠列表
-        this.setData({
-          z_index: 2,
-          index2_one: index2_one + 1,
-          new_page: 2 //新方法的头部第二页
-        })
-      }else{//如果不是第一次加载，就只切换过来就好
-        this.setData({
-          z_index: 2,
-          index2_one: index2_one + 1,
-          new_page: 2 //新方法的头部第一页
-        })
-      }
-    }
-    if (e.target.dataset.current == 3) {
-      var index3_one = this.data.index3_one //取到找机构的加载次数
-      this.setData({
-        z_index: 3,
-        index3_one: index3_one + 1,
-        new_page: 3 //新方法的头部第一页
-      })
-      if (index3_one == 1) {//如果是第一次
-        this.jigou()//加载找机构列表
-      }
-    }
-    if (e.target.dataset.current == 4) {
-      var index4_one = this.data.index4_one //取到找医生的加载次数
-      this.setData({
-        z_index: 4,
-        index4_one: index4_one + 1,
-        new_page: 4 //新方法的头部第一页
-      })
-      if (index4_one == 1) {//如果是第一次
-        this.yisheng()//加载找医生列表
-      } 
-    }
-  },
+  
 
   onLoad: function (options) {//
     //console.log(wx.getSystemInfoSync().windowWidth * 254/750);
@@ -421,28 +245,10 @@ r_change:function(e){
     let vm = this;
     vm.getUserLocation();
     var that = this;
-    var bd_id = options.id;//获取转发时携带的转发用户的id
+    
     var anran_id = wx.getStorageSync('id');
     var page_tab = options.page_tab;
     var cat_id = this.data.cat_id;//分类id
-    this.loadOrderStatus();
-    this.youhui();
-    this.f_fenxiang();
-    
-    if (page_tab == 2){//如果下拉刷新的是我的页面
-      this.loadOrderStatus();
-      this.setData({
-        none_1: 'none',
-        none_2: '',
-        none_3: 'none',
-        none_4: 'none',
-        on_cor1: '',
-        on_cor2: 'on_cor',
-        on_cor3: '',
-        on_cor4: '',
-        page_tab: 2
-      })
-    }
     
     //判断是否显示抽奖弹窗
     if (wx.getStorageSync('choujiang')){
@@ -454,12 +260,13 @@ r_change:function(e){
       zhuanpan_off: choujiang
     });
     //判断是否是转发打开，如果是就执行绑定推荐方法
+    var bd_id = options.id;//获取转发时携带的转发用户的id
     if (bd_id > 0){
       //将转发过来的ID，放入缓存中
       wx.setStorageSync('bd_id', bd_id)//把转发的人id写入缓存
       }
 
-    app.getOpenid().then(function (openid) {
+   /* app.getOpenid().then(function (openid) {
       if (openid == 66){
         that.setData({
           shouquan: 999,
@@ -470,159 +277,68 @@ r_change:function(e){
           shouquan: 0
         });
       } 
-    });
-    this.jiazai()
-    /*瀑布流部分开始 */
-    wx.getSystemInfo({
-      success: (res) => {
-        let ww = res.windowWidth;
-        let wh = res.windowHeight;
-        let imgWidth = ww * 0.48;
-        let scrollH = wh;
-
-        this.setData({
-          scrollH: scrollH,
-          imgWidth: imgWidth
-        });
-
-        this.loadImages(cat_id);
-      }
-    })
-  /*瀑布流部分结束 */
-    
+    });  */
+    this.zhihu();
   },
- youhui:function(){//优惠的第一屏加载
-   var that = this;
-   wx.showLoading();//加载动画
-   wx.request({//加载首页推荐商品
-     url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_xzzzp',
-     method: 'post',
-     data: {
-       page: 1,
-     },
-     header: {
-       'Content-Type': 'application/x-www-form-urlencoded'
-     },
-     success: function (res) {
-       var xzzzp = res.data.xzzzp;
-       that.setData({
-         xzzzp: xzzzp,
-         zhuanpan_on: res.data.zhuanpan,  //转盘
-         huodong_img: res.data.huodong, //活动开关
-         huodong_info:res.data.huodong_info,
-         fenxiang: res.data.fenxiang
-       });
-       //endInitData
-       wx.hideLoading()//关闭加载动画
-     },
-     fail: function (e) {
-       wx.showToast({
-         title: '网络异常！',
-         duration: 2000
-       });
-     },
-   })
- },
-  jigou: function () {//机构的第一屏加载
-    var that = this;
-    wx.showLoading();//加载动画
-    wx.request({//加载首页推荐商品
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_jigou',
-      method: 'post',
-      data: {
-        page: 1,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        var jigou = res.data.jigou;
-        that.setData({
-          jigou: jigou,
-          
-        });
-        //endInitData
-        wx.hideLoading()//关闭加载动画
-      },
-      fail: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
-        });
-      },
-    })
-  },
-  yisheng: function () {//医生的加载
-    var that = this;
-    wx.showLoading();//加载动画
-    wx.request({//加载首页推荐商品
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_yisheng',
-      method: 'post',
-      data: {
-        page: 1,
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        var yisheng = res.data.yisheng;
-        that.setData({
-          yisheng: yisheng,
-
-        });
-        //endInitData
-        wx.hideLoading()//关闭加载动画
-      },
-      fail: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
-        });
-      },
-    })
-  },
-  jiazai: function(){//首页的第一屏加载
+  zhihu: function () {//首页的第一屏加载
     var that = this;
     wx.showLoading();//加载动画 
-      wx.request({//加载首页基础信息
-        url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_index',
-        method: 'post',
-        data: {
-          user_lei: wx.getStorageSync('user_lei')
-        },
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        success: function (res) {
-          var djdzm = res.data.djdzm;
-          var laba = res.data.laba;
-          var ms_goods = res.data.ms_goods;
-          var tjhw = res.data.tjhw_num;
-          var banner = res.data.banner;
-          wx.setStorageSync('ctrl', res.data.ctrl)//把自己的id写入缓存
+    wx.request({//加载首页基础信息
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_zhihu',
+      method: 'post',
+      data: {
+        user_lei: wx.getStorageSync('user_lei'),
+        user_id: wx.getStorageSync('id'),
+        page:this.data.page
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        wx.setStorageSync('ctrl', res.data.ctrl)//把自己的id写入缓存
+        if (res.data.zhihu_index != null){
           that.setData({
-            djdzm: djdzm,
-            laba: laba,
-            ms_goods: ms_goods,
-            tjhw: tjhw,
-            category_list: res.data.category_list,
-            category_list1: res.data.category_list1,
-            category_list2: res.data.category_list2,
-            category_list3: res.data.category_list3,
-            category_list4: res.data.category_list4,
-            imgUrls: banner,
-            libao:res.data.libao
+            zhihu_index: that.data.zhihu_index.concat(res.data.zhihu_index),
           });
-          //endInitData
-          wx.hideLoading()//关闭加载动画
-        },
-        fail: function (e) {
+        } 
+        if (res.data.zhihu_nobody != null){
+          that.setData({
+            zhihu_index: that.data.zhihu_index.concat(res.data.zhihu_nobody)
+          });
+        }
+        
+        if (res.data.zhihu_nobody == null && res.data.zhihu_index == null){
           wx.showToast({
-            title: '网络异常！',
+            title: '没有更多了',
             duration: 2000
           });
-        },
-      });
+          that.setData({
+            more: '没有更多'
+          })
+        }
+        that.setData({
+          page: that.data.page + 1
+        })
+        if(res.data.count_message > 0){
+          wx.showTabBarRedDot({//展示消息的红点
+            index: 2
+          })
+        }else{
+          wx.hideTabBarRedDot({
+            index:2
+          })
+        }
+        
+        //endInitData
+        wx.hideLoading()//关闭加载动画
+      },
+      fail: function (e) {
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      },
+    });
 
   },
   shuaxin:function(e){
@@ -630,147 +346,6 @@ r_change:function(e){
       url: '../index/index',
     })//要延时执行的代码
   },
-/*瀑布流js开始 */
-  onImageLoad: function (e) {
-    let imageId = e.currentTarget.id;
-    let oImgW = e.detail.width;         //图片原始宽度
-    let oImgH = e.detail.height;        //图片原始高度
-    let imgWidth = this.data.imgWidth;  //图片设置的宽度
-    let scale = imgWidth / oImgW;       
-    let imgHeight = oImgH * scale;      //自适应高度
-
-    let images = this.data.images;
-    let imageObj = null;
-
-    for (let i = 0; i < images.length; i++) {
-      let img = images[i];
-      if (img.id === imageId) {
-        imageObj = img;
-        break;
-      }
-    }
-
-    imageObj.height = imgHeight;
-
-    let loadingCount = this.data.loadingCount - 1;
-    let col1 = this.data.col1;
-    let col2 = this.data.col2;
-    
-    if (col1H <= col2H) {
-      col1H += imgHeight;
-      col1.push(imageObj);
-    } else {
-      col2H += imgHeight;
-      col2.push(imageObj);
-    }
-
-    let data = {
-      loadingCount: loadingCount,
-      col1: col1,
-      col2: col2
-    };
-
-    if (!loadingCount) {
-      data.images = [];
-    }
-
-    this.setData(data);
-  },
-
-  loadImages: function (cat_id) {
-    var that = this;
-    var page1 = that.data.page1;
-    var cat_id = that.data.cat_id;
-    wx.showLoading();//加载动画 
-    this.setData({
-      load_ing: 1 //设置为加载中
-    });
-    wx.request({
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=get_shaidan2',
-      method: 'post',
-      data: {
-        id: wx.getStorageSync('id'),
-        cat_id:cat_id,
-        page: page1
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        var shaidan = res.data.comments;
-        if(shaidan == ''){//如果为空了，就继续从第一个开始加载
-          that.setData({
-            loadingCount: shaidan.length,
-            images: shaidan,
-            page1: 1,
-          });
-          if (page1 > 1){
-            that.loadImages();//再执行一次
-          }
-         
-        }else{
-          that.setData({
-            loadingCount: shaidan.length,
-            images: shaidan,
-            page1: page1 + 1,
-            load_ing: 0
-          });
-        }
-        //endInitData
-         wx.hideLoading()//关闭加载动画
-      },
-      fail: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000
-        });
-        that.setData({
-          load_ing: 0
-        });
-      },
-    });
-    /*let images = [
-      { pic: "../../images/1.png", height: 0 },
-      { pic: "../../images/2.png", height: 0 },
-      { pic: "../../images/3.png", height: 0 },
-      { pic: "../../images/4.png", height: 0 },
-      { pic: "../../images/5.png", height: 0 },
-      { pic: "../../images/6.png", height: 0 },
-      { pic: "../../images/7.png", height: 0 },
-      { pic: "../../images/8.png", height: 0 },
-      { pic: "../../images/9.png", height: 0 },
-      { pic: "../../images/10.png", height: 0 },
-      { pic: "../../images/11.png", height: 0 },
-      { pic: "../../images/12.png", height: 0 },
-      { pic: "../../images/13.png", height: 0 },
-      { pic: "../../images/14.png", height: 0 }
-    ];
-
-    let baseId = "img-" + (+new Date());
-
-    for (let i = 0; i < images.length; i++) {
-      images[i].id = baseId + "-" + i;
-    }
-
-    this.setData({
-      loadingCount: images.length,
-      images: images
-    });*/
-  },
-/*瀑布流js结束 */
-/*浮动分享弹出层 */
-f_fenxiang:function(e){
-  let that = this;
-  let djs = 60;
-
-  setTimeout(function () {//延时10秒关闭弹出层
-   
-    that.setData({
-      f_fenxiang: 1,
-    });
-  }, 10000)
-
-},
 
 /*我的信息 */
   loadOrderStatus: function () {
@@ -973,7 +548,7 @@ f_fenxiang:function(e){
     });
   },
   onShow: function () {
-    
+  
   },
   /*分享开始 */
   onShareAppMessage: function () {//

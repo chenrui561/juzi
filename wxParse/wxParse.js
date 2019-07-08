@@ -93,7 +93,8 @@ function wxAutoImageCal(originalWidth, originalHeight,that,bindName) {
   wx.getSystemInfo({
     success: function (res) {
       var padding = that.data[bindName].view.imagePadding;
-      windowWidth = res.windowWidth-6*padding;
+      //windowWidth = res.windowWidth-6*padding;//计算图片宽度
+      windowWidth = res.windowWidth;//计算图片宽度
       windowHeight = res.windowHeight;
       //判断按照那种方式进行缩放
       console.log("windowWidth" + windowWidth);

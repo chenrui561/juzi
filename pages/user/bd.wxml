@@ -11,23 +11,46 @@
     </view>
   </view>
   <view class="page-section">
-    <view class="weui-cells__title" >真实姓名</view>
+    <view class="weui-cells__title" >职业</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="q_name" class="weui-input" value='{{info.q_name}}'  placeholder="您的职业" />
+      </view>
+    </view>
+  </view>
+  <view class="page-section">
+
+    <view class="weui-cells__title" ><text wx:if="{{jf == 1}}" style='color:#f20'>*</text>真实姓名</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">
         <input name="rel_name" class="weui-input" value='{{info.rel_name}}'  placeholder="请输入您的真实姓名" />
       </view>
     </view>
   </view>
-
-    <view class="weui-cells__title"><text style='color:#f20'>*</text>请输入您的手机号</view>
-    <view class="weui-cells weui-cells_after-title">
+<view wx:if="{{wx_phone == 1}}" class="weui-cells__title flex_h">
+      <text style='color:#f20'>*</text>
+      <text>请输入您的手机号</text>
+      </view>
+    <view wx:if="{{wx_phone == 1}}" class="weui-cells weui-cells_after-title page-section">
       <view class="weui-cell weui-cell_input">
-        <input name="phone" bindinput='input_mobile' class="weui-input" maxlength="11" placeholder="您的手机号码" />
-        <view wx:if="{{djs == 0}}" class='yzm' data-off='{{off}}' bindtap="send_yzm">获取验证码</view>
-        <view wx:if="{{djs > 0}}" class='yzm_djs'>{{djs}}秒</view>
+        <input name="phone"  class="weui-input hui" maxlength="11" value='{{input_mobile}}' disabled="ture" />
+        <view  class='yzm' bindtap="change_phone">修改</view>
       </view>
     </view>
-  <view class="page-section">
+
+    <view wx:if="{{wx_phone == 0}}" class="weui-cells__title flex_h">
+      <text style='color:#f20'>*</text>
+      <text>请输入您的手机号</text>
+     <!-- <button class='huoqu' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>--></view>
+    <view wx:if="{{wx_phone == 0}}" class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="phone" bindinput='input_mobile' class="weui-input" maxlength="11" value='{{input_mobile}}' placeholder="您的手机号码" />
+        <view wx:if="{{djs == 0}}" class='yzm' data-off='{{off}}' bindtap="send_yzm">获取验证码</view>
+        <view wx:if="{{djs > 0}}" class='yzm_djs'>{{djs}}秒</view>
+        
+      </view>
+    </view>
+  <view wx:if="{{wx_phone == 0}}" class="page-section">
     <view class="weui-cells__title" ><text style='color:#f20'>*</text>请输入验证码</view>
     <view class="weui-cells weui-cells_after-title">
       <view class="weui-cell weui-cell_input">

@@ -1,0 +1,44 @@
+/* pages/zhihu/zhihu_guanzhu.wxss */
+.guanzhu{
+  font-size: 13px;
+  line-height: 20px;
+  height: 20px;
+  color: #F14918;
+  margin: 2px 15px;
+  padding: 1px 10px;
+  border-radius:5px; 
+  border:1px solid #F14918;
+}
+.guanzhu2{
+  font-size: 13px;
+  line-height: 20px;
+  height: 20px;
+  color: #999;
+  margin: 2px 15px;
+  padding: 1px 10px;
+  border-radius:5px; 
+  border:1px solid #999;
+}
+.swiper-tab{  
+    width: 100%;  
+    border-bottom: 1px solid #eee;  
+    text-align: center;  
+    line-height: 80rpx;
+    background: #fff;  
+    position: fixed;
+    top: 0;  
+    display: flex;
+    z-index: 999;
+    overflow: hidden;
+     flex-direction: row;
+    }  
+.swiper-tab-list{  
+  font-size: 12px;  
+   
+  width: 50%;  
+  color: #666;  
+  }  
+  .on{ 
+  color: #F14918;  
+  border-bottom: 5rpx solid #F14918;
+  }  

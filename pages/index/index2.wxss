@@ -1,6 +1,6 @@
 /**index.wxss**/
 .swiper-tab{  
-    width: 100%;  
+    width: 90%;  
    /* border-top: 1px #f7f7f7 solid;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.050);*/
     text-align: center;  
@@ -36,8 +36,8 @@ display:-webkit-box;
  font-size: 13px; 
   display:inline-block;
   /*margin-left:10rpx;*/ 
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   color: #666; 
   line-height: 26px;
   } 
@@ -92,19 +92,21 @@ width: 95%;
   }
   .search{
 display:flex;
-background-color:#f2f2f2;
-width: 70%;
+background-color:#fff;
+width: 92%;
 border-radius:28px;
-margin-right: 20px;
+margin-left: 4%;
+border: 1px #ccc solid
+
 }
 .search_img{
 width:18px;
 height:18px;
-margin:3px 3px 3px 10px;
+margin:9px 3px 0 10px;
 }
 .search_text{
-font-size:13px;
-line-height:26px;
+font-size:14px;
+line-height:35px;
 color: #999;
 }
 .index_sousuo{
@@ -187,7 +189,6 @@ border-top: 1px #f2f2f2 solid;
 }
 .page {
   font-family: '微软雅黑';
-  background-color: #f5f8fa;
 }
 .none {
   display: none;
@@ -999,13 +1000,108 @@ border:none;
 
   .fabu{
 position:fixed;
-bottom:68px;
+bottom:20px;
 right:20px;
 background-color:#F14918;
 border-radius:50%;
-width:38px;
-height:38px;
+width:42px;
+height:42px;
 display:flex;
 justify-content: center;
 align-items:center;
+}
+
+/*新版社区css*/
+.jiahao{
+  width: 6VW;
+  height: 26px;
+  font-size: 11px;
+  position: relative;
+}
+.left_yy{
+  width: 6px;
+  height: 26PX;
+  background-size: 6px 26px;
+  background-repeat:no-repeat;
+  position: absolute;
+  left: -5px;
+  z-index: 9999;
+}
+/* 话题*/
+.huati_list{
+  padding-top: 35px;
+}
+.huati{
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: #fff;
+  
+}
+.huati_title{
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items:flex-start;
+  
+  }
+  .wentitle{ line-height: 21px;}
+  .quesion_ico{width: 16px; height: 16px; margin-right: 5px;}
+.huidalist{display: flex;justify-content:space-between;align-items:flex-start; margin-top:5px;}
+.huidalist_f{display: flex;align-items:flex-start; }
+.flex_h_end{
+  display: flex;
+  justify-content:flex-end;
+  align-items: center;
+}
+.wenioc_img{ width: 16px;
+height: 16px;
+
+flex-shrink: 0
+}
+.wenioc{ padding-top: 2px; width: 16px; height: 16px;margin-right: 5px;}
+.huati_img{
+  width: 90px;
+  height: 75px;
+  flex-shrink:0;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+.huati_info{
+  margin-bottom: 5px;
+}
+.huati_text{
+  font-size: 15px;
+  color: #323332;
+  line-height: 21px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.huati_last{
+  font-size: 14px;
+  color: #999;
+  width: 100%;
+  margin-top: 10px;
+}
+.quesion_list{ margin-right: 30px;}
+.touxiang_img{
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+button::after{
+border:none;
+}
+.no_button {
+  font-size: 28rpx;
+  background-color: #fff;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  text-align: inherit;
 }

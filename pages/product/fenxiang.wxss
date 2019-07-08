@@ -1,0 +1,18 @@
+/* pages/huodong/fenxiang.wxss */
+.img_url{
+  width: 84vw;
+  margin-left: 8vw;
+  margin-top: 5vw;
+  border-radius: 10px;
+  box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.103);
+}
+.img_down{
+  line-height: 40px;
+  font-size: 16px;
+  background-color: #1aad19;
+  color: #fff;
+  width: 84vw;
+  left: 8vw;
+  position: fixed;
+  bottom: 7VW;
+}

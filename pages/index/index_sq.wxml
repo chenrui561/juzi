@@ -1,0 +1,225 @@
+<!-- index.wxmi -->
+<!--授权登录-->
+<view wx:if="{{shouquan == 0}}" class='shouquan'></view>
+<view class='shouquan_b' wx:if="{{shouquan == 0}}">
+  <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
+  <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子放心美</text>
+  <button style="bottom: 0;position: absolute;width: 100%;color: #F14918;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+<view wx:if="{{zhuanpan_off > 0}}" class='shouquan'></view>
+<view wx:if="{{zhuanpan_off > 0}}" class='zhuanpan'>
+  <navigator url="../turntable/turntable">
+    <image mode='aspectFill' class='zhuanpan_img' src='http://www.juziyimei.com/images/tanchuang.jpg'></image>
+  </navigator>
+  <image bindtap='close_choujiang' mode='aspectFit' class='zhuanpan_close' src='/images/close.png'></image>
+</view>
+<!--授权登录end-->
+<!-- 商城页面开始-->
+<view class="page">
+  <!--首页头部-->
+  <view wx:if="{{kongzhi > 0}}" class='index_head flex_h_b pt5'>
+      <scroll-view scroll-x class="swiper-tab">
+       <view  class="swiper-tab-list {{z_index==3 ? 'swiper-tab-color' : ''}}" data-current="3" bindtap="indexChange">桔子商学院 </view>
+      <view  class="swiper-tab-list {{z_index==2 ? 'swiper-tab-color' : ''}}" data-current="2" bindtap="indexChange">会员社区</view>
+        <view class="swiper-tab-list {{z_index==1 ? 'swiper-tab-color' : ''}} " bindtap="indexChange" data-current="1">医美问答</view>
+        
+       
+      </scroll-view>
+        <navigator url='../search/search-zhihu' class='search'>
+          <image class='search_img' src='/images/search.png'></image>
+        </navigator>
+  </view>
+  <view wx:if="{{kongzhi == 0}}" class='index_head'>
+          <view class='index_sousuo2'>
+              <navigator url='../search/search-zhihu' class='search2'>
+                <image class='search_img2' src='/images/search.png'></image>
+                <text class='search_text2'>搜索您感兴趣的话题</text>
+              </navigator>
+          </view>
+  </view>
+  <!--首页头部end-->
+  <!--内容-->
+  <view class='huati_list' wx:if="{{z_index == 1}}">
+    <navigator wx:for="{{zhihu_index}}" url='/pages/zhihu/zhihu?aid={{item.id}}&wid={{item.wid}}' class='huati flex_s_l'>
+      <form bindsubmit='formid' report-submit="true">
+        <button formType="submit" class='no_button'>
+          <view class='huati_title'>
+            <view class='wenioc'>
+              <image class="wenioc_img" src="/images/wen.jpg"></image>
+            </view>
+            <view class='wentitle'>{{item.title}}</view>
+          </view>
+          <view class='huidalist'>
+            <view class='huidalist_f'>
+              <view class='wenioc'>
+                <image class='wenioc_img' src='/images/huida.jpg'></image>
+              </view>
+              <view class='huati_text'>{{item.jianjie}}</view>
+            </view>
+            <image wx:if="{{item.fengmian != ''}}" class='huati_img' mode='aspectFill' src='{{item.fengmian}}'></image>
+          </view>
+          <view wx:if="{{item.id > 0}}" class='huati_last flex_h_end'>
+            <view class='quesion_list'>
+              <image class='quesion_ico' src='/images/pinlun.jpg'></image>{{item.pl}}</view>
+            <view class='quesion_list' style='margin-right:0;'>
+              <image class='quesion_ico' src='/images/dianzan.jpg'></image>{{item.zan}}</view>
+          </view>
+        </button>
+      </form>
+    </navigator>
+
+    <!--<navigator wx:for="{{zhihu_nobody}}" wx:for-item="item2" url='/pages/zhihu/zhihu?wid={{item2.wid}}' class='huati flex_s_l'>
+    <view class='huati_title'>{{item2.title}}</view>
+    <view class='huati_last'>0关注</view>
+</navigator>-->
+  <view class='no_more' style='margin-bottom:50px;'>{{more}}</view>
+
+  <navigator url='/pages/up_anli/question-ask?type_id=2' class='fabu'>
+    <image style='width:20px;height:20px;' src='/images/fabu.png'></image>
+  </navigator>
+  </view>
+
+<!--社区开始-->
+  <view class='huati_list' wx:if="{{z_index == 2}}">
+ <!--排序-->
+    <view class='flex_h font_16 p10_l_r bg bbe '>
+      <!--<view class='w100 l_h40 bbe'>
+        <text class='blue'>置顶</text>
+        <text class='ml10'>阿三大叔大叔大叔大</text>
+      </view>-->
+      <!--小喇叭开始-->
+        <text class='blue l_h40'>公告</text>
+        <swiper class='ml10' style='height:40px;background-color:#fff;width:80%;' indicator-dots="{{indicatorDots}}" vertical="true" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+          <block wx:for="{{gonggao}}">
+            <swiper-item>
+              <navigator url='{{item.url}}' class='laba w100'>{{item.gg}}</navigator>
+            </swiper-item>
+          </block>
+        </swiper>
+        <!--小喇叭结束
+
+      <view class='w100 l_h40'>
+        <text class='blue'>公告</text>
+        <text class='ml10'>阿三大叔大叔大叔大</text>
+      </view>-->
+    </view>
+
+  <!--排序-->
+    <view class='flex_h_b font_16 p10 bg bbe mt10'>
+      <view class='flex_h'>
+        <view bindtap='jinghua' class="youhui_f {{jinghua == 0 ?'':'youhui_f_jh'}} ">只看精华</view>
+        <view bindtap='shoucang' class="youhui_f {{shoucang == 0 ?'':'youhui_f_jh'}} ">我的收藏</view>
+      </view>
+      <picker bindchange="pick" value='{{index}}' range="{{pick}}">
+        <view class='flex_h_b'>
+          <view>{{pick[shequ_pick]}}</view>
+          <image class='down' src='/images/down.png'></image>
+        </view>
+      </picker>
+    </view>
+  <!--列表-->
+    <navigator wx:for="{{shequ}}" url='/pages/zhihu/shequ_info?sid={{item.sid}}' class='shequ flex_s_l'>
+      <form bindsubmit='formid' report-submit="true" class='w100'>
+        <button formType="submit" class='no_button w100'>
+          <view class='user_info'>
+            <image class='user_img' src='{{item.tx_img}}'></image>
+            <view class='user_name flex_s_l'>
+              <text class='font_16'>{{item.passwd_answer}}</text>
+              <text wx:if="{{item.beizhu}}" class='hui font_12'>{{item.time}}</text>
+            </view>
+          </view>
+          <view class='shequ_title'>
+            <text wx:if="{{item.jing == 1}}" class='jing'>精</text>
+            <text wx:if="{{item.ding == 0}}"  class='ding'>置顶</text>
+            <view>{{item.title}}</view>
+          </view>
+          <view class='flex_h' wx:if="{{item.fengmian1}}">
+            <image  wx:if="{{item.fengmian2}}" class='shequ_list_img' mode='aspectFill' src='{{item.fengmian1}}'></image>
+            <image  wx:if="{{!item.fengmian2}}" class='shequ_list_img2' mode='aspectFill' src='{{item.fengmian1}}'></image>
+            <image wx:if="{{item.fengmian2}}" class='shequ_list_img' mode='aspectFill' src='{{item.fengmian2}}'></image>
+            <image wx:if="{{item.fengmian3}}" class='shequ_list_img' mode='aspectFill' src='{{item.fengmian3}}'></image>
+          </view>
+          
+          <view class='huati_last flex_h_b'>
+            <view class='shequ_add_time'>{{item.time_h}}</view>
+              <view class="flex_h">
+                <view class='flex_h'>
+                  <image class='quesion_ico' src='/images/yuedu.png'></image>{{item.yuedu}}
+                </view>  
+                <view class='flex_h ml20'>
+                  <image class='quesion_ico' src='/images/pinlun.jpg'></image>{{item.count_huifu}}
+                </view>
+              </view>
+               <!-- <view class='quesion_list' style='margin-right:0;'>
+                  <image class='quesion_ico' src='/images/dianzan.jpg'></image>{{item.zan}}</view>-->
+            </view>
+        </button>
+      </form>
+    </navigator>
+
+  <view class='no_more' style='padding-bottom:50px;'>{{more}}</view>
+  <navigator url='/pages/up_anli/question-ask?type_id=3' class='fabu'>
+    <image style='width:20px;height:20px;' src='/images/fabu.png'></image>
+  </navigator>
+  </view>
+
+  <!--第一页结束-->
+  <!--找优惠-开始-->
+<!--社区开始-->
+  <view class='shangxueyuan' wx:if="{{z_index == 3}}">
+  <!--<navigator url="../up_anli/down" class="qbdd flex_h_b" >
+      <view class="font_14 c3">{{anli}}</view>
+  
+        <image style='width: 16px;height: 16px;margin-left: 5px;' src="/images/x_right.png"></image>
+    
+  </navigator>-->
+    <view class='p10 m5 bg'>
+      <view class='flex_h_b bbe l_h40'>
+        <view class='font_16'>新人学堂</view>
+        <navigator url='../video/list' class='font_16 hui'>更多</navigator>
+      </view>
+      
+      <navigator url='../video/index?id={{item.vid}}&title={{item.name}}' wx:for="{{new_man}}" class='pt10 pb10 flex_h_b bbe'>
+        <view class='flex_h'>
+          <image class='video_img' mode='aspectFill' src='{{item.img}}'></image>
+          <view class='font_16 l_h32 '>
+            <view class='ovh1'>{{item.name}}</view>
+            <view class='hui'>{{item.video_user}}{{item.long_time}}</view>
+          </view>
+        </view>
+        <view class='chakan'>查看视频</view>
+      </navigator>
+      <navigator url='../video/list' class='no_more mt10'>查看全部</navigator>
+    </view>
+
+<view class='p10 m5 bg'>
+      <view class='flex_h_b bbe l_h40'>
+        <view class='font_16'>桔子充电宝</view>
+        <navigator url='../audio/list' class='font_16 hui'>更多</navigator>
+      </view>
+      
+      <navigator url='../audio/index?id={{item.aid}}&title={{item.name}}' wx:for="{{cdb}}" class='pt10 pb10 flex_h_b bbe'>
+        <view class='flex_h '>
+          <image class='video_img' mode='aspectFill' src='{{item.img}}'></image>
+          <view class='font_16 l_h32 '>
+            <view class='ovh1'>{{item.name}}</view>
+            <view class='hui'>{{item.audio_user}}{{item.long_time}}</view>
+          </view>
+        </view>
+        <view class='chakan '>收听音频</view>
+      </navigator>
+
+
+    
+        <navigator url='../audio/list' class='no_more mt10'>查看全部</navigator>
+    </view>
+
+  <!--案例下载-->
+
+
+ 
+  </view>
+  <!--第二页-找优惠-开始-->
+  <!--第四页-找医生-开始-->
+  <!--第四页-找医生-结束-->
+</view>

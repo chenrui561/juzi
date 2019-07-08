@@ -1,0 +1,178 @@
+<!--pages/index/zhaoshang.wxml-->
+<!--弹出层-->
+  <view bindtap='takeCouponClose' class='couponLayerBox' animation="{{animMaskData}}" style='height:{{LayerBoxHeight}};'></view>
+  <view class='couponLayer' animation="{{animContentData}}">
+      <view class='title flex_h_b'>
+         <view class='close'> </view>
+         <text>分享</text>
+
+         <image class='couponIcon'  bindtap='takeCouponClose' src='/images/guanbi.png'></image>
+      </view>
+      <view class='flex_h mb30 mt30'>
+        <!--推荐好友-->
+        <view class='flex_s w50'>
+          <button open-type="share" class="fenxiang_py">
+            <image class="icon_wx2"src="/images/weixin.png"></image>
+          </button>
+          <view class='font_14 haoyou'>好友</view>
+        </view>
+
+        <!--生成图片-->
+        <view class='flex_s w50'>
+          <navigator url='../index/fenxiang?qd_id={{qd_id}}' class="fenxiang_tp">
+            <image class="icon_wx_pyq"src="/images/pyq.png"></image>
+          </navigator>
+          <view class='font_14 haoyou'>图片</view>
+        </view>
+      </view>
+  </view>
+<!--弹出层end-->
+<view bindtap='takeCoupon' class="fenxiang"><image class="fenxiang_img" src='/images/fx.png'></image></view>
+<navigator  open-type='switchTab' url='/pages/index/index' class="shouye">
+    <image class="shouye_img" src='/images/shouye.png'></image>
+    <text class='white font_12'>去首页</text>
+</navigator>
+
+<view class='bg1'>
+  <image class='image_zs pr' mode="widthFix" src='http://www.juziyimei.com/images/zhaoshang/zhaoshang_01.jpg'>
+    <view class='zhifu flex_s_c pa' >
+      <!--<view bindtap='createProductOrder2' >
+        <image class='zhifu_icon1' mode='widthFix' src='http://www.juziyimei.com/images/zhaoshang/zhifu_01.png'></image>
+      </view>-->
+      <view bindtap='createProductOrder' data-id='1'>
+        <image class='zhifu_icon2' mode='widthFix' src='http://www.juziyimei.com/images/zhaoshang/new_zhifu_02.png'></image>
+      </view>
+      <view bindtap='createProductOrder' data-id='2'>
+        <image class='zhifu_icon3' mode='widthFix' src='http://www.juziyimei.com/images/zhaoshang/new_zhifu_03.png'></image>
+      </view>
+    </view>
+  </image>
+  <image class='image_zs' mode="widthFix" src='http://www.juziyimei.com/images/zhaoshang/zhaoshang_02.jpg'></image>
+  <view class='youshi flex_s_c'>
+    <image class='ys_icon' mode='aspectFit' src='http://www.juziyimei.com/images/zhaoshang/youshi_01.jpg'></image>
+    <view class='ys_txt'>
+      <view class='ys_title'>【免费】为你开整形医院</view>
+      <view class='ys_xiangxi'>桔子医美未来在全国上线2000+合作整形医院，所有整形医院都可为你和你的客户服务。只要你有客户想做整形，无论在哪消费，你都赚钱。</view>
+    </view>
+  </view>
+<view class='youshi flex_s_c'>
+    <image class='ys_icon' mode='aspectFit' src='http://www.juziyimei.com/images/zhaoshang/youshi_02.jpg'></image>
+    <view class='ys_txt'>
+      <view class='ys_title'>【免费】送你一个医美互联网商城</view>
+      <view class='ys_xiangxi'>桔子医美就像“淘宝、京东、美团”一样，主做医美领域的互联网商城。只要成为桔子会员，即可生成你专属的“医美平台系统”。</view>
+    </view>
+  </view>
+
+<view class='youshi flex_s_c'>
+    <image class='ys_icon' mode='aspectFit' src='http://www.juziyimei.com/images/zhaoshang/youshi_04.jpg'></image>
+    <view class='ys_txt'>
+      <view class='ys_title'>躺在家里·也赚钱</view>
+      <view class='ys_xiangxi'>桔子会员均有资格发展自己的团队，每发展一个团队成员有392-39200元不等奖励，且团队成员自动为你赚钱，哪怕你躺在家里也能赚钱。</view>
+    </view>
+  </view>
+<view class='youshi flex_s_c'>
+    <image class='ys_icon' mode='aspectFit' src='http://www.juziyimei.com/images/zhaoshang/youshi_05.jpg'></image>
+    <view class='ys_txt'>
+      <view class='ys_title'>1部手机·动动手指就赚钱</view>
+      <view class='ys_xiangxi'>仅需一部手机，即可生成自己专属的二维码和商城，分享二维码给他人，未来此人在平台上的所有消费，手机后台一目了然，直接收钱提现即可。</view>
+    </view>
+  </view>
+<view class='youshi flex_s_c'>
+    <image class='ys_icon' mode='aspectFit' src='http://www.juziyimei.com/images/zhaoshang/youshi_06.jpg'></image>
+    <view class='ys_txt'>
+      <view class='ys_title'>整形医院·为你打工</view>
+      <view class='ys_xiangxi'>凡成为桔子会员，客户在机构消费，最高可拿等同于63％的收益相当于平台上的几千家整形机构都在为你打工。</view>
+    </view>
+  </view>
+
+</view>
+<view class='bg2'>
+<view class='productlist'>
+    <navigator url='../product/detail?productId=773' class="product">
+      <image class='product_p' src='http://www.juziyimei.com/images/zhaoshang/porduct_01.jpg' mode='widthFix'></image>
+      <view class='product_txt flex_r_c'> 
+        <view class='zhongjian'>【总监】</view>
+        <view class='mflq'>免费领取</view>
+      </view> 
+    </navigator>
+    <navigator url='../product/detail?productId=772' class="product">
+      <image class='product_p' src='http://www.juziyimei.com/images/zhaoshang/porduct_02.jpg' mode='widthFix'></image>
+      <view class='product_txt flex_r_c'> 
+        <view class='zhongjian'>【城市合伙人】</view>
+        <view class='mflq'>免费领取</view>
+      </view> 
+    </navigator>
+    
+ </view>
+
+  <view class='zs_title flex_c_c'>  
+    <view class='zs_title_b color_hei'>1折起の医美特惠平台</view>
+    <view class='zs_title_s color_hei l_h30'>价格比客户自己去医院还便宜，推荐人“不仅赚钱/更赚口碑”</view>
+  </view>
+
+    <view class="cont">
+      <navigator wx:for="{{xzzzp}}" class="pr" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
+        <form bindsubmit='formid' report-submit="true">
+        <button formType="submit" class='no_button'>
+        <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
+        <image class="photo" mode='aspectFill' src="http://www.juziyimei.com/{{item.goods_img}}"></image>
+        <view class='h40 flex_h'>
+          <view class="title">{{item.goods_name}}</view>
+        </view>
+
+        <view class='flex_h font_14 l_h20 mtl-5'>
+          <view class="juzi_cor">优惠价：{{item.juzi_price}}元</view><view class="gmx">{{item.market_price}}元</view>
+        </view>
+        <view class="hui font_12 l_h20 mtl-5"><text class='juzi_cor'>{{item.shop_price}}</text>元预约优惠价</view>
+        <view class='goods_bottom' >
+          <view class="juli">{{item.yy_num}}人预约</view>
+          <view class='flex_h_b brand_name'>
+            <image style="width:12px;height:12px; float: left;flex-shrink:0;" src="/images/shop.png"></image>
+            <view style="height: 20px;line-height: 20px;text-align: center;margin-left:2px;">{{item.brand_name}}</view>
+          </view>
+        </view>
+            <text class="juli" wx:if="{{user_lei == 99}}">返佣：{{item.huodong_1}}/{{item.huodong_2}}/{{item.huodong_3}}</text>
+            <text class="juli" wx:if="{{user_lei == 1}}">返佣：{{item.huodong_1}}</text>
+            <text class="juli" wx:if="{{user_lei == 2}}">返佣：{{item.huodong_1}}/{{item.huodong_2}}</text>
+            <text class="juli" wx:if="{{user_lei == 3}}">返佣：{{item.huodong_3}}/{{item.huodong_2}}/{{item.huodong_3}}</text>
+        </button>
+        </form>
+      </navigator>
+    </view>
+
+</view>
+
+<view class='bg1'>
+  <view class='zs_title flex_c_c'>  
+    <view class='zs_title_b color_fff'>23个省+2000家医美机构</view>
+    <view class='zs_title_s color_fff'>100％机构合法，精选+严选+优选，只选机构“优势项目”</view>
+  </view>
+  <view class='zs_jjigou'><image class='img_width' src='http://www.juziyimei.com/images/zhaoshang/jigou.jpg' mode='widthFix'></image></view>
+  <view class='zs_title flex_c_c'>  
+    <view class='zs_title_b color_fff'>3大盈利模式 63％最高返佣</view>
+    <view class='zs_title_s color_fff' style='font-size:16px;'>直客奖 + 团队奖 + 推荐奖</view>
+  </view>
+  <view class='moshi'><image class='img_width' src='http://www.juziyimei.com/images/zhaoshang/moshi_01.jpg' mode='widthFix'></image></view>
+  <view class='moshi'><image class='img_width' src='http://www.juziyimei.com/images/zhaoshang/moshi_02.jpg' mode='widthFix'></image></view>
+  <view class='moshi'><image class='img_width' src='http://www.juziyimei.com/images/zhaoshang/moshi_03.jpg' mode='widthFix'></image></view>
+  <view class='zs_title flex_c_c'>  
+    <view class='zs_title_b color_fff'>桔子是什么？</view>
+    <view class='zs_title_s color_fff' style='font-size:16px;'>5G移动互联网-O2O医美社交电商平台</view>
+  </view>
+  <view class='zs_jiejian'>
+    <image class='img_width' src='http://www.juziyimei.com/images/zhaoshang/jianjie.jpg' mode='widthFix'></image>
+    <view class='zs_jiejian_txt'><text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;桔子放心美小程序，是5G移动互联网-O2O医美社交电商平台，隶属于武汉多美美合科技公司，由前腾讯技术高管团队联合创办。</text></view>
+    <view class='zs_jiejian_txt'><text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;通过“互联网+医美+社交+电商”的创新模式，</text>以“AI智能推荐算法+PHP+MYSQL”为技术，桔子为广大医美渠道商提供全国各地“口碑好+技术好+价格低+成交率高+返点高”的医院和医生，确保你的客户能享受到更好的医美技术服务，自己还能赚到更多利润。</view>
+    <view class='zs_jiejian_txt'><text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;成为桔子会员，等于拥有了全国几千家医院和几万名医生的医美大平台。</text></view>
+  </view>
+<view class='zs_title flex_c_c'>  
+    <view class='zs_title_b color_fff'>成为桔子会员流程</view>
+</view>
+<view class='zs_liuchen'><image class='img_width' src='http://www.juziyimei.com/images/zhaoshang/liuchen.jpg' mode='widthFix'></image></view>
+</view>
+
+<button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='footfixed2'>立即申请</button>
+<button open-type="contact" bindcontact="handleContact" session-from='zhaoshang' class='footfixed3 flex_h_c'>
+    <image class="icon_wx"src="/images/weixin.png"></image>
+          <text>咨询</text>
+</button>

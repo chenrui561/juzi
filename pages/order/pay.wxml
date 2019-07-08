@@ -7,11 +7,11 @@
 				<image src="http://www.juziyimei.com/{{item.goods_img}}"></image>
 			</view>
 			<view style='width:80%;overflow:hidden;text-overflow:ellipsis;display:flex;-webkit-line-clamp:2;-webkit-box-orient:vertical;justify-content:space-between;' >	
-      <view>
-				<view  class="font_14 mt5 ovh1">{{item.goods_name}}</view>
-        <view  class="font_11 mt5 ovh1 c9">{{item.brand_name}}</view>
-        <view  class="font_11 mt5 c9 flex_h" wx:if="{{item.tid > 0}}"><image class='mini_tx_img' src='{{item.tx_img}}'></image>{{item.passwd_answer}}向你推荐</view>
-       </view>
+      <navigator url='../product/detail?productId={{item.goods_id}}'>
+				<view class="font_14 mt5 ovh2">{{item.goods_name}}</view>
+        <view wx:if="{{item.brand_id > 0}}" class="font_11 mt5 ovh1 c9">{{item.brand_name}}</view>
+        <view wx:else class="font_11 mt5 ovh1 c9">需选择医院</view>
+      </navigator>
       <view style='margin-left:5%;' >
 			<text wx:if="{{tuanid == 0}}" class="gm_ovh_1h red pt10">¥{{item.goods_price}}</text>
       <text wx:if="{{tuanid > 0}}" class="gm_ovh_1h red pt10">¥{{item.tuan_price}}</text>
@@ -27,7 +27,13 @@
       </view>
 			</view>
 		</view>		
-
+<!-- 选择医院-->
+  <view wx:if="{{goods_info[0].brand_id == 0}}" class="info" style="margin-top: 10px;">		
+  <picker mode="selector" value="{{index}}" range="{{xz_brand_info}}"    bindchange="bindDateChange2">
+    <view class="picker">请选择医院：{{xz_brand_info[xz_yiyuan]}}
+    </view>
+  </picker>
+	</view>
 <!-- 到院时间-->
   <view class="info" style="margin-top: 10px;">		
   <picker mode="date" value="{{date}}" start="{{now}}"   bindchange="bindDateChange">
@@ -36,6 +42,7 @@
     </view>
   </picker>
 	</view>
+
 <!--优惠券-->
 <view class="info" wx:if="{{user_bonus}}" >
   <view class="q_info">优惠券：</view>
@@ -52,7 +59,7 @@
   </radio-group>
 </view>
 <!--余额支付-->
-    <view class="info" style="margin-top: 10px;">
+    <view wx:if="{{yue_off == 1}}" class="info" style="margin-top: 10px;">
 			<view style="display: flex;Flex-direction:column;">
           <view class="q_info">
            您的账户余额：{{yue}}元
@@ -93,6 +100,7 @@
 				<button class="xx_pay_submit" type="default" id="xxPay" formType="submit" >线下支付</button>
 			</navigator> -->
 			<button class="wx_pay_submit" type="primary" id="wxPay" disabled="{{btnDisabled}}" formType="submit" bindtap="createProductOrderByWX">微信支付</button>
+    <!--  <button style="background: #eee; color:#333;" class="wx_pay_submit  mt10" type="primary" id="wxPay" disabled="{{btnDisabled}}" formType="submit" bindtap="change_yiyuan">重新选择医院</button>-->
 		<!-- 	<button class="xx_pay_submit" type="default" id="xxPay" disabled="{{btnDisabled}}" formType="submit" bindtap="createProductOrderByXX">线下支付</button>-->
 			
 		</view>

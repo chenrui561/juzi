@@ -53,7 +53,11 @@ Page({
       wx.setStorageSync('bd_id', opt.id)//把转发的人id写入缓存
 
     }
-
+    if (wx.getStorageSync('id') == '') {//如果缓存里面没有id，那就弹授权
+      that.setData({
+        shouquan: 0,
+      });
+    }
     var app_uid = wx.getStorageSync('id');//获取app.js里的用户id
     var hx_uid = wx.getStorageSync('id');//获取缓存里面的用户id
 
@@ -256,7 +260,7 @@ Page({
     var that = this;
     if (e.detail.userInfo) {
       //调用应用实例的方法获取全局数据
-      app.getOpenid().then(function (openid) {
+     /* app.getOpenid().then(function (openid) {
         if (openid == 66) {
           console.log(66)
           that.setData({
@@ -268,7 +272,7 @@ Page({
         if (openid == 88) {
           console.log(88)
         }
-      });
+      });*/
       //用户按了允许授权按钮
 
     } else {

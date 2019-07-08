@@ -11,10 +11,12 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.3",
+	"libVersion": "2.7.3",
 	"appid": "wx058ea8866be28317",
 	"projectname": "%E6%A1%94%E5%AD%90%E4%B8%80%E8%B5%B7%E7%BE%8E",
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -33,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 35,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -43,22 +45,9 @@
 					"scene": "1007"
 				},
 				{
-					"id": -1,
-					"name": "绑定手机号",
-					"pathName": "pages/user/bd",
-					"query": ""
-				},
-				{
 					"id": 2,
 					"name": "列表",
 					"pathName": "pages/listdetail/listdetail",
-					"query": "",
-					"scene": "1007"
-				},
-				{
-					"id": -1,
-					"name": "绑定手机",
-					"pathName": "pages/user/bd",
 					"query": "",
 					"scene": "1007"
 				},
@@ -70,21 +59,24 @@
 				},
 				{
 					"id": 5,
-					"name": "案例",
-					"pathName": "pages/question-ask/anli",
-					"query": "id=3"
+					"name": "线下报备订单列表",
+					"pathName": "pages/user/team-dd",
+					"query": "currentTab=1&otype=deliver&id=2",
+					"scene": null
 				},
 				{
-					"id": 6,
+					"id": 4,
 					"name": "带推荐预约项目",
 					"pathName": "pages/product/detail",
-					"query": "productId=37&id=1&tid=1"
+					"query": "productId= 892",
+					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "带分享的首页",
 					"pathName": "pages/index/index",
-					"query": "id=1"
+					"query": "id=1",
+					"scene": null
 				},
 				{
 					"id": 8,
@@ -183,10 +175,11 @@
 					"query": "id=1&mf=1&&type_id=1"
 				},
 				{
-					"id": -1,
-					"name": "搜索日记",
-					"pathName": "pages/search/search-rj",
-					"query": ""
+					"id": 24,
+					"name": "搜索",
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
 				},
 				{
 					"id": -1,
@@ -225,16 +218,11 @@
 					"query": "id=1"
 				},
 				{
-					"id": -1,
-					"name": "活动",
-					"pathName": "pages/huodong/huodong2",
-					"query": ""
-				},
-				{
-					"id": -1,
-					"name": "直客",
+					"id": 31,
+					"name": "直客/渠道",
 					"pathName": "pages/user/jiaofei",
-					"query": "id=4"
+					"query": "id=3&order_id=123",
+					"scene": null
 				},
 				{
 					"id": -1,
@@ -251,7 +239,141 @@
 				{
 					"id": -1,
 					"name": "写回答",
-					"pathName": "pages/zhihu/input"
+					"pathName": "pages/zhihu/input",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "搜索知乎回答",
+					"pathName": "pages/search/search-zhihu",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的关注",
+					"pathName": "pages/zhihu/zhihu_guanzhu",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的收藏",
+					"pathName": "pages/user/shoucang",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消息",
+					"pathName": "pages/index/message",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "优惠",
+					"pathName": "pages/index/index2",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 40,
+					"name": "店铺主页",
+					"pathName": "pages/jigou/jigou",
+					"query": "jigou_id= 308",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的推荐",
+					"pathName": "pages/user/team-user",
+					"query": "team_type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "分享的知乎回答",
+					"pathName": "pages/zhihu/zhihu",
+					"query": "aid=7&wid=6&id=1",
+					"scene": null
+				},
+				{
+					"id": 43,
+					"name": "商品详情加广告参数",
+					"pathName": "pages/product/detail",
+					"query": "productId=826&gg_id=1",
+					"scene": null
+				},
+				{
+					"id": 44,
+					"name": "带分享的项目页",
+					"pathName": "pages/product/detail",
+					"query": "productId=673&id=1",
+					"scene": null
+				},
+				{
+					"id": 45,
+					"name": "招商",
+					"pathName": "pages/index/zhaoshang",
+					"query": "qd_id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/order/detail",
+					"query": "orderId=478",
+					"scene": null
+				},
+				{
+					"id": 47,
+					"name": "评论",
+					"pathName": "pages/up_anli/question-ask",
+					"query": "type_id=1&brand_id=147&order_id=-100",
+					"scene": null
+				},
+				{
+					"id": 48,
+					"name": "用户详情",
+					"pathName": "pages/user/detail",
+					"query": "id=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "视频",
+					"pathName": "pages/video/index",
+					"query": "id= 1",
+					"scene": null
+				},
+				{
+					"id": 50,
+					"name": "社区",
+					"pathName": "pages/index/index_sq",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 51,
+					"name": "发帖",
+					"pathName": "pages/up_anli/question-ask",
+					"query": "type_id=3",
+					"scene": null
+				},
+				{
+					"id": 52,
+					"name": "订单日志",
+					"pathName": "pages/order/order_log",
+					"query": "order_id=824",
+					"scene": null
+				},
+				{
+					"id": 53,
+					"name": "社区帖子详情",
+					"pathName": "pages/zhihu/shequ_info",
+					"query": "sid=1",
+					"scene": null
 				}
 			]
 		}

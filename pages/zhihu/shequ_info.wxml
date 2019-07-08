@@ -1,0 +1,175 @@
+<!--pages/zhihu/zhihu.wxml-->
+<view class='mt5'>
+
+    <!--用户基本信息和分享的内容-->
+    <view class='user_con mt5'>
+      <view class='wen_title'>{{xcx_shequ_info.title}}</view>
+      <view class='user_info'>
+        <view class='user_info2'>
+          <image class='user_img' src='{{xcx_shequ_info.tx_img}}'></image>
+          <view class='flex_s_l'>
+            <text class='user_name'>{{xcx_shequ_info.passwd_answer}}</text>
+            <text class='user_name hui'>{{xcx_shequ_info.add_time}}</text>
+          </view>
+          
+        </view>
+
+        <view wx:if="{{guanzhu_off == 0}}" data-id='{{xcx_shequ_info.user_id}}' bindtap='guanzhu' class='guanzhu'>关注</view>
+        <view wx:if="{{guanzhu_off > 0}}" data-id='{{xcx_shequ_info.user_id}}' bindtap='del_guanzhu' class='guanzhu2'>已关注</view>
+      </view>
+      <view class="wxParse user_connet">
+        <view style="padding-top: 10px;">
+          <editor id="editor" style="height:auto" class="shequ_editor" showImgSize showImgToolbar showImgResize read-only="true" bindready="onEditorReady">
+          </editor>
+        </view>
+      </view>
+      <text wx:if="{{xcx_shequ_info.update_time != xcx_shequ_info.add_time}}" class='user_time'>重新编辑于{{xcx_shequ_info.update_time}}</text>
+    </view>
+
+
+  <!--底部悬浮栏-->
+  <view class='zhihu_bottom2 flex_h_b'>
+    <!--赞同/反对-->
+    <view class='flex_h'>
+      <navigator open-type='switchTab' url='/pages/index/index' wx:if="{{bd_id > 0}}" class='flex_h_c zantong'>
+        <icon class="iconfont icon-juzi ico_juzi"></icon>
+        <text class='shouye_text ico_in'>首页</text>
+      </navigator>
+     <!-- <view wx:if="{{zan_off == 0}}" class='flex_h_c zantong' bindtap='zan' data-idx='1'>
+        <icon class="iconfont icon-triangle-top ico {{zan.zan==1 ? 'ico_in' : ''}}"></icon>
+        <text wx:if="{{zan_count > 0}}" class="zantong_text {{zan.zan==1 ? 'ico_in' : ''}}">赞{{zan_count}}</text>
+        <text wx:else class="zantong_text {{zan.zan==1 ? 'ico_in' : ''}}">赞</text>
+      </view>
+      <view wx:else class='flex_h_c zantong' data-idx='1'>
+        <icon class="iconfont icon-triangle-top ico "></icon>
+        <image style='height:14px;width:14px;' src='/images/loading.gif'></image>
+      </view>-->
+
+      <navigator url='../up_anli/question-ask?type_id=3&sid={{sid}}' wx:if="{{bianji == 1}}" class='zantong' data-idx='2'>
+        <text  class="zantong_text ">编辑</text>
+      </navigator>
+       <view wx:if="{{bianji == 1}}" class='zantong' bindtap='del_shequ_zt' data-sid='{{sid}}'>
+        <text  class="zantong_text ">删除</text>
+      </view>
+      <view wx:if="{{guanli == 1 && xcx_shequ_info.ding == 0}}" class="zantong youhui_f_jh" bindtap='ding' data-idx='1'>
+        <text  class="zantong_text ">已置顶</text>
+      </view>
+      <view wx:if="{{guanli == 1 && xcx_shequ_info.ding == 1}}" class="zantong" bindtap='ding' data-idx='0'>
+        <text  class="zantong_text ">置顶</text>
+      </view>
+      <view wx:if="{{guanli == 1 && xcx_shequ_info.jing == 1}}" class="zantong youhui_f_jh" bindtap='jing' data-idx='0'>
+        <text  class="zantong_text ">已加精</text>
+      </view>
+     <view wx:if="{{guanli == 1 && xcx_shequ_info.jing == 0}}" class="zantong " bindtap='jing' data-idx='1'>
+        <text  class="zantong_text ">加精</text>
+      </view>
+      
+    </view>
+    <!--收藏/评论-->
+    <view class='flex_h_c'>
+      <view bindtap='shequ_shoucang' class='flex_s shoucang'>
+        <icon class="iconfont icon-shoucang ico2 {{shoucang==1 ? 'ico_in' : ''}}"></icon>
+        <text class="yaoqing_text2 {{shoucang==1 ? 'ico_in' : ''}}">{{shoucang==1 ? '已收藏' : '收藏'}}</text>
+      </view>
+      <view bindtap='takeCoupon' class='flex_s mr10'>
+        <icon class="iconfont icon-icon_comment ico2"></icon>
+        <text class='yaoqing_text2'>{{count_hui}}回帖</text>
+      </view>
+    </view>
+  </view>
+
+
+
+
+  <!--回复-->
+  <view  class='guoqu_box '>
+    <view class='flex_h_b pl10 pr10 bbe'>
+      <view class='flex_h'>
+        <view class='title bottom_line' bindtap='tab'>全部回帖</view>
+        <view class='title' bindtap='tab'>只看楼主</view>
+      </view>
+      
+      <picker class='flex_h' bindchange="pick" value='{{index}}' range="{{pick}}">
+          <view class='flex_h'>
+            <view class='font_12'>{{pick[paixu]}}</view>
+            <image class='down' src='/images/down.png'></image>
+          </view>
+      </picker>
+    </view>
+    
+    <!--评论内容-->
+    <view class='pl_box' wx:for="{{list}}" wx:key="{{key}}">
+      <view class='pl_info_all'>
+        <image class='pl_img' src='{{item[0].huifu_info.tx_img}}'></image>
+        <view class='pl_info'>
+          <view class='flex_h' style='color:#333'>
+            <text>{{item[0].huifu_info.passwd_answer}}</text>
+            <text class='louzhu' wx:if="{{item[0].huifu_info.user_id == xcx_shequ_info.user_id}}">楼主</text>
+          </view>
+          <view class='flex_h_b'>
+            <view class='flex_h font_12' style='color:#999'>
+              <text>第{{item[0].huifu_info.lou}}楼</text>
+              <text class='ml5 mr5'>|</text>
+              <text>{{item[0].huifu_info.update_time}}</text>
+            </view>
+            <view wx:if="{{user_id == item[0].huifu_info.user_id || guanli == 1}}" class='flex_h'>
+              <navigator url='../up_anli/question-ask?type_id=3&sid={{item[0].huifu_info.sid}}' class='font_12 mr10'>重新编辑</navigator>
+              <view bindtap='del_shequ' data-sid='{{item[0].huifu_info.sid}}' class='font_12'>删除</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='pl_content2' bindtap='huifu_lou' data-sid='{{item[0].huifu_info.sid}}' data-lou='{{item[0].huifu_info.lou}}'>
+        <import src="../../wxParse/wxParse.wxml"/> 
+        <view class="wxParse user_connet">
+            <view  style="padding-top: 10px;">
+              <template is="wxParse" data="{{wxParseData:item}}"/>
+            </view>
+        </view>
+        </view>
+        
+        <!--回复-->
+        <view  class='font_16 bg_f2 ml35 mb10 flex_s p10_l_r mr10 '>
+          <view wx:for="{{item[0].huifu_info.huifu}}" class=' w100 l_h30 m5_s'>
+            <text class='blue'>{{item.passwd_answer}}<text class='louzhu' wx:if="{{item.user_id == xcx_shequ_info.user_id}}">楼主</text>：</text>
+            <text class='ml5'>{{item.content}}</text>
+          </view>
+          
+        </view>
+    </view>
+
+    <view  class='pl_no'>
+      <text class='pl_no_text'>{{more}}</text>
+    </view>
+    <view>
+
+
+
+    </view>
+  </view>
+
+
+
+
+  <!--底部悬浮栏-->
+  <navigator wx:if="{{h_input == 0}}" url='../up_anli/question-ask?type_id=3&zid={{sid}}' class='zhihu_bottom flex_h_b'>
+    <!--回复-->
+   <!--评论提交-->
+      <view  data-id='1' class='ml10 flex_h mt10 mb10 w100'>
+        <image class='pl_img' src='{{tx_img}}'></image>
+        <view class='pl_input_t'>立即回帖...</view>
+      </view>
+  </navigator>
+  <view wx:if="{{h_input == 1}}"  class='zhihu_bottom flex_h_b'>
+    <!--回复-->
+   <!--评论提交-->
+      <view  data-id='1' class='ml10 flex_h mt10 mb10 w100'>
+        <image class='pl_img' src='{{tx_img}}'></image>
+        <input focus adjust-position class='pl_input_t' confirm-type="send" bindconfirm="send_huifu" bindblur="off_huifu_lou" placeholder="回复{{huifu_lou}}楼"></input>
+      </view>
+  </view>
+
+
+
+  <view class='l_h90'></view>
+</view>

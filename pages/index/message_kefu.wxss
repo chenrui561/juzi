@@ -1,0 +1,75 @@
+/* pages/index/message_kefu.wxss */
+.message_list{
+  margin: 1%;
+  padding-bottom: 100px;
+  width: 98%;
+  height: 90%;
+}
+page{
+  height: 100%;
+}
+.message_info{
+  margin-bottom: 15px;
+}
+.left{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.right{
+display: flex;
+ flex-direction: column;
+  align-items: flex-end;
+}
+.user_info{
+  display: flex;
+ font-size: 14px;
+ justify-content: center;
+ align-content: center;
+}
+.text_info{
+  background-color: #96EC68;
+  margin: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+.text_info2{
+  background-color: #fff;
+  margin: 5px;
+  margin-left: 0px;
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+.text_info3{
+  background-color: #fff;
+  margin: 5px;
+  margin-left: 0px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: rgb(53, 64, 228);
+  border-radius: 5px;
+}
+.input_bottom{
+  position: fixed;
+  width: 100%;
+  background-color: #f2f2f2;
+  bottom:0;
+  height: auto;
+}
+.input{
+  height: 40px;
+  background-color: #fff;
+  margin-left: 3%;
+  width: 85%;
+  border-radius: 5px;
+  line-height: 24px;
+  font-size: 16px;
+}
+.jia{
+  font-size: 24px;
+  color: #999;
+}
+
+

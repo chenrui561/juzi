@@ -66,3 +66,15 @@ page {
   color: #1aad19;
   font-size: 14px;
 }
+.huoqu{
+  height: 28px;
+  line-height: 28px;
+  font-size: 14px;
+  border-radius: 0;
+  border: 0;
+  background-color: #f8f8f8;
+  color: #F14918;
+  padding-left: 5px;
+  margin-left: 5px;
+  position:inherit;
+}

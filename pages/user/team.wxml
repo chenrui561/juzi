@@ -25,7 +25,12 @@
             </view>
           </view>
       </view>
-      
+      <navigator url="../web/web?web_type=9" class="sc1 df flex_h_b" >
+        <view class='flex_s_l'>
+          <view class='ml10 mr10'>桔子放心美会员协议</view>
+        </view>     
+        <view  class='shengji'>点击查看</view>   
+      </navigator>
       <view wx:if="{{u_info.user_lei == 1}}" class="sc1 df flex_h_b" data-phone='{{t_user_info.mobile_phone}}'>
         <view class='flex_s_l'>
           <text class='ml10 mr10'>当前级别：总监</text>
@@ -63,7 +68,7 @@
 
 
 
-<navigator url="../user/team-dd?currentTab=1&otype=deliver" class="qbdd" style='margin:10px 10px 0px 10px'>
+<navigator url="../user/team-dd?currentTab=1&otype=deliver&id=1" class="qbdd" style='margin:10px 10px 0px 10px'>
  <view >
     <span class="font_14 c3">团队订单查询</span>
     <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>

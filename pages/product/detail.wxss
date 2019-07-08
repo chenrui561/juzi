@@ -43,7 +43,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom:10px;
+  padding-bottom:60px;
   padding: 10px;
   background-color:#fff;
   font-size: 14px;
@@ -79,7 +79,6 @@
 .cont{
   width: 100%;
   background: #fff;
-  margin-bottom: 10px;
 }
 .tp_image{
   width: 100%;
@@ -145,6 +144,52 @@ justify-content: center;
 z-index: 1;
 opacity: 0.8;
 }
+.shouye{
+width:70px;
+height:28px;
+left: 10px;
+top: 10px;
+padding: 0;
+margin: 5px;
+border-radius:30px;
+background-color:#333;
+border:0px solid #fff;
+position: fixed;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+opacity: 0.8;
+}
+.fenxiang_py{
+width:50px;
+height:50px;
+padding: 0;
+margin: 0;
+border-radius:50%;
+background-color:#02bf02;
+border:0px solid #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+opacity: 0.8;
+}
+
+.fenxiang_tp{
+width:50px;
+height:50px;
+padding: 0;
+margin: 0;
+border-radius:50%;
+background-color:#F7A93A;
+border:0px solid #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1;
+opacity: 0.8;
+}
 .tuijian{
 left: 10px;
 top: 10px;
@@ -168,6 +213,10 @@ border:none;
   width: 20px;
   height:20px;
 }
+.shouye_img{
+  width: 16px;
+  height:16px;
+}
 .tuijian_img{
   width: 24px;
   height:24px;
@@ -187,6 +236,17 @@ margin-top: 8px;
 .icon_wx{
   width: 24px;
   height:18px;
+  flex-shrink:0;
+}
+.icon_wx2{
+  width: 32px;
+  height:24px;
+  flex-shrink:0;
+}
+.icon_wx_pyq{
+  width: 32px;
+  height:32px;
+  flex-shrink:0;
 }
 .l_h15{
   line-height: 15px;
@@ -325,7 +385,6 @@ width:100%;
 font-size:14px;
 display: flex;
 justify-content: space-between;
-border-top:1px solid #eee;
 /*line-height:50px;*/
 /*background: #dd2727;*/
 
@@ -621,6 +680,7 @@ swiper{
 .slide-image{ 
   width: 100%; 
   height: 100%;
+  display: block;
 }
 
 .pos{
@@ -713,7 +773,7 @@ border-bottom:1px solid #e3e3e3;
   display: block;
 }
 .wxParse{
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 .zixun{
   position: fixed;
@@ -745,4 +805,83 @@ border-bottom:1px solid #e3e3e3;
 }
 .guoqu_box{
   margin-bottom: 50px;
+}
+.zixun_bottom{
+  border-radius:0;
+  line-height: 50px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+/*弹出层css*/
+.couponLayerBox{
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  top:0rpx;
+  left: 0rpx;
+  opacity: 0;
+}
+.couponLayer{
+  width: 100%;
+  background-color: #fff;
+  position: fixed;
+  left: 0rpx;
+  bottom: 0rpx;
+  height: 30%;
+  z-index: 9999;
+  transform:translateY(100%);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.couponLayer .title{
+  height: 80rpx;
+  line-height: 80rpx;
+  padding:0 25rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.couponLayer .title .couponIcon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 18rpx;
+}
+.couponLayer .title text{
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #363636;
+}
+.couponLayer .title .close{
+  padding:20rpx;
+  width: 22rpx;
+  height: 22rpx;
+  float: right;
+  margin-top: 10rpx;
+}
+.couponLayer .title .close image{
+  margin-bottom: 30rpx;
+}
+.pl_con{
+  height: calc(100% - 91px);
+}
+.huifu_ico{
+height: 16px;
+width: 16px;
+}
+.del_pl{
+  height: 16px;
+  width: 16px;
+  margin-right: 10px;
+}
+/*弹出层css-end*/
+
+.no_button {
+  font-size: 28rpx;
+  background-color: #f7f7f7;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  text-align: inherit;
+  overflow:inherit;
 }

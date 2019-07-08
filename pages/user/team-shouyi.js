@@ -14,35 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showLoading();//加载动画
-    var that = this;
-    wx.request({
-
-      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=xcx_shouyi_liushui',
-      method: 'post',
-      data: {
-        id: wx.getStorageSync('id'),
-      },
-      header: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        //--init data 
-        var goods_user = res.data.goods_user;
-        var user_info = res.data.user_info;
-        that.setData({
-          goods_user: goods_user,
-          user_info: user_info[0]
-        });
-        wx.hideLoading()//关闭加载动画
-      },
-      error: function (e) {
-        wx.showToast({
-          title: '网络异常！',
-          duration: 2000,
-        });
-      },
-    });
+   
   },
 
   /**

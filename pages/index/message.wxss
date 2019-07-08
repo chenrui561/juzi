@@ -1,0 +1,38 @@
+/* pages/index/message.wxss */
+.ico{
+  font-size: 28px;
+  color: #999;
+}
+.padding{
+  padding: 2% 2% 0% 2%;
+}
+.w96{ width: 96%;}
+.guanzhu_cor{color: #4897FF;}
+.pl_cor{color: #68D7AC;} 
+.zan_cor{color: #FB5869}
+.yaoqing_cor{color: #F7A93A;}
+.juzi_cor{color:#F14918;}
+.dian{
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: #E96151;
+}
+.whf{
+  font-size: 12px;
+  line-height: 20px;
+  color:#FB5869;
+}
+.search_input{
+    width: 89%;
+    border-radius: 25px;
+    background: #fff;
+    border: none;
+    font-size: 14px;
+    padding:2px 2.5%;
+    margin-top: 10px;
+    margin-left: 3%;
+    height: 26px;
+    line-height:28px;
+    min-height:28px;
+    }

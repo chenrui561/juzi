@@ -1,0 +1,18 @@
+<!--pages/zhihu/zhihu_guanzhu.wxml-->
+<view scroll-x="true" class="swiper-tab">
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" data-otype="pay" bindtap="change">我关注的人</view>
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" data-otype="deliver" bindtap="change2">关注我的人</view> 
+</view>
+<view class='mt50'>
+  <view wx:for="{{guanzhu_list}}" wx:key="key" class='flex_h_b bg_white p10 m10_s h30 '>
+    <view class='flex_h'>
+      <image class='tx_img' src='{{item.tx_img}}'></image>
+      <view class='flex_s_l'>
+        <text class='font_14'>{{item.passwd_answer}}</text>
+        <text wx:if="{{item.q_name}}" class='font_12 hui'>{{item.q_name}}</text>
+      </view>
+    </view>
+    <view wx:if="{{item.gz_id}}" data-id='{{item.user_id}}' bindtap='del_guanzhu' class='guanzhu2'>已关注</view>
+    <view wx:else data-id='{{item.user_id}}' bindtap='guanzhu' class='guanzhu'>关注</view>
+  </view>
+</view>

@@ -1,0 +1,67 @@
+<!--pages/ruzhu/ruzhu.wxml-->
+<!--pages/user/bd.wxml-->
+<!--授权登录-->
+<view wx:if="{{shouquan == 0}}" class='shouquan'></view>
+<view class='shouquan_b' wx:if="{{shouquan == 0}}">
+    <image style="width: 40px;height: 40px;border-radius: 50%;margin-top:40px;" src='/images/logo.png'></image>
+    <text style="font-size: 14px;margin-top: 20px;">需要您授权登录桔子放心美</text>
+    <button style="bottom: 0;position: absolute;width: 100%;color: #F14918;border-top-left-radius: 0px;border-top-right-radius: 0px;" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button>
+</view>
+<!--授权登录end-->
+
+<view class="page-body">
+<view class='font_14 hui m10'>{{money}}</view>
+<!--第一步-->
+  <form wx:if="{{jindu == 1}}" bindsubmit="formSubmit" bindreset="formReset">
+  <view class="page-section">
+  <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="jigou_name" class="weui-input" value='{{info.time}}' placeholder="请输入预约到店时间" />
+      </view>
+    </view>
+  </view>
+   <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="user_name" class="weui-input" value='{{info.user_name}}' placeholder="请输入联系人姓名" />
+      </view>
+    </view>
+  </view>
+   <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="phone" class="weui-input" value='{{info.phone}}' placeholder="请输入联系人手机号" />
+      </view>
+    </view>
+  </view>
+<!--如果是生美，就有租金的
+   <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input name="phone" class="weui-input" value='{{info.phone}}' placeholder="请输入联系人手机号" />
+      </view>
+    </view>
+  </view>-->
+  <!--返点大于等于20%-->
+
+  <!--返点end-->
+
+ </view>
+  <button wx:if="{{state == 1}}" style="margin-top:30px;margin-bottom:30px;width: 86%;color: #999;background-color:#fff;" formType="submit">已提交</button>
+  <button wx:else style="margin-top:30px;margin-bottom:30px;width: 86%;color: #F14918;background-color:#fff;" formType="submit">提交</button>
+ </form>
+
+
+
+
+
+<!--已通过申请-->
+<view class='cg' wx:if="{{jindu ==4}}">
+<icon class="iconfont icon-dui "></icon>
+ 您的申请已通过，请查看/管理您的网店
+<navigator url='/pages/jigou/jigou?jigou_id={{info.brand_id}}' class='btn'>管理店铺</navigator>
+</view>
+</view>
+
+

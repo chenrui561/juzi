@@ -13,21 +13,31 @@
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/index/index_t",
+    "pages/index/index_sq",
     "pages/index/index2",
+    "pages/index/fenxiang",
+    "pages/index/message",
+    "pages/index/message_kefu",
     "pages/zhihu/zhihu",
     "pages/zhihu/wenti_huida_list",
+    "pages/zhihu/huida_list",
     "pages/zhihu/input",
+    "pages/zhihu/shequ_info",
+    "pages/zhihu/zhihu_guanzhu",
     "pages/index/tuan",
     "pages/myproduct/index",
     "pages/myproduct/list",
     "pages/product/detail",
     "pages/product/lilshi",
+    "pages/product/fenxiang",
     "pages/search/search",
     "pages/search/search-rj",
+    "pages/search/search-zhihu",
     "pages/jigou/jigou",
+    "pages/jigou/jigou_info",
     "pages/jigou/yisheng",
     "pages/user/user",
     "pages/user/quan",
@@ -56,48 +66,57 @@
     "pages/user/my-anli",
     "pages/order/pay",
     "pages/order/detail",
-    "pages/order/downline",
+    "pages/order/order_log",
     "pages/cart/cart",
     "pages/listdetail/listdetail",
-    "pages/address/address",
-    "pages/address/user-address/user-address",
-    "pages/category/index",
     "pages/turntable/turntable",
-    "pages/xuanze/xz_xiangmu",
     "pages/turntable/huojiang",
     "pages/up_anli/question-ask",
     "pages/up_anli/down",
     "pages/up_anli/shenhe",
     "pages/audio/index",
     "pages/audio/list",
-    "pages/test/test",
+    "pages/audio/fenxiang",
+    "pages/video/index",
+    "pages/video/list",
+    "pages/video/fenxiang",
     "pages/ruzhu/ruzhu",
+    "pages/ruzhu/fabu",
+    "pages/user/detail",
+    "pages/ruzhu/hezuo",
+    "pages/index/zhaoshang",
     "pages/ruzhu/ruzhu_info"
-      ],
-  "window":{
-    "backgroundTextStyle":"light",
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "桔子放心美",
-    "navigationBarTextStyle":"black"
+      "backgroundColor": "#f5f8fa",
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#000",
     "selectedColor": "#F14918",
-    "borderStyle": "white",
+    "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/icons/huati_2.png",
-        "selectedIconPath": "images/icons/huati_1.png",
-        "text": "话题"
-      },
-
-      {
-        "pagePath": "pages/index/index2",
         "iconPath": "images/icons/btn-tabs_01.png",
         "selectedIconPath": "images/icons/btn-tabs_07.png",
-        "text": "优惠"
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/index/index_sq",
+        "iconPath": "images/icons/huati_2.png",
+        "selectedIconPath": "images/icons/huati_1.png",
+        "text": "社区"
+      },
+      {
+        "pagePath": "pages/index/message",
+        "iconPath": "images/icons/message.png",
+        "selectedIconPath": "images/icons/message2.png",
+        "text": "消息"
       },
       {
         "pagePath": "pages/user/user",
@@ -106,5 +125,6 @@
         "text": "我的"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

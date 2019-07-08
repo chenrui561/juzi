@@ -59,6 +59,8 @@
     background: #f2f2f2;
    /* padding: 4%;*/
     margin-bottom: 5px;
+    border-top: 1px #eee solid;
+    border-bottom: 1px #eee solid;
 }
 .shop checkbox{ 
     margin-top: 27px;
@@ -98,14 +100,14 @@
     overflow: hidden;
     font-size: 12px;
     color: #999;
-    text-align:right;
+    margin-left: 10px;
 }
 .sp_jg{
     width: 100%;
     overflow: hidden;
     font-size: 14px;
     color: #333;
-    text-align:right;
+    margin-left: 10px;
 }
 .dle{
     color: #999;
@@ -160,4 +162,27 @@
 }
 .mr_5{
     margin-right: 5px;
+}
+.youhui_f{
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  background-color: #fff;
+  line-height: 26px;
+  margin: 10px 5px 5px 5px;
+  padding: 1px 10px;
+  height: 26px;
+  border-radius: 5px;
+}
+.youhui_f_on{
+  background-color:rgba(248, 212, 201, 0.5);
+  color: #F14918;
+}
+.ss_price{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #999;
+  align-items: center;
+  margin-right: 10px;
 }

@@ -1,10 +1,13 @@
 <!--pages/search/search.wxml-->
 <view class="search df">
-    <input class="df_1" placeholder="请输入您要搜索的内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+    <input placeholder="请输入您要搜索的内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+    <picker class='pick flex_h_c' bindchange="pick" value='{{index}}' range="{{pick}}">
+      <view class='flex_h_c'>{{pick[pick_id]}}<image class='down' src='/images/down.png'></image></view>
+    </picker>
     <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
 </view>
-<view class="cont" wx:if="{{hotKeyShow}}">
-    <view style='padding-top:50px;'>
+<view class="cont" wx:if="{{searchValue =='' && more_id == 0 && yy == 0}}">
+    <view style='margin:5px;'>
         <text class="font_14" >热门搜索</text>
         <view class="w100">
             <button wx:for="{{hotKeyList}}" wx:key="key" bindtap="doKeySearch" data-key="{{item.content}}">{{item.content}}</button>
@@ -15,74 +18,73 @@
         </view>
     </view>
 </view>
-<view class="search_no" wx:if="{{!!searchValue && !productData.length}}">
+<view class="search_no" wx:if="{{more_id == 1 && productData.length == 0}}">
     <view class="font_14"><image class="scimg" src="/images/search_no.png"></image></view>
     <text>没有找到您要的宝贝/(ㄒoㄒ)/~~</text>
 </view>
-<!--<view class="shop" wx:for="{{productData}}"> 
-    <navigator url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">      
-        <image class="sh_slt" src="http://www.anranhaitao.com/{{item.goods_img}}"></image>
-        <view class="sp_text">
-            <view class="sp_tit ovh1">{{item.goods_name}}</view>
-            <view class="sp_jg">￥ {{item.shop_price}}</view>
-            <view class="sp_jg">￥ {{item.market_price}}</view>
+
+  <view  class="cont" >
+  <!--优惠-->
+      <navigator wx:if="{{pick_id == 0}}" wx:for="{{productData}}" wx:key="key" class="pr" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
+        <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
+        <image class="photo" mode='aspectFill' src="http://www.juziyimei.com/{{item.goods_img}}"></image>
+        <view class='h40 flex_h'>
+          <view class="title">{{item.goods_name}}</view>
         </view>
-    </navigator>
-</view>-->
 
-<view style='padding-top: 48px;'>
-<!--<view class="ban" wx:for="{{productData}}">
-      
-            <navigator url="../product/detail?productId={{item.goods_id}}" class="cover flex-wrp">
+        <view class='flex_h font_14 l_h20 mtl-5'>
+          <view class="juzi_cor">优惠价{{item.juzi_price}}元</view>
+        </view>
+        <view class="hui font_12 l_h20 mtl-5"><text class='juzi_cor'>{{item.shop_price}}</text>元预约优惠价</view>
+        <view class='goods_bottom' >
+          <view class="gmx">原价{{item.market_price}}元</view>
+          <view class='flex_h_b brand_name'>
+            <image style="width:12px;height:12px; float: left;flex-shrink:0;" src="/images/shop.png"></image>
+            <view class='brand_name_text'>特价优惠</view>
+          </view>
+        </view>
+        <text class="juli" wx:if="{{user_lei == 99}}">返佣：{{item.huodong_1}}/{{item.huodong_2}}/{{item.huodong_3}}<text class='c3'>|{{item.kefu_fan}}</text></text>
+            <text class="juli" wx:if="{{user_lei == 6}}">自己消费返佣：{{item.huodong_1}}元</text>
+            <text class="juli" wx:if="{{user_lei == 1}}">返佣：{{item.huodong_1}}元</text>
+            <text class="juli" wx:if="{{user_lei == 2}}">返佣：{{item.huodong_1}}元/{{item.huodong_2}}元</text>
+            <text class="juli" wx:if="{{user_lei == 3}}">返佣：{{item.huodong_1}}元/{{item.huodong_2}}元</text>
+            <text class="juli" wx:if="{{ user_lei == 11 || user_lei == 12}}">返佣：{{item.huodong_1}}/{{item.huodong_2}}<text class='c3'>|{{item.kefu_fan}}</text></text>
+         
+      </navigator>
+<!--机构/医生-->
+<view wx:if="{{pick_id == 1 }}" wx:for="{{productData}}"  class='jigou_lb'>
+        <navigator class="pr3 flex_h" url="../jigou/jigou?jigou_id={{item.brand_id}}" hover-class="changestyle">
+        <image class="yiyuan_photo" mode='aspectFill' src="http://www.juziyimei.com/data/brandlogo/{{item.brand_logo}}"></image>
+        <view class='jigou_right_info'>
+          <view class="jigou_title">{{item.brand_name}}</view>
+           <view wx:if="{{item.scxm}}" class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.scxm}}</view>
+           <view wx:else class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.address}}</view>
+          <view class='flex_h mt5'>
+            <image mode='widthFix' class='pjxx mr5' src='/images/star{{item.fen}}.png'></image>
+            <text class='hui font_12 tc' wx:if="{{user_lei == 99}}">返佣：{{item.level}}</text>
+            <text class='hui font_12 tc' wx:if="{{user_lei == 6}}">自己消费返佣：{{item.level_3}}</text>
+            <text class='hui font_12 tc' wx:if="{{user_lei == 1}}">返佣：{{item.level_3}}</text>
+            <text class='hui font_12 tc' wx:if="{{user_lei == 2}}">返佣：{{item.level_2}}</text>
+            <text class='hui font_12 tc' wx:if="{{user_lei == 3}}">返佣：{{item.level_1}}</text>
+            <text class='hui font_12 tc' wx:if="{{user_lei == 11}}">返佣：{{item.level_1}}/{{item.level_2}}</text>
+          </view>
+        </view>
+      </navigator>
+      <navigator class='btn pa right' url='/pages/user/yy?yiyuan_id={{item.brand_id}}&yiyuan_name={{item.brand_name}}' wx:if="{{yy == 1}}">选择</navigator>   
+</view>
+<view wx:if="{{pick_id == 2}}" wx:for="{{productData}}"  class='jigou_lb'>
+        <navigator class="pr3 flex_h" url="../jigou/jigou?jigou_id={{item.brand_id}}" hover-class="changestyle">
+        <image class="yiyuan_photo" mode='aspectFill' src="http://www.juziyimei.com/data/brandlogo/{{item.brand_logo}}"></image>
+        <view class='jigou_right_info'>
+          <view class="jigou_title">{{item.brand_name}}</view>
+           <view wx:if="{{item.lx == 2 }}" class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.scxm}}</view>
+          <view class='flex_h mt5'>
+            <image mode='widthFix' class='pjxx mr5' src='/images/star{{item.fen}}.png'></image>
             
-                <image class="banner" src="https://www.juziyimei.com/{{item.goods_img}}" mode="widthFix"></image>
-          <view class="act-item ellipsis_title">
-             {{item.goods_name}}
-            </view>
-            <view class="act-item ellipsis" style='text-align: center;line-height:30px;' >
-                <text style="color:red">¥ {{item.shop_price}}</text>
-                <text class='pro_rel_price2'>¥ {{item.market_price}}</text>
-            </view>
-            </navigator>
-        </view> 
-        <view wx:if="{{!hotKeyShow}}" class="clear mt10" >{{more}}</view>  
-  </view>-->
-
-  <view  class="cont" wx:for="{{productData}}" wx:key="key">
-                          <navigator  class="pr2" url="../product/detail?productId={{item.goods_id}}" hover-class="changestyle">
-                            
-                            <image class="hot_photo" mode='aspectFill' src="http://www.juziyimei.com/{{item.goods_img}}">
-                              <image wx:if="{{item.is_huodong == 1}}" class="jiaobiao" src="/images/huodong.png"></image>
-                            </image>
-                            <view class="hot_title">{{item.goods_name}}</view>
-                            
-                            <view style="display:flex;line-height:32rpx;color:#999;margin-top:5px;">
-                              <view class="gmxx" style="font-size:28rpx;">
-                                  <view style="display:flex;line-height:32rpx;color:#999">
-                                    <view style="float: right;font-size: 12px;display: flex;align-items: center;">
-                                      <text>{{item.brand_name}}</text> 
-                                    </view>
-                                  </view>  
-                              </view>
-                            </view>
-                            <view style="display:flex;font-size: 12px;line-height:32rpx;color:#999;justify-content:space-between;">
-                                  <text>预约数：{{item.yy_num}}</text>
-                                  <text wx:if="{{user_lei == 99 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_3}}/￥{{item.huodong_2}}/￥{{item.huodong_1}}</text> 
-                                  <text wx:if="{{user_lei == 99 && item.is_huodong == 0}}" >返佣：{{item.level_3}}%/{{item.level_2}}%/{{item.level_1}}%</text> 
-                                  <text wx:if="{{user_lei == 3 && item.is_huodong == 1}}" >返佣：￥{{item.huodong_1}}</text> 
-                                  <text wx:if="{{user_lei == 2 && item.is_huodong == 1}}">返佣：￥{{item.huodong_2}}</text>  
-                                  <text wx:if="{{user_lei == 1 && item.is_huodong == 1}}">返佣：￥{{item.huodong_3}}</text> 
-                                  <text wx:if="{{user_lei == 3 && item.is_huodong == 0}}" >返佣：{{item.level_1}}%</text> 
-                                  <text wx:if="{{user_lei == 2 && item.is_huodong == 0}}">返佣：{{item.level_2}}%</text>  
-                                  <text wx:if="{{user_lei == 1 && item.is_huodong == 0}}">返佣：{{item.level_3}}%</text>
-                            </view>
-                            <view style="display:flex;line-height:50rpx;margin-top:3px;">
-                                  <view style="float: right;font-size: 12px;display: flex;align-items: center; color:#999;">
-                                      桔子价:
-                                    </view>
-                                  <view class="gmxx" style="  color: red;">¥ {{item.juzi_price}}</view>
-                                  <view class="gmx">¥ {{item.market_price}}</view> 
-                              </view>
-                          </navigator>
-                    </view>
+          </view>
+        </view>
+      </navigator>
+      <navigator class='btn pa right' url='/pages/user/yy?yiyuan_id={{item.brand_id}}&yiyuan_name={{item.brand_name}}' wx:if="{{yy == 1}}">选择</navigator>   
+</view>
+<view wx:if="{{productData.length > 0}}" class='no_more' style='margin-bottom:70px;'>{{more}}</view>
 </view>

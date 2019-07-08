@@ -1,68 +1,158 @@
 <!--pages/user/team-shouyi.wxml-->
 <!--线下-->
-<view wx:if="{{id == 1}}" >
+<block wx:if="{{id == 1}}" >
+<view class='flex_h'>
   <view class='yangshi shijian'>支付时间</view>
   <view class='yangshi sl'>昵称/姓名</view>
   <view class='yangshi nick'>金额</view>
   <view class='yangshi bz'>类型</view>
-  <view  wx:for="{{goods_user}}" wx:key="key">
+ </view> 
+  <navigator class='flex_h' url='../user/detail?id={{item.user_id}}'   wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.pay_time}}</view>
     <view class='yangshi2 sl'>{{item.passwd_answer}}/{{item.rel_name}}</view>
     <view  class='yangshi2 nick'>{{item.money_paid}}元</view>
     <view wx:if="{{item.tuijian > 0 && item.type_id == 1}}" class='yangshi2 bz'>线下报备</view>
-    <view wx:if="{{item.type_id == 2}}" class='yangshi2 bz'>渠道缴费</view>
+    <view wx:if="{{item.type_id == 2}}" class='yangshi2 bz'>会员缴费</view>
     <view wx:if="{{item.tuijian == 0 && item.type_id == 1}}" class='yangshi2 bz'>线上预约</view>
-  </view>
+  </navigator>
   
-</view>
-
-<view wx:if="{{id == 2}}" >
+</block>
+<!--缴费信息-->
+<block wx:if="{{id == 2}}" >
+<view class='flex_h'>
   <view class='yangshi shijian'>时间</view>
   <view class='yangshi sl'>报备人</view>
   <view class='yangshi nick'>报备信息</view>
   <view class='yangshi bz'>状态</view>
-
-  <view  wx:for="{{goods_user}}" wx:key="key">
+</view>
+  <navigator class='flex_h' url='../user/detail?id={{item.user_id}}'   wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.pay_time}}</view>
     <view class='yangshi2 sl'>{{item.passwd_answer}}/{{item.rel_name}}</view>
     <view  class='yangshi2 nick'>{{item.money_paid}}元</view>
     <view wx:if="{{item.tuijian > 0 && item.type_id == 1}}" class='yangshi2 bz'>线下报备</view>
-    <view wx:if="{{item.type_id == 2}}" class='yangshi2 bz'>渠道缴费</view>
+    <view wx:if="{{item.type_id == 2}}" class='yangshi2 bz'>会员缴费</view>
     <view wx:if="{{item.tuijian == 0 && item.type_id == 1}}" class='yangshi2 bz'>线上预约</view>
-  </view>
+  </navigator>
   
-</view>
+</block>
 <!--渠道信息-->
-<view wx:if="{{id == 3}}" >
+<view wx:if="{{id == 3}}"  class='search'>
+<input placeholder="请输入您要搜索的内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+</view>
+<view wx:if="{{id == 3}}" class='mt40'  >
+<view class='flex_h_c mt40'>
+        <view class="youhui_f {{gj_time == 1 ? 'youhui_f_on':''}}"  bindtap='gj_time2'>跟进时间</view>
+        <picker bindchange="leixing" value='{{index}}' range="{{leixing}}"  class="youhui_f flex_h_c {{leixing_id > 0 ? 'youhui_f_on':''}}"><text>{{leixing_id > 0 ? leixing[leixing_id] : '类型'}}</text></picker>
+      </view>
+<view class='flex_h_c ml5 mr5'>
+  <view class="font_14 hui">下次跟进时间：</view>
+  <picker mode="date"   class="youhui_f " bindchange="next_gj_time_start">{{next_gj_time_start==0?'请选择':next_gj_time_start}} </picker>
+  -
+  <picker mode="date"   class="youhui_f " bindchange="next_gj_time_end">{{next_gj_time_end==0?'请选择':next_gj_time_end}}</picker>
+</view>
+<view class='flex_h'>
   <view class='yangshi shijian'>加入时间</view>
-  <view class='yangshi nick '>微信昵称</view>
+  <view class='yangshi nick '>跟进时间</view>
   <view class='yangshi sl'>姓名/级别</view>
   <view class='yangshi bz'>手机号</view>
+</view>
 
-  <view  wx:for="{{goods_user}}" wx:key="key">
+  <navigator class='flex_h' url='../user/detail?id={{item.user_id}}'  wx:for="{{goods_user}}" wx:key="key" bindtap='order_change' data-id='{{item.user_id}}'>
     <view class='yangshi2 shijian'>{{item.reg_time}}</view>
-    <view class='yangshi2 nick '>{{item.passwd_answer}}</view>
-    <view  wx:if="{{item.user_lei == 1}}" class='yangshi2 sl'>{{item.rel_name}}/总监</view>
-    <view  wx:if="{{item.user_lei == 2}}" class='yangshi2 sl'>{{item.rel_name}}/城市合伙人</view>
-    <view  wx:if="{{item.user_lei == 3}}" class='yangshi2 sl'>{{item.rel_name}}/省代</view>
+    <view class='yangshi2 nick '>{{item.gj_time}}</view>
+    <view  wx:if="{{item.user_lei == 1}}" class='yangshi2 sl'><text class='juzi_cor'>{{item.genjin_lei}}</text>{{item.rel_name}}/总监</view>
+    <view  wx:if="{{item.user_lei == 2}}" class='yangshi2 sl'><text class='juzi_cor'>{{item.genjin_lei}}</text>{{item.rel_name}}/城市合伙人</view>
+    <view  wx:if="{{item.user_lei == 3}}" class='yangshi2 sl'><text class='juzi_cor'>{{item.genjin_lei}}</text>{{item.rel_name}}/市代</view>
+    <view  wx:if="{{item.user_lei == 6}}" class='yangshi2 sl'><text class='juzi_cor'>{{item.genjin_lei}}</text>{{item.rel_name}}/会员</view>
     <view class='yangshi2 bz'>{{item.mobile_phone}}</view>
-  </view>
-  
+  </navigator>
+  <view class='no_more' style='margin-bottom:70px;'>{{more}}</view>
 </view>
 
 <!--直客信息-->
-<text>{{count}}</text>
-<view wx:if="{{id == 4}}"  >
-  <view class='yangshi shijian'>时间</view>
-  <view class='yangshi nick '>昵称</view>
-  <view class='yangshi sl'>手机号</view>
-  <view class='yangshi bz'>状态</view>
+<view wx:if="{{id == 4}}"  class='search'>
+<input placeholder="请输入您要搜索的内容" bindconfirm="doSearch2" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+</view>
+<block wx:if="{{id == 4}}"  >
+<view class='flex_h_c mt40'>
+        <view class="youhui_f {{phone == 1 ? 'youhui_f_on':''}}"  bindtap='phone'>有手机</view>
+        <view class="youhui_f {{gj_time == 1 ? 'youhui_f_on':''}}"  bindtap='gj_time'>跟进时间</view>
+        <picker bindchange="states" value='{{index}}' range="{{states}}"  class="youhui_f flex_h_c {{states_id > 0 ? 'youhui_f_on':''}}"><text>{{states_id > 0 ? states[states_id] : '状态'}}</text></picker>
+        <picker bindchange="leixing" value='{{index}}' range="{{leixing}}"  class="youhui_f flex_h_c {{leixing_id > 0 ? 'youhui_f_on':''}}"><text>{{leixing_id > 0 ? leixing[leixing_id] : '类型'}}</text></picker>
+        <picker wx:if="{{shi}}" class="youhui_f flex_h_c {{paixu == 4 ? 'youhui_f_on':''}}">{{shi}}</picker>
+        <picker wx:else bindchange="pick" value='{{index}}' range="{{pick}}" class="youhui_f flex_h_c {{pick_id > 0 ? 'youhui_f_on':''}}"><text>{{pick_id > 0 ? pick[pick_id] : '地区'}}</text></picker>
+      </view>
+<view class='flex_h_c ml5 mr5'>
+  <view class="font_14 hui">下次跟进时间：</view>
+  <picker mode="date"   class="youhui_f " bindchange="next_gj_time_start">{{next_gj_time_start==0?'请选择':next_gj_time_start}} </picker>
+  -
+  <picker mode="date"   class="youhui_f " bindchange="next_gj_time_end">{{next_gj_time_end==0?'请选择':next_gj_time_end}}</picker>
+</view>
+  <view class='flex_h '>
+    <view class='yangshi shijian'>时间</view>
+    <view class='yangshi nick '>昵称</view>
+    <view class='yangshi sl'>手机号</view>
+    <view class='yangshi bz'>状态/跟进时间</view>
+  </view>
+  <navigator class='flex_h' url='../user/detail?id={{item.user_id}}' wx:for="{{goods_user}}" wx:key="key">
+    <view class='yangshi2 shijian'>{{item.reg_time}}</view>
+    <view class='yangshi2 nick '><text class='juzi_cor'>{{item.genjin_lei}}</text>{{item.passwd_answer}}</view>
+    <view class='yangshi2 sl'>{{item.mobile_phone}}</view>
+    <view wx:if="{{item.gj_states == 0}}" class='yangshi2 bz hui'>未申请/{{item.gj_time}}</view>
+    <view wx:if="{{item.gj_states == 1}}" class='yangshi2 bz juzi_cor'>已申请/{{item.gj_time}}</view>
+    <view wx:if="{{item.gj_states == 2}}" class='yangshi2 bz pl_cor'>已联系/{{item.gj_time}}</view>
+    <view wx:if="{{item.gj_states == 3}}" class='yangshi2 bz hui'>无意向/{{item.gj_time}}</view>
+    <view wx:if="{{item.gj_states == 4}}" class='yangshi2 bz pl_cor'>待跟进/{{item.gj_time}}</view>
+    <view wx:if="{{item.gj_states == 5}}" class='yangshi2 bz pl_cor'>有意向/{{item.gj_time}}</view>
+    <view wx:if="{{item.gj_states == 6}}" class='yangshi2 bz green'>已缴费/{{item.gj_time}}</view>
+  </navigator>
+  <view class='no_more' style='margin-bottom:70px;'>{{more}}</view>
+</block>
+<!--申请信息-->
+<block wx:if="{{id == 5}}"  >
+  <view class='flex_h'>
+    <view class='yangshi shijian'>时间</view>
+    <view class='yangshi nick '>昵称</view>
+    <view class='yangshi sl'>手机号</view>
+    <view class='yangshi bz'>状态</view>
+  </view>
 
-  <navigator url='../user/detail?id={{item.user_id}}' wx:for="{{goods_user}}" wx:key="key">
+  <navigator class='flex_h' url='../user/detail?id={{item.user_id}}' wx:for="{{goods_user}}" wx:key="key">
     <view class='yangshi2 shijian'>{{item.reg_time}}</view>
     <view class='yangshi2 nick '>{{item.passwd_answer}}</view>
     <view class='yangshi2 sl'>{{item.mobile_phone}}</view>
-    <view wx:if="{{item.gj_states == 0}}" class='yangshi2 bz'>未跟进</view>
-  </navigator>
-  
+    <view wx:if="{{item.gj_states == 0}}" class='yangshi2 bz hui'>未申请</view>
+    <view wx:if="{{item.gj_states == 1}}" class='yangshi2 bz juzi_cor'>已申请</view>
+    <view wx:if="{{item.gj_states == 2}}" class='yangshi2 bz pl_cor'>已联系</view>
+    <view wx:if="{{item.gj_states == 3}}" class='yangshi2 bz hui'>无意向</view>
+    <view wx:if="{{item.gj_states == 4}}" class='yangshi2 bz pl_cor'>待跟进</view>
+    <view wx:if="{{item.gj_states == 5}}" class='yangshi2 bz pl_cor'>有意向</view>
+    <view wx:if="{{item.gj_states == 6}}" class='yangshi2 bz green'>已缴费</view>
+  </navigator>  
+</block>
+<!--进别人的号的用户信息-->
+<view wx:if="{{id == 6 || id == 7 || id == 8}}"  class='search'>
+<input placeholder="请输入您要搜索的内容" bindconfirm="doSearch3" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+</view>
+<view wx:if="{{id == 6 || id == 7 || id == 8}}" class="mt40"  >
+<view class='flex_h'>
+    <view class='yangshi shijian'>时间</view>
+    <view class='yangshi nick '>昵称</view>
+    <view class='yangshi sl'>手机号</view>
+    <view class='yangshi bz'>身份</view>
+  </view>
+  <view class='flex_h ' bindtap='goto' data-id='{{item.user_id}}' wx:for="{{goods_user_all}}" wx:key="key">
+    <view class='yangshi2 shijian'>{{item.reg_time}}</view>
+    <view class='yangshi2 nick '>{{item.passwd_answer}}</view>
+    <view class='yangshi2 sl'>{{item.mobile_phone}}</view>
+    <view wx:if="{{item.user_lei == 0}}" class='yangshi2 bz hui'>直客</view>
+    <view wx:if="{{item.user_lei == 1}}" class='yangshi2 bz juzi_cor'>总监</view>
+    <view wx:if="{{item.user_lei == 2}}" class='yangshi2 bz pl_cor'>城市合伙人</view>
+    <view wx:if="{{item.user_lei == 3}}" class='yangshi2 bz hui'>市代</view>
+    <view wx:if="{{item.user_lei == 6}}" class='yangshi2 bz pl_cor'>会员</view>
+    <view wx:if="{{item.user_lei == 11}}" class='yangshi2 bz green'>客服</view>
+    <view wx:if="{{item.user_lei == 12}}" class='yangshi2 bz green'>客服新人</view>
+    <view wx:if="{{item.user_lei == 99}}" class='yangshi2 bz green'>管理员</view>
+  </view>
+  <view class='no_more' style='margin-bottom:70px;'>{{more}}</view>
 </view>

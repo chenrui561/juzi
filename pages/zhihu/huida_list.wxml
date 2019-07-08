@@ -1,0 +1,53 @@
+<!--pages/zhihu/zhihu.wxml-->
+<view class='{{noscroll}}'>
+    <view class="sc df tc sc-top " style='margin:10px 10px 0px 10px;padding-top:5%;'>
+    <navigator class="df_1" url="../zhihu/zhihu_guanzhu" hover-class="none" >
+        <view > 
+        <icon class="iconfont icon-qunfengcainixihuan ico guanzhu_cor "></icon>
+       </view>
+        <text class="font_12">我的关注<text style="color:red"></text></text>
+      </navigator>
+      <navigator class="df_1" url="../zhihu/huida_list?type_id=2" hover-class="none" >
+          <view><icon class="iconfont icon-qunfengfuwuzhongxin ico zan_cor "></icon></view>
+          <text  class="font_12">我的赞同<text style="color:red"></text></text>
+      </navigator>
+    </view>
+
+
+<view>
+  <view class='flex_h_b l_h20 m10 font_14 hui'>
+    <text>{{hd_count}}个回答</text>
+    <picker>默认排序</picker>
+  </view>
+  <view class=''>
+      <navigator wx:for="{{wenti}}" url='/pages/zhihu/wenti_huida_list?wid={{item.wid}}' class='huati flex_s_l'>
+      <view class="huati_title {{item.type == 1 ? 'hui':''}}">{{item.title}}</view>
+      <view class='huati_last flex_h_b'>
+        
+        <text>我的提问</text>
+
+      </view>
+    </navigator>
+    <navigator wx:for="{{huida_list}}" url='/pages/zhihu/zhihu?aid={{item.id}}&wid={{item.wid}}' class='huati flex_s_l'>
+      <view class="huati_title {{item.type == 1 ? 'hui':''}}">{{item.title}}</view>
+      <view class='huati_info flex_h_b'>
+        <view class="huati_text {{item.type == 1 ? 'hui':''}}">{{item.jianjie}}</view>
+        <image wx:if="{{item.fengmian != ''}}" class='huati_img' mode='aspectFill' src='{{item.fengmian}}'></image>
+      </view>
+      <view class='huati_last flex_h_b'>
+        
+        <text>{{item.zan}}个赞同 · {{item.pl}}评论</text>
+        <text wx:if="{{item.type == 1}}">草稿</text>
+      </view>
+    </navigator>
+  </view>
+</view>
+
+
+
+
+
+
+</view>
+
+

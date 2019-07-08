@@ -1,0 +1,15 @@
+<!--pages/audio/list.wxml-->
+<view class="search df">
+    <input class="df_1" placeholder="请输入您要搜索的内容" bindconfirm="doSearch" confirm-type="搜索" type='text' value="{{searchValue}}" bindinput="searchValueInput"/>
+    <button bindtap="doSearch"><image class="searchcion" src="/images/search.png"></image></button>
+</view>
+
+
+<view class='audio_list'>
+  <navigator url='../video/index?id={{item.vid}}&title={{item.name}}' wx:for="{{list}}" wx:key="key" data-aid="{{item.vid}}" class="qbdd  ">
+    <view >
+      <span class="font_14">{{item.name}}</span>
+      <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+      </view>
+  </navigator> 
+</view>

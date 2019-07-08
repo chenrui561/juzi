@@ -1,233 +1,448 @@
 <!--pages/user/user.wxml-->
 <view class="page">
-    <view url="../user/bd" class="userinfo">
-      <view class='user_qr'>
-          <view bindtap='qr' style='background-image:url(https://www.juziyimei.com/images/qr.png);' class='qr_img'><image src='{{qr_img}}' style='display:none;'></image></view>
-          <navigator url="../user/bd" wx:if="{{u_info.mobile_phone == '' && u_info.user_lei == 0}}" class='huiyuan' >游客  ></navigator>
-          <navigator url="" wx:if="{{u_info.user_lei == 0 && u_info.mobile_phone !== ''}}" class='huiyuan' >用户  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 1}}" class='huiyuan' >总监  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 2}}" class='huiyuan' >城市合伙人  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 3}}" class='huiyuan' >省联创  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 9}}" class='huiyuan' >医院  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 10}}" class='huiyuan' >内部员工  ></navigator>
-          <navigator url="../user/team" wx:if="{{u_info.user_lei == 99}}" class='huiyuan' >管理员  ></navigator>
-      </view>    
-          <navigator wx:if="{{mobile_phone}}" url='../user/bd' class='user_info'>
-            <image class="userinfo-avatar fl_l" src="{{u_info.tx_img}}" background-size="cover"></image>
-            <view class='user_text'>
-              <text class="fl_l" style="font-size: 16px;line-height:20px;" >{{u_info.nick_name}}</text>
-              <text  class="fl_l" style="font-size: 14px;line-height:20px;" >{{mobile_phone}}</text>
-            </view>
-          </navigator>
-          <navigator wx:else url='../user/bd' class='user_info'>
-            <image class="userinfo-avatar fl_l" src="{{u_info.tx_img}}" background-size="cover"></image>
-            <view class='user_text'>
-              <text class="fl_l" style="font-size: 16px;line-height:20px;" >{{u_info.nick_name}}</text>
-           
-              <text class="fl_l" style="font-size: 14px;line-height:20px;" >您还未绑定手机号</text>
-            </view>
-          </navigator>
-      </view>
-    <view class="sc1 df">
-        <view class="df_1 tc">
-          <navigator url="../user/quan" hover-class="none">
-            <view class='cash'>{{b_count}}</view>
-            <text>优惠券</text>
-          </navigator>
-        </view>
-        <view class="df_1 tc">
-          <navigator url="../user/team-shouyi" hover-class="none">
-            <view class='cash'><text style="font-size:11px;">￥</text>{{all_money}}</view>
-            <text>钱包余额</text>
-          </navigator>
-        </view>
-    </view> 
-    <!--订单详情-->
-    <view class="qbdd" style='border-bottom: 1px solid #f2f2f2'>
-    <span class="font_14 c3">我的订单</span>
-    <navigator class="fl_r c9 font_12 l_h20" url="../user/dingdan?currentTab=0" hover-class="none" >全部订单 <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span></navigator>
-    </view>
-    <view class="sc df tc " style='margin:0px 10px'>
-    <navigator class="df_1" url="../user/dingdan?currentTab=0&otype=pay" hover-class="none" >
-        <view > 
-        <image class='dd_box' src="/images/dfk.png"><view wx:if="{{count1 > 0}}" class='car_count juzi_cor'>{{count1}}</view></image> 
-       </view>
-        <text class="font_12">待付款<text style="color:red"></text></text>
-      </navigator>
 
-     <navigator class="df_1" url="../user/dingdan?currentTab=1&otype=deliver" hover-class="none" >
-      <view><image class='dd_box' src="/images/dfh.png"><view wx:if="{{count2 > 0}}" class='car_count juzi_cor'>{{count2}}</view></image></view>
-        <text class="font_12">已预约</text>      
+  <view url="../user/bd" class="userinfo">
+    <view class='user_qr'>
+      <view bindtap='qr' style='background-image:url(https://www.juziyimei.com/images/qr.png);' class='qr_img'>
+        <image src='{{qr_img}}' style='display:none;'></image>
+      </view>
+      <navigator url="../user/bd" wx:if="{{u_info.mobile_phone == '' && u_info.user_lei == 0}}" class='huiyuan'>游客 ></navigator>
+      <navigator url="" wx:if="{{u_info.user_lei == 0 && u_info.mobile_phone !== ''}}" class='huiyuan'>用户 </navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 1}}" class='huiyuan'>总监 ></navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 2}}" class='huiyuan'>城市合伙人 ></navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 3}}" class='huiyuan'>市联合创始人 ></navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 6}}" class='huiyuan'>普通会员 ></navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 9}}" class='huiyuan'>医院 ></navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 10}}" class='huiyuan'>内部员工 ></navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 11}}" class='huiyuan'>客服 ></navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 12}}" class='huiyuan'>客服新人 ></navigator>
+      <navigator url="../user/team" wx:if="{{u_info.user_lei == 99}}" class='huiyuan'>管理员 ></navigator>
+    </view>
+    <view wx:if="{{mobile_phone}}" class='user_info'>
+      <image bindtap='change_head' class="userinfo-avatar fl_l" src="{{u_info.tx_img}}" background-size="cover"></image>
+      <navigator class='user_text' url='../user/bd'>
+        <text class="fl_l" style="font-size: 16px;line-height:20px;">{{u_info.nick_name}}</text>
+        <text class="fl_l" style="font-size: 14px;line-height:20px;">{{mobile_phone}}</text>
+      </navigator>
+    </view>
+    <view wx:else class='user_info'>
+      <image bindtap='change_head' class="userinfo-avatar fl_l" src="{{u_info.tx_img}}" background-size="cover"></image>
+      <navigator url='../user/bd' class='user_text'>
+        <text class="fl_l" style="font-size: 16px;line-height:20px;">{{u_info.nick_name}}</text>
+        <text class="fl_l" style="font-size: 14px;line-height:20px;">您还未绑定手机号，点击绑定</text>
+      </navigator>
+    </view>
+  </view>
+  <view class="sc1 df" style='border-bottom-left-radius:0px;border-bottom-right-radius:0px;'>
+
+    <view class="df_1 tc">
+      <navigator url="../zhihu/huida_list?type_id=1" hover-class="none">
+        <view class='cash'>{{count_my}}</view>
+        <text>我的创作(篇)</text>
+      </navigator>
+    </view>
+    <view class="df_1 tc">
+      <navigator url="../user/team-shouyi" hover-class="none">
+        <view class='cash'>{{all_money}}</view>
+        <text>钱包余额(元)</text>
+      </navigator>
+    </view>
+  </view>
+<view style='border-bottom-left-radius:5px;border-bottom-right-radius:5px;' bindtap='copyText' data-text="{{zhuanshu_phone}}" class="zhuanshu bte c3" >{{zhuanshu_kefu}} </view>
+
+  <!--详情-->
+
+  <!-- <view class="sc df tc sc-top " style='margin:10px 10px 0px 10px;padding-top:5%;'>
+    <navigator class="df_1" url="../zhihu/zhihu_guanzhu" hover-class="none" >
+        <view > 
+        <icon class="iconfont icon-qunfengcainixihuan ico guanzhu_cor "></icon>
+       </view>
+        <text class="font_12">我的关注<text style="color:red"></text></text>
+      </navigator>
+      <navigator class="df_1" url="../zhihu/huida_list?type_id=2" hover-class="none" >
+          <view><icon class="iconfont icon-qunfengfuwuzhongxin ico zan_cor "></icon></view>
+          <text  class="font_12">我的赞同<text style="color:red"></text></text>
+      </navigator>
+      <navigator class="df_1" url="../user/team-user?team_type=1" hover-class="none" >
+      <view><icon class="iconfont icon-qunfengjindiankeliuleixingfenxi ico pl_cor "></icon></view>
+        <text class="font_12">我的推荐</text>      
+      </navigator> 
+    </view>
+<view class="sc df tc sc-bottom" style='margin: 0px 10px;'>
+    <navigator class="df_1" url="/pages/user/shoucang" hover-class="none" >
+          <view><icon class="iconfont icon-qunfengyewuguanli ico shoucang_cor "></icon></view>
+          <text class="font_12">收藏夹<text style="color:red"></text></text>
+      </navigator>
+    
+     <navigator class="df_1" url="../user/quan" hover-class="none" >
+      <view><icon class="iconfont icon-qunfengyouhuixinxi ico yhq_cor "></icon></view>
+        <text class="font_12">优惠券</text>      
       </navigator> 
 
-      <navigator class="df_1" url="../user/dingdan?currentTab=2&otype=receive" hover-class="none" >
-          <view><image class='dd_box' src="/images/dpl.png"><view wx:if="{{count3 > 0}}" class='car_count juzi_cor'>{{count3}}</view></image></view>
-          <text class="font_12">已完成<text style="color:red"></text></text>
+      <navigator class="df_1" url="../cart/cart" hover-class="none" >
+        <view > 
+        <icon class="iconfont icon-qunfenggoumaitaocan ico gouwuche_cor "></icon> 
+       </view>
+        <text class="font_12">购物车<text style="color:red"></text></text>
       </navigator>
+    </view>-->
 
-    <navigator class="df_1" url="../user/dingdan?currentTab=3&otype=finish" hover-class="none" >
-          <view><image class='dd_box' src="/images/tksh.png"><view wx:if="{{count4 > 0}}" class='car_count juzi_cor'>{{count4}}</view></image></view>
-          <text  class="font_12">已取消<text style="color:red"></text></text>
-      </navigator>
+  <!--订单详情-->
+  <view class="qbdd" style='border-bottom: 1px solid #f2f2f2;margin-top:10px;border-top-left-radius:5px;border-top-right-radius:5px;'>
+    <span class="font_14 c3">我的订单</span>
+    <navigator class="fl_r c9 font_12 l_h20" url="../user/dingdan?currentTab=0" hover-class="none">全部订单
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </navigator>
+  </view>
+  <view class="sc df tc " style='margin:0px 10px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;'>
+    <navigator class="df_1" url="../user/dingdan?currentTab=0&otype=pay" hover-class="none">
+      <view class='pr'>
+        <image class='dd_box' src="/images/dpl.png"></image>
+        <view wx:if="{{count1 > 0}}" class='car_count juzi_cor'>{{count1}}</view>
+      </view>
+      <text class="font_12">待付款<text style="color:red"></text></text>
+    </navigator>
 
-    
+    <navigator class="df_1" url="../user/dingdan?currentTab=1&otype=deliver" hover-class="none">
+      <view class='pr'>
+        <image class='dd_box' src="/images/dpl.png"></image>
+        <view wx:if="{{count2 > 0}}" class='car_count juzi_cor'>{{count2}}</view>
+      </view>
+      <text class="font_12">已预约</text>
+    </navigator>
+
+    <navigator class="df_1" url="../user/dingdan?currentTab=2&otype=receive" hover-class="none">
+      <view class='pr'>
+        <image class='dd_box' src="/images/dpl.png"></image>
+        <view wx:if="{{count3 > 0}}" class='car_count juzi_cor'>{{count3}}</view>
+      </view>
+      <text class="font_12">待评价<text style="color:red"></text></text>
+    </navigator>
+
+    <navigator class="df_1" url="../user/dingdan?currentTab=3&otype=finish" hover-class="none">
+      <view>
+        <image class='dd_box' src="/images/tksh.png">
+          <view wx:if="{{count4 > 0}}" class='car_count juzi_cor'>{{count4}}</view>
+        </image>
+      </view>
+      <text class="font_12">已完成<text style="color:red"></text></text>
+    </navigator>
+
+
     <!--<navigator class="df_1" url="../user/dingdan?currentTab=4&otype=fenxiang" hover-class="none" >
           <view><image src="/images/tksh.png"></image></view>
           <text class="font_12">拼团订单<text style="color:red"></text></text>
        </navigator>-->
+  </view>
+
+
+
+  <navigator wx:if="{{u_info.user_lei >= 9 && dian_info > 0}}" url="/pages/jigou/jigou?jigou_id={{dian_info}}" class="qbdd" style='border-radius:5px;margin-top:10px;'>
+    <view>
+      <span class="font_14 c3">管理我的机构</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
+  </navigator>
 
 
-
-<navigator url="../cart/cart" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
- <view >
-    <span class="font_14 c3">购物车</span>
-    <span class="fl_r c9" hover-class="none"> {{count_car}}<image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-
-<navigator url="/pages/user/shoucang" class="qbdd" style='margin:10px 10px 0px 10px'>
- <view >
-    <span class="font_14 c3">我的收藏</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>
-
-<navigator url="/pages/user/my-anli" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
+  <!--<navigator url="/pages/user/my-anli" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
  <view >
     <span class="font_14 c3">我的日记</span>
     <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
     </view>
-</navigator>  
-<navigator wx:if="{{u_info.user_lei == 0}}" url="../user/team-user?team_type=1" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">我的推荐</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+</navigator>  -->
+
+  <navigator url="/pages/user/shoucang" class="qbdd" style='border-bottom-left-radius: 0rpx;border-bottom-right-radius: 0rpx;border-top-left-radius:10rpx;border-top-right-radius:10rpx;margin-top:10px;'>
+    <view>
+      <span class="font_14 c3">收藏夹</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>  
-<navigator url="/pages/up_anli/question-ask?type_id=1 " class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
+  </navigator>
+  <navigator url="../user/team-user?team_type=1 " class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
+    <view>
+      <span class="font_14 c3">我的推荐</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <navigator url="/pages/up_anli/question-ask?type_id=4 " class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0rpx;border-top-right-radius:0rpx;'>
  <view >
     <span class="font_14 c3">用户反馈</span>
     <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
     </view>
-</navigator>  
+</navigator>
+  <!--<navigator url="../cart/cart" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
+    <view>
+      <span class="font_14 c3">购物车</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>-->
 
+
+
+  <!--
+  -->
+  <!--
 <button open-type="share" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
  <view >
     <span class="font_14 c3">分享给朋友</span>
     <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
     </view>
 </button>  
+-->
 
+  <navigator wx:if="{{u_info.user_lei > 0 }}" url="/pages/user/yy" class="qbdd" style='margin:10px 10px 0px 10px;border-top-left-radius:5px;border-top-right-radius:5px;'>
+    <view>
+      <span class="font_14 c3">客户预约</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei > 0 }}" url="../user/team" class="qbdd">
+    <view>
+      <span class="font_14 c3">团队详情</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
 
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="/pages/user/yy" class="qbdd" style='margin:10px 10px 0px 10px'>
- <view >
-    <span class="font_14 c3">客户预约</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  <navigator wx:if="{{u_info.user_lei > 0 }}" url="../index/zhaoshang?qd_id={{u_info.user_id}}" class="qbdd">
+    <view>
+      <span class="font_14 c3">发展团队</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
+  </navigator>
 
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="../up_anli/down" class="qbdd" style='border-bottom-left-radius: 0rpx;border-bottom-right-radius: 0rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">案例下载</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  <navigator wx:if="{{u_info.user_lei > 0 && u_info.mf_qd > 0}}" url="../user/team-fazhan?id=0&type=0&mf=1" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">免费发展团队</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator> 
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="../audio/list" class="qbdd" style='border-bottom-left-radius: 0rpx;border-bottom-right-radius: 0rpx;border-top-left-radius:0px;border-top-right-radius:0px;'>
- <view >
-    <span class="font_14 c3">桔子充电宝</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator> 
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="../user/team" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius:0px;border-top-right-radius:0px; '>
- <view >
-    <span class="font_14 c3">团队详情</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
-    </view>
-</navigator>   
+  </navigator>
 
-<navigator wx:if="{{u_info.user_lei > 0 }}" url="../user/team-fazhan?id=0&type=0&mf=0" class="qbdd" >
- <view >
-    <span class="font_14 c3">发展团队</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  <navigator wx:if="{{u_info.user_lei > 0}}" url="../up_anli/down" class="qbdd" style='border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;margin-top:10px; '>
+    <view>
+      <span class="font_14 c3">案例下载</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-
-<navigator wx:if="{{u_info.user_lei > 0 && u_info.mf_qd > 0}}" url="../user/team-fazhan?id=0&type=0&mf=1" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:40px;'>
- <view >
-    <span class="font_14 c3">免费发展团队</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <!--<navigator wx:if="{{u_info.user_lei > 0 && cdb == 1}}" url="../audio/list" class="qbdd">
+    <view>
+      <span class="font_14 c3">桔子充电宝</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei == 10 || u_info.user_lei == 99}}" url="../up_anli/shenhe" class="qbdd" style='margin:10px 10px 0px 10px;'>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei > 0 && cdb == 1}}" url="../video/list" class="qbdd" style='margin-bottom:10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">新人学堂</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>-->
+  <!--<navigator wx:if="{{u_info.user_lei == 10 || u_info.user_lei == 99}}" url="../up_anli/shenhe" class="qbdd" style='margin:10px 10px 0px 10px;'>
  <view >
     <span class="font_14 c3">日记审核</span>
     <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei == 99}}" url="../user/jiaofei?id=1" class="qbdd" style=''>
- <view >
-    <span class="font_14 c3">缴费提醒</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+</navigator>-->
+  <navigator wx:if="{{u_info.user_lei >= zhaoshang_ctrl}}" url="../user/jiaofei?id=5" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;margin-bottom:10px;margin-top:10px; '>
+    <view>
+      <span class="font_14 c3">招商申请信息</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei == 99}}" url="../user/tixian_sh" class="qbdd" style=''>
- <view >
-    <span class="font_14 c3">提现审核</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <!--管理员看全部信息-->
+  <navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=3" class="qbdd" style='margin:10px 10px 0px 10px;border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">会员信息</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.user_lei == 99 ? '管理员权限':'客服权限'}}
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/tixian_sh2" class="qbdd" style=''>
- <view >
-    <span class="font_14 c3">提现记录【自制】</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=4" class="qbdd">
+    <view>
+      <span class="font_14 c3">直客信息</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.user_lei == 99 ? '管理员权限':'客服权限'}}
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/tixian_sh2?id=2" class="qbdd" style=''>
- <view >
-    <span class="font_14 c3">交易记录【自制】</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei > 9}}" url="../user/team-dd?currentTab=1&otype=deliver&id=3" class="qbdd">
+    <view>
+      <span class="font_14 c3">线上预约订单</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.user_lei == 99 ? '管理员权限':'客服权限'}}
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=3" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
- <view >
-    <span class="font_14 c3">渠道信息</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei > 9}}" url="../user/team-dd?currentTab=1&otype=deliver&id=2" class="qbdd">
+    <view>
+      <span class="font_14 c3">线下报备订单</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.user_lei == 99 ? '管理员权限':'客服权限'}}
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=4" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
- <view >
-    <span class="font_14 c3">直客信息</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei > 0}}" url="../user/jiaofei?id=1" class="qbdd" style='margin-bottom:10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">缴费提醒</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.user_lei == 99 ? '管理员权限':''}}
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/team-dd?currentTab=1&otype=deliver&id=3" class="qbdd">
- <view >
-    <span class="font_14 c3">线上预约订单</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <!--管理员看全部信息end-->
+  <!--市级代理-->
+  <navigator wx:if="{{u_info.user_lei == 3}}" url="../user/jiaofei?id=3&type={{u_info.type_id}}&shi={{u_info.shi}}" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">会员信息</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.shi}}市代
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/team-dd?currentTab=1&otype=deliver&id=2" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;'>
- <view >
-    <span class="font_14 c3">线下报备订单</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei == 3}}" url="../user/jiaofei?id=4&type={{u_info.type_id}}&shi={{u_info.shi}}" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">直客信息</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.shi}}市代
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<navigator wx:if="{{u_info.user_lei == 99}}" url="../web/web?web_type=99" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;'>
- <view >
-    <span class="font_14 c3">数据统计</span>
-    <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei == 3}}" url="../user/team-dd?currentTab=1&otype=deliver&id=3" class="qbdd">
+    <view>
+      <span class="font_14 c3">线上预约订单</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.shi}}市代
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
     </view>
-</navigator>
-<!--<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=2" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;'>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei == 3}}" url="../user/team-dd?currentTab=1&otype=deliver&id=2" class="qbdd" style=''>
+    <view>
+      <span class="font_14 c3">线下报备订单</span>
+      <span class="fl_r c9" hover-class="none">{{u_info.shi}}市代
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei == 3}}" url="../user/jiaofei?id=1" class="qbdd" style='margin-bottom:10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">缴费提醒</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <!--市级代理end-->
+  <!--内部管理员-->
+
+  <navigator wx:if="{{u_info.user_lei == 99}}" url="../user/tixian_sh" class="qbdd" style='margin-top:10px;border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">提现审核</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei == 99}}" url="../user/tixian_sh2" class="qbdd" style=''>
+    <view>
+      <span class="font_14 c3">提现记录【自制】</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei == 99}}" url="../user/tixian_sh2?id=2" class="qbdd" style=''>
+    <view>
+      <span class="font_14 c3">交易记录【自制】</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei == 99}}" url="../user/jiaofei?id=1&jia=1" class="qbdd" style='margin-bottom:10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;'>
+    <view>
+      <span class="font_14 c3">缴费提醒【自制】</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <navigator wx:if="{{u_info.user_lei > 10}}" url="../web/web?web_type=99" class="qbdd" style='border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;'>
+    <view>
+      <span class="font_14 c3">数据统计</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+  <!--内部管理员end-->
+  <navigator wx:if="{{u_info.user_lei == 99 }}" url="../user/jiaofei?id=6" class="qbdd" style='border-radius: 10rpx;margin-bottom:10px;'>
+    <view>
+      <span class="font_14 c3">进任何人的号</span>
+      <span class="fl_r c9" hover-class="none">
+        <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image>
+      </span>
+    </view>
+  </navigator>
+
+  <!--<navigator wx:if="{{u_info.user_lei > 9}}" url="../user/jiaofei?id=2" class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;'>
  <view >
     <span class="font_14 c3">预约报备信息</span>
     <span class="fl_r c9" hover-class="none"> <image style='width: 11px;height: 10px;margin-left: 5px;' src="/images/x_right.png"></image></span>
     </view>
 </navigator>-->
-<view class='l_h60'></view>
+  <view class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'>
+
+    <view class='flex_h_b'>
+      <span class="font_14 c3 flex_h w100" style="white-space:nowrap;">
+        <form bindsubmit='formid' style="line-height: 0px;" report-submit="true">
+          <button formType="submit" class='no_button'>
+            <view class='font_14'>推送通知
+              <text class='hui font_12'>({{form_count}}次)</text>
+            </view>
+            <view class='hui font_12'>点击获取次数</view>
+          </button>
+        </form>
+      </span>
+      <switch checked="{{form_off}}" bindchange="form_off" />
+    </view>
+
+  </view>
+
+  <view bindtap='huancun' class="qbdd" style='margin:10px 10px 0px 10px;border-bottom-left-radius: 10rpx;border-bottom-right-radius: 10rpx;margin-bottom:10px;border-top-left-radius: 10rpx;border-top-right-radius: 10rpx;'>
+
+    <view class='flex_h_b'>
+      <span class="font_14 c3 flex_h w100" style="white-space:nowrap;">
+
+        <view class='font_14'>清除缓存</view>
+
+      </span>
+    </view>
+
+  </view>
+  <view class='l_h60'></view>
 </view>
-
-
-

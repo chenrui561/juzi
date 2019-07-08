@@ -76,11 +76,8 @@ caogao:function(hid){
       'Content-Type': 'application/x-www-form-urlencoded'
     },
     success: function (res) {
-      console.log(res)
       var a = res.data.huida[0].caogao_type.split(",");
       var b = res.data.huida[0].caogao.split("|");
-      console.log(a);
-      console.log(b);
       wx.setNavigationBarTitle({
         title: res.data.title
       })
@@ -122,12 +119,10 @@ caogao:function(hid){
 
   handleContentInput(e) {
     const value = e.detail.value
-    this.data.content = value
-    this.data.contentCount = value.length
-    $digest(this)
     this.setData({
       input_content: e.detail.value
     })
+
   },
 /*处理最后的box内容，并提交到草稿 */
   box: function (tijiao) {//处理提交
