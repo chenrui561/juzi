@@ -1054,7 +1054,7 @@ align-items:center;
 .shequ_title{
   font-size: 16px;
   display: flex;
-  align-items:center;
+  align-items:flex-start;
   justify-content: flex-start;
   margin-bottom: 5px;
   line-height: 28px;
@@ -1163,7 +1163,9 @@ border:none;
   height: 18px;
   line-height: 18px;
   text-align: center;
-  margin-right: 3px;
+  margin-right: 5px;
+  margin-top: 5px;
+  flex-shrink: 0;
 }
 .ding{
   background-color: rgb(101, 164, 247);
@@ -1175,6 +1177,7 @@ border:none;
   line-height: 18px;
   text-align: center;
   margin-right: 3px;
+  flex-shrink: 0;
 }
 /*桔子商学院*/
 .shangxueyuan{

@@ -51,14 +51,12 @@
             <text class="juli" wx:if="{{ user_lei == 11 || user_lei == 12}}">返佣：{{item.huodong_1}}/{{item.huodong_2}}<text class='c3'>|{{item.kefu_fan}}</text></text>
          
       </navigator>
-<!--机构/医生-->
+<!--机构-->
 <view wx:if="{{pick_id == 1 }}" wx:for="{{productData}}"  class='jigou_lb'>
         <navigator class="pr3 flex_h" url="../jigou/jigou?jigou_id={{item.brand_id}}" hover-class="changestyle">
         <image class="yiyuan_photo" mode='aspectFill' src="http://www.juziyimei.com/data/brandlogo/{{item.brand_logo}}"></image>
         <view class='jigou_right_info'>
           <view class="jigou_title">{{item.brand_name}}</view>
-           <view wx:if="{{item.scxm}}" class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.scxm}}</view>
-           <view wx:else class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.address}}</view>
           <view class='flex_h mt5'>
             <image mode='widthFix' class='pjxx mr5' src='/images/star{{item.fen}}.png'></image>
             <text class='hui font_12 tc' wx:if="{{user_lei == 99}}">返佣：{{item.level}}</text>
@@ -68,20 +66,27 @@
             <text class='hui font_12 tc' wx:if="{{user_lei == 3}}">返佣：{{item.level_1}}</text>
             <text class='hui font_12 tc' wx:if="{{user_lei == 11}}">返佣：{{item.level_1}}/{{item.level_2}}</text>
           </view>
+           <view wx:if="{{item.scxm}}" class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.scxm}}</view>
+           <view class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.address}}</view>
+          
         </view>
       </navigator>
       <navigator class='btn pa right' url='/pages/user/yy?yiyuan_id={{item.brand_id}}&yiyuan_name={{item.brand_name}}' wx:if="{{yy == 1}}">选择</navigator>   
 </view>
+<!--医生-->
 <view wx:if="{{pick_id == 2}}" wx:for="{{productData}}"  class='jigou_lb'>
         <navigator class="pr3 flex_h" url="../jigou/jigou?jigou_id={{item.brand_id}}" hover-class="changestyle">
         <image class="yiyuan_photo" mode='aspectFill' src="http://www.juziyimei.com/data/brandlogo/{{item.brand_logo}}"></image>
         <view class='jigou_right_info'>
-          <view class="jigou_title">{{item.brand_name}}</view>
-           <view wx:if="{{item.lx == 2 }}" class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.scxm}}</view>
+          <view class="flex_h_end">
+            <view class="yisheng_title">{{item.brand_name}}</view>
+            <view class="font_12 hui ml5 l_h20">{{item.jibie}}</view>
+          </view>
           <view class='flex_h mt5'>
             <image mode='widthFix' class='pjxx mr5' src='/images/star{{item.fen}}.png'></image>
-            
           </view>
+          <view wx:if="{{item.lx == 2 }}" class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.scxm}}</view>
+          <view class='pr10 scxm hui'>{{item.yy_name}}</view>
         </view>
       </navigator>
       <navigator class='btn pa right' url='/pages/user/yy?yiyuan_id={{item.brand_id}}&yiyuan_name={{item.brand_name}}' wx:if="{{yy == 1}}">选择</navigator>   

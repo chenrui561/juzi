@@ -194,6 +194,12 @@
       <switch wx:if="{{orderData.genjin_state == 0}}" checked bindchange="genjin_states" />
       <switch wx:if="{{orderData.genjin_state == 1}}"  bindchange="genjin_states" />
     </view>
+<!--下次跟进结束-->
+  <view class="flex_h_b font_14 c3 mt10">
+    <text>订单所属客服：{{zixun.nick_name}}</text>
+    <picker  bindchange="change_zixun" range="{{zixun_list}}">修改</picker>
+  </view>
+
   </view>
 
   <view wx:if="{{user_lei > 0}}" class="p_all mt10 bg_white">

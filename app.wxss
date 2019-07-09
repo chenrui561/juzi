@@ -159,6 +159,11 @@ page{
   justify-content: space-between;
   align-items: center;
 }
+.flex_h_end{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
 /*垂直居中*/
 .flex_s{
   display: flex;

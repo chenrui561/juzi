@@ -694,7 +694,31 @@ Page({
 
 
   },
-
+  /*修改咨询 */
+  change_zixun:function(e){
+    var that = this;
+    wx.request({
+      url: app.d.anranUrl + '/index.php?m=default&c=indem&a=change_zixun',
+      method: 'post',
+      data: {
+        order_id: that.data.orderId,
+        zixun_id: e.detail.value
+      },
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      success: function (res) {
+        that.loadProductDetail();
+      },
+      fail: function () {
+        // fail
+        wx.showToast({
+          title: '网络异常！',
+          duration: 2000
+        });
+      }
+    });
+  },
   loadProductDetail:function(){
     var that = this;
     wx.request({
@@ -720,6 +744,8 @@ Page({
             log_id: log_id,
             genjin: res.data.genjin,
             fanli:res.data.fanli,
+            zixun:res.data.zixun,
+            zixun_list:res.data.zixun_list,
             count_pl: res.data.count_pl
           });
         }else{

@@ -216,11 +216,11 @@
             <text class='hui font_12 tc' wx:if="{{user_lei == 2 || user_lei == 3 || user_lei == 11}}">返佣：{{item.level_2}}</text>
           </view>
             <view class=' pr10 text_lue hui font_12 mt5 mb5 no_next_text'>{{item.address}}</view>
-            <view class="flex_h" >
-              <text class=' pr10  hui font_12 mt5 mb5 no_next_text'>擅长：</text>
-              <view wx:if="{{item.scxm[0] != ''}}" class=' pr10  hui font_12 mt5 mb5 no_next_text'>{{item.scxm[0]}}</view>
-              <view wx:if="{{item.scxm[1] != ''}}" class=' pr10  hui font_12 mt5 mb5 no_next_text'>{{item.scxm[1]}}</view>
-              <view wx:if="{{item.scxm[2] != ''}}" class=' pr10  hui font_12 mt5 mb5 no_next_text'>{{item.scxm[2]}}</view>
+            <view wx:if="{{item.scxm[0] != ''}}" class="flex_h" >
+              <text class='   hui font_12  mb5 no_next_text'>擅长：</text>
+              <view wx:if="{{item.scxm[0] != ''}}" class=' pr10  hui font_12  mb5 no_next_text'>{{item.scxm[0]}}</view>
+              <view wx:if="{{item.scxm[1] != ''}}" class=' pr10  hui font_12  mb5 no_next_text'>{{item.scxm[1]}}</view>
+              <view wx:if="{{item.scxm[2] != ''}}" class=' pr10  hui font_12  mb5 no_next_text'>{{item.scxm[2]}}</view>
             </view>
             <!--<text class='font_weight c3 mr5'>{{item.count_xiangmu}}</text><text class=' pr10 bre'>优惠</text>
             <text class='font_weight c3 ml10 mr5'>{{item.count_anli}}</text><text class=' pr10 bre'>案例</text>
@@ -244,20 +244,23 @@
 <navigator class="pr3 flex_h" url="../jigou/jigou?jigou_id={{item.brand_id}}&ys=1" hover-class="changestyle">
         <image class="yiyuan_photo" mode='aspectFill' src="http://www.juziyimei.com/data/brandlogo/{{item.brand_logo}}"></image>
         <view class='jigou_right_info'>
-          <view class="yisheng_title">{{item.brand_name}}</view>
+          <view class="flex_h_end">
+            <view class="yisheng_title">{{item.brand_name}}</view>
+            <view class="font_12 hui ml5 l_h20">{{item.jibie}}</view>
+          </view>
           <view class="hui font_12 flex_s_l mt5 mb5">
           
-             <view class='flex_h mt5'>
+             <view class='flex_h mt5 mb5'>
                 <image mode='widthFix' lazy-load class='pjxx mr5' src='/images/star{{item.fen}}.png'></image>
               </view>
 
               <view wx:if="{{item.scxm[0] != ''}}" class="flex_h" >
-                <text class=' pr10  hui font_12 mt5 mb5 no_next_text'>擅长：</text>
-                <view wx:if="{{item.scxm[0] != ''}}" class=' pr10  hui font_12 mt5 mb5 no_next_text'>{{item.scxm[0]}}</view>
-                <view wx:if="{{item.scxm[1] != ''}}" class=' pr10  hui font_12 mt5 mb5 no_next_text'>{{item.scxm[1]}}</view>
-                <view wx:if="{{item.scxm[2] != ''}}" class=' pr10  hui font_12 mt5 mb5 no_next_text'>{{item.scxm[2]}}</view>
+                <text class='  hui font_12  mb5 no_next_text'>擅长：</text>
+                <view wx:if="{{item.scxm[0] != ''}}" class=' pr10  hui font_12  mb5 no_next_text'>{{item.scxm[0]}}</view>
+                <view wx:if="{{item.scxm[1] != ''}}" class=' pr10  hui font_12  mb5 no_next_text'>{{item.scxm[1]}}</view>
+                <view wx:if="{{item.scxm[2] != ''}}" class=' pr10  hui font_12  mb5 no_next_text'>{{item.scxm[2]}}</view>
               </view>
-              <view wx:else class='pr10 scxm'>{{item.yy_name}}</view>
+              <view class='pr10 scxm'>{{item.yy_name}}</view>
 
           </view>
          

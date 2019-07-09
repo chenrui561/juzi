@@ -524,8 +524,8 @@ align-items:center;
 }
 
 .shequ_editor{
-  line-height: 36px;
-  font-size: 18px;
+  line-height: 28px;
+  font-size: 16px;
   color: #333;
 }
 .ql-container {
